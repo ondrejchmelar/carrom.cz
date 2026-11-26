@@ -6,4 +6,41 @@ end_date: 2025-11-15
 venue: { name: Praha, city: Praha }
 edition_name: { cs: XX. Carrom Open Cup Praha, en: 20th Carrom Open Cup Prague }
 source: old-site
-results: {}                 # konečné pořadí doplní import ze SoL
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/7895cefac0ac11f097cb901b0edac7fa
+results:
+  singles:
+    - { place: 1, player: pawel-wroczynski }
+    - { place: 2, player: maghesh-babu }
+    - { place: 3, name: "Vikash Kanna Chandra Prasad Megalai", country: IN }
+    - { place: 4, player: karlos-novak }
+    - { place: 5, player: jakub-nowakowski }
+    - { place: 6, player: matej-bednar }
+    - { place: 7, player: ajay-sekhesh }
+    - { place: 8, player: frank-fehr }
+    - { place: 9, player: paulina-nowakowska }
+    - { place: 10, player: sylwester-pogorzelski }
+    - { place: 11, name: "Simon Nebeling", country: DE }
+    - { place: 12, player: ondrej-kubicek }
+    - { place: 13, player: frantisek-cervenka }
+    - { place: 14, player: lukas-navratil }
+    - { place: 15, player: jan-tesitel }
+    - { place: 16, player: ondrej-chmelar }
+    - { place: 17, player: hans-faller }
+    - { place: 18, player: miroslav-cernohous }
+    - { place: 19, player: zdenek-svitak }
+    - { place: 20, player: tomas-chmelar }
+    - { place: 21, player: pavel-schierl }
+    - { place: 22, player: ales-formanek }
+    - { place: 23, name: "Nhu Kevin Tieu", country: DE }
+    - { place: 24, player: rostislav-borsky }
+    - { place: 25, player: romana-kralova }
+    - { place: 26, player: michal-fucik }
+    - { place: 27, player: frantisek-rezek }
+    - { place: 28, player: vratislav-borsky }
+    - { place: 29, player: magdalena-novotna }
+    - { place: 30, name: "Eliza Lipinska-Wroczynska", country: PL }
+    - { place: 31, player: vendula-ferancova }
+    - { place: 32, player: filip-vitek }
+    - { place: 33, player: zdenek-taborsky }
+    - { place: 34, player: veronika-stejskalova }
+    - { place: 35, name: "Sharon Marcu", country: DE }

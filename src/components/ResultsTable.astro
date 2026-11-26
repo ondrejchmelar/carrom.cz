@@ -26,11 +26,11 @@ const multi = divisions.length > 1;
         <tbody>
           {(limit ? rows.slice(0, limit) : rows).map((r: any) => {
             const href = playerLink(r.player, m.players, lang);
-            const name = fullName(m.players[r.player], r.name ?? r.player);
+            const name = r.hidden ? (lang === 'en' ? 'name not published' : 'jméno nezveřejněno') : fullName(m.players[r.player], r.name ?? r.player);
             return (
               <tr class={r.place <= 3 ? 'top' : ''}>
                 <td class="rk l">{r.place}.</td>
-                <td class="name">{href ? <a href={href}>{name}</a> : name}</td>
+                <td class={r.hidden ? 'name muted' : 'name'}>{href ? <a href={href}>{name}</a> : name}</td>
                 {rows.some((x: any) => x.country) && <td class="l muted">{r.country ?? ''}</td>}
                 {rows.some((x: any) => x.club_at_time) && <td class="l muted">{r.club_at_time ?? ''}</td>}
               </tr>

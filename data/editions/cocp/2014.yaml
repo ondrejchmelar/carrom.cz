@@ -9,4 +9,50 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2014.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/e9bd1e1c6b6d11e4ac012e92809967e5
+results:
+  singles:
+    - { place: 1, name: "Bartek Sasinski", country: PL }
+    - { place: 2, player: sylwester-pogorzelski }
+    - { place: 3, player: steffen-eder }
+    - { place: 4, player: gunter-seibert }
+    - { place: 5, player: jakub-sasinski }
+    - { place: 6, player: sascha-essinger }
+    - { place: 7, hidden: true }
+    - { place: 8, hidden: true }
+    - { place: 9, player: filip-smoljak }
+    - { place: 10, player: jan-tesitel }
+    - { place: 11, player: darius-brozek }
+    - { place: 12, player: robert-bany }
+    - { place: 13, name: "Paul Schneider", country: DE }
+    - { place: 14, player: hans-faller }
+    - { place: 15, player: romana-kralova }
+    - { place: 16, player: tobias-amrhein }
+    - { place: 17, player: thomas-vormwald }
+    - { place: 18, player: tadeas-matys }
+    - { place: 19, player: zdenek-taborsky }
+    - { place: 20, name: "Thomas Janßen", country: DE }
+    - { place: 21, player: stepan-smoljak }
+    - { place: 22, player: zdenek-svitak }
+    - { place: 23, player: karlos-novak }
+    - { place: 24, player: tomas-chmelar }
+    - { place: 25, hidden: true }
+    - { place: 26, player: ondrej-chmelar }
+    - { place: 27, hidden: true }
+    - { place: 28, player: michal-fucik }
+    - { place: 29, name: "Kacper Grzegorczuk", country: PL }
+    - { place: 30, hidden: true }
+    - { place: 31, hidden: true }
+    - { place: 32, hidden: true }
+    - { place: 33, player: pavel-schierl }
+    - { place: 34, hidden: true }
+    - { place: 35, hidden: true }
+    - { place: 36, hidden: true }
+    - { place: 37, hidden: true }
+    - { place: 38, hidden: true }
+    - { place: 39, name: "Bernd Walter", country: DE }
+    - { place: 40, hidden: true }
+    - { place: 41, player: jiri-pavela }
+    - { place: 42, hidden: true }
+    - { place: 43, hidden: true }
+    - { place: 44, hidden: true }

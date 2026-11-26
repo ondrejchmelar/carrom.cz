@@ -2,6 +2,7 @@ first_name: Kumar
 last_name: Alok
 country: CZ
 mcr: true
+sol: fc55fac5234811ec99b1333b6c3c1c6c
 spellings:
   - Alok Kumar
 source: old-site

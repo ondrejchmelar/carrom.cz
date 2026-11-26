@@ -1,6 +1,44 @@
 competition: druhy
 year: 2024
 status: finished
+start_date: 2024-10-05
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/3b126ed682e811efba229914b9f6cf34
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, name: "Patrick Joiko", country: DE }
+    - { place: 3, player: raj-patil }
+    - { place: 4, player: ajay-sekhesh }
+    - { place: 5, player: zdenek-svitak }
+    - { place: 6, player: tomas-chmelar }
+    - { place: 7, player: filip-smoljak }
+    - { place: 8, name: "Mathias Forlivesi", country: IT }
+    - { place: 9, player: michal-fucik }
+    - { place: 10, player: pavel-schierl }
+    - { place: 11, player: matej-bednar }
+    - { place: 12, player: frantisek-rezek }
+    - { place: 13, player: magdalena-novotna }
+    - { place: 14, player: frantisek-cervenka }
+    - { place: 15, player: selvamani-thirumurugan }
+    - { place: 16, player: lukas-krkavec }
+  juniors:
+    - { place: 1, player: ondrej-kubicek }
+    - { place: 2, player: prokop-novak }
+    - { place: 3, player: magdalena-novotna }
+    - { place: 4, player: michal-dolecek }
+    - { place: 5, player: patrik-vaca }
+    - { place: 6, player: maxim-novotny }
+    - { place: 7, player: jan-docekal }
+    - { place: 8, player: ales-lipensky }
+    - { place: 9, player: michal-knizner }
+    - { place: 10, player: denis-kundrat }
+    - { place: 11, player: jakub-lyko }
+    - { place: 12, player: matej-melmuka }
+    - { place: 13, player: vendula-ferancova }
+    - { place: 14, player: artur-huts }
+    - { place: 15, player: klara-kubova }
+    - { place: 16, player: denis-trecha }
+    - { place: 17, player: bohumil-napravnik }
+    - { place: 18, player: arun-bhopalsingh }

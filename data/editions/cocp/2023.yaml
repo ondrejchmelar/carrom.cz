@@ -10,4 +10,56 @@ external_url: "http://zdenektichy.jalbum.net/carrom/2023_open/index.html"
 source: old-site
 old_url: /turnaje/cocp/cocp_2023.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/cd25582d82e211ee9df46162688db8a6
+results:
+  singles:
+    - { place: 1, player: maghesh-babu }
+    - { place: 2, player: dirk-polchow }
+    - { place: 3, name: "Natvarsingh Chavda", country: UK }
+    - { place: 4, name: "Vinod Chithirai", country: UK }
+    - { place: 5, player: frank-fehr }
+    - { place: 6, player: pawel-wroczynski }
+    - { place: 7, player: karlos-novak }
+    - { place: 8, player: sylwester-pogorzelski }
+    - { place: 9, name: "Raja Krishnan", country: DE }
+    - { place: 10, name: "Paul Schneider", country: DE }
+    - { place: 11, player: zdenek-svitak }
+    - { place: 12, name: "Nirupam Purkayastha", country: DE }
+    - { place: 13, player: ajay-pal }
+    - { place: 14, name: "Amar Sanakal", country: UK }
+    - { place: 15, player: raj-patil }
+    - { place: 16, player: matej-bednar }
+    - { place: 17, player: jan-tesitel }
+    - { place: 18, name: "Patrick Joiko", country: DE }
+    - { place: 19, name: "Longin Kowalski", country: DE }
+    - { place: 20, player: horst-simunsky }
+    - { place: 21, name: "Simon Nebeling", country: DE }
+    - { place: 22, player: frantisek-cervenka }
+    - { place: 23, name: "Francesco Ventola", country: IT }
+    - { place: 24, player: frantisek-rezek }
+    - { place: 25, player: darius-brozek }
+    - { place: 26, player: hans-faller }
+    - { place: 27, player: ondrej-chmelar }
+    - { place: 28, player: neel-vasanth }
+    - { place: 29, player: michal-fucik }
+    - { place: 30, name: "Nhu Kevin Tieu", country: DE }
+    - { place: 31, name: "Witold Blaut", country: PL }
+    - { place: 32, player: tomas-chmelar }
+    - { place: 33, player: magdalena-novotna }
+    - { place: 34, name: "Marcin Weiss", country: PL }
+    - { place: 35, player: pavel-schierl }
+    - { place: 36, player: ondrej-kubicek }
+    - { place: 37, name: "Ronny Kaiser", country: DE }
+    - { place: 38, player: kumar-alok }
+    - { place: 39, name: "Anita Muruganandam", country: CH }
+    - { place: 40, name: "Eliza Lipinska-Wroczynska", country: PL }
+    - { place: 41, name: "Mathias Forlivesi", country: IT }
+    - { place: 42, player: romana-kralova }
+    - { place: 43, name: "Pawel Gajda", country: PL }
+    - { place: 44, player: selvamani-thirumurugan }
+    - { place: 45, name: "Alessia Mercuri", country: IT }
+    - { place: 46, name: "Andreas Müller", country: DE }
+    - { place: 47, player: zdenek-taborsky }
+    - { place: 48, name: "Sharon Marcu", country: DE }
+    - { place: 49, name: "Janus Milojevic", country: DE }
+    - { place: 50, player: shiv-sah }

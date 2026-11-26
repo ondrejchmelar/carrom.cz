@@ -1,6 +1,23 @@
 competition: druhy
 year: 2021
 status: finished
+start_date: 2021-10-02
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/12ae6e9b234711eca4ee333b6c3c1c6c
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: frantisek-cervenka }
+    - { place: 3, player: raj-patil }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: karlos-novak }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: lukas-navratil }
+    - { place: 8, player: jan-tesitel }
+    - { place: 9, player: horst-simunsky }
+    - { place: 10, player: frantisek-rezek }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: pavel-schierl }
+    - { place: 13, player: ales-krestan }
+    - { place: 14, player: kumar-alok }

@@ -9,6 +9,7 @@ report:
 source: old-site
 old_url: /turnaje/druhy/druhy_2015.php
 
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/a049139268d511e5ac012e92809967e5
 results:
   singles:
     - { place: 1, player: filip-smoljak }
@@ -27,3 +28,18 @@ results:
     - { place: 14, player: jiri-pavela }
     - { place: 15, player: jakub-moravec }
     - { place: 16, player: michaela-pavelova }
+  juniors:
+    - { place: 1, player: stepan-smoljak }
+    - { place: 2, hidden: true }
+    - { place: 3, hidden: true }
+    - { place: 4, hidden: true }
+    - { place: 5, hidden: true }
+    - { place: 6, hidden: true }
+    - { place: 7, hidden: true }
+    - { place: 8, hidden: true }
+    - { place: 9, hidden: true }
+    - { place: 10, hidden: true }
+    - { place: 11, hidden: true }
+    - { place: 12, hidden: true }
+    - { place: 13, hidden: true }
+    - { place: 14, hidden: true }

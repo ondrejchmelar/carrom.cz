@@ -1,6 +1,48 @@
 competition: druhy
 year: 2018
 status: finished
+start_date: 2018-10-06
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/0e6be4b6c8b511e8ac012e92809967e5
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: tadeas-matys }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: frantisek-rezek }
+    - { place: 5, player: raj-patil }
+    - { place: 6, player: neel-vasanth }
+    - { place: 7, player: karlos-novak }
+    - { place: 8, player: ondrej-chmelar }
+    - { place: 9, player: jan-tesitel }
+    - { place: 10, player: tomas-chmelar }
+    - { place: 11, player: darius-brozek }
+    - { place: 12, player: rostislav-borsky }
+    - { place: 13, player: lukas-navratil }
+    - { place: 14, player: frantisek-cervenka }
+    - { place: 15, player: ales-krestan }
+    - { place: 16, player: pavel-schierl }
+    - { place: 17, player: miroslav-cernohous }
+    - { place: 18, player: vratislav-borsky }
+    - { place: 19, hidden: true }
+    - { place: 20, player: zdenek-taborsky }
+    - { place: 21, hidden: true }
+    - { place: 22, hidden: true }
+    - { place: 23, player: jiri-pavela }
+    - { place: 24, hidden: true }
+  juniors:
+    - { place: 1, player: rostislav-borsky }
+    - { place: 2, hidden: true }
+    - { place: 3, hidden: true }
+    - { place: 4, player: matej-bednar }
+    - { place: 5, hidden: true }
+    - { place: 6, player: jakub-muller }
+    - { place: 7, hidden: true }
+    - { place: 8, hidden: true }
+    - { place: 9, hidden: true }
+    - { place: 10, hidden: true }
+    - { place: 11, hidden: true }
+    - { place: 12, hidden: true }
+    - { place: 13, hidden: true }
+    - { place: 14, player: josef-slanina }

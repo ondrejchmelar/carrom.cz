@@ -131,6 +131,8 @@ class Players:
                 self.by_key.setdefault(key(n), set()).add(pid)
             for tok in set(key(g('last_name')).split()):  # guesses only on a shared surname
                 self.tokens.setdefault(tok, set()).add(pid)
+            self.first = getattr(self, 'first', {})
+            self.first[pid] = key(g('first_name'))
 
     def match(self, row):
         """-> (player id or None, how)"""
@@ -147,14 +149,17 @@ class Players:
             hit = self.by_key.get(key(c))
             if hit and len(hit) == 1:
                 return next(iter(hit)), 'name'
-        # one shared name with exactly one player (e.g. a long first name in SoL): a guess for the editor to check
-        toks = [x for x in key(plain).split() if len(x) > 3]
-        hits = set()
-        for tk in toks:
-            if len(self.tokens.get(tk, ())) == 1:
-                hits |= self.tokens[tk]
-        if len(hits) == 1:
-            return next(iter(hits)), 'guess'
+        # same surname as exactly one player and a first name that starts the same way (e.g. a long first name
+        # in SoL): a guess for the editor to check. SoL writes "Last First".
+        parts = key(plain).split()
+        if len(parts) >= 2:
+            sur, first = parts[0], ' '.join(parts[1:])
+            hit = self.tokens.get(sur, set())
+            if len(hit) == 1:
+                pid = next(iter(hit))
+                f = self.first.get(pid, '')
+                if f and (first.startswith(f) or f.startswith(first)):
+                    return pid, 'guess'
         return None, None
 
     def add_sol(self, pid, sol, dry):
@@ -202,7 +207,9 @@ def write_edition(ed, division, rows, url, dry):
     t = ed['text']
     lines = ['results:', f'  {division}:']
     for r in rows:
-        if r.get('player'):
+        if r.get('hidden'):
+            lines.append(f"    - {{ place: {r['place']}, hidden: true }}")
+        elif r.get('player'):
             lines.append(f"    - {{ place: {r['place']}, player: {r['player']} }}")
         else:
             lines.append(f"    - {{ place: {r['place']}, name: {json.dumps(r['name'], ensure_ascii=False)}, country: {r['country']} }}")
@@ -262,7 +269,7 @@ def main():
         if division in ed['divisions'] and not a.force:
             report.append(f'- {head} → `{eid}`: výsledky už jsou, přeskočeno (přepíše `--force`).')
             continue
-        guessed, new, foreign = [], [], []
+        guessed, new, foreign, hidden = [], [], [], []
         out = []
         for r in t['rows']:
             pid, how = players.match(r)
@@ -273,6 +280,11 @@ def main():
                 out.append({'place': r['place'], 'player': pid})
                 continue
             info = parse_player(lit.get(f"/lit/player/{r['sol']}"))
+            if not info['country']:
+                # SoL hides players who did not agree to publish their name (the name is scrambled, no country)
+                hidden.append(str(r['place']))
+                out.append({'place': r['place'], 'hidden': True})
+                continue
             cc = COUNTRY.get(info['country'])
             if not cc:
                 cc = info['country'][:2].upper() or '??'
@@ -291,6 +303,8 @@ def main():
             report.append('  - Odhadnutá shoda jména, zkontroluj: ' + '; '.join(guessed))
         if new:
             report.append('  - Noví hráči z ČR (hrají o MČR): ' + '; '.join(new))
+        if hidden:
+            report.append('  - Hráči skrytí v SoL (jméno nezveřejněno), místa: ' + ', '.join(hidden))
         if foreign:
             report.append('  - Zahraniční hráči bez stránky, jen jméno a stát: ' + '; '.join(foreign))
     text_ = '\n'.join(report) + '\n'

@@ -10,4 +10,44 @@ external_url: "http://zdenektichy.jalbum.net/carrom/2022_open/index.html"
 source: old-site
 old_url: /turnaje/cocp/cocp_2022.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/e98f9de6675d11eda24a63a79ccd283b
+results:
+  singles:
+    - { place: 1, player: sylwester-pogorzelski }
+    - { place: 2, name: "Johannes Jörg", country: DE }
+    - { place: 3, player: lorenzo-hurlimann }
+    - { place: 4, player: frank-fehr }
+    - { place: 5, player: pawel-wroczynski }
+    - { place: 6, player: jakub-sasinski }
+    - { place: 7, name: "Andreas Fischer", country: DE }
+    - { place: 8, name: "Sajith Kumara Thenahandi", country: IT }
+    - { place: 9, player: zdenek-svitak }
+    - { place: 10, name: "Wipul Priyantha Neleththi", country: IT }
+    - { place: 11, name: "Witold Blaut", country: PL }
+    - { place: 12, name: "Paul Schneider", country: DE }
+    - { place: 13, player: frantisek-rezek }
+    - { place: 14, player: karlos-novak }
+    - { place: 15, player: filip-smoljak }
+    - { place: 16, player: horst-simunsky }
+    - { place: 17, name: "Kacper Grzegorczuk", country: PL }
+    - { place: 18, name: "Oliver Gies", country: DE }
+    - { place: 19, name: "Simon Nebeling", country: DE }
+    - { place: 20, player: frantisek-cervenka }
+    - { place: 21, player: hans-faller }
+    - { place: 22, player: matej-bednar }
+    - { place: 23, name: "Ronny Kaiser", country: DE }
+    - { place: 24, player: lukas-navratil }
+    - { place: 25, name: "Nikodem Blaut", country: PL }
+    - { place: 26, name: "Piotr Hink", country: PL }
+    - { place: 27, player: jan-tesitel }
+    - { place: 28, player: pavel-schierl }
+    - { place: 29, player: michal-fucik }
+    - { place: 30, player: kumar-alok }
+    - { place: 31, player: tomas-chmelar }
+    - { place: 32, name: "Pawel Gajda", country: PL }
+    - { place: 33, player: jakub-muller }
+    - { place: 34, player: dominika-krestanova }
+    - { place: 35, player: jiri-pavela }
+    - { place: 36, name: "Eliza Lipinska-Wroczynska", country: PL }
+    - { place: 37, name: "Sharon Marcu", country: DE }
+    - { place: 38, name: "Nhu Kevin Tieu", country: DE }

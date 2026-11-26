@@ -1,6 +1,30 @@
 competition: jarni
 year: 2019
 status: finished
+start_date: 2019-03-30
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/95eac39252b911e9ac012e92809967e5
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: karlos-novak }
+    - { place: 3, player: frantisek-rezek }
+    - { place: 4, player: raj-patil }
+    - { place: 5, player: horst-simunsky }
+    - { place: 6, player: neel-vasanth }
+    - { place: 7, player: filip-smoljak }
+    - { place: 8, player: jan-tesitel }
+    - { place: 9, player: ondrej-chmelar }
+    - { place: 10, player: lukas-navratil }
+    - { place: 11, player: michal-fucik }
+    - { place: 12, player: frantisek-cervenka }
+    - { place: 13, player: romana-kralova }
+    - { place: 14, player: darius-brozek }
+    - { place: 15, player: tomas-chmelar }
+    - { place: 16, player: rostislav-borsky }
+    - { place: 17, player: zdenek-taborsky }
+    - { place: 18, player: vratislav-borsky }
+    - { place: 19, player: pavel-schierl }
+    - { place: 20, hidden: true }
+    - { place: 21, hidden: true }

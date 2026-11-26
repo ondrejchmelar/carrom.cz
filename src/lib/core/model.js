@@ -65,6 +65,7 @@ export function buildModel(raw, { today = new Date() } = {}) {
     for (const [div, rows] of Object.entries(ed.results ?? {})) {
       for (const r of rows ?? []) {
         if (r.player == null && r.name) continue; // plain name (e.g. foreign players at the Eurocup)
+        if (r.player == null && r.hidden) continue; // player hidden in SoL (name not published)
         if (!players[r.player]) warnings.push(`editions/${ed.id}: ${div} – neznámý hráč ${r.player ?? '(bez jména)'}`);
       }
     }

@@ -4,4 +4,20 @@ status: finished
 start_date: 2025-04-12      # UKÁZKA: datum odhadnuto, opraví import ze starého webu
 venue: { name: Pelhřimov, city: Pelhřimov }
 source: old-site
-results: {}                 # pořadí doplní import; body MČR jsou v rankings/mcr-2025.yaml
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/e026cadf168d11f0a95c5ff44abdd24c
+results:
+  singles:
+    - { place: 1, player: ajay-sekhesh }
+    - { place: 2, player: karlos-novak }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: matej-bednar }
+    - { place: 5, name: "Mathias Forlivesi", country: IT }
+    - { place: 6, player: frantisek-cervenka }
+    - { place: 7, player: jakub-muller }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, name: "Patrick Joiko", country: DE }
+    - { place: 10, player: neel-vasanth }
+    - { place: 11, player: jan-tesitel }
+    - { place: 12, player: ondrej-kubicek }
+    - { place: 13, player: veronika-stejskalova }
+    - { place: 14, player: jaroslav-kucera }

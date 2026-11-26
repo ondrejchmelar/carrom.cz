@@ -9,6 +9,7 @@ report:
 source: old-site
 old_url: /turnaje/druhy/druhy_2016.php
 
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/513e2e888c0e11e6ac012e92809967e5
 results:
   singles:
     - { place: 1, player: zdenek-svitak }
@@ -29,3 +30,16 @@ results:
     - { place: 16, player: pavel-schierl }
     - { place: 17, player: lukas-pavela }
     - { place: 18, player: martin-velek }
+  juniors:
+    - { place: 1, player: stepan-smoljak }
+    - { place: 2, hidden: true }
+    - { place: 3, hidden: true }
+    - { place: 4, hidden: true }
+    - { place: 5, hidden: true }
+    - { place: 6, hidden: true }
+    - { place: 7, hidden: true }
+    - { place: 8, hidden: true }
+    - { place: 9, hidden: true }
+    - { place: 10, hidden: true }
+    - { place: 11, hidden: true }
+    - { place: 12, player: matej-bednar }
