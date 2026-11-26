@@ -7,13 +7,13 @@ const T = {
   cs: {
     vs: 'Proti počítači', two: 'Dva hráči', level: 'Obtížnost', easy: 'Lehká', mid: 'Střední', hard: 'Těžká',
     reset: 'Nová hra', place: 'Pozice strikeru', board: 'Carromová deska, hra',
-    help: 'Posuň striker po své čáře (táhni ho, nebo použij posuvník). Pak táhni prstem nebo myší od strikeru dozadu, jako prak, a pusť. Čím dál táhneš, tím silněji cvrnkneš.',
+    help: 'Posuň striker po své čáře (táhni ho). Pak táhni prstem nebo myší od strikeru dozadu, jako prak, a pusť. Čím dál táhneš, tím silněji cvrnkneš.',
     keys: 'Klávesnice: ← → posun, ↑ ↓ míření, mezerník síla a výstřel.',
   },
   en: {
     vs: 'Against computer', two: 'Two players', level: 'Level', easy: 'Easy', mid: 'Medium', hard: 'Hard',
     reset: 'New game', place: 'Striker position', board: 'Carrom board, game',
-    help: 'Slide the striker along your base line (drag it or use the slider). Then drag back from the striker like a slingshot and let go. The further you pull, the harder the shot.',
+    help: 'Slide the striker along your base line (drag it). Then drag back from the striker like a slingshot and let go. The further you pull, the harder the shot.',
     keys: 'Keyboard: ← → move, ↑ ↓ aim, space for power and shot.',
   },
 }[lang];
@@ -53,10 +53,6 @@ const T = {
   <p class="cg-status" data-status aria-live="polite"></p>
   <p class="cg-rules small" data-rules></p>
 
-  <label class="cg-slider">
-    <span class="sr-only">{T.place}</span>
-    <input type="range" min="0" max="1000" value="500" data-slider aria-label={T.place} />
-  </label>
 
   <div class="cg-foot">
     <button type="button" class="btn btn-ghost" data-reset>{T.reset}</button>
@@ -130,7 +126,7 @@ const T = {
       'queen-first': 'The queen must be covered before the last coin. The coin goes back to the centre.',
       queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered', easy: 'Queen pocketed' },
       rules: {
-        easy: 'Whoever begins has the white coins; players take turns to begin. Easy game: 3 coins each and the queen. Every pocketed coin counts, nothing goes back. Pocket your coin or the queen and you play on. Cover the queen with your coin (same or next stroke) for +3. It must be covered before anyone's last coin. First to pocket all 3 coins wins.',
+        easy: 'Whoever begins has the white coins; players take turns to begin. Easy game: 3 coins each and the queen. Every pocketed coin counts, nothing goes back. Pocket your coin or the queen and you play on. Cover the queen with your coin (same or next stroke) for +3. It must be covered before anyone\'s last coin. First to pocket all 3 coins wins.',
         full: 'ECC laws: whoever begins (breaks) has the white coins; players take turns to begin. 9 coins each. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
       },
       won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
@@ -151,7 +147,6 @@ const T = {
     const canvas = root.querySelector('canvas')!;
     const ctx = canvas.getContext('2d')!;
     const $ = (s: string) => root.querySelector<HTMLElement>(s)!;
-    const slider = $('[data-slider]') as HTMLInputElement;
     const levelSel = $('[data-level]') as HTMLSelectElement;
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -197,8 +192,6 @@ const T = {
     const nameOf = (c: 'white' | 'black') => (c === myColor() ? (mode === 'computer' ? L.you : L.p1) : mode === 'computer' ? L.cpu : L.p2);
     function setStriker(x: number) {
       strikerX = C.clampStrikerX(x);
-      const k = (strikerX - C.BASE_X[0]) / (C.BASE_X[1] - C.BASE_X[0]);
-      slider.value = String(Math.round((flipped() ? 1 - k : k) * 1000));
     }
     function shotFromAim() {
       if (!aim) return null;
@@ -226,7 +219,6 @@ const T = {
       root.querySelectorAll<HTMLElement>('[data-total]').forEach((el) => (el.textContent = String(C.coinsOf(state))));
       $('[data-rules]').textContent = nb(state.easy ? L.rules.easy : L.rules.full);
       $('[data-status]').textContent = nb(statusText());
-      slider.disabled = !human();
       // Who begins, and so has white, stays on the board until the first shot.
       const start = $('[data-start]');
       start.hidden = state.shots > 0 || !!state.winner;
@@ -478,12 +470,6 @@ const T = {
     canvas.addEventListener('keyup', (e) => {
       if (e.key === ' ' && charging) { charging = false; e.preventDefault(); shoot(kbAngle, kbPower); }
     });
-    slider.addEventListener('input', () => {
-      const v = Number(slider.value) / 1000;
-      const k = flipped() ? 1 - v : v;
-      strikerX = C.BASE_X[0] + (C.BASE_X[1] - C.BASE_X[0]) * k;
-      message = ''; ui(); draw();
-    });
     root.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((b) => b.addEventListener('click', () => {
       mode = b.dataset.mode as 'computer' | 'two';
       root.querySelectorAll('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
@@ -526,7 +512,6 @@ const T = {
   .cg-over strong { font: 800 32px/1.1 var(--f-head); }
   .cg-status { min-height: 48px; font-weight: 600; color: var(--navy); }
   .cg-rules { margin: 0; color: var(--muted); }
-  .cg-slider input { width: 100%; accent-color: var(--red); min-height: 44px; }
   .cg-foot { display: flex; gap: 12px; }
   @media (hover: none) { .cg-keys { display: none; } }
 </style>
