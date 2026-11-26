@@ -1,6 +1,6 @@
 # Přihlašovací služba adminu (GitHub OAuth) – Cloudflare Worker "carrom-cz".
 # Kód je převzatý ze sveltia/sveltia-cms-auth (MIT, viz LICENSE.txt).
-# V Cloudflare: Settings → Build → Root directory = auth, deploy command = npx wrangler deploy.
+# Totéž jako wrangler.toml v kořeni repa, pro případ Root directory = auth.
 # GITHUB_CLIENT_SECRET je jen jako Secret v Cloudflare, nikdy v tomto souboru.
 name = "carrom-cz"
 main = "src/index.js"
