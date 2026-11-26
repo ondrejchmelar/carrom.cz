@@ -27,20 +27,16 @@ const other = (c) => (c === 'white' ? 'black' : 'white');
 export function rack() {
   const pieces = [{ id: 0, kind: 'queen', color: 'queen', x: CENTER, y: CENTER }];
   const d = COIN_R * 2 + 0.2;
-  const inner = [], outer = [];
-  for (let k = 0; k < 6; k++) {
-    const a = (k * Math.PI) / 3 - Math.PI / 2;
-    inner.push([Math.cos(a) * d, Math.sin(a) * d]);
-    outer.push([Math.cos(a) * 2 * d, Math.sin(a) * 2 * d]);
-    const b = a + Math.PI / 6;
-    outer.push([Math.cos(b) * Math.sqrt(3) * d, Math.sin(b) * Math.sqrt(3) * d]);
-  }
-  // White forms a "Y" through the inner ring, as on a real board.
-  const innerColors = ['white', 'black', 'white', 'black', 'white', 'black'];
-  const outerColors = ['black', 'white', 'white', 'black', 'black', 'white', 'white', 'black', 'black', 'white', 'white', 'black'];
+  // Colours alternate in both rings. One ray points at the far-left pocket (top left, seen by white),
+  // and both coins on it are white: inner ring W B W B W B, outer ring corners white, edges black.
+  const ray = Math.atan2(-1, -1);
   let id = 1;
-  inner.forEach(([dx, dy], i) => pieces.push({ id: id++, kind: 'coin', color: innerColors[i], x: CENTER + dx, y: CENTER + dy }));
-  outer.forEach(([dx, dy], i) => pieces.push({ id: id++, kind: 'coin', color: outerColors[i], x: CENTER + dx, y: CENTER + dy }));
+  const put = (a, dist, color) => pieces.push({ id: id++, kind: 'coin', color, x: CENTER + Math.cos(a) * dist, y: CENTER + Math.sin(a) * dist });
+  for (let k = 0; k < 6; k++) put(ray + (k * Math.PI) / 3, d, k % 2 ? 'black' : 'white');
+  for (let k = 0; k < 6; k++) {
+    put(ray + (k * Math.PI) / 3, 2 * d, 'white');
+    put(ray + (k * Math.PI) / 3 + Math.PI / 6, Math.sqrt(3) * d, 'black');
+  }
   for (const p of pieces) Object.assign(p, { vx: 0, vy: 0, r: COIN_R, m: MASS[p.kind], inPlay: true });
   return pieces;
 }
