@@ -42,7 +42,7 @@ const other = (c) => (c === 'white' ? 'black' : 'white');
  * Starting position: queen in the centre, 6 coins around it, 12 in the outer ring (hexagonal packing).
  * The easy game uses only the queen and the inner ring: 7 pieces, 3 coins per colour.
  */
-export function rack({ easy = false, rand = Math.random, jitter = 0.25 } = {}) {
+export function rack({ easy = false, rand = Math.random, jitter = 0.06 } = {}) {
   const R = geom({ easy }).coin;
   const pieces = [{ id: 0, kind: 'queen', color: 'queen', x: CENTER, y: CENTER }];
   const d = R * 2 + 0.2;
