@@ -14,6 +14,7 @@ const s = m.seasons[ed.id];
 const fmt = ed.format ?? {};
 const players = s ? [...s.table.map((r: any) => r.player), ...s.idle] : [];
 const names = shortNames(players, m.players);
+const full = Object.fromEntries(players.map((pid: string) => [pid, plainName(m.players[pid], pid)]));
 const cutAt = fmt.playoff?.groups?.length ? 8 : 0;
 const defaultTab = s && s.phase !== 'group' && s.groups.length ? 'playoff' : 'tabulka';
 // cross table lookup: key "a|b" -> [scoreA, scoreB] from a's side
@@ -128,15 +129,17 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
         <section id="playoff" class="section panel" role="tabpanel">
           <h2 class="sr-only">Playoff</h2>
           {s.groups.length === 0 && <p class="notice">{tr(lang, 'Playoff začne po základním kole', 'The playoff starts after the group stage')}{fmt.group_stage?.until ? ` (${tr(lang, 'do', 'until')} ${dateShort(fmt.group_stage.until, true, lang)})` : ''}.</p>}
-          {s.groups.map((g: any) => (
-            <div class="section">
-              <h3>{tr(lang, `Skupina o ${g.first}.–${g.last}. místo`, `Group for places ${g.first}–${g.last}`)}</h3>
-              <Bracket group={g} names={names} lang={lang} />
+          {s.groups.length > 0 && (
+            <div class="phase groups" role="tablist">
+              {s.groups.map((g: any, i: number) => <a class:list={['pill', { on: i === 0 }]} href={`#po-${g.key}`} data-group={g.key}>{tr(lang, `${g.first}.–${g.last}. místo`, `Places ${g.first}–${g.last}`)}</a>)}
+            </div>
+          )}
+          {s.groups.map((g: any, i: number) => (
+            <div class="group" id={`po-${g.key}`} data-group-panel={g.key} hidden={i > 0}>
+              <h3 class="sr-only">{tr(lang, `Skupina o ${g.first}.–${g.last}. místo`, `Group for places ${g.first}–${g.last}`)}</h3>
+              <Bracket group={g} names={names} full={full} dates={fmt.playoff?.dates} lang={lang} />
             </div>
           ))}
-          {fmt.playoff?.dates && (
-            <p class="small">{tr(lang, 'Termíny: čtvrtfinále', 'Dates: quarter-finals')} {dateShort(fmt.playoff.dates.qf, true, lang)}, {tr(lang, 'semifinále', 'semi-finals')} {dateShort(fmt.playoff.dates.sf, true, lang)}, {tr(lang, 'finále', 'finals')} {dateShort(fmt.playoff.dates.f, true, lang)}.</p>
-          )}
           {s.finalPlaces.length > 0 && (
             <div class="section">
               <h3>{s.complete ? tr(lang, 'Konečné pořadí', 'Final places') : tr(lang, 'Zatím rozhodnutá místa', 'Places decided so far')}</h3>
@@ -164,6 +167,10 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
   .signup .btn { align-self: flex-start; }
   .pill { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: #fff; color: var(--muted); border: 1px solid var(--line); }
   .pill.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .groups { display: flex; flex-wrap: wrap; margin-bottom: 4px; }
+  .groups .pill:hover { color: var(--navy); }
+  .groups .pill.on:hover { color: #fff; }
+  .group { display: flex; flex-direction: column; gap: 10px; }
   .tabs { display: flex; flex-direction: column; gap: 20px; }
   .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: #E3E6EE; border-radius: 12px; padding: 4px; gap: 4px; max-width: 480px; }
   .seg a { min-height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 9px; font-weight: 700; font-size: 15px; color: var(--muted); }
@@ -214,5 +221,12 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
     const pick = () => root.querySelectorAll<HTMLElement>('[data-player]').forEach((d) => { d.hidden = d.dataset.player !== sel!.value; });
     sel?.addEventListener('change', pick);
     if (sel) pick();
+    const chips = [...root.querySelectorAll<HTMLAnchorElement>('[data-group]')];
+    chips.forEach((c) => c.addEventListener('click', (e) => {
+      e.preventDefault();
+      chips.forEach((x) => x.classList.toggle('on', x === c));
+      root.querySelectorAll<HTMLElement>('[data-group-panel]').forEach((p) => { p.hidden = p.dataset.groupPanel !== c.dataset.group; });
+      dispatchEvent(new Event('resize'));
+    }));
   }
 </script>

@@ -1,85 +1,134 @@
 ---
-// One playoff group (pcl-8): quarter-finals, semi-finals, finals and the 5th–8th matches.
-import { t, type Lang } from '../lib/site';
-interface Props { group: any; names: Record<string, string>; lang?: Lang }
-const { group, names, lang = 'cs' } = Astro.props;
+// One playoff group (pcl-8), laid out as in the approved PCL mockup: quarter-finals, semi-finals and finals in
+// three columns joined by lines, the 5th–8th matches underneath. Phones scroll it sideways with short names.
+import { t, dateShort, type Lang } from '../lib/site';
+interface Props { group: any; names: Record<string, string>; full: Record<string, string>; dates?: any; lang?: Lang }
+const { group, names, full, dates = {}, lang = 'cs' } = Astro.props;
+const en = lang === 'en';
 const by = Object.fromEntries(group.slots.map((s: any) => [s.id, s]));
-const cols = [
-  { title: lang === 'en' ? 'Quarter-finals' : 'Čtvrtfinále', ids: ['qf1', 'qf2', 'qf3', 'qf4'] },
-  { title: lang === 'en' ? 'Semi-finals' : 'Semifinále', ids: ['sf1', 'sf2'], lower: ['l-sf1', 'l-sf2'] },
-  { title: lang === 'en' ? 'Finals' : 'Finále', ids: ['f1', 'f3'], lower: ['f5', 'f7'] },
-];
-const label = (p: any) => (p.player ? names[p.player] ?? p.player : lang === 'en' ? p.feedEn : p.feed);
+const d = (k: string) => (dates?.[k] ? ` · ${dateShort(dates[k], false, lang)}` : '');
+const short = (s: any) => t(s.label, lang).replace(/^Čtvrtfinále/, 'ČF').replace(/^Semifinále/, 'SF').replace(/^Quarter-final/, 'QF').replace(/^Semi-final/, 'SF');
+const tag = (s: any) =>
+  group.next === s.id ? { long: en ? 'Next match' : 'Další zápas', short: en ? 'Next' : 'Další', red: false }
+  : s.bestOf > 1 ? { long: en ? `best of ${s.bestOf}` : `na ${Math.ceil(s.bestOf / 2)} vítězné`, short: en ? `best of ${s.bestOf}` : `${Math.ceil(s.bestOf / 2)} výhry`, red: !!s.places }
+  : { long: en ? '1 game' : '1 hra', short: en ? '1 game' : '1 hra', red: !!s.places };
+// line from each source match to the match its winner goes to
+const wires = [['qf1', 'sf1'], ['qf2', 'sf1'], ['qf3', 'sf2'], ['qf4', 'sf2'], ['sf1', 'f1'], ['sf2', 'f1'], ['l-sf1', 'f5'], ['l-sf2', 'f5']]
+  .map(([a, b]) => {
+    const s = by[a], w = s.winner == null ? null : s.players[s.winner]?.player;
+    return `${a}>${b}>${w && by[b].players.some((p: any) => p.player === w) ? 'won' : 'open'}`;
+  }).join(' ');
 ---
-<div class="bracket-scroll">
-  <div class="bracket">
-    {cols.map((c) => (
-      <div class="col">
-        <h4>{c.title}</h4>
-        <div class="col-main">
-          {c.ids.map((id) => {
-            const s = by[id];
-            return (
-              <div class:list={['bm', { next: group.next === id }]}>
-                <div class="bm-top"><span>{t(s.label, lang)}</span>{s.places && <span class="for">{lang === 'en' ? `for ${s.places[0]}.` : `o ${s.places[0]}. místo`}</span>}{!s.places && <span>{s.bestOf > 1 ? (lang === 'en' ? `best of ${s.bestOf}` : `na ${Math.ceil(s.bestOf / 2)} výhry`) : ''}</span>}</div>
-                {s.players.map((p: any, i: number) => (
-                  <div class:list={['bp', { win: s.winner === i, lose: s.winner === 1 - i, tbd: !p.player }]}>
-                    <span class="sd">{p.seed ?? ''}</span>
-                    <span class="nm">{label(p)}</span>
-                    <span class="gs">{s.games.map((g: number[]) => <i class:list={{ g: g[i] > g[1 - i] }}>{g[i]}</i>)}</span>
-                  </div>
-                ))}
+{['qf1', 'qf2', 'qf3', 'qf4', 'sf1', 'sf2', 'l-sf1', 'l-sf2', 'f1', 'f3', 'f5', 'f7'].every((id) => by[id]) && (
+<div class="brk-scroll">
+  <div class="brk" data-wires={wires}>
+    <h4>{en ? 'Quarter-finals' : 'Čtvrtfinále'}{d('qf')}</h4>
+    <h4>{en ? 'Semi-finals' : 'Semifinále'}{d('sf')}</h4>
+    <h4>{en ? 'Finals' : 'Finále'}{d('f')}</h4>
+    {[['qf1', 'qf2', 'qf3', 'qf4'], ['sf1', 'sf2'], ['f1', 'f3'], [], ['l-sf1', 'l-sf2'], ['f5', 'f7']].map((ids, ci) => (
+      ci === 3 ? <>
+        <span></span>
+        <h4 class="po">{en ? '5th–8th place' : 'O 5.–8. místo'}{d('sf')}</h4>
+        <h4 class="po">{en ? '5th and 7th place' : 'O 5. a 7. místo'}{d('f')}</h4>
+        <span></span>
+      </> : ids.length === 0 ? null :
+      <div class:list={['bc', { sa: ci === 1, ce: ci === 2 || ci === 5 }]}>
+        {ids.map((id) => {
+          const s = by[id];
+          const g = tag(s);
+          return <>
+            {id === 'f3' && <h4 class="sub">{en ? 'Third place' : 'O 3. místo'}</h4>}
+            <div class:list={['bm', { next: group.next === id }]} data-slot={id}>
+              <div class="bm-top">
+                <span><span class="lg">{t(s.label, lang)}</span><span class="sh">{short(s)}</span></span>
+                <span class:list={{ for: g.red }}><span class="lg">{g.long}</span><span class="sh">{g.short}</span></span>
               </div>
-            );
-          })}
-        </div>
-        {c.lower && (
-          <div class="col-lower">
-            <h5>{lang === 'en' ? '5th–8th place' : 'O 5.–8. místo'}</h5>
-            {c.lower.map((id) => {
-              const s = by[id];
-              return (
-                <div class:list={['bm', { next: group.next === id }]}>
-                  <div class="bm-top"><span>{t(s.label, lang)}</span></div>
-                  {s.players.map((p: any, i: number) => (
-                    <div class:list={['bp', { win: s.winner === i, lose: s.winner === 1 - i, tbd: !p.player }]}>
-                      <span class="sd">{p.seed ?? ''}</span>
-                      <span class="nm">{label(p)}</span>
-                      <span class="gs">{s.games.map((g: number[]) => <i class:list={{ g: g[i] > g[1 - i] }}>{g[i]}</i>)}</span>
-                    </div>
-                  ))}
+              {s.players.map((p: any, i: number) => (
+                <div class:list={['bp', { win: s.winner === i, lose: s.winner === 1 - i, tbd: !p.player }]}>
+                  <span class="sd">{p.player ? p.seed ?? '' : '–'}</span>
+                  {p.player
+                    ? <span class="nm"><span class="lg">{full[p.player] ?? p.player}</span><span class="sh">{names[p.player] ?? p.player}</span></span>
+                    : <span class="nm">{en ? p.feedEn : p.feed}</span>}
+                  <span class="gs">{s.games.map((x: number[]) => <i class:list={{ g: x[i] > x[1 - i] }}>{x[i]}</i>)}</span>
                 </div>
-              );
-            })}
-          </div>
-        )}
+              ))}
+            </div>
+          </>;
+        })}
       </div>
     ))}
   </div>
 </div>
+<p class="small hint">{en ? 'Scroll sideways for the later rounds.' : 'Posuň do strany pro další kola.'}</p>
+)}
 <style>
-  .bracket-scroll { overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; -webkit-overflow-scrolling: touch; }
-  .bracket { display: grid; grid-template-columns: repeat(3, 236px); gap: 16px; width: max-content; }
-  .col { display: flex; flex-direction: column; gap: 12px; }
-  .col-main { display: flex; flex-direction: column; justify-content: space-around; gap: 12px; flex: 1; }
-  .col-lower { display: flex; flex-direction: column; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
-  h4, h5 { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-  .bm { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #E3E6EE; }
+  .brk-scroll { overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; -webkit-overflow-scrolling: touch; }
+  .brk { position: relative; display: grid; grid-template-columns: repeat(3, 236px); column-gap: 26px; row-gap: 10px; width: max-content; }
+  .brk h4 { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); align-self: end; }
+  .brk h4.po { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .brk h4.sub { margin: 8px 0 -2px; align-self: flex-start; }
+  .bc { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
+  .bc.sa { justify-content: space-around; }
+  .bc.ce { justify-content: center; }
+  .bm { position: relative; z-index: 1; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #E3E6EE; }
   .bm.next { border: 2px solid var(--red); }
-  .bm-top { display: flex; justify-content: space-between; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: #F7F8FB; }
+  .bm-top { display: flex; justify-content: space-between; gap: 8px; padding: 5px 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: #F7F8FB; }
   .bm-top .for { color: var(--red); }
-  .bp { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 8px 12px; font-size: 15px; min-height: 40px; }
+  .bp { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 7px 10px; font-size: 14px; min-height: 40px; }
   .bp + .bp { border-top: 1px solid #EEF0F5; }
   .sd { font-size: 12px; font-weight: 700; color: var(--muted); text-align: center; }
   .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .bp.win .nm { font-weight: 700; }
   .bp.lose .nm { color: var(--muted); }
-  .bp.tbd .nm { color: #8A93A8; font-style: italic; font-size: 14px; }
+  .bp.tbd .nm { color: #8A93A8; font-style: italic; }
   .gs { display: flex; gap: 4px; font-variant-numeric: tabular-nums; font-size: 13px; }
   .gs i { font-style: normal; min-width: 24px; text-align: center; color: var(--muted); }
   .gs i.g { color: var(--navy); font-weight: 800; }
+  .lg { display: none; }
+  .brk :global(svg.wires) { position: absolute; left: 0; top: 0; z-index: 0; pointer-events: none; overflow: visible; }
+  .brk :global(svg.wires path) { fill: none; stroke-width: 2; stroke-linejoin: round; }
+  .brk :global(svg.wires path.won) { stroke: var(--navy); }
+  .brk :global(svg.wires path.open) { stroke: #C3CAD9; }
   @media (min-width: 960px) {
-    .bracket-scroll { margin: 0; padding: 0; overflow: visible; }
-    .bracket { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; width: auto; }
+    .brk-scroll { margin: 0; padding: 0; overflow: visible; }
+    .brk { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 44px; width: auto; }
+    .bp { padding: 8px 12px; font-size: 15px; }
+    .bm-top { padding: 6px 12px; }
+    .lg { display: inline; }
+    .sh { display: none; }
+    .hint { display: none; }
   }
 </style>
+<script>
+  // Draw the lines between matches; redrawn when the layout changes width.
+  const draw = () => {
+    for (const g of document.querySelectorAll<HTMLElement>('.brk[data-wires]')) {
+      g.querySelector('svg.wires')?.remove();
+      const box = g.getBoundingClientRect();
+      const ns = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      svg.setAttribute('class', 'wires');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('width', String(box.width));
+      svg.setAttribute('height', String(box.height));
+      const at = (id: string) => g.querySelector(`[data-slot="${id}"]`)?.getBoundingClientRect();
+      for (const w of (g.dataset.wires ?? '').split(' ')) {
+        const [a, b, cls] = w.split('>');
+        const A = at(a), T = at(b);
+        if (!A || !T) continue;
+        const ax = A.right - box.left, ay = A.top + A.height / 2 - box.top;
+        const tx = T.left - box.left, ty = T.top + T.height / 2 - box.top, xm = (ax + tx) / 2;
+        const p = document.createElementNS(ns, 'path');
+        p.setAttribute('d', `M${ax} ${ay}H${xm}V${ty}H${tx}`);
+        p.setAttribute('class', cls);
+        svg.appendChild(p);
+      }
+      g.prepend(svg);
+    }
+  };
+  draw();
+  addEventListener('resize', draw);
+  document.fonts?.ready.then(draw);
+  // the playoff tab may be hidden at first: redraw when it is shown
+  document.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('[data-tab]')) requestAnimationFrame(draw); });
+</script>
