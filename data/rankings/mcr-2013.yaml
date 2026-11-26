@@ -1,0 +1,39 @@
+year: 2013
+audience: open
+name: { cs: Mistrovství ČR 2013, en: Czech Championship 2013 }
+editions: [jarni/2013, druhy/2013, cocp/2013]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2013.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  horst-simunsky:    [1000, 625, 1000]
+  filip-smoljak:     [941, 1000, 905]
+  karlos-novak:      [882, 875, 715]
+  ondrej-chmelar:    [706, 938, 667]
+  romana-kralova:    [824, 688, 810]
+  darius-brozek:     [765, 750, 572]
+  tadeas-matys:      [647, 501, 762]
+  jan-tesitel:       [589, 813, 524]
+  cyrus-skaria:      [412, 563, 429]
+  jirka-jirkovsky:   [~, ~, 952]
+  tomas-chmelar:     [471, 438, 334]
+  zdenek-svitak:     [~, ~, 857]
+  zdenek-taborsky:   [236, 188, 619]
+  michal-fucik:      [530, 313, ~]
+  pavel-schierl:     [295, 376, 191]
+  zdenka-chmelarova: [354, ~, 239]
+  adrian-dean:       [~, 251, 286]
+  bohous-formanek:   [~, ~, 477]
+  adam-simak:        [~, 126, 144]
+  anna-skaria:       [177, ~, ~]
+  david-krejci:      [119, ~, ~]
+  lukas-pavela:      [~, 63, 49]
+  lenka-prazakova:   [~, ~, 96]
+  david-mirsky:      [60, ~, ~]
+  bogna-piter:       [1, ~, ~]
+  radim-patkolo:     [~, 1, ~]
+  jiri-pavela:       [~, ~, 1]

@@ -1,0 +1,28 @@
+competition: cocp
+year: 2008
+status: finished
+start_date: 2008-11-19
+end_date: 2008-11-19
+report:
+  cs: |
+    Třetí ročník turnaje se uskutečnil 19. 11. v klubu V Jelení. Tentokrát se zúčastnili hráči z Pardubic a Prahy.
+source: old-site
+old_url: /turnaje/cocp/cocp_2008.php
+
+results:
+  singles:
+    - { place: 1, player: ondrej-chmelar }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: zdenek-taborsky }
+    - { place: 6, player: tomas-chmelar }
+    - { place: 7, player: lukas-navratil }
+    - { place: 8, player: milan-svitak }
+    - { place: 9, player: lucie-krestanova }
+    - { place: 10, player: jirka-jirkovsky }
+    - { place: 11, player: martin-cerny }
+    - { place: 12, player: ales-formanek }
+    - { place: 13, player: romana-kralova }
+    - { place: 14, player: zdenka-chmelarova }
+    - { place: 15, player: stepan-kral }

@@ -1,0 +1,24 @@
+competition: pcl
+year: 2009
+status: finished
+source: old-site
+old_url: /pcl/pcl_2009.php
+
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: filip-smoljak }
+    - { place: 4, player: jirka-jirkovsky }
+    - { place: 5, player: ondrej-chmelar }
+    - { place: 6, player: tomas-chmelar }
+    - { place: 7, player: romana-kralova }
+    - { place: 8, player: lukas-navratil }
+    - { place: 9, player: milan-svitak }
+    - { place: 10, player: adrian-dean }
+    - { place: 11, player: darius-brozek }
+    - { place: 12, player: lucie-krestanova }
+    - { place: 13, player: zdenka-chmelarova }
+    - { place: 14, player: jana-tomova }
+    - { place: 15, player: jan-tesitel }
+    - { place: 16, player: alzbeta-bartova }

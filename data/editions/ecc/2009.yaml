@@ -1,0 +1,97 @@
+competition: ecc
+year: 2009
+status: finished
+start_date: 2009-07-10
+end_date: 2009-07-11
+report:
+  cs: |
+    10. - 11. 7. 2009, Švýcarsko, Lenk im Simmental. Finále: Abdin Karnal - Jonathan Leau  25:1  25:12
+source: old-site
+old_url: /ecc/ecc_2009.php
+
+results:
+  singles:
+    - { place: 1, name: Karnal Abdin, country: UK }
+    - { place: 2, name: Jonathan Leau, country: FR }
+    - { place: 3, name: Fabian Pereira, country: FR }
+    - { place: 4, name: Amitha Ubhayathunga, country: IT }
+    - { place: 5, name: Abdul Malik, country: UK }
+    - { place: 6, name: Sriyantha Weerasinghe, country: IT }
+    - { place: 7, name: Nazrul Islam, country: UK }
+    - { place: 8, name: Pierre Dubois, country: FR }
+    - { place: 9, name: Mouraly Venou, country: FR }
+    - { place: 10, name: Heiko Wurst, country: DE }
+    - { place: 11, name: Abdul Wahid, country: UK }
+    - { place: 12, name: Thomas Scheuerl, country: DE }
+    - { place: 13, name: Gianluca Cristiani, country: IT }
+    - { place: 14, name: Kevin Seiger, country: FR }
+    - { place: 15, player: cornel-d-silva, country: PL }
+    - { place: 16, name: Steeve Collard, country: FR }
+    - { place: 17, name: Carlito Bollin, country: CH }
+    - { place: 18, name: Mervin Kalinga, country: CH }
+    - { place: 19, name: Shuab Ahmed, country: UK }
+    - { place: 20, player: lorenzo-hurlimann, country: CH }
+    - { place: 21, name: A Rahman Khan, country: UK }
+    - { place: 22, player: claudio-motta, country: IT }
+    - { place: 23, name: Murshad Khan, country: UK }
+    - { place: 24, name: Rajesh Chilveri, country: UK }
+    - { place: 25, name: Radjou Venou, country: FR }
+    - { place: 26, name: Anders Illi, country: CH }
+    - { place: 27, player: tobias-kruger, country: DE }
+    - { place: 28, name: Marcel Egli, country: CH }
+    - { place: 29, name: Ish Kumer Gupta, country: UK }
+    - { place: 30, name: Abdul Khan, country: UK }
+    - { place: 31, name: Vittorio Canisi, country: IT }
+    - { place: 32, name: Rafi Dewangso, country: CH }
+    - { place: 33, name: Wolfgang Peter, country: DE }
+    - { place: 34, name: Stefano Stucchi, country: IT }
+    - { place: 35, player: andreas-hurtig, country: DE }
+    - { place: 36, player: paolo-martinelli, country: IT }
+    - { place: 37, player: ingo-frauenrath, country: DE }
+    - { place: 38, name: Gabriele Pellegatta, country: IT }
+    - { place: 39, name: Alfred Rajadurai, country: FR }
+    - { place: 40, player: armin-steiner, country: DE }
+    - { place: 41, player: nitesh-sinha, country: PL }
+    - { place: 42, player: francesco-pedicini, country: IT }
+    - { place: 43, name: Stefan Eigenmann, country: CH }
+    - { place: 44, name: Ala Miah, country: UK }
+    - { place: 45, name: Jonas Hürlimann, country: CH }
+    - { place: 46, name: Patrice Dumas, country: FR }
+    - { place: 47, player: elisa-zucchiatti, country: IT }
+    - { place: 48, player: bernhard-sander, country: DE }
+    - { place: 49, name: Jalal Ahmed, country: UK }
+    - { place: 50, player: steffen-eder, country: DE }
+    - { place: 51, name: Ahad Miah, country: UK }
+    - { place: 52, name: Viktor Baumgartner, country: CH }
+    - { place: 53, name: Jan Geister, country: DE }
+    - { place: 54, name: Stéphane Cano, country: FR }
+    - { place: 55, name: Anhar Ali, country: UK }
+    - { place: 56, player: gunter-seibert, country: DE }
+    - { place: 57, name: Armin Schneider, country: DE }
+    - { place: 58, name: Stefano Fabiano, country: IT }
+    - { place: 59, name: Giorgio Balicchi, country: IT }
+    - { place: 60, name: Riccardo Maurizi, country: IT }
+    - { place: 61, name: Norbert Mothe, country: FR }
+    - { place: 62, player: jakub-nowakowski, country: PL }
+    - { place: 63, name: Paolo Ometto, country: IT }
+    - { place: 64, name: Harvey Gomes, country: UK }
+    - { place: 65, player: sylwester-pogorzelski, country: PL }
+    - { place: 66, name: Andrea Croci, country: IT }
+    - { place: 67, player: frank-fehr, country: DE }
+    - { place: 68, name: Walter Buchmann, country: CH }
+    - { place: 69, name: Rolf Schmid, country: CH }
+    - { place: 70, player: fabio-tomasi, country: IT }
+    - { place: 71, player: hans-faller, country: DE }
+    - { place: 72, name: Abdullah Nauandish, country: DE }
+    - { place: 73, name: Kurt Scherrer, country: CH }
+    - { place: 74, name: Fabien Vicart, country: FR }
+    - { place: 75, name: Uwe Schneider, country: DE }
+    - { place: 76, name: Robert Durrer, country: CH }
+    - { place: 77, player: ajay-pal, country: PL }
+    - { place: 78, name: Riz Careem, country: CH }
+    - { place: 79, name: Noam Mayer, country: CH }
+    - { place: 80, name: Michael Helbling, country: CH }
+    - { place: 81, name: Azir Uddin, country: UK }
+    - { place: 82, name: Barbara Thomas, country: CH }
+    - { place: 83, name: Cezary Kubicki, country: PL }
+    - { place: 84, name: Laura Zava, country: IT }

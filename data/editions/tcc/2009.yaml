@@ -1,0 +1,26 @@
+competition: tcc
+year: 2009
+status: finished
+report:
+  cs: |
+    Finále: Horst Šimunský - Milan Kvoch  25:0
+source: old-site
+old_url: /turnaje/tcc/tcc_2009.php
+
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: milan-kvoch }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: ondrej-chmelar }
+    - { place: 5, player: lukas-navratil }
+    - { place: 6, player: milan-svitak }
+    - { place: 7, player: tomas-chmelar }
+    - { place: 8, player: adrian-dean }
+    - { place: 9, player: stepan-hrncir }
+    - { place: 10, player: petr-hrncir }
+    - { place: 11, player: darius-brozek }
+    - { place: 12, player: zdenek-taborsky }
+    - { place: 13, player: zdenka-chmelarova }
+    - { place: 14, player: jana-tomova }
+    - { place: 15, player: lucie-krestanova }

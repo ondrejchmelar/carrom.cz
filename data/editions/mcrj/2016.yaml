@@ -1,0 +1,37 @@
+competition: mcrj
+year: 2016
+status: finished
+start_date: 2016-04-01
+end_date: 2016-04-01
+report:
+  cs: |
+    MČRj bylo odehráno 1. dubna v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2016.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: stepan-smoljak, club_at_time: RaF Praha }
+    - { place: 2, player: jakub-moravec, club_at_time: Gymnázium Letohad }
+    - { place: 3, player: josef-blazek, club_at_time: Hodina H Pelhřimov }
+    - { place: 4, player: dominik-vlcek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 5, player: michaela-pavelova, club_at_time: Gymnázium Letohad }
+    - { place: 6, player: lukas-pavela, club_at_time: Gymnázium Letohad }
+    - { place: 7, player: laura-volejnikova, club_at_time: Gymnázium Letohad }
+    - { place: 8, player: kristian-vajda, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 9, player: dominik-poulicek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 10, player: patrik-smidmajer, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 11, player: matej-linhart, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: jan-dolezal, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: josef-kulik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: tomas-kubera, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: martin-vacek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 16, player: vaclav-pinkas, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 17, player: jiri-masny, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 18, player: jan-fiala, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 19, player: filip-skokan, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 20, player: kamila-brizova, club_at_time: Gymnázium Letohad }
+    - { place: 21, player: lukas-dvorak, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 22, player: matej-suk, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 23, player: leona-daskova, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 24, player: kristyna-hanouskova, club_at_time: SPŠ a SOU Pelhřimov }

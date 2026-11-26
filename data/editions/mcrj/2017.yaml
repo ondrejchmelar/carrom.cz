@@ -1,0 +1,26 @@
+competition: mcrj
+year: 2017
+status: finished
+start_date: 2017-03-31
+end_date: 2017-03-31
+report:
+  cs: |
+    MČRj bylo odehráno 31. března v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2017.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: stepan-smoljak, club_at_time: RaF Praha }
+    - { place: 2, player: martin-vacek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 3, player: dominik-vlcek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 4, player: matej-linhart, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 5, player: jakub-moravec, club_at_time: Gymnázium Letohad }
+    - { place: 6, player: vaclav-pinkas, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 7, player: erik-vonka, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 8, player: michaela-pavelova, club_at_time: Gymnázium Letohad }
+    - { place: 9, player: josef-kulik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 10, player: ales-muller, club_at_time: Gymnázium Letohad }
+    - { place: 11, player: martin-pekarek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: vit-sramek, club_at_time: Gymnázium Letohad }
+    - { place: 13, player: tomas-chmelar, club_at_time: SPŠ a SOU Pelhřimov }

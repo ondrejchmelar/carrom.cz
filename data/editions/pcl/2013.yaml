@@ -1,0 +1,30 @@
+competition: pcl
+year: 2013
+status: finished
+start_date: 2013-01-17
+report:
+  cs: |
+    Nový ročník byl zahájen 17.1.2013 v klubu K4, Celetná 20, od 14. 3. se hraje v naší domovské kavárně UŽ JSME DOMA, Uralská 6, Praha 6. První místo obsadil s jasným náskokem Filip Smoljak.
+source: old-site
+old_url: /pcl/pcl_2013.php
+
+results:
+  singles:
+    - { place: 1, player: filip-smoljak }
+    - { place: 2, player: cyrus-skaria }
+    - { place: 3, player: jan-tesitel }
+    - { place: 4, player: jirka-jirkovsky }
+    - { place: 5, player: romana-kralova }
+    - { place: 6, player: horst-simunsky }
+    - { place: 7, player: tadeas-matys }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, player: darius-brozek }
+    - { place: 10, player: ondrej-chmelar }
+    - { place: 11, player: michal-fucik }
+    - { place: 12, player: adrian-dean }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: zdenka-chmelarova }
+    - { place: 15, player: ales-krestan }
+    - { place: 16, player: anna-skaria }
+    - { place: 17, player: lenka-prazakova }
+    - { place: 18, player: miroslav-duda }

@@ -1,0 +1,28 @@
+competition: jarni
+year: 2011
+status: finished
+start_date: 2011-03-26
+end_date: 2011-03-26
+report:
+  cs: |
+    Finále: Zdeněk Sviták – Ondřej Chmelař 25:16
+source: old-site
+old_url: /turnaje/jarni/jarni_2011.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: ondrej-chmelar }
+    - { place: 3, player: suzanne-schackert }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: romana-kralova }
+    - { place: 6, player: adrian-dean }
+    - { place: 7, player: tomas-chmelar }
+    - { place: 8, player: milan-svitak }
+    - { place: 9, player: zdenek-taborsky }
+    - { place: 10, player: darius-brozek }
+    - { place: 11, player: jan-tesitel }
+    - { place: 12, player: michal-fucik }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: zbynek-fojtik }
+    - { place: 15, player: monika-blaskovicova }

@@ -1,0 +1,31 @@
+competition: tcc
+year: 2010
+status: finished
+report:
+  cs: |
+    Finále: Tobias Krüger - Zdeněk Sviták  25:5
+source: old-site
+old_url: /turnaje/tcc/tcc_2010.php
+
+results:
+  singles:
+    - { place: 1, player: tobias-kruger }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, player: ondrej-chmelar }
+    - { place: 5, player: tomas-chmelar }
+    - { place: 6, player: zdenek-taborsky }
+    - { place: 7, player: lucie-krestanova }
+    - { place: 8, player: jan-tesitel }
+    - { place: 9, player: milan-svitak }
+    - { place: 10, player: darius-brozek }
+    - { place: 11, player: ondrej-franta }
+    - { place: 12, player: adrian-dean }
+    - { place: 13, player: zdenka-chmelarova }
+    - { place: 14, player: zbynek-fojtik }
+    - { place: 15, player: alzbeta-bartova }
+    - { place: 16, player: pavel-schierl }
+    - { place: 17, player: tomas-prazak }
+    - { place: 18, player: jiri-mareda }
+    - { place: 19, player: david-derka }
+    - { place: 20, player: tonda-ondrouch }

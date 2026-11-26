@@ -1,0 +1,28 @@
+competition: druhy
+year: 2014
+status: finished
+start_date: 2014-09-27
+end_date: 2014-09-27
+report:
+  cs: |
+    Druhý turnaj MČR 2014 byl odehrán v sobotu 27. září 2014, v Letohradském soukromém gymnáziu. Finále: Zdeněk Sviták – Filip Smoljak 18:25
+source: old-site
+old_url: /turnaje/druhy/druhy_2014.php
+
+results:
+  singles:
+    - { place: 1, player: filip-smoljak }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: romana-kralova }
+    - { place: 4, player: tomas-chmelar }
+    - { place: 5, player: jan-tesitel }
+    - { place: 6, player: darius-brozek }
+    - { place: 7, player: ondrej-chmelar }
+    - { place: 8, player: stepan-smoljak }
+    - { place: 9, player: pavel-schierl }
+    - { place: 10, player: ales-krestan }
+    - { place: 11, player: michal-fucik }
+    - { place: 12, player: zdenek-taborsky }
+    - { place: 13, player: lukas-pavela }
+    - { place: 14, player: michaela-silarova }
+    - { place: 15, player: jiri-pavela }

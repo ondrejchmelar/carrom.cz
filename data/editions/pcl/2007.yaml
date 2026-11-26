@@ -1,0 +1,17 @@
+competition: pcl
+year: 2007
+status: finished
+source: old-site
+old_url: /pcl/pcl_2007.php
+
+results:
+  singles:
+    - { place: 1, player: filip-smoljak }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: ondrej-chmelar }
+    - { place: 4, player: tomas-chmelar }
+    - { place: 5, player: sumit-malhotra }
+    - { place: 6, player: romana-kralova }
+    - { place: 7, player: marek-svehla }
+    - { place: 8, player: milan-svitak }
+    - { place: 9, player: antje-bucholz }

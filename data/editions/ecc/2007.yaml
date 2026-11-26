@@ -1,0 +1,98 @@
+competition: ecc
+year: 2007
+status: finished
+start_date: 2007-07-14
+end_date: 2007-07-15
+report:
+  cs: |
+    14. - 15. 7. 2007, Německo, Darmstadt. Finále: Dubois Pierre - Nazrul Islam  14:16  25:23  25:10
+source: old-site
+old_url: /ecc/ecc_2007.php
+
+results:
+  singles:
+    - { place: 1, name: Pierre Dubois, country: FR }
+    - { place: 2, name: Nazrul Islam, country: UK }
+    - { place: 3, name: Karnal Abdin, country: UK }
+    - { place: 4, player: peter-bocker, country: DE }
+    - { place: 5, name: Fabian Pereira, country: FR }
+    - { place: 6, name: Jürgen Husmann, country: DE }
+    - { place: 7, name: Lal Rodrigo, country: IT }
+    - { place: 8, name: Khan Abdur Rahman, country: UK }
+    - { place: 9, name: Mouraly Venou, country: FR }
+    - { place: 10, name: Abdul Mumit, country: UK }
+    - { place: 11, name: Abdul Malik, country: UK }
+    - { place: 12, name: Wahid Mohammed Abdul, country: UK }
+    - { place: 13, name: Kunaseelan Sivarasa, country: DE }
+    - { place: 14, name: Jonathan Leau, country: FR }
+    - { place: 15, name: Robert Hauke, country: DE }
+    - { place: 16, name: Amitha Uphayathunga, country: IT }
+    - { place: 17, name: Stefan Besser, country: DE }
+    - { place: 18, name: Thomas Scheuerl, country: DE }
+    - { place: 19, player: dirk-polchow, country: DE }
+    - { place: 20, name: Mervin Kalinga, country: CH }
+    - { place: 21, name: Shuab Ahmed, country: UK }
+    - { place: 22, name: Christian Russo, country: DE }
+    - { place: 23, name: der Schee Pim Van, country: NL }
+    - { place: 24, name: Shomsu Miah, country: UK }
+    - { place: 25, name: Steeve Collard, country: FR }
+    - { place: 26, name: Shaheen Miah, country: UK }
+    - { place: 27, name: Ala Miah, country: UK }
+    - { place: 28, name: Ish Gupta, country: UK }
+    - { place: 29, name: Hussain Muhammed Altaf, country: UK }
+    - { place: 30, name: Sebastian Holtmann, country: DE }
+    - { place: 31, player: andreas-kracht, country: DE }
+    - { place: 32, name: Jörg Kijanski, country: DE }
+    - { place: 33, name: Rudolfo Donnini, country: IT }
+    - { place: 34, player: claudio-motta, country: IT }
+    - { place: 35, name: Elisa Martinelli, country: IT }
+    - { place: 36, player: paolo-martinelli, country: IT }
+    - { place: 37, name: Stefano Stucchi, country: IT }
+    - { place: 38, player: francesco-pedicini, country: IT }
+    - { place: 39, player: lorenzo-hurlimann, country: CH }
+    - { place: 40, name: Jeremie Cieply, country: FR }
+    - { place: 41, name: Malik Tufail Ahmed, country: UK }
+    - { place: 42, name: Murshad Khan, country: UK }
+    - { place: 43, name: Viktor Baumgartner, country: CH }
+    - { place: 44, player: tobias-kruger, country: DE }
+    - { place: 45, name: Ralf Klose, country: DE }
+    - { place: 46, name: Winston Rajuddin, country: DE }
+    - { place: 47, name: Wolfgang Peter, country: DE }
+    - { place: 48, player: bernhard-sander, country: DE }
+    - { place: 49, player: andreas-hurtig, country: DE }
+    - { place: 50, name: Sabbir Khan, country: UK }
+    - { place: 51, player: ingo-frauenrath, country: DE }
+    - { place: 52, name: Vittorio Canisi, country: IT }
+    - { place: 53, name: Mark Müller-Linow, country: DE }
+    - { place: 54, name: Abdullah Nauandish, country: DE }
+    - { place: 55, name: Giorgio Balicchi, country: IT }
+    - { place: 56, name: Anhar Ali, country: UK }
+    - { place: 57, name: Riccardo Maurizi, country: IT }
+    - { place: 58, name: Eric Marzin, country: FR }
+    - { place: 59, player: frank-fehr, country: DE }
+    - { place: 60, name: Alexandre Gilles, country: FR }
+    - { place: 61, player: steffen-eder, country: DE }
+    - { place: 62, name: Meike Weigel, country: DE }
+    - { place: 63, name: Stephano Cano, country: FR }
+    - { place: 64, name: Stefano Fabiano, country: IT }
+    - { place: 65, player: armin-steiner, country: DE }
+    - { place: 66, player: bodo-schnoor, country: DE }
+    - { place: 67, name: Stefan Eigenmann, country: CH }
+    - { place: 68, name: Jude Fernando, country: IT }
+    - { place: 69, name: Emilie Neuhauser, country: FR }
+    - { place: 70, name: Michaela Besser, country: DE }
+    - { place: 71, name: Norbert Mothe, country: FR }
+    - { place: 72, name: Harvey Gomes, country: UK }
+    - { place: 73, name: Laura Vollebregt, country: NL }
+    - { place: 74, player: hans-faller, country: DE }
+    - { place: 75, name: Beyl Dirk Marius, country: DE }
+    - { place: 76, name: Jürgen Frey, country: DE }
+    - { place: 77, name: Riz Careem, country: CH }
+    - { place: 78, name: Kurt Scherrer, country: CH }
+    - { place: 79, player: frank-mohn, country: DE }
+    - { place: 80, name: Anette Menk, country: DE }
+    - { place: 81, name: Devendra Sharma, country: UK }
+    - { place: 82, name: Francesco Bisi, country: IT }
+    - { place: 83, name: Iqbal Hussain, country: UK }
+    - { place: 84, name: Joseph Glasberg, country: UK }
+    - { place: 85, name: Thomas Sicherl, country: DE }

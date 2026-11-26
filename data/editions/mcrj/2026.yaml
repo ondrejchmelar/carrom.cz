@@ -6,4 +6,20 @@ end_date: 2026-04-10
 venue: { name: Pelhřimov, city: Pelhřimov }
 source: sol
 sol_lit_url: ~
-results: {}                 # doplní import ze SoL
+
+results:
+  juniors:
+    - { place: 1, player: ondrej-kubicek, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 2, player: patrik-vaca, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 3, player: martin-schoula, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 4, player: radek-prikryl, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 5, player: jakub-stransky, club_at_time: OA Pelhřimov }
+    - { place: 6, player: jakub-krnac, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 7, player: denis-kundrat, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 8, player: filip-vitek, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 9, player: kristian-vecerka, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 10, player: lukas-chlad, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 11, player: leo-pecl, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: vojtech-bican, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: denis-trecha, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: daniel-sebek, club_at_time: SPŠ a SOU Pelhřimov }

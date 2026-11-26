@@ -1,0 +1,21 @@
+competition: tcc
+year: 2016
+status: finished
+start_date: 2016-06-04
+end_date: 2016-06-04
+report:
+  cs: |
+    Turnaj se uskutečnil 4. června. Finále: Dára Brožek - Karlos Novák  12:21
+source: old-site
+old_url: /turnaje/tcc/tcc_2016.php
+
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: darius-brozek }
+    - { place: 3, player: lukas-pavela }
+    - { place: 4, player: michaela-silarova }
+    - { place: 5, player: pavel-schierl }
+    - { place: 6, player: zdenek-taborsky }
+    - { place: 7, player: michaela-pavelova }
+    - { place: 8, player: jiri-pavela }

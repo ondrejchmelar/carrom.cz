@@ -1,0 +1,32 @@
+competition: tcc
+year: 2011
+status: finished
+report:
+  cs: |
+    Finále: Lorenzo Hürlimann - Zdeněk Sviták  25:0
+source: old-site
+old_url: /turnaje/tcc/tcc_2011.php
+
+results:
+  singles:
+    - { place: 1, player: lorenzo-hurlimann }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, player: adrian-dean }
+    - { place: 5, player: jirka-jirkovsky }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: tomas-chmelar }
+    - { place: 8, player: jan-tesitel }
+    - { place: 9, player: darius-brozek }
+    - { place: 10, player: karlos-novak }
+    - { place: 11, player: pavel-schierl }
+    - { place: 11, player: michal-fucik }
+    - { place: 13, player: milan-svitak }
+    - { place: 14, player: milan-q }
+    - { place: 15, player: zdenek-taborsky }
+    - { place: 15, player: tomas-prazak }
+    - { place: 17, player: zdenka-chmelarova }
+    - { place: 18, player: alzbeta-bartova }
+    - { place: 19, player: jana-tomova }
+    - { place: 20, player: lucie-richtrova }
+    - { place: 21, player: romana-q }

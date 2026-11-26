@@ -1,0 +1,25 @@
+competition: tcc
+year: 2012
+status: finished
+report:
+  cs: |
+    Finále: Tomáš Chmelař - Zdenda Saki Táborský  25:8
+source: old-site
+old_url: /turnaje/tcc/tcc_2012.php
+
+results:
+  singles:
+    - { place: 1, player: tomas-chmelar }
+    - { place: 2, player: zdenek-taborsky }
+    - { place: 3, player: jan-tesitel }
+    - { place: 4, player: jirka-jirkovsky }
+    - { place: 5, player: karlos-novak }
+    - { place: 6, player: darius-brozek }
+    - { place: 7, player: zdenek-svitak }
+    - { place: 8, player: martin-cerny }
+    - { place: 9, player: michal-fucik }
+    - { place: 10, player: adrian-dean }
+    - { place: 11, player: alzbeta-bartova }
+    - { place: 12, player: ales-krestan }
+    - { place: 13, player: lucie-richtrova }
+    - { place: 14, player: renata-hromadkova }

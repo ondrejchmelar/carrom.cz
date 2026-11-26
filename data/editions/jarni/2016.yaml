@@ -1,0 +1,34 @@
+competition: jarni
+year: 2016
+status: finished
+start_date: 2016-04-02
+end_date: 2016-04-02
+report:
+  cs: |
+    Turnaj organizuje SPŠ a SOU Pelhřimov společně s Českou carromovou asociací. Záštitu nad turnajem převzali radní Kraje Vysočina Jana Fialová a starosta města Pelhřimov František Kučera. Součástí carromového víkendu bylo páteční Mistrovství ČR juniorů. Finále: Karlos Novák – Tadeáš Matys 25:22
+source: old-site
+old_url: /turnaje/jarni/jarni_2016.php
+
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: tadeas-matys }
+    - { place: 3, player: filip-smoljak }
+    - { place: 4, player: darius-brozek }
+    - { place: 5, player: ondrej-chmelar }
+    - { place: 6, player: horst-simunsky }
+    - { place: 7, player: stepan-smoljak }
+    - { place: 8, player: zdenek-svitak }
+    - { place: 9, player: jan-tesitel }
+    - { place: 10, player: michal-fucik }
+    - { place: 11, player: pavel-schierl }
+    - { place: 12, player: tomas-chmelar }
+    - { place: 13, player: zdenek-taborsky }
+    - { place: 14, player: romana-kralova }
+    - { place: 15, player: frantisek-rezek }
+    - { place: 16, player: lukas-pavela }
+    - { place: 17, player: lukas-navratil }
+    - { place: 18, player: josef-blazek }
+    - { place: 19, player: jiri-pavela }
+    - { place: 20, player: matej-lysy }
+    - { place: 21, player: michaela-pavelova }

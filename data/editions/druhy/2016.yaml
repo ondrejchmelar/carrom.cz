@@ -1,0 +1,31 @@
+competition: druhy
+year: 2016
+status: finished
+start_date: 2016-10-08
+end_date: 2016-10-08
+report:
+  cs: |
+    Druhý turnaj MČR 2016 byl odehrán v sobotu 8. října 2016, v Letohradském soukromém gymnáziu. Finále: Štěpán Smoljak – Zdeněk Sviták 6:25
+source: old-site
+old_url: /turnaje/druhy/druhy_2016.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: stepan-smoljak }
+    - { place: 3, player: tadeas-matys }
+    - { place: 4, player: jan-tesitel }
+    - { place: 5, player: horst-simunsky }
+    - { place: 6, player: filip-smoljak }
+    - { place: 7, player: karlos-novak }
+    - { place: 8, player: romana-kralova }
+    - { place: 9, player: frantisek-rezek }
+    - { place: 10, player: darius-brozek }
+    - { place: 11, player: ondrej-chmelar }
+    - { place: 12, player: michal-fucik }
+    - { place: 13, player: zdenek-taborsky }
+    - { place: 14, player: tomas-chmelar }
+    - { place: 15, player: michaela-pavelova }
+    - { place: 16, player: pavel-schierl }
+    - { place: 17, player: lukas-pavela }
+    - { place: 18, player: martin-velek }

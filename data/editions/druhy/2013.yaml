@@ -1,0 +1,30 @@
+competition: druhy
+year: 2013
+status: finished
+start_date: 2013-09-28
+end_date: 2013-09-28
+report:
+  cs: |
+    Druhý turnaj MČR 2013 byl odehrán v sobotu 28. září 2013, v Letohradském soukromém gymnáziu. Finále: Ondřej Chmelař – Filip Smoljak 19:25
+source: old-site
+old_url: /turnaje/druhy/druhy_2013.php
+
+results:
+  singles:
+    - { place: 1, player: filip-smoljak }
+    - { place: 2, player: ondrej-chmelar }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, player: jan-tesitel }
+    - { place: 5, player: darius-brozek }
+    - { place: 6, player: romana-kralova }
+    - { place: 7, player: horst-simunsky }
+    - { place: 8, player: cyrus-skaria }
+    - { place: 9, player: tadeas-matys }
+    - { place: 10, player: tomas-chmelar }
+    - { place: 11, player: pavel-schierl }
+    - { place: 12, player: michal-fucik }
+    - { place: 13, player: adrian-dean }
+    - { place: 14, player: zdenek-taborsky }
+    - { place: 15, player: adam-simak }
+    - { place: 16, player: lukas-pavela }
+    - { place: 17, player: radim-patkolo }

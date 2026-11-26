@@ -1,0 +1,32 @@
+competition: pcl
+year: 2012
+status: finished
+start_date: 2012-01-19
+report:
+  cs: |
+    Ročník 2012 byl zahájen 19. ledna, odehrán v liché čtvrtky v Coffee House, Francouzská 100, Praha 2 a ukončen večírkem 6. prosince. Děkujeme Petrovi Lorenzovi za poskytnutý azyl v letech 2011 a 2012.
+source: old-site
+old_url: /pcl/pcl_2012.php
+
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: filip-smoljak }
+    - { place: 4, player: romana-kralova }
+    - { place: 5, player: ondrej-chmelar }
+    - { place: 6, player: darius-brozek }
+    - { place: 7, player: jan-tesitel }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, player: jirka-jirkovsky }
+    - { place: 10, player: siddharaj-joshi }
+    - { place: 11, player: manish-sahijwani }
+    - { place: 12, player: adrian-dean }
+    - { place: 13, player: michal-fucik }
+    - { place: 14, player: zdenka-chmelarova }
+    - { place: 15, player: ales-krestan }
+    - { place: 16, player: alzbeta-tesitelova }
+    - { place: 17, player: pavel-schierl }
+    - { place: 18, player: jacky-damwani }
+    - { place: 19, player: monika-blaskovicova }
+    - { place: 20, player: dominik-aubrecht }

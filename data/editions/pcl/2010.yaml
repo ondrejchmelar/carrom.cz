@@ -1,0 +1,28 @@
+competition: pcl
+year: 2010
+status: finished
+source: old-site
+old_url: /pcl/pcl_2010.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: filip-smoljak }
+    - { place: 4, player: jirka-jirkovsky }
+    - { place: 5, player: tomas-chmelar }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: romana-kralova }
+    - { place: 8, player: darius-brozek }
+    - { place: 9, player: milan-svitak }
+    - { place: 10, player: adrian-dean }
+    - { place: 11, player: jan-tesitel }
+    - { place: 12, player: lucie-krestanova }
+    - { place: 13, player: zbynek-fojtik }
+    - { place: 14, player: stepan-kral }
+    - { place: 15, player: zdenka-chmelarova }
+    - { place: 16, player: alzbeta-bartova }
+    - { place: 17, player: pavel-schierl }
+    - { place: 18, player: monika-blaskovicova }
+    - { place: 19, player: margareta }
+    - { place: 20, player: michal-fucik }

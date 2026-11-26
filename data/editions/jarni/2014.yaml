@@ -1,0 +1,33 @@
+competition: jarni
+year: 2014
+status: finished
+start_date: 2014-03-29
+end_date: 2014-03-29
+report:
+  cs: |
+    Turnaj organizuje SPŠ a SOU Pelhřimov společně s Českou carromovou asociací. Součástí carromového víkendu bylo páteční historicky první Mistrovství ČR juniorů. Finále: Darius Brožek – Tadeáš Matys 19:25
+source: old-site
+old_url: /turnaje/jarni/jarni_2014.php
+
+results:
+  singles:
+    - { place: 1, player: tadeas-matys }
+    - { place: 2, player: darius-brozek }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: jan-tesitel }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: cyrus-skaria }
+    - { place: 8, player: romana-kralova }
+    - { place: 9, player: tomas-chmelar }
+    - { place: 10, player: karlos-novak }
+    - { place: 11, player: zdenek-taborsky }
+    - { place: 12, player: stepan-smoljak }
+    - { place: 13, player: michal-fucik }
+    - { place: 14, player: zbynek-fojtik }
+    - { place: 15, player: pavel-schierl }
+    - { place: 16, player: laura-volejnikova }
+    - { place: 17, player: dominik-aubrecht }
+    - { place: 18, player: michaela-volejnikova }
+    - { place: 19, player: alina-mirakjanova }
+    - { place: 20, player: jiri-vondracek }

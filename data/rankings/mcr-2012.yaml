@@ -1,0 +1,31 @@
+year: 2012
+audience: open
+name: { cs: Mistrovství ČR 2012, en: Czech Championship 2012 }
+editions: [jarni/2012, druhy/2012, cocp/2012]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2012.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  horst-simunsky:     [1000, 909, 1000]
+  zdenek-svitak:      [929, 1000, 913]
+  ondrej-chmelar:     [715, 546, 957]
+  romana-kralova:     [786, 637, 870]
+  jirka-jirkovsky:    [857, ~, 609]
+  filip-smoljak:      [643, 728, 653]
+  jan-tesitel:        [429, 818, 522]
+  karlos-novak:       [501, 364, 783]
+  darius-brozek:      [~, 455, 826]
+  tomas-chmelar:      [286, 183, 566]
+  tadeas-matys:       [215, 273, 479]
+  pavel-schierl:      [~, 1, 696]
+  adrian-dean:        [358, ~, 262]
+  michal-fucik:       [572, ~, ~]
+  zbynek-fojtik:      [72, ~, 392]
+  zdenek-taborsky:    [144, 92, ~]
+  zdenka-chmelarova:  [~, ~, 218]
+  alzbeta-tesitelova: [~, ~, 44]
+  dominik-aubrecht:   [1, ~, ~]

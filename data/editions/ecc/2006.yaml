@@ -1,0 +1,126 @@
+competition: ecc
+year: 2006
+status: finished
+start_date: 2006-07-01
+end_date: 2006-07-01
+report:
+  cs: |
+    1. 7. 2006, Francie, St. Rome de Dolan. Finále: Dubois Pierre - Collard Steeve
+source: old-site
+old_url: /ecc/ecc_2006.php
+
+results:
+  singles:
+    - { place: 1, name: Pierre Dubois, country: FR }
+    - { place: 2, name: Steeve Collard, country: FR }
+    - { place: 3, name: Mohammed Sunahar Ali, country: UK }
+    - { place: 4, name: Abdul Malek, country: UK }
+    - { place: 5, name: Fabian Pereira, country: FR }
+    - { place: 6, player: peter-bocker, country: DE }
+    - { place: 7, name: A.S.K.M. Suja, country: UK }
+    - { place: 8, name: Mouraly Venou, country: FR }
+    - { place: 9, name: Karim Nessakh, country: FR }
+    - { place: 10, name: Wolfgang Peter, country: DE }
+    - { place: 11, name: Md Nazrul Islam, country: UK }
+    - { place: 12, player: paolo-martinelli, country: IT }
+    - { place: 13, name: Shaheen Miah, country: UK }
+    - { place: 14, name: Amitha Ubhayathunga, country: IT }
+    - { place: 15, name: Mohammed Abdul Wahid, country: UK }
+    - { place: 16, name: Jonathan Leau, country: FR }
+    - { place: 17, name: Mohammed Altaf Hussain, country: UK }
+    - { place: 18, player: dirk-polchow, country: DE }
+    - { place: 19, name: Shuab Ahmed, country: UK }
+    - { place: 20, name: Denis Braun, country: FR }
+    - { place: 21, name: Heiko Wurst, country: DE }
+    - { place: 22, name: Aminul Islam Liton, country: UK }
+    - { place: 23, name: Abdul Sattar Khan, country: UK }
+    - { place: 24, player: lorenzo-hurlimann, country: CH }
+    - { place: 25, name: Nicolas Michel, country: FR }
+    - { place: 26, name: Vadivelu Saravanan, country: FR }
+    - { place: 27, name: Franck Cianarella, country: FR }
+    - { place: 28, name: Abdul Mumit, country: UK }
+    - { place: 29, name: Thomas Scheuerl, country: DE }
+    - { place: 30, player: claudio-motta, country: IT }
+    - { place: 31, name: Shomsu Miah, country: UK }
+    - { place: 32, name: Stefan Eigenmann, country: CH }
+    - { place: 33, name: Jelle Arts, country: NL }
+    - { place: 34, name: Der Schee Pim Van, country: NL }
+    - { place: 35, name: Jérôme Wegnez, country: FR }
+    - { place: 36, name: Francisco Menezes, country: FR }
+    - { place: 37, name: Stefano Stucchi, country: IT }
+    - { place: 38, name: Cyrille Masson, country: FR }
+    - { place: 39, name: François Varenne, country: FR }
+    - { place: 40, name: Ala Miah, country: UK }
+    - { place: 41, name: Tufail Ahmed Malik, country: UK }
+    - { place: 42, name: Stéphane Liakhoff, country: FR }
+    - { place: 43, name: Rafi Dewangso, country: CH }
+    - { place: 44, name: Christian Russo, country: DE }
+    - { place: 45, player: elisa-zucchiatti, country: IT }
+    - { place: 46, name: Murshad Khan, country: UK }
+    - { place: 47, name: Aurélien Hanique, country: FR }
+    - { place: 48, name: Abdus Shahid, country: UK }
+    - { place: 49, name: Hugo Brenninkmeijer, country: NL }
+    - { place: 50, name: Anhar Ali, country: UK }
+    - { place: 51, name: Jean Desquines, country: FR }
+    - { place: 52, name: Jack Bouillon, country: FR }
+    - { place: 53, name: Antoine Behaghel, country: FR }
+    - { place: 54, name: Eric Marzin, country: FR }
+    - { place: 55, name: Benoît Bontout, country: FR }
+    - { place: 56, name: Thibault Cousot, country: FR }
+    - { place: 57, name: Kai Dahlbudding, country: DE }
+    - { place: 58, name: Eric Fraisseix, country: FR }
+    - { place: 59, name: Fernando Jude, country: IT }
+    - { place: 60, name: Jérôme David, country: FR }
+    - { place: 61, player: tobias-kruger, country: DE }
+    - { place: 62, name: David Moreau, country: FR }
+    - { place: 63, player: ingo-frauenrath, country: DE }
+    - { place: 64, name: Azhar Jamaldeen, country: CH }
+    - { place: 65, player: armin-steiner, country: DE }
+    - { place: 66, name: Mervin Kalinga, country: CH }
+    - { place: 67, name: Aftab Miah, country: UK }
+    - { place: 68, name: Ibrahim Shahym, country: UK }
+    - { place: 69, player: andreas-hurtig, country: DE }
+    - { place: 70, player: gunter-seibert, country: DE }
+    - { place: 71, name: Viktor Baumgartner, country: CH }
+    - { place: 72, name: Florence Roumegous, country: FR }
+    - { place: 73, name: Rodolfo Donnini, country: IT }
+    - { place: 74, name: Bernard Jalabert, country: FR }
+    - { place: 75, name: Kurt Scherrer, country: CH }
+    - { place: 76, name: Francesco Bisi, country: IT }
+    - { place: 77, name: Stéphane Cano, country: FR }
+    - { place: 78, name: Abdullah Nauandish, country: DE }
+    - { place: 79, name: Vittorio Canisi, country: IT }
+    - { place: 80, name: Stefano Fabiano, country: IT }
+    - { place: 81, name: Yannick Barou, country: FR }
+    - { place: 82, name: Yanik Brunet, country: FR }
+    - { place: 83, name: Riccardo Maurizi, country: IT }
+    - { place: 84, name: Stefan Bartlema, country: NL }
+    - { place: 85, player: bernhard-sander, country: DE }
+    - { place: 86, name: Eric Courtoud, country: FR }
+    - { place: 87, name: Jérémy Cieply, country: FR }
+    - { place: 88, name: Pierre Boulanger, country: FR }
+    - { place: 89, name: Dario Ometto, country: IT }
+    - { place: 90, name: Mukith Hussain, country: UK }
+    - { place: 91, name: Harvey Gomes, country: UK }
+    - { place: 92, name: Jérémie Servel, country: FR }
+    - { place: 93, name: Martin Riegel, country: DE }
+    - { place: 94, name: Kristof Kreimeyer, country: DE }
+    - { place: 95, name: Riz Careem, country: CH }
+    - { place: 96, name: Jean-Jacques Guillemin, country: FR }
+    - { place: 97, name: Silva Arumadura Da, country: CH }
+    - { place: 98, name: Benoît Lamy, country: FR }
+    - { place: 99, name: Jaume Audi, country: ES }
+    - { place: 100, name: Laura Vollebregt, country: NL }
+    - { place: 101, player: hans-faller, country: DE }
+    - { place: 102, name: Thibault Colin, country: FR }
+    - { place: 103, name: Joan Torra, country: ES }
+    - { place: 104, name: Giorgio Balicchi, country: IT }
+    - { place: 105, name: Norbert Mothe, country: FR }
+    - { place: 106, name: Pierre-Henri Lomba, country: FR }
+    - { place: 107, name: Joseph Glasberg, country: UK }
+    - { place: 108, name: Garcia Joan Manuel Sanmartin, country: ES }
+    - { place: 109, name: Marco Coca, country: ES }
+    - { place: 110, name: Pietro Scordo, country: IT }
+    - { place: 111, name: Thérese Laumaille, country: FR }
+    - { place: 112, name: Khoyrul Islam, country: UK }
+    - { place: 113, name: Vijay Sharma, country: UK }

@@ -1,0 +1,35 @@
+competition: cocp
+year: 2009
+status: finished
+start_date: 2009-11-21
+end_date: 2009-11-21
+report:
+  cs: |
+    Čtvrtý ročník turnaje se uskutečnil 21. 11. opět v klubu V Jelení. Tentokrát se zúčastnili hráči z Dortmundu, Pardubic a Prahy. K turnajové pohodě přispěla i skvělá obsluha za barem, i díky ní se turnaj stal také společenskou událostí.
+external_url: "http://fosgo.rajce.idnes.cz/4._Carrom_Open_Cup_Praha/"
+source: old-site
+old_url: /turnaje/cocp/cocp_2009.php
+
+results:
+  singles:
+    - { place: 1, player: tobias-kruger }
+    - { place: 2, player: bernhard-sander }
+    - { place: 3, player: filip-smoljak }
+    - { place: 4, player: zdenek-svitak }
+    - { place: 5, player: ondrej-chmelar }
+    - { place: 6, player: jirka-jirkovsky }
+    - { place: 7, player: romana-kralova }
+    - { place: 8, player: darius-brozek }
+    - { place: 9, player: adrian-dean }
+    - { place: 10, player: zdenek-taborsky }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: horst-simunsky }
+    - { place: 13, player: zdenka-chmelarova }
+    - { place: 14, player: stepan-kral }
+    - { place: 15, player: honza-benes }
+    - { place: 16, player: milan-svitak }
+    - { place: 17, player: lucie-krestanova }
+    - { place: 18, player: zbynek-fojtik }
+    - { place: 19, player: jan-tesitel }
+    - { place: 20, player: alzbeta-bartova }
+    - { place: 21, player: lucie-horstova }

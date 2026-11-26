@@ -1,0 +1,39 @@
+year: 2015
+audience: open
+name: { cs: Mistrovství ČR 2015, en: Czech Championship 2015 }
+editions: [jarni/2015, druhy/2015, cocp/2015]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2015.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  tadeas-matys:        [1000, 866.8, 1000]
+  filip-smoljak:       [941.2, 1000, 762.1]
+  stepan-smoljak:      [706.2, 933.4, 857.3]
+  karlos-novak:        [764.9, 667, 952.4]
+  zdenek-svitak:       [882.5, 800.2, 714.6]
+  jan-tesitel:         [529.9, 334, 904.9]
+  darius-brozek:       [823.7, 533.8, ~]
+  tomas-chmelar:       [412.4, 733.6, 571.9]
+  romana-kralova:      [647.4, 600.4, 619.4]
+  zdenek-taborsky:     [588.6, 200.8, 334]
+  michaela-silarova:   [353.6, 467.2, 286.4]
+  jirka-jirkovsky:     [~, ~, 809.7]
+  pavel-schierl:       [294.8, 267.4, 429.1]
+  ondrej-chmelar:      [~, ~, 667]
+  michal-fucik:        [~, ~, 524.3]
+  dominik-aubrecht:    [~, ~, 476.7]
+  matej-lysy:          [471.1, ~, ~]
+  ales-krestan:        [~, 400.6, ~]
+  frantisek-rezek:     [~, ~, 381.6]
+  lukas-pavela:        [236.1, ~, 96.1]
+  jiri-pavela:         [118.5, 134.2, 191.3]
+  jakub-moravec:       [~, 67.6, 238.9]
+  simon-rada:          [177.3, ~, ~]
+  monika-blaskovicova: [~, ~, 143.7]
+  petra-matysova:      [59.8, ~, 1]
+  michaela-pavelova:   [~, 1, 48.6]
+  lenka-silarova:      [1, ~, ~]

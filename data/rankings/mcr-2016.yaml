@@ -1,0 +1,41 @@
+year: 2016
+audience: open
+name: { cs: Mistrovství ČR 2016, en: Czech Championship 2016 }
+editions: [jarni/2016, druhy/2016, cocp/2016]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2016.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  tadeas-matys:       [950.1, 882.5, 956.6]
+  filip-smoljak:      [900.1, 706.2, 913.1]
+  zdenek-svitak:      [650.4, 1000, 782.8]
+  horst-simunsky:     [750.3, 764.9, 1000]
+  karlos-novak:       [1000, 647.4, 739.4]
+  jan-tesitel:        [600.4, 823.7, 869.7]
+  stepan-smoljak:     [700.3, 941.2, ~]
+  darius-brozek:      [850.2, 471.1, 609.1]
+  ondrej-chmelar:     [800.2, 412.4, 478.8]
+  tomas-chmelar:      [450.6, 236.1, 696]
+  pavel-schierl:      [500.5, 118.5, 565.7]
+  frantisek-rezek:    [300.7, 529.9, 522.2]
+  romana-kralova:     [350.7, 588.6, 435.3]
+  michal-fucik:       [550.5, 353.6, 218.2]
+  neel-vasanth:       [~, ~, 826.3]
+  zdenek-taborsky:    [400.6, 294.8, 261.6]
+  jirka-jirkovsky:    [~, ~, 652.5]
+  lukas-pavela:       [250.8, 59.8, 348.8]
+  ales-krestan:       [~, ~, 391.9]
+  zdenka-chmelarova:  [~, ~, 305]
+  lukas-navratil:     [200.8, ~, ~]
+  michaela-pavelova:  [1, 177.3, ~]
+  raj-patil:          [~, ~, 174.7]
+  josef-blazek:       [150.9, ~, ~]
+  jiri-pavela:        [100.9, ~, 44.4]
+  martin-velek:       [~, 1, 131.3]
+  frantisek-cervenka: [~, ~, 87.9]
+  matej-lysy:         [50.9, ~, ~]
+  karthik-ramesh:     [~, ~, 1]

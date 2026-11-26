@@ -1,0 +1,28 @@
+competition: mcrj
+year: 2023
+status: finished
+start_date: 2023-03-31
+end_date: 2023-03-31
+report:
+  cs: |
+    Mistrovství ČR juniorů bylo odehráno 31. 3. 2023 v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2023.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: ondrej-kubicek, club_at_time: Gymnázium Letohad }
+    - { place: 2, player: jachym-chrpa, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 3, player: magdalena-novotna, club_at_time: Gymnázium Letohad }
+    - { place: 4, player: jan-tocik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 5, player: michal-dolecek, club_at_time: Gymnázium Letohad }
+    - { place: 6, player: stepan-pacner, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 7, player: vojtech-pesek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 8, player: filip-severa, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 9, player: vit-voracek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 10, player: matyas-pecl, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 11, player: jan-simanek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: karel-kuzel, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: artur-huts, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: ondrej-reich, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: jaromir-habara, club_at_time: SPŠ a SOU Pelhřimov }

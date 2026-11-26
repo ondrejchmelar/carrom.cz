@@ -1,0 +1,30 @@
+year: 2011
+audience: open
+name: { cs: Mistrovství ČR 2011, en: Czech Championship 2011 }
+editions: [jarni/2011, druhy/2011, cocp/2011]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2011.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  zdenek-svitak:       [1000, 1000, 857]
+  filip-smoljak:       [846, 938, 1000]
+  ondrej-chmelar:      [923, 875, 667]
+  horst-simunsky:      [~, 813, 952]
+  romana-kralova:      [769, 750, 619]
+  adrian-dean:         [693, 688, 191]
+  darius-brozek:       [385, 501, 762]
+  jan-tesitel:         [308, 438, 810]
+  pavel-schierl:       [155, 625, 524]
+  michal-fucik:        [232, 563, 477]
+  tomas-chmelar:       [616, 376, 334]
+  zdenek-taborsky:     [462, 126, 429]
+  jirka-jirkovsky:     [~, ~, 715]
+  alzbeta-bartova:     [~, 251, 144]
+  zbynek-fojtik:       [78, ~, 286]
+  zdenka-chmelarova:   [~, 63, 239]
+  lucie-krestanova:    [~, 188, ~]
+  monika-blaskovicova: [1, ~, ~]

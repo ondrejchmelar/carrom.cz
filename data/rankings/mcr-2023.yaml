@@ -1,0 +1,39 @@
+year: 2023
+audience: open
+name: { cs: Mistrovství ČR 2023, en: Czech Championship 2023 }
+editions: [jarni/2023, druhy/2023, cocp/2023]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 100
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2023.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  karlos-novak:           [92.93, 100, 100]
+  horst-simunsky:         [100, 94.18, 75.25]
+  zdenek-svitak:          [85.85, 82.53, 95.05]
+  raj-patil:              [78.79, 88.34, 90.1]
+  matej-bednar:           [15.14, 76.7, 85.15]
+  jan-tesitel:            [57.57, 47.59, 80.2]
+  frantisek-cervenka:     [22.21, 65.06, 70.3]
+  frantisek-rezek:        [64.64, 53.4, 65.35]
+  neel-vasanth:           [71.7, ~, 50.5]
+  pavel-schierl:          [36.35, 59.24, 30.7]
+  tomas-chmelar:          [29.28, 47.75, 40.6]
+  jakub-muller:           [~, 70.87, ~]
+  darius-brozek:          [~, ~, 60.4]
+  magdalena-novotna:      [~, 24.28, 35.65]
+  kumar-alok:             [8.07, 35.93, 20.8]
+  ondrej-chmelar:         [~, ~, 55.45]
+  lukas-navratil:         [50.5, ~, ~]
+  michal-fucik:           [~, ~, 45.55]
+  filip-smoljak:          [43.42, ~, ~]
+  ondrej-kubicek:         [~, ~, 25.75]
+  selvamani-thirumurugan: [~, 12.65, 10.9]
+  lukas-krkavec:          [~, 18.46, ~]
+  romana-kralova:         [~, ~, 15.85]
+  zdenek-taborsky:        [~, 1, 5.95]
+  jiri-pavela:            [~, 6.82, ~]
+  dominika-krestanova:    [1, ~, ~]
+  shiv-sah:               [~, ~, 1]

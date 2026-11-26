@@ -1,0 +1,34 @@
+competition: druhy
+year: 2017
+status: finished
+start_date: 2017-10-07
+end_date: 2017-10-07
+report:
+  cs: |
+    Druhý turnaj MČR 2017 byl odehrán v sobotu 7. října 2017, v Letohradském soukromém gymnáziu. Finále: Zdeněk Sviták – Neel Vasanth 25:13
+source: old-site
+old_url: /turnaje/druhy/druhy_2017.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: neel-vasanth }
+    - { place: 3, player: tadeas-matys }
+    - { place: 4, player: raj-patil }
+    - { place: 5, player: jan-tesitel }
+    - { place: 6, player: filip-smoljak }
+    - { place: 7, player: karlos-novak }
+    - { place: 8, player: frantisek-rezek }
+    - { place: 9, player: michal-fucik }
+    - { place: 10, player: tomas-chmelar }
+    - { place: 11, player: darius-brozek }
+    - { place: 12, player: ondrej-chmelar }
+    - { place: 13, player: frantisek-cervenka }
+    - { place: 14, player: pavel-schierl }
+    - { place: 15, player: vratislav-borsky }
+    - { place: 16, player: miroslav-cernohous }
+    - { place: 17, player: rostislav-borsky }
+    - { place: 18, player: zdenek-taborsky }
+    - { place: 19, player: ales-krestan }
+    - { place: 20, player: jiri-pavela }
+    - { place: 21, player: radka-cernohousova }

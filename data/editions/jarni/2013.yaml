@@ -1,0 +1,31 @@
+competition: jarni
+year: 2013
+status: finished
+start_date: 2013-04-06
+end_date: 2013-04-06
+report:
+  cs: |
+    Turnaj organizuje SPŠ a SOU Pelhřimov společně s Českou carromovou asociací. Součástí carromového víkendu byla 5. 4. prezentace a turnaj pro studenty a veřejnost. Přihlášky zasílejte na email: mcr@carrom.cz. Finále: Filip Smoljak – Horst Šimunský 11:25
+source: old-site
+old_url: /turnaje/jarni/jarni_2013.php
+
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: filip-smoljak }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, player: romana-kralova }
+    - { place: 5, player: darius-brozek }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: tadeas-matys }
+    - { place: 8, player: jan-tesitel }
+    - { place: 9, player: michal-fucik }
+    - { place: 10, player: tomas-chmelar }
+    - { place: 11, player: cyrus-skaria }
+    - { place: 12, player: zdenka-chmelarova }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: zdenek-taborsky }
+    - { place: 15, player: anna-skaria }
+    - { place: 16, player: david-krejci }
+    - { place: 17, player: david-mirsky }
+    - { place: 18, player: bogna-piter }

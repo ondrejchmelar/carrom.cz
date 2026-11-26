@@ -1,0 +1,98 @@
+competition: ecc
+year: 2002
+status: finished
+start_date: 2002-07-05
+end_date: 2002-07-05
+report:
+  cs: |
+    5. 7. 2002, Německo, Bonn. Finále: Böcker Peter - Bollin Carlito  25:6
+source: old-site
+old_url: /ecc/ecc_2002.php
+
+results:
+  singles:
+    - { place: 1, player: peter-bocker, country: DE }
+    - { place: 2, name: Carlito Bollin, country: CH }
+    - { place: 3, name: Stefan Besser, country: DE }
+    - { place: 4, name: Ramesh Srinivasan, country: US }
+    - { place: 5, player: dirk-polchow, country: DE }
+    - { place: 6, name: Karnal Abdin, country: UK }
+    - { place: 7, name: Frank Kunisch, country: DE }
+    - { place: 8, name: Sebastian Holtmann, country: DE }
+    - { place: 9, name: Robert Hauke, country: DE }
+    - { place: 10, name: Babu Mallishetty, country: US }
+    - { place: 11, name: Shaheen Miah, country: UK }
+    - { place: 12, name: Josef Meyer, country: CH }
+    - { place: 13, name: Ala Miah, country: UK }
+    - { place: 14, name: Neil Patel, country: US }
+    - { place: 15, player: paolo-martinelli, country: IT }
+    - { place: 16, name: Abdul Malik, country: UK }
+    - { place: 17, name: Guillaume Derrien, country: FR }
+    - { place: 18, name: Kurt Scherrer, country: CH }
+    - { place: 19, name: Nazrul Islam, country: UK }
+    - { place: 20, name: Denis Braun, country: FR }
+    - { place: 21, name: Jean-Louis Blanc, country: FR }
+    - { place: 22, name: Stefan Eigenmann, country: CH }
+    - { place: 23, name: Hersh Patel, country: US }
+    - { place: 24, name: Tufail Malik, country: UK }
+    - { place: 25, name: Abdul Kahn, country: UK }
+    - { place: 26, name: Thomas Scheuerl, country: DE }
+    - { place: 27, name: Shuab Ahmed, country: UK }
+    - { place: 28, name: Mike Krings, country: DE }
+    - { place: 29, name: Viktor Baumgartner, country: CH }
+    - { place: 30, name: Michael Lüning, country: DE }
+    - { place: 31, name: Billy Stevens, country: US }
+    - { place: 32, player: elisa-zucchiatti, country: IT }
+    - { place: 33, name: Jonathan Leau, country: FR }
+    - { place: 34, name: Gianluca Cristiani, country: IT }
+    - { place: 35, name: Alice Chenu, country: FR }
+    - { place: 36, name: Ralph Bruhn, country: DE }
+    - { place: 37, name: Beat Kälin, country: CH }
+    - { place: 38, name: Dietmar Buttler, country: DE }
+    - { place: 39, player: lorenzo-hurlimann, country: CH }
+    - { place: 40, name: Rodolf Donnini, country: IT }
+    - { place: 41, name: Stéphane Liakhoff, country: FR }
+    - { place: 42, name: Mouraly Venou, country: FR }
+    - { place: 43, player: claudio-motta, country: IT }
+    - { place: 44, name: Giorgio Balicchi, country: IT }
+    - { place: 45, name: Raphael Zerbib, country: FR }
+    - { place: 46, name: Nicolas Michel, country: FR }
+    - { place: 47, name: Günter Dorka, country: DE }
+    - { place: 48, name: Olivier Telias, country: FR }
+    - { place: 49, name: Jay Patel, country: US }
+    - { place: 50, name: Cedric Fourcade, country: FR }
+    - { place: 51, name: Pierre Boulanger, country: FR }
+    - { place: 52, name: Cyrille Masson, country: FR }
+    - { place: 53, player: bernhard-sander, country: DE }
+    - { place: 54, name: Stefano Stucchi, country: IT }
+    - { place: 55, player: armin-steiner, country: DE }
+    - { place: 56, name: Benny Meier, country: CH }
+    - { place: 57, name: Jelle Arts, country: NL }
+    - { place: 58, name: Bernard Jalabert, country: FR }
+    - { place: 59, name: François Varenne, country: FR }
+    - { place: 60, name: Franck Ciannarella, country: FR }
+    - { place: 61, name: Paolo Ometto, country: IT }
+    - { place: 62, name: Michael Vierle, country: DE }
+    - { place: 63, name: Krishan Sharma, country: UK }
+    - { place: 64, name: Michaela Dreikhausen, country: DE }
+    - { place: 65, name: Jérôme David, country: FR }
+    - { place: 66, name: Jürgen Frey, country: DE }
+    - { place: 67, name: Anette Menk, country: DE }
+    - { place: 68, name: Riz Careem, country: CH }
+    - { place: 69, name: Rakesh Katwa, country: UK }
+    - { place: 70, name: Baptiste Bermond, country: FR }
+    - { place: 71, name: Simone Blode, country: DE }
+    - { place: 72, name: Stefan Bartlema, country: NL }
+    - { place: 73, name: Phillipe Ernst, country: CH }
+    - { place: 74, name: Laurent Prost, country: FR }
+    - { place: 75, name: Bharat Katwa, country: UK }
+    - { place: 76, name: Georg Steiner, country: DE }
+    - { place: 77, name: Anmol Nandha, country: UK }
+    - { place: 78, name: Jérôme Bordier, country: FR }
+    - { place: 79, name: Paolo Marturano, country: IT }
+    - { place: 80, name: Anthony Plaquin, country: FR }
+    - { place: 81, name: François Calmels, country: FR }
+    - { place: 82, name: Lucia Ammazzalamorte, country: IT }
+    - { place: 83, name: Florence Roumegous, country: FR }
+    - { place: 84, name: Michel Piednoir, country: FR }
+    - { place: 85, name: Caroline Rameau, country: FR }

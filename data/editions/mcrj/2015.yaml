@@ -1,0 +1,40 @@
+competition: mcrj
+year: 2015
+status: finished
+start_date: 2015-03-27
+end_date: 2015-03-27
+report:
+  cs: |
+    MČRj bylo odehráno 27. března v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2015.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: stepan-smoljak, club_at_time: RaF Praha }
+    - { place: 2, player: jakub-moravec, club_at_time: Gymnázium Letohad }
+    - { place: 3, player: michaela-silarova, club_at_time: Gymnázium Letohad }
+    - { place: 4, player: laura-volejnikova, club_at_time: Gymnázium Letohad }
+    - { place: 5, player: josef-blazek, club_at_time: Hodina H Pelhřimov }
+    - { place: 6, player: lukas-pavela, club_at_time: Gymnázium Letohad }
+    - { place: 7, player: michaela-pavelova, club_at_time: Gymnázium Letohad }
+    - { place: 8, player: dominik-vlcek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 9, player: adam-simak, club_at_time: Slovanské gymnázium Olomouc }
+    - { place: 10, player: david-mirsky, club_at_time: Hodina H Pelhřimov }
+    - { place: 11, player: kristian-vajda, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: dominik-poulicek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: matej-linhart, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: filip-skokan, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: martina-blazkova, club_at_time: Gymnázium Pelhřimov }
+    - { place: 16, player: david-samec, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 17, player: josef-kulik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 18, player: patrik-smidmajer, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 19, player: david-masher, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 20, player: patrik-opitz, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 21, player: filip-svoboda, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 22, player: robin-masat, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 23, player: tomas-jelinek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 24, player: martin-zamrzla, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 25, player: jan-martinek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 26, player: lukas-horsky, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 27, player: jiri-klatecka, club_at_time: SPŠ a SOU Pelhřimov }

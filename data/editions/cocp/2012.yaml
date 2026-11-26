@@ -1,0 +1,50 @@
+competition: cocp
+year: 2012
+status: finished
+start_date: 2012-11-17
+end_date: 2012-11-17
+report:
+  cs: |
+    Již potřetí se odehrál tradiční podzimní turnaj v aule HTF UK v Praze pod dohledem Mistra Jana. Tentokráte vyšla třetí listopadová sobota na krásného 17. listopadu. Zůčastnili se hráči z Polska, Německa, Itálie Švédska a Česka. Zvítězil Tobias Krüger, který ve finále porazil Fabia Tomasiho. Foto Zdeňka Tichého
+external_url: "http://carrom.rajce.idnes.cz/7._Carrom_Open_Cup_2012_Praha/"
+source: old-site
+old_url: /turnaje/cocp/cocp_2012.php
+
+results:
+  singles:
+    - { place: 1, player: tobias-kruger }
+    - { place: 2, player: fabio-tomasi }
+    - { place: 3, player: sylwester-pogorzelski }
+    - { place: 4, player: frank-fehr }
+    - { place: 5, player: bodo-schnoor }
+    - { place: 6, player: claudio-motta }
+    - { place: 7, player: horst-simunsky }
+    - { place: 8, player: ondrej-chmelar }
+    - { place: 9, player: daniele-dafatti }
+    - { place: 10, player: zdenek-svitak }
+    - { place: 11, player: romana-kralova }
+    - { place: 12, player: gunter-seibert }
+    - { place: 13, player: suzanne-schackert }
+    - { place: 14, player: darius-brozek }
+    - { place: 15, player: karlos-novak }
+    - { place: 16, player: renuka-naik }
+    - { place: 17, player: robert-bany }
+    - { place: 18, player: pavel-schierl }
+    - { place: 19, player: filip-smoljak }
+    - { place: 20, player: jirka-jirkovsky }
+    - { place: 21, player: tomas-chmelar }
+    - { place: 22, player: jan-tesitel }
+    - { place: 23, player: tadeas-matys }
+    - { place: 24, player: martin-cerny }
+    - { place: 25, player: zbynek-fojtik }
+    - { place: 26, player: cyrus-skaria }
+    - { place: 27, player: gunnar-von-arnold }
+    - { place: 28, player: nilesh-nirmal }
+    - { place: 29, player: adrian-dean }
+    - { place: 30, player: zdenka-chmelarova }
+    - { place: 31, player: mirek-maly }
+    - { place: 32, player: miroslav-duda }
+    - { place: 33, player: radek-jaromersky }
+    - { place: 34, player: alzbeta-tesitelova }
+    - { place: 35, player: rajshekar-naik }
+    - { place: 36, player: ia-jackert }

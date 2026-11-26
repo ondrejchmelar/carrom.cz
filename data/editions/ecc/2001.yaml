@@ -1,0 +1,93 @@
+competition: ecc
+year: 2001
+status: finished
+start_date: 2001-08-31
+end_date: 2001-08-31
+report:
+  cs: |
+    31.8. 2001, Francie, Millau. Finále: Miah Shaheen - Kunisch Frank  25:21
+source: old-site
+old_url: /ecc/ecc_2001.php
+
+results:
+  singles:
+    - { place: 1, name: Shaheen Miah, country: UK }
+    - { place: 2, name: Frank Kunisch, country: DE }
+    - { place: 3, name: Alah Miah, country: UK }
+    - { place: 4, player: dirk-polchow, country: DE }
+    - { place: 5, name: Venou Mouraly, country: FR }
+    - { place: 6, name: Stefan Besser, country: DE }
+    - { place: 7, name: Carlito Bollin, country: CH }
+    - { place: 8, name: Rayard Gerard, country: FR }
+    - { place: 9, name: Srinivasan Ramesh, country: US }
+    - { place: 10, name: Elisa Martinelli, country: IT }
+    - { place: 11, name: Dietmar Buttler, country: DE }
+    - { place: 12, player: paolo-martinelli, country: IT }
+    - { place: 13, name: Shahid Abdus, country: UK }
+    - { place: 14, name: Tufail Malik, country: UK }
+    - { place: 15, player: lorenzo-hurlimann, country: CH }
+    - { place: 16, name: Denis Braun, country: FR }
+    - { place: 17, name: Josef Meyer, country: CH }
+    - { place: 18, name: Nazrul Islam, country: UK }
+    - { place: 19, name: Rangnekar Suneel, country: US }
+    - { place: 20, name: Meike Weigel, country: DE }
+    - { place: 21, name: Giorgio Balicchi, country: IT }
+    - { place: 22, name: Jean-Louis Blanch, country: FR }
+    - { place: 23, name: Abdul Khan, country: UK }
+    - { place: 24, name: Azhim Abdul, country: UK }
+    - { place: 25, name: Thomas Scheuerl, country: DE }
+    - { place: 26, name: Annette Menk, country: DE }
+    - { place: 27, name: Gianluca Cristiani, country: IT }
+    - { place: 28, name: Francois Varenne, country: FR }
+    - { place: 29, name: Fausto Gaifas, country: IT }
+    - { place: 30, name: Manuel Pelling, country: FR }
+    - { place: 31, name: Kurt Scherrer, country: CH }
+    - { place: 32, player: bernhard-sander, country: DE }
+    - { place: 33, name: Peter Hasel, country: DE }
+    - { place: 34, name: Franck Cianarella, country: FR }
+    - { place: 35, name: Heiko Wurst, country: DE }
+    - { place: 36, name: Pramila Rangnekar, country: US }
+    - { place: 37, name: Manuel Laurent, country: FR }
+    - { place: 38, name: Suresh Guduri, country: US }
+    - { place: 39, name: Eric Hermitte, country: FR }
+    - { place: 40, name: Cedric Fourcade, country: FR }
+    - { place: 41, name: Sepp Hasel, country: DE }
+    - { place: 42, name: Stephan Maheo, country: FR }
+    - { place: 43, name: Stephan Poisson, country: FR }
+    - { place: 44, name: Enrico Peroni, country: IT }
+    - { place: 45, name: Jerome David, country: FR }
+    - { place: 46, name: Massimo Dalus, country: IT }
+    - { place: 47, name: Karim Nessakh, country: FR }
+    - { place: 48, name: Viktor Baumgartner, country: CH }
+    - { place: 49, name: Stefano Stucchi, country: IT }
+    - { place: 50, name: Xavier Antoine, country: FR }
+    - { place: 51, name: Stephane Liakhoff, country: FR }
+    - { place: 52, name: Mike Krings, country: DE }
+    - { place: 53, name: Giorgio Azzolini, country: IT }
+    - { place: 54, name: Alice Chenu, country: FR }
+    - { place: 55, name: Riz Careem, country: CH }
+    - { place: 56, name: Laurent Prost, country: FR }
+    - { place: 57, name: Christophe Bouchet, country: FR }
+    - { place: 58, name: Michaela Dreikhausen, country: DE }
+    - { place: 59, name: Roberto Marchetti, country: IT }
+    - { place: 60, name: Raphael Zerbib, country: FR }
+    - { place: 61, name: Rakesh Katwa, country: UK }
+    - { place: 62, player: claudio-motta, country: IT }
+    - { place: 63, name: Georg Steiner, country: DE }
+    - { place: 64, name: Stefan Eigenmann, country: CH }
+    - { place: 65, name: Bharat Kathwa, country: UK }
+    - { place: 66, name: Pierre Boulanger, country: FR }
+    - { place: 67, name: Alain Moro, country: FR }
+    - { place: 68, name: Benoit Muzet, country: FR }
+    - { place: 69, name: Eric Courtoud, country: FR }
+    - { place: 70, name: Rodrigo Ramoneda, country: FR }
+    - { place: 71, player: armin-steiner, country: DE }
+    - { place: 72, name: Eric Marzin, country: FR }
+    - { place: 73, name: Patrizia Lolli, country: IT }
+    - { place: 74, name: Dora Marques, country: FR }
+    - { place: 75, name: Paolo Ometto, country: IT }
+    - { place: 76, name: Abdul Malik, country: UK }
+    - { place: 77, name: Paolo Cominelli, country: IT }
+    - { place: 78, name: Michael Helbling, country: CH }
+    - { place: 79, name: Ropers Guenaelle, country: FR }
+    - { place: 80, name: Francois Brayet, country: FR }

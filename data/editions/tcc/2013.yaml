@@ -1,0 +1,24 @@
+competition: tcc
+year: 2013
+status: finished
+start_date: 2013-05-25
+end_date: 2013-05-25
+report:
+  cs: |
+    Finále: Dára Brožek - Karlos Novák  25:6 Turnaj proběhl 25. května.
+source: old-site
+old_url: /turnaje/tcc/tcc_2013.php
+
+results:
+  singles:
+    - { place: 1, player: darius-brozek }
+    - { place: 2, player: karlos-novak }
+    - { place: 3, player: jirka-jirkovsky }
+    - { place: 4, player: tomas-chmelar }
+    - { place: 5, player: adrian-dean }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: zdenek-taborsky }
+    - { place: 8, player: zdenka-chmelarova }
+    - { place: 9, player: alzbeta-tesitelova }
+    - { place: 10, player: miroslav-duda }
+    - { place: 11, player: lucie-richtrova }

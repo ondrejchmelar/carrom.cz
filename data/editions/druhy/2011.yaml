@@ -1,0 +1,31 @@
+competition: druhy
+year: 2011
+status: finished
+start_date: 2011-10-15
+end_date: 2011-10-15
+report:
+  cs: |
+    Druhý turnaj MČR 2011 byl odehrán 15. 10. v Žamberku v prostorách Pivovaru Kanec.
+external_url: "http://www.pivovarzamberk.wz.cz/"
+source: old-site
+old_url: /turnaje/druhy/druhy_2011.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: filip-smoljak }
+    - { place: 3, player: ondrej-chmelar }
+    - { place: 4, player: horst-simunsky }
+    - { place: 5, player: romana-kralova }
+    - { place: 6, player: adrian-dean }
+    - { place: 7, player: pavel-schierl }
+    - { place: 8, player: michal-fucik }
+    - { place: 9, player: darius-brozek }
+    - { place: 10, player: jan-tesitel }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: karlos-novak }
+    - { place: 13, player: alzbeta-bartova }
+    - { place: 14, player: lucie-krestanova }
+    - { place: 15, player: zdenek-taborsky }
+    - { place: 16, player: zdenka-chmelarova }
+    - { place: 17, player: david-derka }

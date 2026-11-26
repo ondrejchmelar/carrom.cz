@@ -1,0 +1,34 @@
+competition: pcl
+year: 2011
+status: finished
+start_date: 2011-01-20
+report:
+  cs: |
+    Ročník 2011 byl zahájen 20. ledna, odehrán v liché čtvrtky v Coffee House, Francouzská 100, Praha 2 a ukončen večírkem 8. prosince.
+source: old-site
+old_url: /pcl/pcl_2011.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: filip-smoljak }
+    - { place: 4, player: ondrej-chmelar }
+    - { place: 5, player: romana-kralova }
+    - { place: 6, player: darius-brozek }
+    - { place: 7, player: jan-tesitel }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, player: jirka-jirkovsky }
+    - { place: 10, player: adrian-dean }
+    - { place: 11, player: milan-svitak }
+    - { place: 12, player: michal-fucik }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: zdenka-chmelarova }
+    - { place: 15, player: alzbeta-bartova }
+    - { place: 16, player: siddharaj-joshi }
+    - { place: 17, player: lucie-krestanova }
+    - { place: 18, player: ales-krestan }
+    - { place: 19, player: monika-blaskovicova }
+    - { place: 20, player: manish-sahijwani }
+    - { place: 21, player: jana-tomova }
+    - { place: 22, player: jana-skuhrovcova }

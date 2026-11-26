@@ -1,0 +1,61 @@
+competition: ecc
+year: 1997
+status: finished
+start_date: 1997-07-19
+end_date: 1997-07-19
+report:
+  cs: |
+    19. 7. 1997, Velká Británie, Luton. Finále: Besser Stefan - Kunisch Andre  25:4
+source: old-site
+old_url: /ecc/ecc_1997.php
+
+results:
+  singles:
+    - { place: 1, name: Stefan Besser, country: DE }
+    - { place: 2, name: Andre Kunisch, country: DE }
+    - { place: 3, name: Carlito Bollin, country: CH }
+    - { place: 4, name: Karnal Abedin, country: UK }
+    - { place: 5, player: peter-bocker, country: DE }
+    - { place: 6, name: Saleh Ahmed, country: UK }
+    - { place: 7, name: Mike Krings, country: DE }
+    - { place: 8, name: Frank Kunisch, country: DE }
+    - { place: 9, name: Anders Illi, country: CH }
+    - { place: 10, name: Shahen Miah, country: UK }
+    - { place: 11, name: Reg Forbler, country: UK }
+    - { place: 12, name: Peter Baumgartner, country: CH }
+    - { place: 13, name: Abu Islam, country: UK }
+    - { place: 14, name: Nazrus Islam, country: UK }
+    - { place: 15, name: Michael Vierle, country: DE }
+    - { place: 16, name: Tim Kirkby, country: UK }
+    - { place: 17, player: paolo-martinelli, country: IT }
+    - { place: 18, name: Abdul Muhith, country: UK }
+    - { place: 19, name: Mojnu Miah, country: UK }
+    - { place: 20, player: lorenzo-hurlimann, country: CH }
+    - { place: 21, name: Richard White, country: UK }
+    - { place: 22, name: Johann Doss, country: AT }
+    - { place: 23, name: Abdus Shahid, country: UK }
+    - { place: 24, name: Seevern Patten, country: UK }
+    - { place: 25, name: Niklas Doss, country: AT }
+    - { place: 26, name: Denis Braun, country: FR }
+    - { place: 27, name: Beni Meier, country: CH }
+    - { place: 28, name: Elisa Martinelli, country: IT }
+    - { place: 29, name: Roger Mayer, country: CH }
+    - { place: 30, name: Giorgio Balicchi, country: IT }
+    - { place: 31, name: Suto Miah, country: UK }
+    - { place: 32, player: bernhard-sander, country: DE }
+    - { place: 33, name: Abdul Khan, country: UK }
+    - { place: 34, name: Christiane Roeske, country: DE }
+    - { place: 35, name: Michaela Dreikhausen, country: DE }
+    - { place: 36, name: Riccardo Vaccaro, country: IT }
+    - { place: 37, name: Karim Nessakh, country: FR }
+    - { place: 38, name: Meike Weigel, country: DE }
+    - { place: 39, name: Harpinder Walia, country: UK }
+    - { place: 40, name: Kurt Scherrer, country: CH }
+    - { place: 41, name: Freddie Brewer, country: UK }
+    - { place: 42, name: Paolo Marturano, country: IT }
+    - { place: 43, name: Riz Careem, country: CH }
+    - { place: 44, name: Erich Doss, country: AT }
+    - { place: 45, name: Ash }
+    - { place: 46, name: Mahmood Hussein }
+    - { place: 47, name: Nina Kriszten, country: CH }
+    - { place: 48, name: Raj }

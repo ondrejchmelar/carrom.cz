@@ -1,0 +1,16 @@
+competition: cml
+year: 2013
+status: finished
+source: old-site
+old_url: /cml/cml_2013.php
+
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: darius-brozek }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, player: zdenek-taborsky }
+    - { place: 5, player: pavel-schierl }
+    - { place: 6, player: radek-jaromersky }
+    - { place: 7, player: jiri-mareda }
+    - { place: 8, player: david-derka }

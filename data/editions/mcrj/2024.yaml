@@ -1,0 +1,31 @@
+competition: mcrj
+year: 2024
+status: finished
+start_date: 2024-04-12
+end_date: 2024-04-12
+source: old-site
+old_url: "/mcr/mcr_2024.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: ondrej-kubicek, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 2, player: magdalena-novotna, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 3, player: matej-melmuka, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 4, player: prokop-novak, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 5, player: jakub-lyko, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 6, player: ales-lipensky, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 7, player: vit-voracek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 8, player: stepan-pacner, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 9, player: ondrej-reich, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 10, player: vitek-kupsa, club_at_time: ZŠ Košetice }
+    - { place: 11, player: vendula-ferancova, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 12, player: marie-cervinkova, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 13, player: jan-simanek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: vaclav-vrzak, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: artur-huts, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 16, player: karel-kuzel, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 17, player: filip-nguyen, club_at_time: ZŠ Košetice }
+    - { place: 18, player: filip-kepka, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 19, player: tomas-smetana, club_at_time: ZŠ Košetice }
+    - { place: 20, player: jaroslav-prusa, club_at_time: ZŠ Košetice }
+    - { place: 21, player: jachym-holecek, club_at_time: SPŠ a SOU Pelhřimov }

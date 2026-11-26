@@ -1,0 +1,27 @@
+competition: cocp
+year: 2006
+status: finished
+start_date: 2006-11-25
+end_date: 2006-11-25
+report:
+  cs: |
+    První ročník turnaje se uskutečnil 25. 11. v klubu deskových her PALUBA na pražském Smíchově.
+source: old-site
+old_url: /turnaje/cocp/cocp_2006.php
+
+results:
+  singles:
+    - { place: 1, player: ondrej-chmelar }
+    - { place: 2, player: sumit-malhotra }
+    - { place: 3, player: milan-svitak }
+    - { place: 4, player: zdenek-svitak }
+    - { place: 5, player: martin-cerny }
+    - { place: 6, player: ales-formanek }
+    - { place: 7, player: zdenek-taborsky }
+    - { place: 8, player: radek-jaromersky }
+    - { place: 9, player: zdenka-chmelarova }
+    - { place: 10, player: jakub-tesinsky }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: adrian-dean }
+    - { place: 13, player: lars }
+    - { place: 14, player: ivan }

@@ -1,0 +1,31 @@
+competition: jarni
+year: 2015
+status: finished
+start_date: 2015-03-28
+end_date: 2015-03-28
+report:
+  cs: |
+    Turnaj organizuje SPŠ a SOU Pelhřimov společně s Českou carromovou asociací. Součástí carromového víkendu bylo páteční Mistrovství ČR juniorů. Finále: Filip Smoljak – Tadeáš Matys 16:25
+source: old-site
+old_url: /turnaje/jarni/jarni_2015.php
+
+results:
+  singles:
+    - { place: 1, player: tadeas-matys }
+    - { place: 2, player: filip-smoljak }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: darius-brozek }
+    - { place: 5, player: karlos-novak }
+    - { place: 6, player: stepan-smoljak }
+    - { place: 7, player: romana-kralova }
+    - { place: 8, player: zdenek-taborsky }
+    - { place: 9, player: jan-tesitel }
+    - { place: 10, player: matej-lysy }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: michaela-silarova }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: lukas-pavela }
+    - { place: 15, player: simon-rada }
+    - { place: 16, player: jiri-pavela }
+    - { place: 17, player: petra-matysova }
+    - { place: 18, player: lenka-silarova }

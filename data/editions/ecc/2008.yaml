@@ -1,0 +1,81 @@
+competition: ecc
+year: 2008
+status: finished
+start_date: 2008-08-01
+end_date: 2008-08-02
+report:
+  cs: |
+    1. - 2. 8. 2008, Velká Británie, Sutton. Finále: Abdin Karnal - Ali Sunahar
+source: old-site
+old_url: /ecc/ecc_2008.php
+
+results:
+  singles:
+    - { place: 1, name: Karnal Abdin, country: UK }
+    - { place: 2, name: Sunahar Ali, country: UK }
+    - { place: 3, name: Shomsu Miah, country: UK }
+    - { place: 4, name: Fabian Pereira, country: FR }
+    - { place: 5, name: Jonathan Leau, country: FR }
+    - { place: 6, name: Gianluca Cristiani, country: IT }
+    - { place: 7, name: Abdul Malik, country: UK }
+    - { place: 8, name: Altaf Hussein, country: UK }
+    - { place: 9, name: Sriyantha Weerasinghe, country: UK }
+    - { place: 10, name: Mar Khan, country: UK }
+    - { place: 11, player: peter-bocker, country: DE }
+    - { place: 12, name: Abdul Wahid, country: UK }
+    - { place: 13, name: Pierre Dubois, country: FR }
+    - { place: 14, player: dirk-polchow, country: DE }
+    - { place: 15, name: Abdul Mumit, country: UK }
+    - { place: 16, name: Shaheen Miah, country: UK }
+    - { place: 17, name: Heiko Wurst, country: DE }
+    - { place: 18, name: Karim Nessakh, country: FR }
+    - { place: 19, name: Mouraly Venou, country: FR }
+    - { place: 20, name: Ansar Abdin, country: UK }
+    - { place: 21, name: Chandan Narkar, country: UK }
+    - { place: 22, name: Peter Wolfgang, country: DE }
+    - { place: 23, name: Stefano Stucchi, country: IT }
+    - { place: 24, name: Mukith Hussein, country: UK }
+    - { place: 25, name: Nazrul Islam, country: UK }
+    - { place: 26, name: Amitha Ubhayathunga, country: UK }
+    - { place: 27, name: Alfred Rajadurai, country: UK }
+    - { place: 28, name: Abdul Khan, country: UK }
+    - { place: 29, name: Ala Miah, country: UK }
+    - { place: 30, player: tobias-kruger, country: DE }
+    - { place: 31, name: Ish Kumar, country: UK }
+    - { place: 32, player: paolo-martinelli, country: IT }
+    - { place: 33, name: Murshad Khan, country: UK }
+    - { place: 34, player: bernhard-sander, country: DE }
+    - { place: 35, name: Ari Liyange, country: IT }
+    - { place: 36, player: ingo-frauenrath, country: DE }
+    - { place: 37, player: armin-steiner, country: DE }
+    - { place: 38, name: Jeremy Ciepli, country: IT }
+    - { place: 39, player: gunter-seibert, country: DE }
+    - { place: 40, name: Giorgio Balicci, country: IT }
+    - { place: 41, name: Patrice Dumas, country: FR }
+    - { place: 42, name: Radjou Venou, country: FR }
+    - { place: 43, name: Ahmed Shuab, country: UK }
+    - { place: 44, name: Elisa Martinelli, country: IT }
+    - { place: 45, name: Susil Kurera, country: UK }
+    - { place: 46, name: Ruhena Begum, country: UK }
+    - { place: 47, name: Abdullah Niandish, country: UK }
+    - { place: 48, name: Rosawald Carbral, country: FR }
+    - { place: 49, player: andreas-hurtig, country: DE }
+    - { place: 50, name: Abdus Shahid, country: UK }
+    - { place: 51, name: Moklisur Rahman, country: UK }
+    - { place: 52, name: Alain Bonsang, country: FR }
+    - { place: 53, name: Patrick Philips, country: DE }
+    - { place: 54, player: jakub-nowakowski, country: DE }
+    - { place: 55, player: paulina-nowakowska, country: DE }
+    - { place: 56, name: Stefano Fabiano, country: IT }
+    - { place: 57, name: Randjit Venou, country: FR }
+    - { place: 58, name: Armin Schneider, country: DE }
+    - { place: 59, player: hans-faller, country: DE }
+    - { place: 60, name: Stephane Cano, country: IT }
+    - { place: 61, name: Rodolfo Donnini, country: IT }
+    - { place: 62, name: Emilie Neuhauser, country: DE }
+    - { place: 63, name: Norbert Mothe, country: DE }
+    - { place: 64, player: fabio-tomasi, country: IT }
+    - { place: 65, name: Suve Banerjee, country: UK }
+    - { place: 66, name: Joseph Glasberg, country: DE }
+    - { place: 67, name: Flavio Pizzinat, country: IT }
+    - { place: 68, name: Dipal Banerjeb, country: UK }

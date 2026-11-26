@@ -1,0 +1,26 @@
+year: 2021
+audience: open
+name: { cs: Mistrovství ČR 2021, en: Czech Championship 2021 }
+editions: [jarni/2021, druhy/2021, cocp/2021]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 100
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2021.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  zdenek-svitak:      [~, ~, ~]
+  frantisek-cervenka: [~, ~, ~]
+  raj-patil:          [~, ~, ~]
+  filip-smoljak:      [~, ~, ~]
+  karlos-novak:       [~, ~, ~]
+  ondrej-chmelar:     [~, ~, ~]
+  lukas-navratil:     [~, ~, ~]
+  jan-tesitel:        [~, ~, ~]
+  horst-simunsky:     [~, ~, ~]
+  frantisek-rezek:    [~, ~, ~]
+  tomas-chmelar:      [~, ~, ~]
+  pavel-schierl:      [~, ~, ~]
+  ales-krestan:       [~, ~, ~]
+  kumar-alok:         [~, ~, ~]

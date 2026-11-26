@@ -1,0 +1,27 @@
+competition: jarni
+year: 2017
+status: finished
+start_date: 2017-04-01
+end_date: 2017-04-01
+report:
+  cs: |
+    Turnaj organizuje SPŠ a SOU Pelhřimov společně s Českou carromovou asociací. Součástí carromového víkendu bylo páteční Mistrovství ČR juniorů. Finále: Zdeněk Sviták – Horst Šimunský 25:24
+source: old-site
+old_url: /turnaje/jarni/jarni_2017.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: filip-smoljak }
+    - { place: 4, player: karlos-novak }
+    - { place: 5, player: stepan-smoljak }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: raj-patil }
+    - { place: 8, player: ondrej-chmelar }
+    - { place: 9, player: neel-vasanth }
+    - { place: 10, player: tomas-chmelar }
+    - { place: 11, player: frantisek-rezek }
+    - { place: 12, player: romana-kralova }
+    - { place: 13, player: michal-fucik }
+    - { place: 14, player: zdenek-taborsky }

@@ -1,0 +1,29 @@
+competition: druhy
+year: 2015
+status: finished
+start_date: 2015-10-03
+end_date: 2015-10-03
+report:
+  cs: |
+    Druhý turnaj MČR 2015 byl odehrán v sobotu 3. října 2015, v Letohradském soukromém gymnáziu. Finále: Štěpán Smoljak – Filip Smoljak 20:25
+source: old-site
+old_url: /turnaje/druhy/druhy_2015.php
+
+results:
+  singles:
+    - { place: 1, player: filip-smoljak }
+    - { place: 2, player: stepan-smoljak }
+    - { place: 3, player: tadeas-matys }
+    - { place: 4, player: zdenek-svitak }
+    - { place: 5, player: tomas-chmelar }
+    - { place: 6, player: karlos-novak }
+    - { place: 7, player: romana-kralova }
+    - { place: 8, player: darius-brozek }
+    - { place: 9, player: michaela-silarova }
+    - { place: 10, player: ales-krestan }
+    - { place: 11, player: jan-tesitel }
+    - { place: 12, player: pavel-schierl }
+    - { place: 13, player: zdenek-taborsky }
+    - { place: 14, player: jiri-pavela }
+    - { place: 15, player: jakub-moravec }
+    - { place: 16, player: michaela-pavelova }

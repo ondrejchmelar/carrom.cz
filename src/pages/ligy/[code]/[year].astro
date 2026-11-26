@@ -31,12 +31,13 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
     <div class="page-head">
       <a class="small" href={url(`/ligy/${ed.code}/`)}>{t(ed.competition.name)}</a>
       <h1>{`${t(ed.competition.short_name) || t(ed.competition.name)} ${ed.year}`}</h1>
-      <div class="chips phase">
+      {s && <div class="chips phase">
         <span class:list={['pill', { on: s?.phase === 'group' }]}>Základní kolo{fmt.group_stage?.until ? ` do ${dateShort(fmt.group_stage.until, false)}` : ''}</span>
         <span class:list={['pill', { on: s?.phase === 'playoff' }]}>Playoff</span>
         {s?.complete && <span class="pill on">Dohráno</span>}
-      </div>
+      </div>}
       {venue && <p class="small">{venue.name}{venue.address ? `, ${venue.address}` : ''}</p>}
+      {!s && ed.report && <p class="lede">{t(ed.report)}</p>}
     </div>
 
     {!s && (

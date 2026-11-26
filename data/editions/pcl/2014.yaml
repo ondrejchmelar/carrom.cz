@@ -1,0 +1,27 @@
+competition: pcl
+year: 2014
+status: finished
+report:
+  cs: |
+    Pražská carromová liga byla odehrána v naší domovské kavárně UŽ JSME DOMA, Uralská 6, Praha 6. Více informací na pcl@carrom.cz. VÍTĚZEM PRAŽSKÉ CARROMOVÉ LIGY 2014 SE STAL TADEÁŠ MATYS.
+source: old-site
+old_url: /pcl/pcl_2014.php
+
+results:
+  singles:
+    - { place: 1, player: tadeas-matys }
+    - { place: 2, player: filip-smoljak }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: jirka-jirkovsky }
+    - { place: 5, player: cyrus-skaria }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: jan-tesitel }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, player: romana-kralova }
+    - { place: 10, player: pavel-schierl }
+    - { place: 11, player: ales-krestan }
+    - { place: 12, player: zdenka-chmelarova }
+    - { place: 13, player: michal-fucik }
+    - { place: 14, player: adrian-dean }
+    - { place: 15, player: lenka-prazakova }
+    - { place: 16, player: anna-skaria }

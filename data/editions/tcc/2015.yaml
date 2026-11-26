@@ -1,0 +1,22 @@
+competition: tcc
+year: 2015
+status: finished
+start_date: 2015-06-20
+end_date: 2015-06-20
+report:
+  cs: |
+    Po roční přestávce je tu opět Terrace Carrom Cup. Turnaj se uskutečnil 20. června. Finále: Honza Těšitel - Jirka Jirkovský 12:21
+source: old-site
+old_url: /turnaje/tcc/tcc_2015.php
+
+results:
+  singles:
+    - { place: 1, player: jirka-jirkovsky }
+    - { place: 2, player: jan-tesitel }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, player: michal-fucik }
+    - { place: 5, player: pavel-schierl }
+    - { place: 6, player: jakub-moravec }
+    - { place: 7, player: jiri-pavela }
+    - { place: 8, player: lukas-pavela }
+    - { place: 9, player: michaela-pavelova }

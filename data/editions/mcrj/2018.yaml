@@ -1,0 +1,29 @@
+competition: mcrj
+year: 2018
+status: finished
+start_date: 2018-04-06
+end_date: 2018-04-06
+report:
+  cs: |
+    MČRj bylo odehráno 6. dubna v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2018.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: rostislav-borsky, club_at_time: Praha }
+    - { place: 2, player: tomas-chmelar, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 3, player: krystof-melmuka, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 4, player: michaela-pavelova, club_at_time: Gymnázium Letohad }
+    - { place: 5, player: jakub-muller, club_at_time: Gymnázium Letohad }
+    - { place: 6, player: vaclav-pinkas, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 7, player: ales-muller, club_at_time: Gymnázium Letohad }
+    - { place: 8, player: matej-bednar, club_at_time: Gymnázium Letohad }
+    - { place: 9, player: martin-sochor, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 10, player: jakub-korinek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 11, player: martin-kourimsky, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: martin-pekarek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: oldrich-dolezal, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: jan-rezac, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: kristian-svoboda, club_at_time: Praha 6 Dei witze }
+    - { place: 16, player: nikolas-svoboda, club_at_time: Praha 6 Dei witze }

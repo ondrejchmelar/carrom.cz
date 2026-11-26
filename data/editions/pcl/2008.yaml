@@ -1,0 +1,19 @@
+competition: pcl
+year: 2008
+status: finished
+source: old-site
+old_url: /pcl/pcl_2008.php
+
+results:
+  singles:
+    - { place: 1, player: ondrej-chmelar }
+    - { place: 2, player: filip-smoljak }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, player: zdenek-svitak }
+    - { place: 5, player: jirka-jirkovsky }
+    - { place: 6, player: tomas-chmelar }
+    - { place: 7, player: lukas-navratil }
+    - { place: 8, player: milan-svitak }
+    - { place: 9, player: kuba-smoljak }
+    - { place: 10, player: romana-kralova }
+    - { place: 11, player: radek-jaromersky }

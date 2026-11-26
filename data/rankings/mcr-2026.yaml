@@ -1,0 +1,16 @@
+year: 2026
+audience: open
+name: { cs: Mistrovství ČR 2026, en: Czech Championship 2026 }
+editions: [jarni/2026, druhy/2026, cocp/2026]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 100
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2026.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  ajay-sekhesh:  [100, 100, ~]
+  zdenek-svitak: [92.37, 90.09, ~]
+  karlos-novak:  [84.76, 95.04, ~]
+  matej-bednar:  [77.15, 85.15, ~]

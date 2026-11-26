@@ -1,0 +1,28 @@
+competition: jarni
+year: 2012
+status: finished
+start_date: 2012-03-31
+end_date: 2012-03-31
+report:
+  cs: |
+    Finále: Zdeněk Sviták – Horst Šimunský 22:25
+source: old-site
+old_url: /turnaje/jarni/jarni_2012.php
+
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: jirka-jirkovsky }
+    - { place: 4, player: romana-kralova }
+    - { place: 5, player: ondrej-chmelar }
+    - { place: 6, player: filip-smoljak }
+    - { place: 7, player: michal-fucik }
+    - { place: 8, player: karlos-novak }
+    - { place: 9, player: jan-tesitel }
+    - { place: 10, player: adrian-dean }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: tadeas-matys }
+    - { place: 13, player: zdenek-taborsky }
+    - { place: 14, player: zbynek-fojtik }
+    - { place: 15, player: dominik-aubrecht }

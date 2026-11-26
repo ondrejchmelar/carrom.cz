@@ -1,0 +1,33 @@
+competition: cocp
+year: 2007
+status: finished
+start_date: 2007-11-24
+end_date: 2007-11-25
+report:
+  cs: |
+    Druhý ročník turnaje se uskutečnil 24. - 25. 11. znovu v klubu deskových her PALUBA na pražském Smíchově. Poprvé se představili hráči z německého Dortmundu, kteří patří k evropské carromové špičce.
+source: old-site
+old_url: /turnaje/cocp/cocp_2007.php
+
+results:
+  singles:
+    - { place: 1, player: peter-bocker }
+    - { place: 2, player: andreas-kracht }
+    - { place: 3, player: dirk-polchow }
+    - { place: 4, player: frank-mohn }
+    - { place: 5, player: ingo-frauenrath }
+    - { place: 6, player: filip-smoljak }
+    - { place: 7, player: ales-formanek }
+    - { place: 8, player: radek-jaromersky }
+    - { place: 9, player: zdenek-svitak }
+    - { place: 10, player: sumit-malhotra }
+    - { place: 11, player: horst-simunsky }
+    - { place: 12, player: milan-kvoch }
+    - { place: 13, player: zdenek-taborsky }
+    - { place: 14, player: ondrej-chmelar }
+    - { place: 15, player: tomas-chmelar }
+    - { place: 16, player: lukas-navratil }
+    - { place: 17, player: stepan-kral }
+    - { place: 17, player: marek-svehla }
+    - { place: 17, player: kumar-ritesh }
+    - { place: 17, player: romana-kralova }

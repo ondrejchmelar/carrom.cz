@@ -1,0 +1,43 @@
+year: 2014
+audience: open
+name: { cs: Mistrovství ČR 2014, en: Czech Championship 2014 }
+editions: [jarni/2014, druhy/2014, cocp/2014]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2014.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  filip-smoljak:        [842, 1000, 958]
+  zdenek-svitak:        [895, 929, 667]
+  darius-brozek:        [947, 643, 875]
+  tadeas-matys:         [1000, ~, 792]
+  jan-tesitel:          [790, 715, 917]
+  romana-kralova:       [632, 857, 834]
+  tomas-chmelar:        [579, 786, 584]
+  ondrej-chmelar:       [737, 572, 542]
+  zdenek-taborsky:      [474, 215, 750]
+  stepan-smoljak:       [422, 501, 709]
+  karlos-novak:         [527, ~, 625]
+  jirka-jirkovsky:      [~, ~, 1000]
+  michal-fucik:         [369, 286, 501]
+  pavel-schierl:        [264, 429, 417]
+  zbynek-fojtik:        [316, ~, 459]
+  cyrus-skaria:         [685, ~, ~]
+  laura-volejnikova:    [211, ~, 334]
+  zdenka-chmelarova:    [~, ~, 376]
+  ales-krestan:         [~, 358, ~]
+  lukas-pavela:         [~, 144, 209]
+  vaclav-michalek:      [~, ~, 292]
+  jakub-moravec:        [~, ~, 251]
+  lenka-prazakova:      [~, ~, 168]
+  dominik-aubrecht:     [159, ~, ~]
+  jiri-pavela:          [~, 1, 126]
+  michaela-volejnikova: [106, ~, 1]
+  adam-simak:           [~, ~, 84]
+  michaela-silarova:    [~, 72, ~]
+  alina-mirakjanova:    [54, ~, ~]
+  lucie-chaloupkova:    [~, ~, 43]
+  jiri-vondracek:       [1, ~, ~]

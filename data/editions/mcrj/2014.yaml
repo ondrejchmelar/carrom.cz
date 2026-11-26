@@ -1,0 +1,41 @@
+competition: mcrj
+year: 2014
+status: finished
+start_date: 2014-03-28
+end_date: 2014-03-28
+report:
+  cs: |
+    MČRj bylo odehráno 28. března v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2014.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: stepan-smoljak, club_at_time: RaF Praha }
+    - { place: 2, player: adam-simak, club_at_time: Gymnázium Letohad }
+    - { place: 3, player: michaela-silarova, club_at_time: Gymnázium Letohad }
+    - { place: 4, player: lukas-pavela, club_at_time: Gymnázium Letohad }
+    - { place: 5, player: matej-lysy, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 6, player: jakub-moravec, club_at_time: Gymnázium Letohad }
+    - { place: 7, player: jaroslav-marek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 8, player: david-mirsky, club_at_time: Hodina H }
+    - { place: 9, player: laura-volejnikova, club_at_time: ZŠ Chlumec nad Cidlinou }
+    - { place: 10, player: michaela-pavelova, club_at_time: Gymnázium Letohad }
+    - { place: 11, player: vojtech-broz, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: josef-blazek, club_at_time: Hodina H }
+    - { place: 13, player: robin-masat, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: jiri-mastny, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: dominik-poulicek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 16, player: marie-dvorakova, club_at_time: Gymnázium Pelhřimov }
+    - { place: 17, player: tereza-knezu, club_at_time: Hodina H }
+    - { place: 18, player: tomas-vacek, club_at_time: Hodina H }
+    - { place: 19, player: kristian-vajda, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 20, player: martina-blazkova, club_at_time: Gymnázium Pelhřimov }
+    - { place: 21, player: lukas-horsky, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 22, player: patrik-opitz, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 23, player: tereza-prokesova, club_at_time: Obchodní akademie Pelhřimov }
+    - { place: 24, player: filip-skokan, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 25, player: zuzana-krizkova, club_at_time: Gymnázium Pelhřimov }
+    - { place: 26, player: eliska-krizkova, club_at_time: Gymnázium Pelhřimov }
+    - { place: 27, player: libor-horky, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 28, player: tereza-havelova, club_at_time: Gymnázium Pelhřimov }

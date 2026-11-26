@@ -1,0 +1,29 @@
+competition: mcrj
+year: 2022
+status: finished
+start_date: 2022-04-01
+end_date: 2022-04-01
+report:
+  cs: |
+    Mistrovství ČR juniorů bylo odehráno 1. 4. 2022 v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2022.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: matej-bednar, club_at_time: Gymnázium Letohad }
+    - { place: 2, player: jakub-muller, club_at_time: Gymnázium Letohad }
+    - { place: 3, player: lukas-krkavec, club_at_time: Gymnázium Letohad }
+    - { place: 4, player: jakub-muller, club_at_time: Gymnázium Letohad }
+    - { place: 5, player: jachym-chrpa, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 6, player: radek-vacha, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 7, player: ondrej-adamovsky, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 8, player: vojtech-pesek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 9, player: josef-slanina, club_at_time: Gymnázium Letohad }
+    - { place: 10, player: jan-bravek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 11, player: jan-tocik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: jan-simanek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: martin-david, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: tomas-slavik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: tomas-mauer, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 16, player: ondrej-reich, club_at_time: SPŠ a SOU Pelhřimov }

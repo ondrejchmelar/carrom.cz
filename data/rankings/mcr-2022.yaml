@@ -1,0 +1,34 @@
+year: 2022
+audience: open
+name: { cs: Mistrovství ČR 2022, en: Czech Championship 2022 }
+editions: [jarni/2022, druhy/2022, cocp/2022]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2022.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  karlos-novak:        [1000, 1000, 867]
+  zdenek-svitak:       [938, 909, 1000]
+  raj-patil:           [813, 818, ~]
+  frantisek-rezek:     [688, 455, 933]
+  frantisek-cervenka:  [875, ~, 667]
+  filip-smoljak:       [501, 728, 800]
+  tomas-chmelar:       [750, 637, 201]
+  horst-simunsky:      [625, ~, 734]
+  matej-bednar:        [~, 546, 600]
+  jan-tesitel:         [563, ~, 467]
+  lukas-navratil:      [438, ~, 534]
+  pavel-schierl:       [251, 364, 401]
+  kumar-alok:          [313, ~, 267]
+  romana-kralova:      [376, ~, ~]
+  michal-fucik:        [~, ~, 334]
+  zdenek-taborsky:     [126, 183, ~]
+  jakub-muller:        [~, 92, 134]
+  vratislav-borsky:    [188, ~, ~]
+  dominika-krestanova: [~, ~, 68]
+  rostislav-borsky:    [63, ~, ~]
+  jiri-pavela:         [~, 1, 1]
+  vijay-karthikeyan:   [1, ~, ~]

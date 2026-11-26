@@ -1,0 +1,52 @@
+competition: cocp
+year: 2011
+status: finished
+start_date: 2011-11-19
+end_date: 2011-11-19
+report:
+  cs: |
+    Tradiční podzimní turnaj se uskutečnil v sobotu 19. listopadu pod dohledem Mistra Jana v aule HTF UK v Praze. Zůčastnili se hráči z Polska, Německa, Itálie a Česka. Zvítězil Cornel D'Silva, který po strhujícim finále, hraném na 13 boardů, porazil Tobiase Krügera 25:23!!! V průběhu turnaje zahrál Cornel D'Silva jeden bílý slam. Foto Zdeňka Tichého
+external_url: "http://carrom.rajce.idnes.cz/6._carrom_open_cup/"
+source: old-site
+old_url: /turnaje/cocp/cocp_2011.php
+
+results:
+  singles:
+    - { place: 1, player: cornel-d-silva }
+    - { place: 2, player: tobias-kruger }
+    - { place: 3, player: nitesh-sinha }
+    - { place: 4, player: paulina-nowakowska }
+    - { place: 5, player: francesco-pedicini }
+    - { place: 6, player: paolo-martinelli }
+    - { place: 7, player: elisa-zucchiatti }
+    - { place: 8, player: filip-smoljak }
+    - { place: 9, player: horst-simunsky }
+    - { place: 10, player: sylwester-pogorzelski }
+    - { place: 11, player: suzanne-schackert }
+    - { place: 12, player: siddharaj-joshi }
+    - { place: 13, player: jakub-nowakowski }
+    - { place: 14, player: sascha-essinger }
+    - { place: 15, player: gunter-seibert }
+    - { place: 16, player: tobias-amrhein }
+    - { place: 17, player: zdenek-svitak }
+    - { place: 18, player: bodo-schnoor }
+    - { place: 19, player: jan-tesitel }
+    - { place: 20, player: thomas-vormwald }
+    - { place: 21, player: darius-brozek }
+    - { place: 22, player: jirka-jirkovsky }
+    - { place: 23, player: ondrej-chmelar }
+    - { place: 24, player: steffen-eder }
+    - { place: 25, player: romana-kralova }
+    - { place: 26, player: martin-cerny }
+    - { place: 27, player: pavel-schierl }
+    - { place: 28, player: michal-fucik }
+    - { place: 29, player: zdenek-taborsky }
+    - { place: 30, player: karlos-novak }
+    - { place: 31, player: tomas-chmelar }
+    - { place: 32, player: zbynek-fojtik }
+    - { place: 33, player: zdenka-chmelarova }
+    - { place: 34, player: adrian-dean }
+    - { place: 35, player: alzbeta-bartova }
+    - { place: 36, player: petr-lorenz }
+    - { place: 37, player: manish-sahijwani }
+    - { place: 38, player: tadeas-matys }

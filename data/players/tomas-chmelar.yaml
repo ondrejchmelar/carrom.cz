@@ -2,3 +2,6 @@ first_name: Tomáš
 last_name: Chmelař
 country: CZ
 mcr: true
+spellings:
+  - "Tomáš \"Chmeli\" Chmelař"
+  - "Tomáš \"Tomík\" Chmelař"

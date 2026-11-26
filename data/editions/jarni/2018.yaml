@@ -1,0 +1,31 @@
+competition: jarni
+year: 2018
+status: finished
+start_date: 2018-04-07
+end_date: 2018-04-07
+report:
+  cs: |
+    Turnaj organizuje SPŠ a SOU Pelhřimov společně s Českou carromovou asociací. Za velké podpory města Pelhřimov a kraje Vysočina. Součástí carromového víkendu bylo páteční Mistrovství ČR juniorů. Finále: Tadeáš Matys – Horst Šimunský 9:25 Zde výsledky jednotlivých kol Jarního turnaje.
+source: old-site
+old_url: /turnaje/jarni/jarni_2018.php
+
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: tadeas-matys }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: frantisek-rezek }
+    - { place: 6, player: zdenek-svitak }
+    - { place: 7, player: raj-patil }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, player: jan-tesitel }
+    - { place: 10, player: ondrej-chmelar }
+    - { place: 11, player: neel-vasanth }
+    - { place: 12, player: michal-fucik }
+    - { place: 13, player: rostislav-borsky }
+    - { place: 14, player: pavel-schierl }
+    - { place: 15, player: romana-kralova }
+    - { place: 16, player: miroslav-cernohous }
+    - { place: 17, player: ales-krestan }
+    - { place: 18, player: vratislav-borsky }

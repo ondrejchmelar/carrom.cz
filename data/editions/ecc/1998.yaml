@@ -1,0 +1,71 @@
+competition: ecc
+year: 1998
+status: finished
+start_date: 1998-07-04
+end_date: 1998-07-04
+report:
+  cs: |
+    4. 7. 1998, Německo, Berlin. Finále: Böcker Peter - Kunisch Frank  18:25
+source: old-site
+old_url: /ecc/ecc_1998.php
+
+results:
+  singles:
+    - { place: 1, name: Frank Kunisch, country: DE }
+    - { place: 2, player: peter-bocker, country: DE }
+    - { place: 3, name: Darius Wieczorek, country: DE }
+    - { place: 4, player: dirk-polchow, country: DE }
+    - { place: 5, name: Stefan Besser, country: DE }
+    - { place: 6, name: Rene Samstag, country: DE }
+    - { place: 7, name: Edgar Höll, country: DE }
+    - { place: 8, name: Ameerkhan Kittur, country: DE }
+    - { place: 9, player: paolo-martinelli, country: IT }
+    - { place: 10, name: Carlito Bollin, country: CH }
+    - { place: 11, name: Othmar Jahn, country: DE }
+    - { place: 12, name: Ari Liyanage, country: IT }
+    - { place: 13, name: Michael Lüning, country: DE }
+    - { place: 14, name: Gereon Bolder, country: DE }
+    - { place: 15, name: Meike Weigel, country: DE }
+    - { place: 16, name: Ingo Sponholz, country: DE }
+    - { place: 17, name: Gerard Rayar, country: FR }
+    - { place: 18, name: Volkmar Schmitz, country: DE }
+    - { place: 19, name: Felix Andenmatten, country: CH }
+    - { place: 20, name: Shaheen Miah, country: UK }
+    - { place: 21, name: Cédúc Fourcade, country: FR }
+    - { place: 22, name: Josef Meyer, country: CH }
+    - { place: 23, name: Nazrul Islam, country: UK }
+    - { place: 24, name: Roman Schneider, country: DE }
+    - { place: 25, name: Abdul Khan, country: UK }
+    - { place: 26, name: Stefano Stucci, country: IT }
+    - { place: 27, name: Patricia Lolli, country: IT }
+    - { place: 28, name: Elisa Martinelli, country: IT }
+    - { place: 29, name: Abdus Shahid, country: UK }
+    - { place: 30, name: Richard Tay, country: DE }
+    - { place: 31, name: Dietmar Buttler, country: DE }
+    - { place: 32, name: Mike Krings, country: DE }
+    - { place: 33, name: Manuel Pelleing, country: FR }
+    - { place: 34, name: Roberto Marchetti, country: IT }
+    - { place: 35, name: Stefan Eigenmann, country: CH }
+    - { place: 36, name: Giorgio Balicchi, country: IT }
+    - { place: 37, name: Cyrille Masson, country: FR }
+    - { place: 38, name: Rodolfo Donnini, country: IT }
+    - { place: 39, name: Roland Walder, country: CH }
+    - { place: 40, name: Beat Kälin, country: CH }
+    - { place: 41, name: Michael Vierle, country: DE }
+    - { place: 42, name: Gökhan Kurtel, country: DE }
+    - { place: 43, name: Kurt Scherrer, country: CH }
+    - { place: 44, player: bernhard-sander, country: DE }
+    - { place: 45, name: Marcel Egli, country: CH }
+    - { place: 46, name: Vincent Perron, country: FR }
+    - { place: 47, name: Alice Chenu, country: FR }
+    - { place: 48, name: Paolo Marturano, country: IT }
+    - { place: 49, name: Michaela Dreikhausen, country: DE }
+    - { place: 50, name: Simone Blode, country: DE }
+    - { place: 51, name: Denis Braun, country: FR }
+    - { place: 52, name: Eric Hermitte, country: FR }
+    - { place: 53, name: Nicolas Martinet, country: FR }
+    - { place: 54, name: Petra Brandenburg, country: DE }
+    - { place: 55, name: Guillaume Derrien, country: FR }
+    - { place: 56, name: Karim Nessaku, country: FR }
+    - { place: 57, name: Sudhir Thakur, country: DE }
+    - { place: 58, name: Florence Deruy, country: FR }

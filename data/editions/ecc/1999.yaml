@@ -1,0 +1,81 @@
+competition: ecc
+year: 1999
+status: finished
+start_date: 1999-07-03
+end_date: 1999-07-03
+report:
+  cs: |
+    3. 7. 1999, Švýcarsko, Zürich. Finále: Kunisch Frank - Böcker Peter  25:18
+source: old-site
+old_url: /ecc/ecc_1999.php
+
+results:
+  singles:
+    - { place: 1, name: Frank Kunisch, country: DE }
+    - { place: 2, player: peter-bocker, country: DE }
+    - { place: 3, name: Karnal Abedin, country: UK }
+    - { place: 4, name: Carlito Bollin, country: CH }
+    - { place: 5, name: Stefan Besser, country: DE }
+    - { place: 6, name: Thorsten Trotz, country: DE }
+    - { place: 7, player: lorenzo-hurlimann, country: CH }
+    - { place: 8, name: Abdul Khan, country: UK }
+    - { place: 9, name: Yuvaradj Ducher, country: FR }
+    - { place: 10, name: Peter Baumgartner, country: CH }
+    - { place: 11, player: dirk-polchow, country: DE }
+    - { place: 12, name: Shaheen Miah, country: UK }
+    - { place: 13, name: Holger Schon, country: DE }
+    - { place: 14, name: Nazrul Islam, country: UK }
+    - { place: 15, name: Abdus Saleh, country: UK }
+    - { place: 16, player: paolo-martinelli, country: IT }
+    - { place: 17, name: Gerard Rayar, country: FR }
+    - { place: 18, name: Peter Hasel, country: DE }
+    - { place: 19, name: Rafi Dewangso, country: LK }
+    - { place: 20, name: Josef Meyer, country: CH }
+    - { place: 21, name: Ciorgio Balicchi, country: IT }
+    - { place: 22, name: Meike Weigel, country: DE }
+    - { place: 23, name: Dietmar Buttler, country: DE }
+    - { place: 24, name: Elisa Martinelli, country: IT }
+    - { place: 25, name: Jürg Nef, country: CH }
+    - { place: 26, player: bernhard-sander, country: DE }
+    - { place: 27, name: Mike Krings, country: DE }
+    - { place: 28, name: Stefan Eigenmann, country: CH }
+    - { place: 29, name: Felix Andenmatten, country: CH }
+    - { place: 30, name: Abdus Shahid, country: UK }
+    - { place: 31, name: Beat Kälin, country: CH }
+    - { place: 32, name: Richard Tay, country: DE }
+    - { place: 33, name: Roland Walder, country: CH }
+    - { place: 34, name: Jürgen Frey, country: DE }
+    - { place: 35, name: Stefano Stucchi, country: IT }
+    - { place: 36, name: Robert Durrer, country: CH }
+    - { place: 37, name: Cédric Fourcade, country: FR }
+    - { place: 38, name: Patrizia Lolli, country: IT }
+    - { place: 39, name: Alice Chenu, country: FR }
+    - { place: 40, name: Christiane Roeskoe, country: DE }
+    - { place: 41, name: Denis Braun, country: FR }
+    - { place: 42, name: Cyrille Masson, country: FR }
+    - { place: 43, name: Thomas Scheuerl, country: DE }
+    - { place: 44, name: Fausto Gaifas, country: IT }
+    - { place: 45, name: Viktor Baumgartner, country: CH }
+    - { place: 46, name: Alfred Rubi, country: CH }
+    - { place: 47, name: Roberto Marchetti, country: IT }
+    - { place: 48, name: Karim Nessakh, country: FR }
+    - { place: 49, name: Martin Boettcher, country: DE }
+    - { place: 50, name: Roger Mayer, country: CH }
+    - { place: 51, name: Guillaume Derrien, country: FR }
+    - { place: 52, name: Michael Vierle, country: DE }
+    - { place: 53, name: Sepp Hasel, country: DE }
+    - { place: 54, name: Riz Careem, country: CH }
+    - { place: 55, name: Franc Ciannarella, country: FR }
+    - { place: 56, name: Paolo Marturano, country: IT }
+    - { place: 57, name: Simon Blode, country: DE }
+    - { place: 58, name: Michaela Dreikhausen, country: DE }
+    - { place: 59, name: Rodolfo Donnini, country: IT }
+    - { place: 60, name: Jean-Jacques Guillemin, country: FR }
+    - { place: 61, name: Zina Baumgartner, country: CH }
+    - { place: 62, name: Lucia Elena Donnini, country: IT }
+    - { place: 63, name: Raphael Zerbib, country: FR }
+    - { place: 64, name: Eric Courtoud, country: FR }
+    - { place: 65, name: Florence Deruy, country: FR }
+    - { place: 66, name: Pierre Henri Lomba, country: FR }
+    - { place: 67, name: Ouwerkerk Manuel van, country: DE }
+    - { place: 68, name: Veron Bollin, country: IN }

@@ -3,3 +3,7 @@ last_name: Schierl
 short_name: Šéfik        # krátké jméno do tabulek ligy
 country: CZ
 mcr: true
+spellings:
+  - "Pavel \"Šéfik\" Schierl"
+  - "Pavel Schierl \"Šéfik\""
+  - Pavel Šéfik Schierl

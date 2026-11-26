@@ -1,0 +1,83 @@
+competition: ecc
+year: 2003
+status: finished
+start_date: 2003-07-26
+end_date: 2003-07-26
+report:
+  cs: |
+    25 - 26. 7. 2003, Velká Británie, Luton. Finále: Abdin Karnal - Bollin Carlito  6:25  12:17
+source: old-site
+old_url: /ecc/ecc_2003.php
+
+results:
+  singles:
+    - { place: 1, name: Carlito Bollin, country: CH }
+    - { place: 2, name: Karnal Abdin, country: UK }
+    - { place: 3, name: Hafizur Rahman, country: UK }
+    - { place: 4, name: Nazrul Islam, country: UK }
+    - { place: 5, name: Uddin Enam Khan, country: UK }
+    - { place: 6, name: Atiqur Rahman, country: UK }
+    - { place: 7, name: Nozir Ahmed, country: UK }
+    - { place: 8, name: Abdul Mumith, country: UK }
+    - { place: 9, name: Shaheen Miah, country: UK }
+    - { place: 10, name: Aminul Islam, country: UK }
+    - { place: 11, name: Sunahar Ali, country: UK }
+    - { place: 12, player: peter-bocker, country: DE }
+    - { place: 13, name: Babu Malishetty, country: US }
+    - { place: 14, name: Abdul Malik, country: UK }
+    - { place: 15, name: Neil Patel, country: US }
+    - { place: 16, name: Salim Uddin, country: UK }
+    - { place: 17, name: Mouraly Venou, country: FR }
+    - { place: 18, name: Roman Schneider, country: DE }
+    - { place: 19, name: Askm Suja, country: UK }
+    - { place: 20, name: Azam Mohammed Khan, country: UK }
+    - { place: 21, name: Fabian Perreira, country: FR }
+    - { place: 22, name: Sebastian Holtmann, country: DE }
+    - { place: 23, name: Nicolas Michel, country: FR }
+    - { place: 24, player: bernhard-sander, country: DE }
+    - { place: 25, name: Jay Patel, country: US }
+    - { place: 26, name: Gianluca Cristiani, country: IT }
+    - { place: 27, player: dirk-polchow, country: DE }
+    - { place: 28, name: Abdul Khan, country: UK }
+    - { place: 29, name: Stefan Besser, country: DE }
+    - { place: 30, player: paolo-martinelli, country: IT }
+    - { place: 31, name: Francois Varenne, country: FR }
+    - { place: 32, name: Tufail Malik, country: UK }
+    - { place: 33, name: Shofik Miah, country: UK }
+    - { place: 34, player: claudio-motta, country: IT }
+    - { place: 35, name: Giorgio Balicchi, country: IT }
+    - { place: 36, name: Paolo Ometto, country: IT }
+    - { place: 37, name: Stefano Stucchi, country: IT }
+    - { place: 38, name: Olivier Telias, country: FR }
+    - { place: 39, name: Elisa Martinelli, country: IT }
+    - { place: 40, name: Rodolfo Donnini, country: IT }
+    - { place: 41, name: Karim Nessack, country: FR }
+    - { place: 42, name: Meike Weigel, country: DE }
+    - { place: 43, name: Hersh Patel, country: US }
+    - { place: 44, name: Abdul Hoque, country: UK }
+    - { place: 45, name: Dario Ommeto, country: IT }
+    - { place: 45, name: Kurt Scherrer, country: CH }
+    - { place: 47, name: Viktor Baumgartner, country: CH }
+    - { place: 48, name: Peter Baumgartner, country: CH }
+    - { place: 49, name: Clement Michel, country: FR }
+    - { place: 50, player: armin-steiner, country: DE }
+    - { place: 51, player: francesco-pedicini, country: IT }
+    - { place: 52, name: Krishan Sharma, country: UK }
+    - { place: 53, name: Cedric Fourcade, country: FR }
+    - { place: 54, name: Rajesh Kansara, country: UK }
+    - { place: 55, name: Mark Aitken, country: UK }
+    - { place: 56, name: Mike Krings, country: DE }
+    - { place: 57, name: Aftab Miah, country: UK }
+    - { place: 58, name: Michael Bauer, country: DE }
+    - { place: 59, name: Jelle Arts, country: NL }
+    - { place: 60, name: Sylvestre Smorenburg, country: FR }
+    - { place: 61, name: Riccardo Maurizi, country: IT }
+    - { place: 62, name: Olivier Hugenholtz, country: NL }
+    - { place: 63, name: Ouwerkerk Manuel van, country: DE }
+    - { place: 64, name: Hugo Brenninkmeijer, country: NL }
+    - { place: 65, name: Lorena Roverselli, country: IT }
+    - { place: 66, name: Stefan Bartlema, country: NL }
+    - { place: 67, name: Dagmar Kirschbaum, country: DE }
+    - { place: 68, name: Hasmukh Patel, country: US }
+    - { place: 69, name: Mohsin Aga, country: FR }
+    - { place: 70, name: Berrie Bergsma, country: NL }

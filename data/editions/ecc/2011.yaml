@@ -1,0 +1,108 @@
+competition: ecc
+year: 2011
+status: finished
+start_date: 2011-06-23
+end_date: 2011-06-27
+report:
+  cs: |
+    23. - 27. 6. 2011, Francie, Villepinte. Finále: Abdin Karnal - Fabian Pereira  25:15
+source: old-site
+old_url: /ecc/ecc_2011.php
+
+results:
+  singles:
+    - { place: 1, name: Karnal Abdin, country: UK }
+    - { place: 2, name: Fabian Pereira, country: FR }
+    - { place: 3, name: Pierre Dubois, country: FR }
+    - { place: 4, name: Sunahar Ali, country: UK }
+    - { place: 5, name: Jonathan Leau, country: FR }
+    - { place: 6, name: Murshed Khan, country: UK }
+    - { place: 7, name: Carlito Bollin, country: CH }
+    - { place: 8, name: Wolfgang Peter, country: DE }
+    - { place: 9, name: Alfred Rajadurai, country: FR }
+    - { place: 10, name: Chandan Narker, country: FR }
+    - { place: 11, player: tobias-kruger, country: DE }
+    - { place: 12, player: dirk-polchow, country: DE }
+    - { place: 13, name: Muhiuddin Ahmed, country: UK }
+    - { place: 14, name: Nazrul Islam, country: UK }
+    - { place: 15, name: Steeve Collard, country: FR }
+    - { place: 16, name: Abdul Wahid, country: UK }
+    - { place: 17, name: Ala Miah, country: UK }
+    - { place: 18, player: cornel-d-silva, country: PL }
+    - { place: 19, name: Yuvaradj Ducher, country: FR }
+    - { place: 20, name: Abdur Rahman Khan, country: UK }
+    - { place: 21, name: Amitha Ubhayathunga, country: IT }
+    - { place: 22, player: paolo-martinelli, country: IT }
+    - { place: 23, name: Stefano Stucchi, country: IT }
+    - { place: 24, name: Shaheen Miah, country: UK }
+    - { place: 25, player: andreas-hurtig, country: DE }
+    - { place: 26, name: Vittorio Canisi, country: IT }
+    - { place: 27, name: Ish Kumar, country: UK }
+    - { place: 28, name: Shuab Ahmed, country: UK }
+    - { place: 29, name: Gianluca Cristiani, country: IT }
+    - { place: 30, name: Karim Nessakh, country: FR }
+    - { place: 31, name: Jérémy Cieply, country: FR }
+    - { place: 32, name: Radjou Venou, country: FR }
+    - { place: 33, name: Josef Meyer, country: CH }
+    - { place: 34, name: Denis Braun, country: FR }
+    - { place: 35, name: Mouraly Venou, country: FR }
+    - { place: 36, name: Johannes Jörg, country: DE }
+    - { place: 37, name: Thibault Colin, country: FR }
+    - { place: 38, player: armin-steiner, country: DE }
+    - { place: 39, player: gunter-seibert, country: DE }
+    - { place: 40, name: Stéphane Liakhoff, country: FR }
+    - { place: 41, name: Abdullah Naundish, country: UK }
+    - { place: 42, player: ingo-frauenrath, country: DE }
+    - { place: 43, name: Ahad Miah, country: UK }
+    - { place: 44, name: Stefano Fabiano, country: IT }
+    - { place: 45, name: Cyrille Masson, country: FR }
+    - { place: 46, player: nitesh-sinha, country: PL }
+    - { place: 47, player: elisa-zucchiatti, country: IT }
+    - { place: 48, name: Thierry Huchet, country: FR }
+    - { place: 49, name: Adbul Malik, country: UK }
+    - { place: 50, name: Kevin Sieger, country: FR }
+    - { place: 51, player: francesco-pedicini, country: IT }
+    - { place: 52, name: Jan Geister, country: DE }
+    - { place: 53, player: claudio-motta, country: IT }
+    - { place: 54, player: lorenzo-hurlimann, country: CH }
+    - { place: 55, name: Nick Humbert, country: DE }
+    - { place: 56, player: steffen-eder, country: DE }
+    - { place: 57, name: Christian Roshin, country: DE }
+    - { place: 58, name: Jack Bouillon, country: FR }
+    - { place: 59, name: Riccardo Maurizi, country: IT }
+    - { place: 60, name: Stéphane Cano, country: FR }
+    - { place: 61, name: Viktor Baumgartner, country: CH }
+    - { place: 62, player: bernhard-sander, country: DE }
+    - { place: 63, name: Thomas Chobé, country: FR }
+    - { place: 64, name: Fatti Daniele Da, country: IT }
+    - { place: 65, name: Andrea Martinelli, country: IT }
+    - { place: 66, name: Julian Perkin, country: FR }
+    - { place: 67, name: Sattirabady Jupiter, country: FR }
+    - { place: 68, player: andreas-kracht, country: DE }
+    - { place: 69, name: Paolo Ometto, country: IT }
+    - { place: 70, name: Armin Schneider, country: DE }
+    - { place: 71, name: Renato Felizardo, country: IT }
+    - { place: 72, name: Anhar Ali, country: UK }
+    - { place: 73, name: Harvey Gomes, country: UK }
+    - { place: 74, player: fabio-tomasi, country: IT }
+    - { place: 75, name: Alain Sieger, country: FR }
+    - { place: 76, name: Walter Buchmann, country: CH }
+    - { place: 77, name: Carlos Fernandez, country: CH }
+    - { place: 78, player: jakub-nowakowski, country: PL }
+    - { place: 79, name: Yoann Pidial, country: FR }
+    - { place: 80, player: filip-smoljak, country: CZ }
+    - { place: 81, name: Nickolas David Iyons, country: UK }
+    - { place: 82, player: romana-kralova, country: CZ }
+    - { place: 83, name: Steven Pidial, country: FR }
+    - { place: 84, player: frank-fehr, country: DE }
+    - { place: 85, player: hans-faller, country: DE }
+    - { place: 86, name: Rodolfo Donnini, country: IT }
+    - { place: 87, name: Azir Uddin, country: UK }
+    - { place: 88, name: Michael Dupé, country: FR }
+    - { place: 89, player: pavel-schierl, country: CZ }
+    - { place: 90, name: Rishi Sinha, country: PL }
+    - { place: 91, name: Athéna Pantzos, country: IT }
+    - { place: 92, player: nitin-changrani, country: PL }
+    - { place: 93, name: M .S Rockey, country: FR }
+    - { place: 94, name: Lucia Elena Ammazzalamorte, country: IT }
+    - { place: 95, name: Claude “rchais” Marchais, country: IT }

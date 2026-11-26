@@ -1,0 +1,25 @@
+competition: druhy
+year: 2012
+status: finished
+start_date: 2012-10-06
+end_date: 2012-10-06
+report:
+  cs: |
+    Druhý turnaj MČR 2012 byl odehrán v sobotu 6. října 2012 v restauraci U Sálavců ve Vysoké nad Labem. Finále: Zdeněk Sviták – Horst Šimunský 25:20
+source: old-site
+old_url: /turnaje/druhy/druhy_2012.php
+
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: jan-tesitel }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: romana-kralova }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: darius-brozek }
+    - { place: 8, player: karlos-novak }
+    - { place: 9, player: tadeas-matys }
+    - { place: 10, player: tomas-chmelar }
+    - { place: 11, player: zdenek-taborsky }
+    - { place: 12, player: pavel-schierl }

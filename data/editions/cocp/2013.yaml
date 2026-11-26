@@ -1,0 +1,52 @@
+competition: cocp
+year: 2013
+status: finished
+start_date: 2013-11-16
+end_date: 2013-11-16
+report:
+  cs: |
+    Tradiční podzimní turnaj se uskutečnil v sobotu 16. listopadu 2013. Poprvé v historii se českým účastníkům podařilo proniknout mezi evropskou carromovou špičku.
+external_url: "http://carrom.rajce.idnes.cz/8_Carrom_Open_Cup_Praha_2013"
+source: old-site
+old_url: /turnaje/cocp/cocp_2013.php
+
+results:
+  singles:
+    - { place: 1, player: dirk-polchow }
+    - { place: 2, player: thorsten-kullmann }
+    - { place: 3, player: sylwester-pogorzelski }
+    - { place: 4, player: horst-simunsky }
+    - { place: 5, player: frank-fehr }
+    - { place: 6, player: jirka-jirkovsky }
+    - { place: 7, player: filip-smoljak }
+    - { place: 8, player: robert-bany }
+    - { place: 9, player: paulina-nowakowska }
+    - { place: 10, player: hans-faller }
+    - { place: 11, player: bartosz-sasinski }
+    - { place: 12, player: gunnar-von-arnold }
+    - { place: 13, player: zdenek-svitak }
+    - { place: 14, player: romana-kralova }
+    - { place: 15, player: jakub-sasinski }
+    - { place: 16, player: gunter-seibert }
+    - { place: 17, player: tobias-amrhein }
+    - { place: 18, player: tadeas-matys }
+    - { place: 19, player: thomas-vormwald }
+    - { place: 20, player: suzanne-schackert }
+    - { place: 21, player: bodo-schnoor }
+    - { place: 22, player: karlos-novak }
+    - { place: 23, player: ondrej-chmelar }
+    - { place: 24, player: zdenek-taborsky }
+    - { place: 25, player: darius-brozek }
+    - { place: 26, player: jan-tesitel }
+    - { place: 27, player: bohous-formanek }
+    - { place: 28, player: lukasz-piotrowski }
+    - { place: 29, player: cyrus-skaria }
+    - { place: 30, player: lukas-navratil }
+    - { place: 31, player: tomas-chmelar }
+    - { place: 32, player: adrian-dean }
+    - { place: 33, player: zdenka-chmelarova }
+    - { place: 34, player: pavel-schierl }
+    - { place: 35, player: adam-simak }
+    - { place: 36, player: lenka-prazakova }
+    - { place: 37, player: lukas-pavela }
+    - { place: 38, player: jiri-pavela }

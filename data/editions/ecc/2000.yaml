@@ -1,0 +1,85 @@
+competition: ecc
+year: 2000
+status: finished
+start_date: 2000-07-29
+end_date: 2000-07-29
+report:
+  cs: |
+    29. 7. 2000, Itálie, Mezzocorona. Finále: Abedin Karnal - Bollin Carlito  13:25
+source: old-site
+old_url: /ecc/ecc_2000.php
+
+results:
+  singles:
+    - { place: 1, name: Carlito Bollin, country: CH }
+    - { place: 2, name: Karnal Abedin, country: UK }
+    - { place: 3, name: Abdul Malik, country: UK }
+    - { place: 4, player: peter-bocker, country: DE }
+    - { place: 5, name: Frank Kunisch, country: DE }
+    - { place: 6, name: Stefan Besser, country: DE }
+    - { place: 7, name: Josef Meyer, country: CH }
+    - { place: 8, name: Fausto Gaifas, country: IT }
+    - { place: 9, name: Nazrul Islam, country: UK }
+    - { place: 10, player: lorenzo-hurlimann, country: CH }
+    - { place: 11, player: dirk-polchow, country: DE }
+    - { place: 12, name: Dietmar Buttler, country: DE }
+    - { place: 13, name: Roman Schneider, country: DE }
+    - { place: 14, name: Shaheen Miah, country: UK }
+    - { place: 15, name: Robert Hauke, country: DE }
+    - { place: 16, player: paolo-martinelli, country: IT }
+    - { place: 17, name: Patrick Philips, country: DE }
+    - { place: 18, name: Jean-Louis Blanch, country: FR }
+    - { place: 19, name: Rodolfo Donnini, country: IT }
+    - { place: 20, name: Massimo Dalus, country: IT }
+    - { place: 21, name: Wurst Heiko, country: DE }
+    - { place: 22, name: Beat Kälin, country: CH }
+    - { place: 23, name: Ari Liyanage, country: IT }
+    - { place: 24, player: bernhard-sander, country: DE }
+    - { place: 25, name: Giorgio Balicchi, country: IT }
+    - { place: 26, name: Thomas Scheuerl, country: DE }
+    - { place: 27, name: Susil Kurera, country: FR }
+    - { place: 28, name: Meike Weigel, country: DE }
+    - { place: 29, name: Stephan Mahoe, country: IT }
+    - { place: 30, name: Stefano Stucchi, country: IT }
+    - { place: 31, name: Karim Nessakh, country: FR }
+    - { place: 32, name: Abdul Khan, country: UK }
+    - { place: 33, name: Denis Braun, country: FR }
+    - { place: 34, name: Sebastian Holtmann, country: DE }
+    - { place: 35, name: Stefan Eigenmann, country: CH }
+    - { place: 36, name: David Jerome, country: FR }
+    - { place: 37, name: Viktor Baumgartner, country: CH }
+    - { place: 38, name: Alice Chenu, country: FR }
+    - { place: 39, name: Franck Cianarella, country: IT }
+    - { place: 40, name: Michael Ficon, country: IT }
+    - { place: 41, name: Cristina Candioli, country: IT }
+    - { place: 42, name: Kurt Scherrer, country: CH }
+    - { place: 43, name: Roberto Marchetti, country: IT }
+    - { place: 44, name: Abdus Shahid, country: UK }
+    - { place: 45, name: Cederic Fourcade, country: FR }
+    - { place: 46, name: Vincent Perron, country: FR }
+    - { place: 47, name: Elisa Martinelli, country: IT }
+    - { place: 48, name: Niklas Doss, country: IT }
+    - { place: 49, name: Raphael Zerbib, country: FR }
+    - { place: 50, name: Annette Menk, country: DE }
+    - { place: 51, name: Mike Krings, country: DE }
+    - { place: 52, name: Enrico Peroni, country: IT }
+    - { place: 53, name: Michaela Dreikhausen, country: DE }
+    - { place: 54, name: Riz Careem, country: CH }
+    - { place: 55, name: Martin Riegel, country: DE }
+    - { place: 56, name: Giorgio Azzoloni, country: IT }
+    - { place: 57, name: Jean-Joel Lamy, country: FR }
+    - { place: 58, name: Erik Doss, country: IT }
+    - { place: 59, name: Jürgen Frey, country: DE }
+    - { place: 60, player: armin-steiner, country: DE }
+    - { place: 61, name: Joki Doss, country: IT }
+    - { place: 62, name: Simone Blode, country: DE }
+    - { place: 63, name: Nina Kriszten, country: CH }
+    - { place: 64, name: Patrizia Lolli, country: IT }
+    - { place: 65, name: Roger Mayer, country: CH }
+    - { place: 66, name: Michael Helbling, country: CH }
+    - { place: 67, name: Yuri Golin, country: IT }
+    - { place: 68, name: Jocelyne Josse, country: FR }
+    - { place: 69, name: Jonas Hürlimann, country: DE }
+    - { place: 70, name: Ouwerkerk Manuel van, country: DE }
+    - { place: 71, name: Noam Mayer, country: CH }
+    - { place: 72, name: Marco Bianchi, country: IT }

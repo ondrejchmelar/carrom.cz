@@ -1,0 +1,39 @@
+competition: mcrj
+year: 2019
+status: finished
+start_date: 2019-03-30
+end_date: 2019-03-30
+report:
+  cs: |
+    MČRj bylo odehráno 30. března v Pelhřimově.
+source: old-site
+old_url: "/mcr/mcr_2019.php#juniori"
+
+results:
+  juniors:
+    - { place: 1, player: martin-sochor, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 2, player: vit-sysr, club_at_time: Gymnázium Letohad }
+    - { place: 3, player: matej-bednar, club_at_time: Gymnázium Letohad }
+    - { place: 4, player: krystof-melmuka, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 5, player: jakub-muller, club_at_time: Gymnázium Letohad }
+    - { place: 6, player: dominik-kundrat, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 7, player: jakub-kolman, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 8, player: michael-sin, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 9, player: vojtech-hrabanek, club_at_time: ZŠ Košetice }
+    - { place: 10, player: ondrej-krajicek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 11, player: jan-skabraha, club_at_time: Gymnázium Letohad }
+    - { place: 12, player: adam-hamernik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: jakub-vichr, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: pavel-mrva, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: tomas-pinkas, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 16, player: tereza-jelinkova, club_at_time: ZŠ Košetice }
+    - { place: 17, player: vit-tafij, club_at_time: ZŠ Košetice }
+    - { place: 18, player: jan-polacek, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 19, player: jake-dominic-baldock, club_at_time: ZŠ Košetice }
+    - { place: 20, player: vilem-plasil, club_at_time: ZŠ Košetice }
+    - { place: 21, player: lukas-kott, club_at_time: ZŠ Košetice }
+    - { place: 22, player: anh-martin-bui, club_at_time: ZŠ Košetice }
+    - { place: 23, player: simona-jelinkova, club_at_time: ZŠ Košetice }
+    - { place: 24, player: monika-vancurova, club_at_time: ZŠ Košetice }
+    - { place: 25, player: vanessa-dousova, club_at_time: ZŠ Košetice }
+    - { place: 26, player: aneta-budarova, club_at_time: ZŠ Košetice }

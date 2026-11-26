@@ -1,0 +1,38 @@
+year: 2024
+audience: open
+name: { cs: Mistrovství ČR 2024, en: Czech Championship 2024 }
+editions: [jarni/2024, druhy/2024, cocp/2024]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 100
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2024.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  karlos-novak:        [100, 100, 89.58]
+  ajay-sekhesh:        [93.81, 84.76, 100]
+  zdenek-svitak:       [87.62, 77.14, 94.79]
+  filip-smoljak:       [~, 61.9, 84.37]
+  tomas-chmelar:       [56.67, 69.52, 58.32]
+  matej-bednar:        [69.05, 39.04, 47.9]
+  pavel-schierl:       [~, 46.66, 68.74]
+  lukas-navratil:      [75.24, ~, 32.27]
+  ondrej-chmelar:      [19.53, ~, 79.16]
+  raj-patil:           [~, 92.38, ~]
+  ondrej-kubicek:      [31.91, ~, 53.11]
+  frantisek-rezek:     [50.48, 31.42, 27.06]
+  horst-simunsky:      [82.53, 81.43, ~]
+  stepan-smoljak:      [~, ~, 73.95]
+  ales-formanek:       [~, ~, 63.53]
+  neel-vasanth:        [62.86, ~, ~]
+  frantisek-cervenka:  [38.1, 16.18, ~]
+  michal-fucik:        [~, 54.28, ~]
+  kumar-alok:          [13.34, ~, 37.48]
+  magdalena-novotna:   [25.72, 23.8, 21.85]
+  shoeb-ahmed-khan:    [44.29, ~, ~]
+  jan-tesitel:         [~, ~, 42.69]
+  zdenek-taborsky:     [7.15, ~, ~]
+  monika-blaskovicova: [~, ~, 6.22]
+  lukas-krkavec:       [1, 1, ~]
+  jana-kubickova:      [~, ~, 1]

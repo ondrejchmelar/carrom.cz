@@ -1,0 +1,25 @@
+competition: pcl
+year: 2015
+status: finished
+report:
+  cs: |
+    Pražská carromová liga byla odehrána v naší domovské kavárně UŽ JSME DOMA, Uralská 6, Praha 6. Více informací na pcl@carrom.cz. VÍTĚZEM PRAŽSKÉ CARROMOVÉ LIGY 2015 SE STAL TADEÁŠ MATYS.
+source: old-site
+old_url: /pcl/pcl_2015.php
+
+results:
+  singles:
+    - { place: 1, player: tadeas-matys }
+    - { place: 2, player: filip-smoljak }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: jan-tesitel }
+    - { place: 5, player: tomas-chmelar }
+    - { place: 6, player: romana-kralova }
+    - { place: 7, player: jirka-jirkovsky }
+    - { place: 8, player: michal-fucik }
+    - { place: 9, player: adrian-dean }
+    - { place: 10, player: zdenka-chmelarova }
+    - { place: 11, player: vaclav-michalek }
+    - { place: 12, player: lenka-prazakova }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: lucie-chaloupkova }

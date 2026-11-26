@@ -1,0 +1,30 @@
+competition: pcl
+year: 2016
+status: finished
+start_date: 2016-01-21
+report:
+  cs: |
+    Pražská carromová liga začíná 21. ledna v naší domovské kavárně UŽ JSME DOMA, Uralská 6, Praha 6. Hraje se každý lichý čtvrtek. Od listopadu se přesouváme do nového působiště: Café Trilobit, Zborovská 37, Praha 5. Závěrečné hraní a vyhlášení bude 8. prosince. Více informací na pcl@carrom.cz. VÍTĚZEM PRAŽSKÉ CARROMOVÉ LIGY 2016 SE STAL TADEÁŠ MATYS.
+source: old-site
+old_url: /pcl/pcl_2016.php
+
+results:
+  singles:
+    - { place: 1, player: tadeas-matys }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: ondrej-chmelar }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: romana-kralova }
+    - { place: 6, player: tomas-chmelar }
+    - { place: 7, player: jan-tesitel }
+    - { place: 8, player: frantisek-rezek }
+    - { place: 9, player: michal-fucik }
+    - { place: 10, player: adrian-dean }
+    - { place: 11, player: pavel-schierl }
+    - { place: 12, player: lukas-navratil }
+    - { place: 13, player: neel-vasanth }
+    - { place: 14, player: zdenka-chmelarova }
+    - { place: 15, player: lenka-prazakova }
+    - { place: 16, player: frantisek-cervenka }
+    - { place: 17, player: monika-blaskovicova }
+    - { place: 18, player: martin-velek }

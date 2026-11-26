@@ -1,0 +1,42 @@
+year: 2017
+audience: open
+name: { cs: Mistrovství ČR 2017, en: Czech Championship 2017 }
+editions: [jarni/2017, druhy/2017, cocp/2017]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 1000
+check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
+source: old-site            # /mcr/mcr_2017.php
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  zdenek-svitak:      [1000, 1000, 833.5]
+  neel-vasanth:       [390.7, 950.4, 1000]
+  horst-simunsky:     [923.7, ~, 916.8]
+  filip-smoljak:      [847.6, 752.5, 875.1]
+  raj-patil:          [543.1, 851.5, 791.9]
+  karlos-novak:       [771.5, 702.9, 542.1]
+  jan-tesitel:        [619.2, 802, 667]
+  ondrej-chmelar:     [466.8, 455.4, 958.4]
+  frantisek-rezek:    [238.5, 653.4, 750.3]
+  tomas-chmelar:      [314.6, 554.5, 708.6]
+  michal-fucik:       [86.1, 603.9, 583.8]
+  tadeas-matys:       [~, 900.9, ~]
+  stepan-smoljak:     [695.4, ~, ~]
+  pavel-schierl:      [~, 356.4, 292.4]
+  jirka-jirkovsky:    [~, ~, 625.4]
+  ales-krestan:       [~, 109, 500.5]
+  zdenek-taborsky:    [1, 158.4, 375.6]
+  darius-brozek:      [~, 505, ~]
+  romana-kralova:     [162.3, ~, 334]
+  jiri-pavela:        [~, 59.5, 417.3]
+  lukas-navratil:     [~, ~, 458.9]
+  miroslav-cernohous: [~, 257.5, 167.5]
+  frantisek-cervenka: [~, 406, ~]
+  vratislav-borsky:   [~, 306.9, 84.3]
+  zbynek-fojtik:      [~, ~, 250.8]
+  zdenka-chmelarova:  [~, ~, 209.1]
+  rostislav-borsky:   [~, 208, 1]
+  petra-matysova:     [~, ~, 125.9]
+  martin-velek:       [~, ~, 42.6]
+  radka-cernohousova: [~, 1, ~]

@@ -1,0 +1,43 @@
+competition: cocp
+year: 2010
+status: finished
+start_date: 2010-11-20
+end_date: 2010-11-20
+report:
+  cs: |
+    Pátý ročník turnaje se uskutečnil 20. 11. za hojné zahraniční účasti v aule HTF UK v Praze. Přijeli kvalitní soupeři z Polska a Německa.
+external_url: "http://carrom.rajce.idnes.cz/5._Carrom_Open_Cup_Praha_2010/"
+source: old-site
+old_url: /turnaje/cocp/cocp_2010.php
+
+results:
+  singles:
+    - { place: 1, player: cornel-d-silva }
+    - { place: 2, player: tobias-kruger }
+    - { place: 3, player: nitesh-sinha }
+    - { place: 4, player: sylwester-pogorzelski }
+    - { place: 5, player: andreas-hurtig }
+    - { place: 6, player: ajay-pal }
+    - { place: 7, player: zdenek-svitak }
+    - { place: 8, player: horst-simunsky }
+    - { place: 9, player: ondrej-chmelar }
+    - { place: 10, player: filip-smoljak }
+    - { place: 11, player: armin-steiner }
+    - { place: 12, player: jirka-jirkovsky }
+    - { place: 13, player: marvin-hurtig }
+    - { place: 14, player: suzanne-schackert }
+    - { place: 15, player: hans-faller }
+    - { place: 16, player: paulina-nowakowska }
+    - { place: 17, player: milan-svitak }
+    - { place: 18, player: zbynek-fojtik }
+    - { place: 19, player: romana-kralova }
+    - { place: 20, player: adrian-dean }
+    - { place: 21, player: nitin-changrani }
+    - { place: 22, player: darius-brozek }
+    - { place: 23, player: lucie-krestanova }
+    - { place: 24, player: pavel-schierl }
+    - { place: 25, player: tomas-chmelar }
+    - { place: 26, player: zdenek-taborsky }
+    - { place: 27, player: jan-tesitel }
+    - { place: 28, player: zdenka-chmelarova }
+    - { place: 29, player: alzbeta-bartova }
