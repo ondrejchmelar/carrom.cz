@@ -199,3 +199,18 @@ test('striker moves forward or back to fit beside a coin on the base line (law 1
   Object.assign(c, { y: C.BASE_Y.bottom }); // right on the line: no room
   assert.equal(C.strikerSpot(s, 370), null);
 });
+
+test('game to 25 points or 8 boards, draw if level after 8 (law 39)', () => {
+  assert.equal(C.matchWinner({ me: 24, other: 10 }, 5), null);
+  assert.equal(C.matchWinner({ me: 26, other: 10 }, 5), 'me');
+  assert.equal(C.matchWinner({ me: 12, other: 14 }, 8), 'other');
+  assert.equal(C.matchWinner({ me: 12, other: 12 }, 8), 'draw');
+  assert.equal(C.matchWinner({ me: 10, other: 3 }, 4, true), 'me');
+});
+
+test('from 22 points the queen adds nothing (law 37)', () => {
+  const s = Object.assign(C.newGame({ score: { white: 22, black: 0 } }), { broken: true });
+  s.fell = []; pocket(s, (q) => q.color === 'white'); pocket(s, (q) => q.kind === 'queen'); C.endShot(s);
+  s.fell = []; pocket(s, (q) => q.color === 'white', 8); C.endShot(s);
+  assert.equal(s.winner, 'white'); assert.equal(s.points, 9);
+});

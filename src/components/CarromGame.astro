@@ -34,6 +34,7 @@ const T = {
     </label>
   </div>
 
+  <p class="cg-match" data-match aria-live="polite"></p>
   <div class="cg-score" aria-live="polite">
     <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/<span data-total>3</span></span><span data-name="white"></span></span>
     <span class="cg-queen" data-queen></span>
@@ -95,8 +96,11 @@ const T = {
         easy: 'Kdo začíná, má bílé kameny; začíná se střídavě. Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, nic se nevrací. Když dáš svůj kámen nebo královnu, hraješ dál. Královnu musíš potvrdit svým kamenem (hned nebo dalším šťouchem), pak dává +3 body. Potvrdit ji musí někdo dřív, než padne poslední kámen. Vyhrává, kdo má první venku své 3 kameny.',
         full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Striker se musí dotýkat obou čar (u kamene na čáře ho lze posunout dopředu či dozadu) a červené kolečko na konci čáry zakryje celé, nebo se ho nedotkne. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
       },
-      won: (n: string) => `${n} vyhrává!`, lost: 'Vyhrál počítač.', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
-      youWon: 'Vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
+      won: (n: string) => `Sadu vyhrává ${n}.`, lost: 'Sadu vyhrál počítač.',
+      matchYou: 'Vyhráváš zápas!', matchCpu: 'Zápas vyhrál počítač.', matchWon: (n: string) => `Zápas vyhrává ${n}!`,
+      standing: (a: number, b: number) => `Stav zápasu ${a}:${b}.`, final: (a: number, b: number) => `Konečný stav ${a}:${b}.`,
+      match: (t: number, b: number) => `Zápas do ${t} bodů, nejvýš 8 sad · ${b}. sada`, draw: 'Zápas skončil remízou.', nextBoard: 'Další sada', newMatch: 'Nová hra', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
+      youWon: 'Sadu vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
     },
     en: {
       you: 'You', cpu: 'Computer', p1: 'Player 1', p2: 'Player 2', white: 'white', black: 'black',
@@ -129,8 +133,11 @@ const T = {
         easy: 'Whoever begins has the white coins; players take turns to begin. Easy game: 3 coins each and the queen. Every pocketed coin counts, nothing goes back. Pocket your coin or the queen and you play on. Cover the queen with your coin (same or next stroke) for +3. It must be covered before anyone\'s last coin. First to pocket all 3 coins wins.',
         full: 'ECC laws: whoever begins (breaks) has the white coins; players take turns to begin. 9 coins each. The striker must touch both base lines (next to a coin on the line it may sit a little forward or back) and must cover a red end circle entirely or not touch it. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
       },
-      won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
-      youWon: 'You win!', aimHint: 'Pull back and let go.',
+      won: (n: string) => `${n} wins the board.`, lost: 'The computer wins the board.',
+      matchYou: 'You win the game!', matchCpu: 'The computer wins the game.', matchWon: (n: string) => `${n} wins the game!`,
+      standing: (a: number, b: number) => `Game score ${a}:${b}.`, final: (a: number, b: number) => `Final score ${a}:${b}.`,
+      match: (t: number, b: number) => `Game to ${t} points, at most 8 boards · board ${b}`, draw: 'The game is a draw.', nextBoard: 'Next board', newMatch: 'New game', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
+      youWon: 'You win the board!', aimHint: 'Pull back and let go.',
     },
   };
 
@@ -168,6 +175,11 @@ const T = {
     // The break alternates between boards and the breaker plays white (ECC law 29). Board 1, 3, …:
     // you (or player 1) break with white; board 2, 4, …: the computer (or player 2) does.
     let board = 1;
+    // Match score by person (you / player 1 = me), added up over the boards (law 39).
+    let totals = { me: 0, other: 0 };
+    let matchOver: null | 'me' | 'other' | 'draw' = null;
+    let counted = false;
+    const personOf = (c: string) => (c === myColor() ? 'me' : 'other');
     const myColor = () => (board % 2 ? 'white' : 'black'); // you, or player 1
     // You always sit at the bottom; in a two-player game the player on turn does.
     const flipped = () => (mode === 'two' ? state.turn === 'black' : myColor() === 'black');
@@ -227,9 +239,18 @@ const T = {
       $('[data-start-text]').textContent = nb(mode === 'computer' ? (myColor() === 'white' ? L.badgeYou : L.badgeCpu) : L.badge(nameOf('white')));
       const over = $('[data-over]');
       over.hidden = !state.winner;
+      const meName = mode === 'computer' ? L.you : L.p1, otherName = mode === 'computer' ? L.cpu : L.p2;
+      $('[data-match]').textContent = `${L.match(easy() ? C.MATCH.easy.target : C.MATCH.full.target, board)} · ${meName} ${totals.me} : ${totals.other} ${otherName}`;
       if (state.winner) {
-        $('[data-over-title]').textContent = mode === 'computer' ? (state.winner === myColor() ? L.youWon : L.lost) : L.won(nameOf(state.winner));
-        $('[data-over-text]').textContent = nb(`${state.reason ? L.reason[state.reason] + ' ' : ''}${L.pts(state.points)}`);
+        const boardText = `${state.reason ? L.reason[state.reason] + ' ' : ''}${L.pts(state.points)}`;
+        if (matchOver) {
+          $('[data-over-title]').textContent = matchOver === 'draw' ? L.draw : mode === 'computer' ? (matchOver === 'me' ? L.matchYou : L.matchCpu) : L.matchWon(matchOver === 'me' ? meName : otherName);
+          $('[data-over-text]').textContent = nb(`${boardText} ${L.final(totals.me, totals.other)}`);
+        } else {
+          $('[data-over-title]').textContent = mode === 'computer' ? (state.winner === myColor() ? L.youWon : L.lost) : L.won(nameOf(state.winner));
+          $('[data-over-text]').textContent = nb(`${boardText} ${L.standing(totals.me, totals.other)}`);
+        }
+        $('[data-again]').textContent = matchOver ? L.newMatch : L.nextBoard;
       }
     }
 
@@ -373,6 +394,11 @@ const T = {
     }
     function finish() {
       const r = C.endShot(state);
+      if (state.winner && !counted) {
+        counted = true;
+        totals[personOf(state.winner)] += state.points;
+        matchOver = C.matchWinner(totals, board, state.easy) as typeof matchOver;
+      }
       const key = r.msg.find((m: string) => m !== 'own' || r.msg.length === 1) ?? r.msg[0];
       message = key ? (L as any)[key] ?? '' : '';
       if (r.again && !r.foul && r.msg.includes('own') && !r.msg.includes('pending') && !r.msg.includes('covered')) message = L.own;
@@ -408,14 +434,17 @@ const T = {
       }, 350);
     }
     function reset() {
-      state = C.newGame({ mode, easy: easy() }); // white breaks
+      const score = { white: 0, black: 0 };
+      score[myColor()] = totals.me; score[myColor() === 'white' ? 'black' : 'white'] = totals.other;
+      state = C.newGame({ mode, easy: easy(), score }); // white breaks
+      counted = false;
       phase = 'aim'; message = ''; aim = null; cpuGhost = null; kbPower = 0; kbAngle = -Math.PI / 2;
       setStriker(C.CENTER);
       ui(); draw();
       if (mode === 'computer' && myColor() !== 'white') cpuTurn();
     }
     const nextBoard = () => { board++; reset(); };
-    const firstBoard = () => { board = 1; reset(); };
+    const firstBoard = () => { board = 1; totals = { me: 0, other: 0 }; matchOver = null; reset(); };
 
     // ---------- input ----------
     canvas.addEventListener('pointerdown', (e) => {
@@ -478,8 +507,8 @@ const T = {
       firstBoard();
     }));
     levelSel.addEventListener('change', firstBoard);
-    $('[data-reset]').addEventListener('click', nextBoard);
-    $('[data-again]').addEventListener('click', nextBoard);
+    $('[data-reset]').addEventListener('click', firstBoard);
+    $('[data-again]').addEventListener('click', () => (matchOver ? firstBoard() : nextBoard()));
     new ResizeObserver(resize).observe(canvas);
     reset();
     resize();
@@ -493,6 +522,7 @@ const T = {
   .cg-level { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
   .cg-level select { min-height: 44px; border-radius: 22px; border: 1px solid var(--chip-line); background: var(--surface); color: var(--navy); font: 600 15px var(--f-body); padding: 0 14px; }
   .cg-level select:disabled { opacity: 0.45; }
+  .cg-match { margin: 0; font: 700 15px/1.3 var(--f-body); color: var(--navy); text-align: center; }
   .cg-score { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
   .cg-side { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; }
   .cg-side b { color: var(--navy); font-size: 16px; }

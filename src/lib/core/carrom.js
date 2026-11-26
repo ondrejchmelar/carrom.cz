@@ -83,7 +83,7 @@ export function rack({ easy = false, rand = Math.random, jitter = 0.06 } = {}) {
 
 export const coinsOf = (state) => (state.easy ? 3 : 9);
 
-export function newGame({ mode = 'computer', first = 'white', easy = false } = {}) {
+export function newGame({ mode = 'computer', first = 'white', easy = false, score = { white: 0, black: 0 } } = {}) {
   return {
     mode,                          // 'computer' (you are white at the bottom) | 'two' (hot seat)
     easy,                          // easy game: 7 pieces, no dues, queen counts at once
@@ -94,6 +94,7 @@ export function newGame({ mode = 'computer', first = 'white', easy = false } = {
     queen: { state: 'board', by: null }, // board | pending (must be covered next) | covered
     winner: null,
     points: 0,
+    score: { ...score },           // match score before this board, by colour (for laws 33, 37, 93–101)
     reason: null,                  // why a board ended early (ECC laws 93–101), for the UI
     dues: { white: 0, black: 0 },  // coins owed for a pocketed striker, paid when available (L57)
     broken: easy,                  // the break is done once the striker touched a coin (L23)
@@ -387,20 +388,24 @@ export function endShot(state) {
   const covered = state.queen.state === 'covered';
   const left = (c) => 9 - state.pocketed[c];
   const win = (c, points, reason = null) => { state.winner = c; state.points = Math.min(12, points); state.reason = reason; };
+  // From 22 match points on, the queen no longer adds 3 (L33, L37) and the 3-point penalties become 1.
+  const late = (c) => (state.score?.[c] ?? 0) >= 22;
+  const qp = (c) => (late(c) ? 0 : 3), pen = (c) => (late(c) ? 1 : 3);
+  const queenFor = (c) => (state.queen.by === c ? qp(c) : 0);
   const myAll = state.pocketed[me] === 9, oppAll = state.pocketed[opp] === 9;
   if (foul) {
-    if (!covered && before + mine.length === 9) win(opp, 4, 'last-own-striker');            // L98
-    else if (oppAll && !covered) win(opp, left(me) + 3 + 1, 'last-their-striker');          // L101
-    else if (oppAll) win(opp, left(me) + (state.queen.by === opp ? 3 : 0));
+    if (!covered && before + mine.length === 9) win(opp, pen(opp) + 1, 'last-own-striker');            // L98
+    else if (oppAll && !covered) win(opp, left(me) + qp(opp) + 1, 'last-their-striker');          // L101
+    else if (oppAll) win(opp, left(me) + queenFor(opp));
   } else if (myAll && oppAll) {
-    if (!covered) win(opp, 3, 'both-last');                                                  // L95
-    else win(me, state.queen.by === me ? 3 : 1, 'both-last-covered');                        // L93, L94
+    if (!covered) win(opp, pen(opp), 'both-last');                                                  // L95
+    else win(me, state.queen.by === me ? pen(me) : 1, 'both-last-covered');                        // L93, L94
   } else if (myAll) {
-    if (covered) win(me, left(opp) + (state.queen.by === me ? 3 : 0));                       // L32
-    else win(opp, 3, 'last-own');                                                            // L97
+    if (covered) win(me, left(opp) + queenFor(me));                       // L32
+    else win(opp, pen(opp), 'last-own');                                                            // L97
   } else if (oppAll) {
-    if (covered) win(opp, left(me) + (state.queen.by === opp ? 3 : 0));
-    else win(opp, left(me) + 3, 'last-their');                                               // L96
+    if (covered) win(opp, left(me) + queenFor(opp));
+    else win(opp, left(me) + qp(opp), 'last-their');                                               // L96
   }
   return done(again);
 }
@@ -455,6 +460,20 @@ function endShotEasy(state) {
   const summary = { by: me, foul, mine: mine.length, theirs: theirs.length, queenIn, again, msg, winner: state.winner };
   state.log.push(summary);
   return summary;
+}
+
+// ---------------------------------------------------------------- match
+
+/** A game is played to 25 points or at most 8 boards; after the 8th board the leader wins, level
+ * scores are a draw (law 39). Easy plays to 10, also at most 8 boards. Returns the winning key of
+ * totals, 'draw', or null while the game goes on. */
+export const MATCH = { full: { target: 25, boards: 8 }, easy: { target: 10, boards: 8 } };
+export function matchWinner(totals, boards, easy = false) {
+  const { target, boards: max } = easy ? MATCH.easy : MATCH.full;
+  const [[a, pa], [b, pb]] = Object.entries(totals);
+  if (pa >= target || pb >= target) return pa >= pb ? a : b;
+  if (boards >= max) return pa === pb ? 'draw' : pa > pb ? a : b;
+  return null;
 }
 
 // ---------------------------------------------------------------- aiming guide
