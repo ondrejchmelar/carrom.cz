@@ -42,6 +42,7 @@ const T = {
 
   <div class="cg-stage">
     <canvas tabindex="0" aria-label={T.board} aria-describedby="cg-help"></canvas>
+    <div class="cg-start" data-start hidden><i class="dot w"></i><span data-start-text></span></div>
     <div class="cg-over" data-over hidden>
       <strong data-over-title></strong>
       <span data-over-text></span>
@@ -69,7 +70,8 @@ const T = {
   const TXT = {
     cs: {
       you: 'Ty', cpu: 'Počítač', p1: 'Hráč 1', p2: 'Hráč 2', white: 'bílé', black: 'černé',
-      yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Začínáš ty, a proto máš bílé kameny. Rozstřel!', cpuBreaks: 'Tuhle sadu začíná počítač, a proto má bílé. Ty máš černé.', starts: (n: string) => `Začíná ${n}, a proto má bílé kameny. Rozstřel!`, cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
+      yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Začínáš ty, a proto máš bílé kameny. Rozstřel!', cpuBreaks: 'Tuhle sadu začíná počítač, a proto má bílé. Ty máš černé.', starts: (n: string) => `Začíná ${n}, a proto má bílé kameny. Rozstřel!`,
+      badgeYou: 'Začínáš ty: máš bílé', badgeCpu: 'Začíná počítač: má bílé', badge: (n: string) => `Začíná ${n}: má bílé`, cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
       blocked: 'Striker nesmí ležet na kameni. Posuň ho.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
@@ -101,7 +103,8 @@ const T = {
     },
     en: {
       you: 'You', cpu: 'Computer', p1: 'Player 1', p2: 'Player 2', white: 'white', black: 'black',
-      yourTurn: (c: string) => `Your turn, you play ${c}.`, youBreak: 'You begin, so you have the white coins. Break!', cpuBreaks: 'The computer begins this board, so it has white. You have black.', starts: (n: string) => `${n} begins, so they have the white coins. Break!`, cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
+      yourTurn: (c: string) => `Your turn, you play ${c}.`, youBreak: 'You begin, so you have the white coins. Break!', cpuBreaks: 'The computer begins this board, so it has white. You have black.', starts: (n: string) => `${n} begins, so they have the white coins. Break!`,
+      badgeYou: 'You begin: you have white', badgeCpu: 'Computer begins: it has white', badge: (n: string) => `${n} begins: white`, cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
       turnOf: (n: string, c: string) => `${n} to play (${c}).`,
       blocked: 'The striker may not touch a coin. Move it.',
       own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
@@ -222,6 +225,10 @@ const T = {
       $('[data-rules]').textContent = nb(state.easy ? L.rules.easy : L.rules.full);
       $('[data-status]').textContent = nb(statusText());
       slider.disabled = !human();
+      // Who begins, and so has white, stays on the board until the first shot.
+      const start = $('[data-start]');
+      start.hidden = state.shots > 0 || !!state.winner;
+      $('[data-start-text]').textContent = nb(mode === 'computer' ? (myColor() === 'white' ? L.badgeYou : L.badgeCpu) : L.badge(nameOf('white')));
       const over = $('[data-over]');
       over.hidden = !state.winner;
       if (state.winner) {
@@ -510,6 +517,10 @@ const T = {
   canvas:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   .cg-over { position: absolute; inset: 22% 12%; background: rgba(14, 27, 61, 0.94); color: #fff; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 20px; }
   .cg-over[hidden] { display: none; }
+  .cg-start { position: absolute; left: 50%; top: 60%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; max-width: 86%; white-space: nowrap; padding: 10px 18px; border-radius: 999px; background: rgba(14, 27, 61, 0.92); color: #fff; font: 700 17px/1.25 var(--f-body); text-align: center; box-shadow: 0 6px 20px rgba(14, 27, 61, 0.25); pointer-events: none; }
+  .cg-start[hidden] { display: none; }
+  .cg-start .dot { flex: none; width: 16px; height: 16px; border: 2px solid #fff; }
+  @media (max-width: 599px) { .cg-start { font-size: 14px; padding: 8px 14px; } }
   .cg-over strong { font: 800 32px/1.1 var(--f-head); }
   .cg-status { min-height: 48px; font-weight: 600; color: var(--navy); }
   .cg-rules { margin: 0; color: var(--muted); }
