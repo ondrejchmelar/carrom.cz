@@ -17,4 +17,8 @@ Záštitu nad celou akcí převzali radní Kraje Vysočina Jana Fialová a star
 
 Junioři svůj turnaj odehráli v pátek 1. dubna. Konečné výsledky najdete [zde](/uploads/archiv/adresar_dokumenty/MCRj_2016.pdf).
 
+[![](/uploads/archiv/novinky/carrom_2016_doprovod_09.jpg)](/uploads/archiv/novinky/carrom_2016_doprovod_09.jpg)
+
 Jarní turnaj se uskutečnil v sobotu 2. dubna. Výsledky jsou [zde](/uploads/archiv/adresar_dokumenty/Jarni_turnaj_2016.pdf).
+
+[![](/uploads/archiv/novinky/carrom_2016_turnaj_19.jpg)](/uploads/archiv/novinky/carrom_2016_turnaj_19.jpg)

@@ -17,4 +17,6 @@ Fotografie Zdeňka Tichého najdete [ZDE](https://www.lib.cas.cz/zt/carrom/album
 
 Výsledky turnaje najdete [zde](/uploads/archiv/adresar_dokumenty/10.cocp_vysledky.pdf).
 
+![](/uploads/archiv/novinky/cocp_2015.jpg)
+
 Turnaj se uskutečníl pod záštitou starosty městské části Praha 4 pana Petra Štěpánka a za podpory MČ Praha 4. Děkujeme.

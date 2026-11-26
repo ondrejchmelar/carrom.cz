@@ -16,3 +16,5 @@ source: old-site
 Fotografie Zdeňka Tichého najdete [ZDE](https://www.lib.cas.cz/zt/carrom/album/2016_open/index.html).
 
 Pořadí najdete [zde](/uploads/archiv/adresar_dokumenty/COCP_2016_poradi.pdf).
+
+![](/uploads/archiv/novinky/cocp_2016_medailisti.jpg)

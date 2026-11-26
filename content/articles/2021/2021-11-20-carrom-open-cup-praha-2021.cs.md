@@ -14,3 +14,5 @@ source: old-site
 16. ročník pražského turnaje se uskutečníl 20. listopadu. Finále odehráli Pawel Wrocznyski a Zdeněk Sviták. Gratulujeme. Fotky Zdeňka Tichého prohlížejte [zde](https://www.lib.cas.cz/zt/carrom/album/2021_open/index.html).
 
 Výsledky najdete [zde](/uploads/archiv/adresar_dokumenty/vysledky_cocp_2021.pdf).
+
+![](/uploads/archiv/novinky/spolecna_cocp_2021.jpg)

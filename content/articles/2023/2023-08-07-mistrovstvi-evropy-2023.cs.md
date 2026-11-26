@@ -19,4 +19,8 @@ Výsledky jednotlivců najdete [zde](/uploads/archiv/adresar_dokumenty/TourneyRa
 
 Výsledky čtyřher najdete [zde](/uploads/archiv/adresar_dokumenty/TourneyRankingdoubles.pdf).
 
+![](/uploads/archiv/novinky/ondrej.jpg)
+
+![](/uploads/archiv/novinky/cr_tym.jpg)
+
 Více informací [zde.](http://eurocup2023.ukcarromfed.com/)

@@ -50,10 +50,13 @@ class News(HTMLParser):
         elif tag == 'a' and self.mode == 'body':
             self.href = self.map(a.get('href', ''))
             self.linktext = []
+            self.img_in_link = False
         elif tag == 'img' and self.mode == 'body':
             src = self.map(a.get('src', ''))
-            if src.startswith('http'):
+            if src:
                 self.out(f'\n\n![]({src})\n\n')
+                if self.href is not None:
+                    self.img_in_link = True
 
     def handle_endtag(self, tag):
         if self.mode is None:
@@ -65,8 +68,11 @@ class News(HTMLParser):
         elif tag in ('b', 'strong'):
             self.out('**')
         elif tag == 'a' and self.href is not None:
-            text = ''.join(self.linktext).strip() or self.href
+            text = ''.join(self.linktext).strip()
             href, self.href = self.href, None
+            if not text and getattr(self, 'img_in_link', False):
+                return  # a linked picture: the picture is shown already
+            text = text or href
             self.out(f'[{text}]({href})' if href else text)
 
     def handle_data(self, data):

@@ -17,4 +17,6 @@ SPŠ a SOU Pelhřimov, za podpory města a kraje Vysočina. V Pelhřimově se
 
 gymnazista z Prahy. Atmosféra byla vynikající, všichni účastníci hráli s obrovským zaujetím, a protože to pro většinu z nich byly první soutěžní zápasy, tak postupně sbírali také velmi důležité zkušenosti. Hrálo se nejen o titul Mistr ČR, ale také o hodnotné ceny. Ve finále porazil pražský Štěpán Smoljak Adama Šimáka z Letohradu, čímž mu oplatil porážku ze základní skupiny, a stal se tak historicky prvním Mistrem ČR v juniorské kategorii! Gratulujeme.
 
-Celkové pořadí najdete zde. Fotky najdete [ZDE](https://www.facebook.com/media/set/?set=a.306094866204552.1073741831.292583900888982&type=1).
+Celkové pořadí najdete [zde](/vysledky/mcr/). Fotky najdete [ZDE](https://www.facebook.com/media/set/?set=a.306094866204552.1073741831.292583900888982&type=1).
+
+![](/uploads/archiv/novinky/carromove_mladi.jpg)

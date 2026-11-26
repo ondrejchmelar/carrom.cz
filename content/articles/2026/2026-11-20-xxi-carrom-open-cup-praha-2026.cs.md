@@ -15,7 +15,7 @@ Další ročník turnaje máme úspěšně za sebou.
 
 Máme velkou radost, že se turnaje zúčastnil také prezident Mezinárodní carromové federace, pan Josef Meyer. Jako jediný hráč dokázal zahrát bílý slam – inu, muž na správném místě!
 
-Výsledky turnaje najdete zde.
+Výsledky turnaje najdete [zde](/uploads/archiv/novinky/vysledky_cocp_2026.pdf).
 
 Skvělé fotky Zdeňka Tichého [zde](https://zdenektichy.jalbum.net/carrom/2026_open/index.html).
 

@@ -13,4 +13,6 @@ source: old-site
 
 5. dubna byl představen agenturou [Dobrý den](http://www.dobryden.cz/novinky/chysta-se/) největší carromový board v České republice o rozměrech 164 x 164 cm, který vyrobili studenti [Středního odborného učiliště v Pelhřimově.](http://www.spssou-pe.cz)
 
+![](/uploads/archiv/novinky/rekord.jpg)
+
 Další fotografie najdete [zde](http://carrom.rajce.idnes.cz/Carrom_Pelhrimov_5._-_6._dubna_2013/).

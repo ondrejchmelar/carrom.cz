@@ -21,6 +21,8 @@ senátorovi
 
 a [Německé carromové federaci](http://www.carrom.de/) za velikou pomoc a podporu.
 
+![](/uploads/archiv/novinky/logo_praha3.jpg)
+
 Výsledky a fotografie najdete na [eurocup.carrom.cz](http://eurocup.carrom.cz/#/)
 
 Reportáž České televize z ME začíná ve 113 minutě [Studia 6.](http://www.ceskatelevize.cz/porady/1096902795-studio-6/216411010100708/)

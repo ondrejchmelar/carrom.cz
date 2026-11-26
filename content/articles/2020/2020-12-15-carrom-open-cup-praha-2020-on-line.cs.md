@@ -12,3 +12,5 @@ source: old-site
 ---
 
 15. ročník pražského turnaje se uskutečníl on-line ve formátu Corona turnaje pro omezený počet hráčů. Finále odehráli Johannes Jörg a Frank Fehr. Gratulujeme. Výsledky najdete [zde](/uploads/archiv/adresar_dokumenty/vysledky_cocp_2020.pdf).
+
+![](/uploads/archiv/novinky/spolecna_cocp_2020.jpg)

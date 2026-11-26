@@ -16,3 +16,5 @@ source: old-site
 Skvělé třetí místo obsadil Hors Šimunský (CZE). Všem gratulujeme a těšíme se příští rok. Výsledky turnaje [zde](/uploads/archiv/adresar_dokumenty/cocp_2019_vysledky.pdf).
 
 Fotky [Zdeňka Tichého zde](https://www.lib.cas.cz/zt/carrom/album/2019_open/index.html).
+
+![](/uploads/archiv/novinky/cocp_foto.jpg)

@@ -19,4 +19,6 @@ Konečné výsledky najdete [zde](/uploads/archiv/adresar_dokumenty/vysledky_COC
 
 Děkujeme MČ Praha 4 za podporu a všem účastníkům za krásný jubilejní ročník.
 
+![](/uploads/archiv/novinky/mc_praha_4.jpg)
+
 Těšíme se na setkání při dalších turnajích!

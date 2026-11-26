@@ -13,4 +13,6 @@ source: old-site
 
 V sobotu 29. března se v Pelhřimově uskutečnil Jarní turnaj, první ze série tří letošních turnajů o MČR. Tento turnaj je otevřený pro všechny, bez ohledu na věkovou kategorii. Do města se tak z celé České republiky sjeli zkušení hráči této zábavné hry. Po vyrovnaném a napínavém finále zvítězil Tadeáš Matys z Prahy. Poraženým finalistou byl Darius Brožek z Pardubic. Fotky najdete [ZDE](https://www.facebook.com/media/set/?set=a.306121816201857.1073741832.292583900888982&type=1).
 
-Celkové pořadí zde.
+Celkové pořadí [zde](/vysledky/jarni/).
+
+![](/uploads/archiv/novinky/mistri.jpg)

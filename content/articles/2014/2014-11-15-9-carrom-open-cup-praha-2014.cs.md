@@ -14,3 +14,5 @@ source: old-site
 Tradiční podzimní turnaj proběhl v sobotu 15. listopadu 2014 za rekordní účasti 44 hráčů z pěti evropských zemí. Do finále se probojovali dva hráči z Polska. Vítězství si nakonec odvezl Bartosz Sasiński, druhé místo obsadil Sylwester Pogorzelski a bronzovou medaili si odvezl do německého Darmstadtu Steffen Eder. Celkové pořadí najdete [zde](/vysledky/cocp/2014/). Krásné fotografie si prohlédněte v [galerii](/galerie/).
 
 Susanne Schackert byla jmenována čestnou členkou České carromové asociace.
+
+![](/uploads/archiv/novinky/cocp_2014.jpg)

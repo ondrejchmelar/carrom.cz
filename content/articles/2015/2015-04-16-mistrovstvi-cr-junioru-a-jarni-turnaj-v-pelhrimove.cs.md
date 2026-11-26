@@ -28,3 +28,5 @@ Turnaje opět skvěle zorganizovala
 Záštitu nad oběma soutěžemi převzala radní Kraje Vysočina pro školství Jana Fialová a starosta města Pelhřimov František Kučera. Všem děkujeme a těšíme se na další spolupráci.
 
 Více si přečtěte v [Pelhřimovském deníku.](http://pelhrimovsky.denik.cz/hledani/?q=carrom)
+
+[![](/uploads/archiv/novinky/plakat_carrom_2015_v1_small.png)](/uploads/archiv/novinky/plakat_carrom_2015_v1.png)

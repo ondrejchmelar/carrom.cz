@@ -19,6 +19,8 @@ Výsledky Mistrovství ČR juniorů [zde](/uploads/archiv/adresar_dokumenty/mcrj
 
 Výsledky Jarního turnaje najdete [zde](/uploads/archiv/adresar_dokumenty/Pelhrimov_poradi_2022.pdf).
 
+![](/uploads/archiv/novinky/mcrj_2022.jpg)
+
 Velké díky za přípravu obou turnajů patří
 
 [SPŠ a SOU Pelhřimov](https://www.spssou-pe.cz/) a za podporu městu Pelhřimov a kraji Vysočina.
