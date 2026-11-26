@@ -26,6 +26,6 @@ const { Content } = page ? await render(page) : { Content: null };
 </Base>
 <style>
   .intro { display: grid; gap: 32px; }
-  .game { display: flex; flex-direction: column; gap: 12px; max-width: 560px; scroll-margin-top: 16px; }
-  @media (min-width: 960px) { .intro { grid-template-columns: minmax(0, 1fr) 520px; gap: 64px; align-items: start; } }
+  .game { display: flex; flex-direction: column; gap: 12px; max-width: 820px; scroll-margin-top: 16px; }
+  @media (min-width: 960px) { .intro { grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 56px; align-items: start; } }
 </style>

@@ -8,7 +8,7 @@ export const STRIKER_R = 20.6;          // striker Ø 41.3 mm
 export const CENTER = BOARD / 2;
 export const BASE_Y = { bottom: BOARD - 118, top: 118 }; // striker centre on the base line
 export const BASE_X = [151, BOARD - 151];                 // allowed striker centre range
-export const MAX_SPEED = 5200;          // mm/s for a full-power shot
+export const MAX_SPEED = 4600;          // mm/s for a full-power shot
 const FRICTION = 820;                   // mm/s² sliding deceleration on a powdered board
 const DAMP = 0.35;                      // extra speed-proportional damping (1/s)
 const E_BALL = 0.9, E_WALL = 0.72;      // restitution
@@ -138,7 +138,7 @@ export const moving = (bodies) => bodies.some((p) => p.inPlay && (p.vx || p.vy))
 /** Put the striker on the base line and give it a velocity. angle in radians, power 0–1. */
 export function startShot(state, x, angle, power) {
   const color = state.turn;
-  const v = Math.max(0.04, Math.min(1, power)) * MAX_SPEED;
+  const v = Math.max(0.015, Math.min(1, power)) * MAX_SPEED;
   state.striker = { id: 'striker', kind: 'striker', color, x: clampStrikerX(x), y: BASE_Y[side(color)], r: STRIKER_R, m: MASS.striker, vx: Math.cos(angle) * v, vy: Math.sin(angle) * v, inPlay: true };
   state.fell = [];
   state.shots++;
