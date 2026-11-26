@@ -73,6 +73,10 @@ export function newGame({ mode = 'computer', first = 'white', easy = false } = {
     queen: { state: 'board', by: null }, // board | pending (must be covered next) | covered
     winner: null,
     points: 0,
+    reason: null,                  // why a board ended early (ECC laws 93–101), for the UI
+    dues: { white: 0, black: 0 },  // coins owed for a pocketed striker, paid when available (L57)
+    broken: easy,                  // the break is done once the striker touched a coin (L23)
+    breakTries: 0,
     log: [],                       // short messages for the status line, newest last
     shots: 0,
   };
@@ -111,6 +115,8 @@ function contact(a, b) {
     a.x -= nx * overlap * (b.m / tot); a.y -= ny * overlap * (b.m / tot);
     b.x += nx * overlap * (a.m / tot); b.y += ny * overlap * (a.m / tot);
   }
+  if (a.kind === 'striker') a.touched = true;
+  if (b.kind === 'striker') b.touched = true;
   const rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
   if (rel >= -1e-3) return null;
   const j = (-(1 + E_BALL) * rel) / (1 / a.m + 1 / b.m);
@@ -202,7 +208,7 @@ export function tick(state) {
   return moving(bodiesOf(state));
 }
 
-// ---------------------------------------------------------------- rules (simplified ICF)
+// ---------------------------------------------------------------- rules
 
 function freeSpot(state) {
   const R = geom(state).coin;
@@ -231,67 +237,99 @@ function returnOne(state, color) {
 
 /**
  * Apply the rules once everything has stopped. Mutates state; returns a summary for the UI.
- * Simplified ICF: pocket your own coin to shoot again; the queen counts only when covered by your
- * next coin; pocketing the striker is a foul (your pocketed coins of that shot and one more go back).
+ * Medium and Hard follow the Laws of Carrom as adopted by the ECC (singles, one board); law numbers
+ * in the comments. Easy uses its own short rules (endShotEasy).
  */
 export function endShot(state) {
   if (state.easy) return endShotEasy(state);
   const me = state.turn, opp = other(me);
   const fell = state.fell ?? [];
+  const touched = !!state.striker?.touched;
   const foul = fell.some((p) => p.kind === 'striker');
   const mine = fell.filter((p) => p.color === me);
   const theirs = fell.filter((p) => p.color === opp);
   const queenIn = fell.some((p) => p.kind === 'queen');
   const queen = state.pieces[0];
-  const hadOwn = state.pocketed[me] > 0;
-  state.pocketed[me] += mine.length;
-  state.pocketed[opp] += theirs.length;
   state.striker = null;
   state.fell = [];
   const msg = [];
+  const done = (again) => {
+    if (!state.winner && !again) state.turn = opp;
+    const summary = { by: me, foul, mine: mine.length, theirs: theirs.length, queenIn, again, msg, winner: state.winner, reason: state.reason };
+    state.log.push(summary);
+    return summary;
+  };
+
+  // The break (L23–L26): the striker must touch a coin; three attempts, then the break passes.
+  // A pocketed striker on a missed attempt costs only the turn, no due.
+  if (!state.broken) {
+    if (!touched) {
+      state.breakTries = (state.breakTries ?? 0) + 1;
+      if (state.breakTries >= 3) { state.breakTries = 0; msg.push('break-lost'); return done(false); }
+      msg.push(foul ? 'break-lost' : 'break-retry');
+      if (foul) state.breakTries = 0;
+      return done(!foul);
+    }
+    state.broken = true;
+  }
+
+  const hadOwn = state.pocketed[me] > 0;
+  const owed = state.dues[me] > 0;
+  const before = state.pocketed[me];
+  state.pocketed[me] += mine.length;
+  state.pocketed[opp] += theirs.length;
+  const pending = state.queen.state === 'pending' && state.queen.by === me;
+  const queenBack = (key) => { if (!queen.inPlay) returnPiece(state, queen); state.queen = { state: 'board', by: null }; if (key) msg.push(key); };
   let again = false;
 
   if (foul) {
+    // Striker pocketed = due (L56–L60): your coins of this stroke go back plus one more.
+    // With your own coin (or the queen) in the same stroke you play on, otherwise the turn ends.
     for (const p of mine) returnPiece(state, p);
-    const penalty = returnOne(state, me);
-    if (queenIn || (state.queen.state === 'pending' && state.queen.by === me)) {
-      if (!queen.inPlay) returnPiece(state, queen);
-      state.queen = { state: 'board', by: null };
-    }
-    msg.push(penalty || mine.length ? 'foul' : 'foul-free');
+    state.dues[me]++;
+    if (queenIn) queenBack();                       // L89, L90
+    else if (pending && !mine.length) queenBack();  // L91; with an own coin it stays to be covered (L92)
+    again = mine.length > 0 || queenIn;
+    msg.push(again ? 'foul-on' : 'foul');
   } else {
-    if (state.queen.state === 'pending' && state.queen.by === me) {
+    if (pending) {
       if (mine.length) { state.queen = { state: 'covered', by: me }; msg.push('covered'); }
-      else { returnPiece(state, queen); state.queen = { state: 'board', by: null }; msg.push('queen-back'); }
+      else queenBack('queen-back');                 // L86
     }
     if (queenIn) {
-      if (mine.length) { state.queen = { state: 'covered', by: me }; msg.push('covered'); }
+      if (owed) queenBack('queen-due');             // L83
+      else if (mine.length) { state.queen = { state: 'covered', by: me }; msg.push('covered'); } // L87
       else if (hadOwn) { state.queen = { state: 'pending', by: me }; msg.push('pending'); again = true; }
-      else { returnPiece(state, queen); state.queen = { state: 'board', by: null }; msg.push('queen-early'); }
+      else queenBack('queen-early');                // L79, L82
     }
-    if (mine.length) { again = true; msg.push('own'); }
+    if (mine.length) { again = !(queenIn && owed); msg.push('own'); }
     if (theirs.length) msg.push('theirs');
     if (!fell.length) msg.push('miss');
   }
 
-  // You may not clear your coins while the queen is still in play: the last coin goes back.
-  for (const c of [me, opp]) {
-    if (state.pocketed[c] === 9 && state.queen.state !== 'covered') {
-      returnOne(state, c);
-      if (c === me) { again = false; msg.push('last-coin'); }
-    }
-  }
+  // Pay dues as soon as you have a pocketed coin (L57).
+  while (state.dues[me] > 0 && returnOne(state, me)) { state.dues[me]--; if (!msg.includes('due-paid')) msg.push('due-paid'); }
 
-  for (const c of [me, opp]) {
-    if (state.pocketed[c] === 9 && state.queen.state === 'covered') {
-      state.winner = c;
-      state.points = 9 - state.pocketed[other(c)] + (state.queen.by === c ? 3 : 0);
-    }
+  // End of the board (L32, L34–L38, L93–L101). Points = opponent's coins left + 3 for your queen.
+  const covered = state.queen.state === 'covered';
+  const left = (c) => 9 - state.pocketed[c];
+  const win = (c, points, reason = null) => { state.winner = c; state.points = Math.min(12, points); state.reason = reason; };
+  const myAll = state.pocketed[me] === 9, oppAll = state.pocketed[opp] === 9;
+  if (foul) {
+    if (!covered && before + mine.length === 9) win(opp, 4, 'last-own-striker');            // L98
+    else if (oppAll && !covered) win(opp, left(me) + 3 + 1, 'last-their-striker');          // L101
+    else if (oppAll) win(opp, left(me) + (state.queen.by === opp ? 3 : 0));
+  } else if (myAll && oppAll) {
+    if (!covered) win(opp, 3, 'both-last');                                                  // L95
+    else win(me, state.queen.by === me ? 3 : 1, 'both-last-covered');                        // L93, L94
+  } else if (myAll) {
+    if (covered) win(me, left(opp) + (state.queen.by === me ? 3 : 0));                       // L32
+    else win(opp, 3, 'last-own');                                                            // L97
+  } else if (oppAll) {
+    if (covered) win(opp, left(me) + (state.queen.by === opp ? 3 : 0));
+    else win(opp, left(me) + 3, 'last-their');                                               // L96
   }
-  if (!state.winner && !again) state.turn = opp;
-  const summary = { by: me, foul, mine: mine.length, theirs: theirs.length, queenIn, again, msg, winner: state.winner };
-  state.log.push(summary);
-  return summary;
+  return done(again);
 }
 
 /**
@@ -405,6 +443,11 @@ export function simulate(state, shot, maxSteps = 2400) {
   let score = mine * 10 - theirs * 6 + (queen && (state.easy || state.pocketed[me] > 0 || mine) ? 8 : 0);
   if (state.queen.state === 'pending' && state.queen.by === me) score += mine ? 12 : -10;
   if (foul) score -= state.easy ? 8 : 18 + mine * 10;
+  if (!state.easy && state.queen.state !== 'covered' && !(queen && mine)) {
+    // Clearing a colour while the queen is still in play loses the board (ECC laws 96, 97).
+    if (state.pocketed[me] + mine >= 9) score -= 60;
+    if (state.pocketed[other(me)] + theirs >= 9) score -= 60;
+  }
   // Leave the opponent little: own coins near pockets are good, theirs are bad.
   for (const p of s.pieces) {
     if (!p.inPlay || p.kind !== 'coin') continue;
@@ -446,7 +489,7 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   const me = state.turn;
   const y = BASE_Y[side(me)];
   const { striker: SR, pockets } = geom(state);
-  const targets = state.pieces.filter((p) => p.inPlay && (p.color === me || (p.kind === 'queen' && (state.easy || state.pocketed[me] > 0))));
+  const targets = state.pieces.filter((p) => p.inPlay && (p.color === me || (p.kind === 'queen' && (state.easy || (state.pocketed[me] > 0 && !state.dues?.[me])))));
   const cands = [];
   for (let xi = 0; xi <= 16; xi++) {
     const x = BASE_X[0] + ((BASE_X[1] - BASE_X[0]) * xi) / 16;

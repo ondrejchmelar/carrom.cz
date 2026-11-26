@@ -73,16 +73,28 @@ const T = {
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
       blocked: 'Striker nesmí ležet na kameni. Posuň ho.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
-      foul: 'Faul: striker v díře, jeden tvůj kámen se vrací na desku.', 'foul-free': 'Faul: striker v díře.',
+      foul: 'Faul: striker v díře. Jeden tvůj kámen jde zpět na desku (nemáš-li žádný, dlužíš ho) a tah končí.',
+      'foul-on': 'Faul: striker v díře. Kameny z tohoto šťouchu a jeden navíc jdou zpět, ale hraješ dál.',
+      'break-retry': 'Při rozstřelu musí striker trefit kámen. Zkus to znovu (máš tři pokusy).',
+      'break-lost': 'Rozstřel se nepovedl, hraje soupeř.',
+      'queen-due': 'Dokud dlužíš kámen, královnu dát nelze. Vrací se doprostřed a tah končí.',
+      'due-paid': 'Dlužný kámen se vrací na desku.',
       pending: 'Královna v díře! Teď ji potvrď svým kamenem.', covered: 'Královna potvrzená (+3 body).',
       'queen-back': 'Královnu se nepodařilo potvrdit, vrací se doprostřed.',
       'queen-early': 'Královnu lze dát až po prvním vlastním kameni. Vrací se doprostřed.',
-      'last-coin': 'Poslední kámen nejde dát dřív než královnu. Vrací se na desku.',
+      reason: {
+        'last-own': 'Poslední vlastní kámen padl dřív, než byla královna potvrzená.',
+        'last-their': 'Padl poslední soupeřův kámen, zatímco královna byla ještě na desce.',
+        'last-own-striker': 'Poslední vlastní kámen padl se strikerem dřív než královna.',
+        'last-their-striker': 'Poslední soupeřův kámen padl se strikerem, královna byla na desce.',
+        'both-last': 'Padly oba poslední kameny, královna zůstala na desce.',
+        'both-last-covered': 'Padly oba poslední kameny najednou.',
+      } as Record<string, string>,
       'queen-easy': 'Královna v díře (+3 body), hraješ znovu.', 'foul-easy': 'Striker v díře, na tahu je soupeř.',
       queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená', easy: 'Královna v díře' },
       rules: {
         easy: 'Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, královna dává +3 body hned. Striker v díře jen ukončí tah, nic se nevrací. Vyhrává, kdo má první venku své 3 kameny.',
-        full: 'Plná pravidla: 9 kamenů na hráče, královnu je třeba potvrdit dalším vlastním kamenem, za striker v díře vracíš jeden kámen na desku.',
+        full: 'Pravidla ECC: 9 kamenů na hráče. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
       },
       won: (n: string) => `${n} vyhrává!`, lost: 'Vyhrál počítač.', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
       youWon: 'Vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
@@ -93,16 +105,28 @@ const T = {
       turnOf: (n: string, c: string) => `${n} to play (${c}).`,
       blocked: 'The striker may not touch a coin. Move it.',
       own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
-      foul: 'Foul: striker pocketed, one of your coins goes back.', 'foul-free': 'Foul: striker pocketed.',
+      foul: 'Foul: striker pocketed. One of your coins goes back (owed if you have none) and your turn ends.',
+      'foul-on': 'Foul: striker pocketed. This stroke\'s coins and one more go back, but you play on.',
+      'break-retry': 'On the break the striker must touch a coin. Try again (three attempts).',
+      'break-lost': 'The break failed, your opponent plays.',
+      'queen-due': 'While you owe a coin the queen cannot be pocketed. Back to the centre, turn over.',
+      'due-paid': 'The owed coin goes back on the board.',
       pending: 'Queen pocketed! Now cover it with your coin.', covered: 'Queen covered (+3 points).',
       'queen-back': 'Queen not covered, back to the centre.',
       'queen-early': 'The queen counts only after your first coin. Back to the centre.',
-      'last-coin': 'Your last coin cannot go before the queen. It goes back.',
+      reason: {
+        'last-own': 'The last own coin went in before the queen was covered.',
+        'last-their': "The opponent's last coin went in while the queen was still on the board.",
+        'last-own-striker': 'The last own coin went in with the striker before the queen.',
+        'last-their-striker': "The opponent's last coin went in with the striker, queen on the board.",
+        'both-last': 'Both last coins went in with the queen still on the board.',
+        'both-last-covered': 'Both last coins went in together.',
+      } as Record<string, string>,
       'queen-easy': 'Queen pocketed (+3 points), shoot again.', 'foul-easy': 'Striker pocketed, your turn ends.',
       queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered', easy: 'Queen pocketed' },
       rules: {
         easy: 'Easy game: 3 coins each and the queen. Every pocketed coin counts and the queen gives +3 points straight away. A pocketed striker only ends your turn, nothing goes back. First to pocket all 3 coins wins.',
-        full: 'Full rules: 9 coins each, the queen must be covered by your next coin, a pocketed striker costs you one coin back on the board.',
+        full: 'ECC laws: 9 coins each. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
       },
       won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
       youWon: 'You win!', aimHint: 'Pull back and let go.',
@@ -196,7 +220,7 @@ const T = {
       over.hidden = !state.winner;
       if (state.winner) {
         $('[data-over-title]').textContent = mode === 'computer' ? (state.winner === 'white' ? L.youWon : L.lost) : L.won(nameOf(state.winner));
-        $('[data-over-text]').textContent = L.pts(state.points);
+        $('[data-over-text]').textContent = nb(`${state.reason ? L.reason[state.reason] + ' ' : ''}${L.pts(state.points)}`);
       }
     }
 

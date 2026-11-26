@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as C from '../../src/lib/core/carrom.js';
 
+// A game after the break, so the rules tests start in open play.
+const fresh = (o) => Object.assign(C.newGame(o), { broken: true });
+
 const pocket = (s, pred, n = 1) => {
   // Mark n matching pieces as having fallen during the running shot.
   s.fell ??= [];
@@ -18,7 +21,7 @@ test('rack: queen, 9 white, 9 black, no overlaps', () => {
 });
 
 test('own coin: shoot again; nothing: turn passes', () => {
-  const s = C.newGame();
+  const s = fresh();
   s.fell = []; pocket(s, (q) => q.color === 'white');
   assert.equal(C.endShot(s).again, true);
   assert.equal(s.turn, 'white');
@@ -27,18 +30,47 @@ test('own coin: shoot again; nothing: turn passes', () => {
   assert.equal(s.turn, 'black');
 });
 
-test('foul returns the pocketed own coin plus one penalty coin', () => {
-  const s = C.newGame();
+test('striker with own coin: that coin and one due go back, you play on (L58)', () => {
+  const s = fresh();
   s.fell = []; pocket(s, (q) => q.color === 'white', 2); C.endShot(s);
   assert.equal(s.pocketed.white, 2);
   s.fell = [{ kind: 'striker' }]; pocket(s, (q) => q.color === 'white');
   C.endShot(s);
   assert.equal(s.pocketed.white, 1);
+  assert.equal(s.turn, 'white');
+});
+
+test('striker alone: one due, turn ends; owed until you have a coin (L56, L57)', () => {
+  const s = fresh();
+  s.fell = [{ kind: 'striker' }]; C.endShot(s);
+  assert.equal(s.turn, 'black'); assert.equal(s.dues.white, 1);
+  s.turn = 'white'; s.fell = []; pocket(s, (q) => q.color === 'white'); C.endShot(s);
+  assert.equal(s.pocketed.white, 0); assert.equal(s.dues.white, 0);
+});
+
+test("opponent's coin is no foul; their last coin with the queen on the board loses you the board (L28, L96)", () => {
+  const s = fresh();
+  s.fell = []; pocket(s, (q) => q.color === 'black'); const r = C.endShot(s);
+  assert.equal(r.foul, false); assert.equal(s.pocketed.black, 1); assert.equal(s.turn, 'black');
+  s.turn = 'white'; s.fell = []; pocket(s, (q) => q.color === 'black', 8); C.endShot(s);
+  assert.equal(s.winner, 'black'); assert.equal(s.points, 9 + 3); assert.equal(s.reason, 'last-their');
+});
+
+test('own last coin before the queen loses the board by 3 (L97)', () => {
+  const s = fresh();
+  s.fell = []; pocket(s, (q) => q.color === 'white', 9); C.endShot(s);
+  assert.equal(s.winner, 'black'); assert.equal(s.points, 3);
+});
+
+test('break: three attempts to touch a coin, then it passes (L24, L25)', () => {
+  const s = C.newGame();
+  for (let i = 0; i < 2; i++) { s.fell = []; C.endShot(s); assert.equal(s.turn, 'white'); }
+  s.fell = []; C.endShot(s);
   assert.equal(s.turn, 'black');
 });
 
 test('queen must be covered by the next coin', () => {
-  const s = C.newGame();
+  const s = fresh();
   s.fell = []; pocket(s, (q) => q.color === 'white'); C.endShot(s);
   s.fell = []; pocket(s, (q) => q.kind === 'queen');
   assert.equal(C.endShot(s).again, true);
@@ -49,7 +81,7 @@ test('queen must be covered by the next coin', () => {
 });
 
 test('the board is won after all coins and a covered queen', () => {
-  const s = C.newGame();
+  const s = fresh();
   s.fell = []; pocket(s, (q) => q.color === 'white'); pocket(s, (q) => q.kind === 'queen'); C.endShot(s);
   assert.equal(s.queen.by, 'white');
   s.fell = []; pocket(s, (q) => q.color === 'white', 8); C.endShot(s);
@@ -74,7 +106,7 @@ test('easy rack: queen and 3 coins per colour', () => {
 });
 
 test('easy: a pocketed striker returns nothing and ends the turn', () => {
-  const s = C.newGame({ easy: true });
+  const s = fresh({ easy: true });
   s.fell = [{ kind: 'striker' }]; pocket(s, (q) => q.color === 'white');
   const r = C.endShot(s);
   assert.equal(s.pocketed.white, 1);
@@ -83,7 +115,7 @@ test('easy: a pocketed striker returns nothing and ends the turn', () => {
 });
 
 test('easy: the queen counts at once and the first to clear wins', () => {
-  const s = C.newGame({ easy: true });
+  const s = fresh({ easy: true });
   s.fell = []; pocket(s, (q) => q.kind === 'queen');
   assert.equal(C.endShot(s).again, true);
   assert.equal(s.queen.by, 'white');
@@ -103,7 +135,7 @@ test('easy computer returns a valid shot', () => {
 
 test('a pocketed striker never counts as a coin', () => {
   for (const easy of [false, true]) {
-    const s = C.newGame({ easy });
+    const s = fresh({ easy });
     C.startShot(s, C.CENTER, -Math.PI / 2, 0.1);
     s.fell = [s.striker];
     C.endShot(s);
@@ -113,7 +145,7 @@ test('a pocketed striker never counts as a coin', () => {
 });
 
 test('full rules: striker foul after a coin costs that coin', () => {
-  const s = C.newGame();
+  const s = fresh();
   s.fell = []; pocket(s, (q) => q.color === 'white'); C.endShot(s);
   C.startShot(s, C.CENTER, -Math.PI / 2, 0.1);
   s.fell = [s.striker];
