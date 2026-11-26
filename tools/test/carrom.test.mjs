@@ -128,3 +128,14 @@ test('aiming guide: straight up from the centre hits a coin and pushes it on', (
   assert.ok(pr.striker.to[1] < C.BASE_Y.bottom && pr.striker.to[1] > C.CENTER);
   assert.ok(pr.coins[0].to[1] < pr.coins[0].from[1]);
 });
+
+test("pocketing the opponent's last coin is no foul: it goes back and nobody wins", () => {
+  const s = C.newGame({ easy: true });
+  s.fell = []; pocket(s, (q) => q.color === 'black', 2); C.endShot(s); // white sinks two black coins, turn passes
+  s.turn = 'white';
+  s.fell = []; pocket(s, (q) => q.color === 'black'); const r = C.endShot(s);
+  assert.equal(s.winner, null);
+  assert.equal(s.pocketed.black, 2);
+  assert.equal(s.pocketed.white, 0);
+  assert.ok(r.msg.includes('their-last'));
+});
