@@ -1,0 +1,11 @@
+# Přihlašovací služba adminu (GitHub OAuth) – Cloudflare Worker "carrom-cz".
+# Kód je převzatý ze sveltia/sveltia-cms-auth (MIT, viz LICENSE.txt).
+# V Cloudflare: Settings → Build → Root directory = auth, deploy command = npx wrangler deploy.
+# GITHUB_CLIENT_SECRET je jen jako Secret v Cloudflare, nikdy v tomto souboru.
+name = "carrom-cz"
+main = "src/index.js"
+compatibility_date = "2026-11-11"
+
+[vars]
+ALLOWED_DOMAINS = "ondrejchmelar.github.io, carrom.cz, www.carrom.cz"
+GITHUB_CLIENT_ID = "Ov23ligyePgD1q27dtEK"

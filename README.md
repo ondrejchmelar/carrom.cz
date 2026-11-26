@@ -47,8 +47,10 @@ po převodu repozitáře do (bezplatné) GitHub organizace s pravidly větví.
 4. **Přihlášení do adminu přes GitHub** – GitHub Pages neumí OAuth, proto běží malá přihlašovací služba
    [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) na Cloudflare Workers (zdarma):
    `https://carrom-cz.chmelar-o.workers.dev`. Je nastavená jako `base_url` v `public/admin/config.yml`
-   a `public/admin/vysledky/config.yml`. GitHub OAuth app má callback `…workers.dev/callback`; client ID a secret
-   jsou jen v proměnných workeru (`GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `ALLOWED_DOMAINS`), nikdy v repu.
+   a `public/admin/vysledky/config.yml`. GitHub OAuth app má callback `…workers.dev/callback`.
+   Kód workeru je ve složce `auth/` (převzato ze sveltia-cms-auth, MIT); Cloudflare ho nasazuje z tohoto repa
+   s Root directory `auth`. Client ID a povolené domény jsou v `auth/wrangler.toml`, client secret jen jako
+   Secret `GITHUB_CLIENT_SECRET` v Cloudflare, nikdy v repu.
 5. **Asistent** – repo secret `ANTHROPIC_API_KEY` (vlastní workspace s limitem $20/měsíc). Bez něj workflow nic nedělá.
 
 ## Vývoj
