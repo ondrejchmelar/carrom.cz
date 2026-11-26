@@ -126,11 +126,16 @@ test('easy: no win while the queen is on the board, the last coin comes back', (
   assert.equal(r.msg[0], 'queen-first');
 });
 
-test('easy: the queen counts at once and the first to clear wins', () => {
+test('easy: the queen needs covering, and the first to clear wins', () => {
   const s = fresh({ easy: true });
   s.fell = []; pocket(s, (q) => q.kind === 'queen');
   assert.equal(C.endShot(s).again, true);
-  assert.equal(s.queen.by, 'white');
+  assert.equal(s.queen.state, 'pending');
+  s.fell = []; C.endShot(s);
+  assert.equal(s.queen.state, 'board'); assert.ok(s.pieces[0].inPlay);
+  s.turn = 'white'; s.fell = []; pocket(s, (q) => q.kind === 'queen'); pocket(s, (q) => q.color === 'white'); C.endShot(s);
+  assert.equal(s.queen.state, 'covered'); assert.equal(s.queen.by, 'white');
+  s.pocketed.white = 0; s.pieces.filter((q) => q.color === 'white').forEach((q) => (q.inPlay = true));
   s.fell = []; pocket(s, (q) => q.color === 'black'); C.endShot(s);
   assert.equal(s.turn, 'black');
   s.fell = []; pocket(s, (q) => q.color === 'black', 2); C.endShot(s);

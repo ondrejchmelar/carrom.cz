@@ -356,9 +356,10 @@ export function endShot(state) {
 /**
  * Easy rules: every pocketed coin counts for its colour (no dues). Your own coin or the queen lets
  * you shoot again, even if the striker went in too; a pocketed striker on its own just ends the turn.
- * The queen needs no cover and gives +3 to whoever pockets it, but it must go in before a colour's
- * last coin: a last coin pocketed while the queen is on the board goes back to the centre and the
- * turn ends. The first colour with all its coins in (queen gone) wins.
+ * The queen must be covered by your own coin in the same or the next stroke (else it goes back to the
+ * centre) and is worth +3 to whoever covers it. It must be covered before a colour's last coin: a
+ * last coin pocketed earlier goes back to the centre and the turn ends. The first colour with all
+ * its coins in wins.
  */
 function endShotEasy(state) {
   const me = state.turn, opp = other(me);
@@ -373,7 +374,15 @@ function endShotEasy(state) {
   state.fell = [];
   const msg = [];
   let again = mine.length > 0 || queenIn;
-  if (queenIn) { state.queen = { state: 'covered', by: me }; msg.push('queen-easy'); }
+  const queen = state.pieces[0];
+  if (state.queen.state === 'pending' && state.queen.by === me) {
+    if (mine.length) { state.queen = { state: 'covered', by: me }; msg.push('covered'); }
+    else { returnPiece(state, queen); state.queen = { state: 'board', by: null }; msg.push('queen-back'); }
+  }
+  if (queenIn) {
+    if (mine.length) { state.queen = { state: 'covered', by: me }; msg.push('covered'); }
+    else { state.queen = { state: 'pending', by: me }; msg.push('pending'); }
+  }
   if (foul) msg.push(again ? 'foul-easy-on' : 'foul-easy');
   if (mine.length) msg.push('own');
   if (theirs.length) msg.push('theirs');

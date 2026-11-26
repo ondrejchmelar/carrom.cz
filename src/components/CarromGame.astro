@@ -93,10 +93,10 @@ const T = {
         'both-last-covered': 'Padly oba poslední kameny najednou.',
       } as Record<string, string>,
       'queen-easy': 'Královna v díře (+3 body), hraješ znovu.', 'foul-easy': 'Striker v díře, na tahu je soupeř.', 'foul-easy-on': 'Striker v díře, ale tvůj kámen se počítá a hraješ dál.',
-      'queen-first': 'Královna musí do díry dřív než poslední kámen. Kámen se vrací doprostřed.',
+      'queen-first': 'Královna musí být potvrzená dřív než poslední kámen. Kámen se vrací doprostřed.',
       queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená', easy: 'Královna v díře' },
       rules: {
-        easy: 'Kdo začíná, má bílé kameny; začíná se střídavě. Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, nic se nevrací. Když dáš svůj kámen nebo královnu, hraješ dál. Královna dává +3 body hned, ale musí do díry dřív než poslední kámen. Vyhrává, kdo má první venku své 3 kameny.',
+        easy: 'Kdo začíná, má bílé kameny; začíná se střídavě. Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, nic se nevrací. Když dáš svůj kámen nebo královnu, hraješ dál. Královnu musíš potvrdit svým kamenem (hned nebo dalším šťouchem), pak dává +3 body. Potvrdit ji musí někdo dřív, než padne poslední kámen. Vyhrává, kdo má první venku své 3 kameny.',
         full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
       },
       won: (n: string) => `${n} vyhrává!`, lost: 'Vyhrál počítač.', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
@@ -127,10 +127,10 @@ const T = {
         'both-last-covered': 'Both last coins went in together.',
       } as Record<string, string>,
       'queen-easy': 'Queen pocketed (+3 points), shoot again.', 'foul-easy': 'Striker pocketed, your turn ends.', 'foul-easy-on': 'Striker pocketed, but your coin counts and you play on.',
-      'queen-first': 'The queen must go in before the last coin. The coin goes back to the centre.',
+      'queen-first': 'The queen must be covered before the last coin. The coin goes back to the centre.',
       queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered', easy: 'Queen pocketed' },
       rules: {
-        easy: 'Whoever begins has the white coins; players take turns to begin. Easy game: 3 coins each and the queen. Every pocketed coin counts, nothing goes back. Pocket your coin or the queen and you play on. The queen gives +3 straight away but must go in before the last coin. First to pocket all 3 coins wins.',
+        easy: 'Whoever begins has the white coins; players take turns to begin. Easy game: 3 coins each and the queen. Every pocketed coin counts, nothing goes back. Pocket your coin or the queen and you play on. Cover the queen with your coin (same or next stroke) for +3. It must be covered before anyone's last coin. First to pocket all 3 coins wins.',
         full: 'ECC laws: whoever begins (breaks) has the white coins; players take turns to begin. 9 coins each. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
       },
       won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
@@ -222,7 +222,7 @@ const T = {
       $('[data-name="white"]').textContent = nameOf('white');
       $('[data-name="black"]').textContent = nameOf('black');
       root.querySelectorAll<HTMLElement>('.cg-side').forEach((el) => el.classList.toggle('on', el.dataset.side === state.turn && !state.winner));
-      $('[data-queen]').textContent = state.easy && state.queen.state === 'covered' ? L.queen.easy : L.queen[state.queen.state as 'board'];
+      $('[data-queen]').textContent = L.queen[state.queen.state as 'board'];
       root.querySelectorAll<HTMLElement>('[data-total]').forEach((el) => (el.textContent = String(C.coinsOf(state))));
       $('[data-rules]').textContent = nb(state.easy ? L.rules.easy : L.rules.full);
       $('[data-status]').textContent = nb(statusText());
