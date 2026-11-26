@@ -8,9 +8,10 @@ export const STRIKER_R = 20.6;          // striker Ø 41.3 mm
 export const CENTER = BOARD / 2;
 export const BASE_Y = { bottom: BOARD - 118, top: 118 }; // striker centre on the base line
 export const BASE_X = [151, BOARD - 151];                 // allowed striker centre range
-export const MAX_SPEED = 4600;          // mm/s for a full-power shot
-const FRICTION = 820;                   // mm/s² sliding deceleration on a powdered board
-const DAMP = 0.35;                      // extra speed-proportional damping (1/s)
+export const MAX_SPEED = 5000;          // mm/s for a full-power break
+// A powdered board is slick: pieces slow down evenly (dry friction, μ ≈ 0.08) and glide a long way,
+// with no extra drag at speed. A firm 2 m/s shot rolls about 2.5 m before it stops.
+export const FRICTION = 780;            // mm/s² sliding deceleration
 const E_BALL = 0.9, E_WALL = 0.72;      // restitution
 const MASS = { coin: 5.5, queen: 5.5, striker: 15 };
 const STOP = 6;                         // mm/s below which a piece is at rest
@@ -27,10 +28,10 @@ export const POCKETS = [
  * centred 23 from the edges), so coins, striker and pockets are about 1.6× bigger.
  */
 const HOME = BOARD / 322;
-const FULL_GEOM = { friction: FRICTION, coin: COIN_R, striker: STRIKER_R, pocket: POCKET_R, pockets: POCKETS };
+const FULL_GEOM = { coin: COIN_R, striker: STRIKER_R, pocket: POCKET_R, pockets: POCKETS };
 const EP = 23 * HOME;
 const EASY_GEOM = {
-  friction: 1600, coin: 11 * HOME, striker: 14.5 * HOME, pocket: 17 * HOME,
+  coin: 11 * HOME, striker: 14.5 * HOME, pocket: 17 * HOME,
   pockets: [[EP, EP], [BOARD - EP, EP], [EP, BOARD - EP], [BOARD - EP, BOARD - EP]],
 };
 export const geom = (state) => (state?.easy ? EASY_GEOM : FULL_GEOM);
@@ -120,7 +121,7 @@ export function step(bodies, dt = DT, g = FULL_GEOM) {
     if (!p.inPlay) continue;
     const v = Math.hypot(p.vx, p.vy);
     if (v < STOP) { p.vx = p.vy = 0; continue; }
-    const nv = Math.max(0, v - (g.friction + DAMP * v) * dt);
+    const nv = Math.max(0, v - FRICTION * dt);
     p.vx *= nv / v; p.vy *= nv / v;
     p.x += p.vx * dt; p.y += p.vy * dt;
   }
@@ -328,6 +329,18 @@ export function simulate(state, shot, maxSteps = 2400) {
   return { score, mine, theirs, foul, queen };
 }
 
+/**
+ * Just enough power: the coin should reach the pocket still rolling at about 25 cm/s.
+ * sl = striker travel to the coin, ul = coin travel to the pocket, cut = cos of the cut angle.
+ */
+const HIT = ((1 + E_BALL) * MASS.striker) / (MASS.striker + MASS.coin); // coin speed per striker speed, head-on
+export function shotPower(sl, ul, cut) {
+  const coin = Math.sqrt(2 * FRICTION * Math.max(0, ul) + 250 ** 2);
+  const atHit = coin / (HIT * Math.max(0.35, cut));
+  const start = Math.sqrt(atHit ** 2 + 2 * FRICTION * sl);
+  return Math.min(1, start / MAX_SPEED);
+}
+
 function pathClear(state, ax, ay, bx, by, r, ignore) {
   const dx = bx - ax, dy = by - ay, len = Math.hypot(dx, dy) || 1;
   for (const p of state.pieces) {
@@ -363,17 +376,18 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
         if (!pathClear(state, t.x, t.y, px, py, t.r, t)) continue;
         if (!pathClear(state, x, y, cx, cy, SR, t)) continue;
         const dist = sl + ul;
-        const power = Math.min(1, 0.22 + dist / 1500 / Math.max(0.45, cut));
+        const power = shotPower(sl, ul - geom(state).pocket * 0.5, cut);
         cands.push({ x, angle: Math.atan2(sy, sx), power, h: cut * 3 - dist / 400 + (t.kind === 'queen' ? 1 : 0) });
       }
     }
   }
-  // Fallback: break or a firm shot at the middle.
+  // Fallback: a firm break, or a medium shot at the middle to open things up.
+  const opening = state.pieces.every((p) => p.inPlay && Math.hypot(p.x - CENTER, p.y - CENTER) < 120);
   if (!cands.length) {
     for (let xi = 0; xi <= 8; xi++) {
       const x = BASE_X[0] + ((BASE_X[1] - BASE_X[0]) * xi) / 8;
       if (!strikerFree(state, x, me)) continue;
-      cands.push({ x, angle: Math.atan2(CENTER - y, CENTER - x), power: 0.85, h: 0 });
+      cands.push({ x, angle: Math.atan2(CENTER - y, CENTER - x), power: opening ? 0.7 : 0.4, h: 0 });
     }
   }
   if (!cands.length) cands.push({ x: CENTER, angle: me === 'white' ? -Math.PI / 2 : Math.PI / 2, power: 0.8, h: 0 });
@@ -381,14 +395,15 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   if (simple) {
     const c = cands[Math.floor(rand() * Math.min(cands.length, 6))];
     const noise = 0.12;
-    return { x: c.x, angle: c.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, Math.max(0.15, c.power * (1 + (rand() - 0.5) * 0.3))) };
+    return { x: c.x, angle: c.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, c.power * (0.95 + rand() * 0.35)) };
   }
   let best = null;
   const pool = cands.slice(0, budget);
   for (const c of pool) {
-    for (const dp of [0, 0.12, -0.08]) {
-      const shot = { x: c.x, angle: c.angle, power: Math.min(1, Math.max(0.15, c.power + dp)) };
+    for (const dp of [1, 1.15, 1.35]) {
+      const shot = { x: c.x, angle: c.angle, power: Math.min(1, c.power * dp) };
       const r = simulate(state, shot);
+      r.score -= shot.power * 3; // prefer the gentlest shot that does the job
       if (!best || r.score > best.score) best = { ...shot, score: r.score };
     }
   }
