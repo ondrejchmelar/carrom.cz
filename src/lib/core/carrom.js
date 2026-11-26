@@ -23,8 +23,11 @@ export const POCKETS = [
 
 const other = (c) => (c === 'white' ? 'black' : 'white');
 
-/** Starting position: queen in the centre, 6 coins around it, 12 in the outer ring (hexagonal packing). */
-export function rack() {
+/**
+ * Starting position: queen in the centre, 6 coins around it, 12 in the outer ring (hexagonal packing).
+ * The easy game uses only the queen and the inner ring: 7 pieces, 3 coins per colour.
+ */
+export function rack({ easy = false } = {}) {
   const pieces = [{ id: 0, kind: 'queen', color: 'queen', x: CENTER, y: CENTER }];
   const d = COIN_R * 2 + 0.2;
   // Colours alternate in both rings. One ray points at the far-left pocket (top left, seen by white),
@@ -33,7 +36,7 @@ export function rack() {
   let id = 1;
   const put = (a, dist, color) => pieces.push({ id: id++, kind: 'coin', color, x: CENTER + Math.cos(a) * dist, y: CENTER + Math.sin(a) * dist });
   for (let k = 0; k < 6; k++) put(ray + (k * Math.PI) / 3, d, k % 2 ? 'black' : 'white');
-  for (let k = 0; k < 6; k++) {
+  for (let k = 0; k < 6 && !easy; k++) {
     put(ray + (k * Math.PI) / 3, 2 * d, 'white');
     put(ray + (k * Math.PI) / 3 + Math.PI / 6, Math.sqrt(3) * d, 'black');
   }
@@ -41,10 +44,13 @@ export function rack() {
   return pieces;
 }
 
-export function newGame({ mode = 'computer', first = 'white' } = {}) {
+export const coinsOf = (state) => (state.easy ? 3 : 9);
+
+export function newGame({ mode = 'computer', first = 'white', easy = false } = {}) {
   return {
     mode,                          // 'computer' (you are white at the bottom) | 'two' (hot seat)
-    pieces: rack(),
+    easy,                          // easy game: 7 pieces, no dues, queen counts at once
+    pieces: rack({ easy }),
     striker: null,                 // set while a shot is running
     turn: first,                   // colour on turn; white shoots from the bottom, black from the top
     pocketed: { white: 0, black: 0 },
@@ -181,6 +187,7 @@ function returnOne(state, color) {
  * next coin; pocketing the striker is a foul (your pocketed coins of that shot and one more go back).
  */
 export function endShot(state) {
+  if (state.easy) return endShotEasy(state);
   const me = state.turn, opp = other(me);
   const fell = state.fell ?? [];
   const foul = fell.some((p) => p.kind === 'striker');
@@ -239,6 +246,43 @@ export function endShot(state) {
   return summary;
 }
 
+/**
+ * Easy rules: every pocketed coin counts for its colour, your own coin or the queen lets you shoot
+ * again, the queen is worth 3 points to whoever pockets it, a pocketed striker only ends the turn
+ * (no coin goes back). The first colour with all its coins in the pockets wins.
+ */
+function endShotEasy(state) {
+  const me = state.turn, opp = other(me);
+  const fell = state.fell ?? [];
+  const foul = fell.some((p) => p.kind === 'striker');
+  const mine = fell.filter((p) => p.color === me);
+  const theirs = fell.filter((p) => p.color === opp);
+  const queenIn = fell.some((p) => p.kind === 'queen');
+  state.pocketed[me] += mine.length;
+  state.pocketed[opp] += theirs.length;
+  state.striker = null;
+  state.fell = [];
+  const msg = [];
+  if (queenIn) { state.queen = { state: 'covered', by: me }; msg.push('queen-easy'); }
+  if (foul) msg.push('foul-easy');
+  if (mine.length) msg.push('own');
+  if (theirs.length) msg.push('theirs');
+  if (!fell.length) msg.push('miss');
+  const again = !foul && (mine.length > 0 || queenIn);
+  const n = coinsOf(state);
+  // Pocketing the opponent's last coin hands them the board, as in the full game.
+  const done = [me, opp].filter((c) => state.pocketed[c] >= n);
+  if (done.length) {
+    const c = done.length === 2 ? me : done[0];
+    state.winner = c;
+    state.points = n - state.pocketed[other(c)] + (state.queen.by === c ? 3 : 0);
+  }
+  if (!state.winner && !again) state.turn = opp;
+  const summary = { by: me, foul, mine: mine.length, theirs: theirs.length, queenIn, again, msg, winner: state.winner };
+  state.log.push(summary);
+  return summary;
+}
+
 // ---------------------------------------------------------------- computer opponent
 
 function clone(state) {
@@ -256,9 +300,9 @@ export function simulate(state, shot, maxSteps = 2400) {
   const mine = fell.filter((p) => p.color === me).length;
   const theirs = fell.filter((p) => p.color === other(me)).length;
   const queen = fell.some((p) => p.kind === 'queen');
-  let score = mine * 10 - theirs * 6 + (queen && (state.pocketed[me] > 0 || mine) ? 8 : 0);
+  let score = mine * 10 - theirs * 6 + (queen && (state.easy || state.pocketed[me] > 0 || mine) ? 8 : 0);
   if (state.queen.state === 'pending' && state.queen.by === me) score += mine ? 12 : -10;
-  if (foul) score -= 18 + mine * 10;
+  if (foul) score -= state.easy ? 8 : 18 + mine * 10;
   // Leave the opponent little: own coins near pockets are good, theirs are bad.
   for (const p of s.pieces) {
     if (!p.inPlay || p.kind !== 'coin') continue;
@@ -281,12 +325,13 @@ function pathClear(state, ax, ay, bx, by, r, ignore) {
 /**
  * Choose a shot for the colour on turn. Candidate shots aim the striker so that it sends a coin
  * (own coins, the queen when allowed) straight at a pocket; the best few are simulated in full.
- * skill 0–1 adds aiming noise for a beatable opponent.
+ * skill 0–1 adds aiming noise for a beatable opponent. simple: a casual opponent that does not
+ * search, it takes one of the more obvious straight shots at random and aims it loosely.
  */
-export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 90 } = {}) {
+export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 90, simple = false } = {}) {
   const me = state.turn;
   const y = BASE_Y[side(me)];
-  const targets = state.pieces.filter((p) => p.inPlay && (p.color === me || (p.kind === 'queen' && (state.pocketed[me] > 0))));
+  const targets = state.pieces.filter((p) => p.inPlay && (p.color === me || (p.kind === 'queen' && (state.easy || state.pocketed[me] > 0))));
   const cands = [];
   for (let xi = 0; xi <= 16; xi++) {
     const x = BASE_X[0] + ((BASE_X[1] - BASE_X[0]) * xi) / 16;
@@ -316,6 +361,11 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   }
   if (!cands.length) cands.push({ x: CENTER, angle: me === 'white' ? -Math.PI / 2 : Math.PI / 2, power: 0.8, h: 0 });
   cands.sort((a, b) => b.h - a.h);
+  if (simple) {
+    const c = cands[Math.floor(rand() * Math.min(cands.length, 6))];
+    const noise = 0.075;
+    return { x: c.x, angle: c.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, Math.max(0.15, c.power * (1 + (rand() - 0.5) * 0.3))) };
+  }
   let best = null;
   const pool = cands.slice(0, budget);
   for (const c of pool) {

@@ -64,3 +64,39 @@ test('a break shot moves the pack and comes to rest', () => {
   assert.ok(n < 6000);
   assert.ok(s.pieces.some((p) => Math.hypot(p.x - C.CENTER, p.y - C.CENTER) > 120));
 });
+
+test('easy rack: queen and 3 coins per colour', () => {
+  const p = C.rack({ easy: true });
+  assert.equal(p.length, 7);
+  assert.equal(p.filter((x) => x.color === 'white').length, 3);
+  assert.equal(p.filter((x) => x.color === 'black').length, 3);
+  assert.equal(C.coinsOf(C.newGame({ easy: true })), 3);
+});
+
+test('easy: a pocketed striker returns nothing and ends the turn', () => {
+  const s = C.newGame({ easy: true });
+  s.fell = [{ kind: 'striker' }]; pocket(s, (q) => q.color === 'white');
+  const r = C.endShot(s);
+  assert.equal(s.pocketed.white, 1);
+  assert.equal(r.again, false);
+  assert.equal(s.turn, 'black');
+});
+
+test('easy: the queen counts at once and the first to clear wins', () => {
+  const s = C.newGame({ easy: true });
+  s.fell = []; pocket(s, (q) => q.kind === 'queen');
+  assert.equal(C.endShot(s).again, true);
+  assert.equal(s.queen.by, 'white');
+  s.fell = []; pocket(s, (q) => q.color === 'black'); C.endShot(s);
+  assert.equal(s.turn, 'black');
+  s.fell = []; pocket(s, (q) => q.color === 'black', 2); C.endShot(s);
+  assert.equal(s.winner, 'black');
+  assert.equal(s.points, 3);
+});
+
+test('easy computer returns a valid shot', () => {
+  const s = C.newGame({ easy: true });
+  const shot = C.chooseShot(s, { simple: true });
+  assert.ok(Number.isFinite(shot.angle) && shot.power > 0 && shot.power <= 1);
+  assert.ok(C.strikerFree(s, shot.x, s.turn));
+});

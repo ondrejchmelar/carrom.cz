@@ -27,17 +27,17 @@ const T = {
     <label class="cg-level">
       <span>{T.level}</span>
       <select data-level>
-        <option value="0.35">{T.easy}</option>
-        <option value="0.6" selected>{T.mid}</option>
-        <option value="0.9">{T.hard}</option>
+        <option value="easy" selected>{T.easy}</option>
+        <option value="mid">{T.mid}</option>
+        <option value="hard">{T.hard}</option>
       </select>
     </label>
   </div>
 
   <div class="cg-score" aria-live="polite">
-    <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/9</span><span data-name="white"></span></span>
+    <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/<span data-total>3</span></span><span data-name="white"></span></span>
     <span class="cg-queen" data-queen></span>
-    <span class="cg-side" data-side="black"><span data-name="black"></span><span><b data-count="black">0</b>/9</span><i class="dot b"></i></span>
+    <span class="cg-side" data-side="black"><span data-name="black"></span><span><b data-count="black">0</b>/<span data-total>3</span></span><i class="dot b"></i></span>
   </div>
 
   <div class="cg-stage">
@@ -50,6 +50,7 @@ const T = {
   </div>
 
   <p class="cg-status" data-status aria-live="polite"></p>
+  <p class="cg-rules small" data-rules></p>
 
   <label class="cg-slider">
     <span class="sr-only">{T.place}</span>
@@ -77,7 +78,12 @@ const T = {
       'queen-back': 'Královnu se nepodařilo potvrdit, vrací se doprostřed.',
       'queen-early': 'Královnu lze dát až po prvním vlastním kameni. Vrací se doprostřed.',
       'last-coin': 'Poslední kámen nejde dát dřív než královnu. Vrací se na desku.',
-      queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená' },
+      'queen-easy': 'Královna v díře (+3 body), hraješ znovu.', 'foul-easy': 'Striker v díře, na tahu je soupeř.',
+      queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená', easy: 'Královna v díře' },
+      rules: {
+        easy: 'Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, královna dává +3 body hned. Striker v díře jen ukončí tah, nic se nevrací. Vyhrává, kdo má první venku své 3 kameny.',
+        full: 'Plná pravidla: 9 kamenů na hráče, královnu je třeba potvrdit dalším vlastním kamenem, za striker v díře vracíš jeden kámen na desku.',
+      },
       won: (n: string) => `${n} vyhrává!`, lost: 'Vyhrál počítač.', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
       youWon: 'Vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
     },
@@ -92,7 +98,12 @@ const T = {
       'queen-back': 'Queen not covered, back to the centre.',
       'queen-early': 'The queen counts only after your first coin. Back to the centre.',
       'last-coin': 'Your last coin cannot go before the queen. It goes back.',
-      queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered' },
+      'queen-easy': 'Queen pocketed (+3 points), shoot again.', 'foul-easy': 'Striker pocketed, your turn ends.',
+      queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered', easy: 'Queen pocketed' },
+      rules: {
+        easy: 'Easy game: 3 coins each and the queen. Every pocketed coin counts and the queen gives +3 points straight away. A pocketed striker only ends your turn, nothing goes back. First to pocket all 3 coins wins.',
+        full: 'Full rules: 9 coins each, the queen must be covered by your next coin, a pocketed striker costs you one coin back on the board.',
+      },
       won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
       youWon: 'You win!', aimHint: 'Pull back and let go.',
     },
@@ -100,6 +111,9 @@ const T = {
 
   const COL = { frame: '#3B2416', frame2: '#4A2F1D', birch: '#E8D3A9', birch2: '#E2C995', navy: '#0E1B3D', red: '#D3242B', white: '#FBF7EE', black: '#1D2233', amber: '#F2B33D' };
   const FRAME = 30; // frame width in board mm
+
+  // Czech typography: no line break after one-letter prepositions and conjunctions.
+  const nb = (t: string) => t.replace(/(^|[\s(])([vaskzouiVASKZOUI]) /g, '$1$2\u00a0');
 
   for (const root of document.querySelectorAll<HTMLElement>('.cg')) setup(root);
 
@@ -113,7 +127,9 @@ const T = {
     const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     let mode: 'computer' | 'two' = 'computer';
-    let state = C.newGame({ mode });
+    const SKILL: Record<string, number> = { mid: 0.6, hard: 0.9 };
+    const easy = () => levelSel.value === 'easy';
+    let state = C.newGame({ mode, easy: easy() });
     let strikerX = C.CENTER;
     let aim: null | { px: number; py: number } = null;     // pointer position while aiming (board coords)
     let drag: null | 'place' | 'aim' | 'undecided' = null;
@@ -171,10 +187,11 @@ const T = {
       $('[data-name="white"]').textContent = nameOf('white');
       $('[data-name="black"]').textContent = nameOf('black');
       root.querySelectorAll<HTMLElement>('.cg-side').forEach((el) => el.classList.toggle('on', el.dataset.side === state.turn && !state.winner));
-      $('[data-queen]').textContent = L.queen[state.queen.state as 'board'];
-      $('[data-status]').textContent = statusText();
+      $('[data-queen]').textContent = state.easy && state.queen.state === 'covered' ? L.queen.easy : L.queen[state.queen.state as 'board'];
+      root.querySelectorAll<HTMLElement>('[data-total]').forEach((el) => (el.textContent = String(C.coinsOf(state))));
+      $('[data-rules]').textContent = nb(state.easy ? L.rules.easy : L.rules.full);
+      $('[data-status]').textContent = nb(statusText());
       slider.disabled = !human();
-      levelSel.disabled = mode === 'two';
       const over = $('[data-over]');
       over.hidden = !state.winner;
       if (state.winner) {
@@ -302,7 +319,7 @@ const T = {
     function cpuTurn() {
       phase = 'cpu'; ui();
       setTimeout(() => {
-        const shot = C.chooseShot(state, { skill: Number(levelSel.value) });
+        const shot = C.chooseShot(state, state.easy ? { simple: true } : { skill: SKILL[levelSel.value] ?? 0.6 });
         // show where it plays, then shoot
         const from = strikerX, t0 = performance.now(), dur = reduceMotion ? 1 : 900;
         cpuGhost = { ...shot, t: 0 };
@@ -318,7 +335,7 @@ const T = {
       }, 350);
     }
     function reset() {
-      state = C.newGame({ mode });
+      state = C.newGame({ mode, easy: easy() });
       phase = 'aim'; message = ''; aim = null; cpuGhost = null; kbPower = 0; kbAngle = -Math.PI / 2;
       setStriker(C.CENTER);
       ui(); draw();
@@ -390,6 +407,7 @@ const T = {
       root.querySelectorAll('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
       reset();
     }));
+    levelSel.addEventListener('change', reset);
     $('[data-reset]').addEventListener('click', reset);
     $('[data-again]').addEventListener('click', reset);
     new ResizeObserver(resize).observe(canvas);
@@ -421,6 +439,7 @@ const T = {
   .cg-over[hidden] { display: none; }
   .cg-over strong { font: 800 32px/1.1 var(--f-head); }
   .cg-status { min-height: 48px; font-weight: 600; color: var(--navy); }
+  .cg-rules { margin: 0; color: var(--muted); }
   .cg-slider input { width: 100%; accent-color: var(--red); min-height: 44px; }
   .cg-foot { display: flex; gap: 12px; }
   @media (hover: none) { .cg-keys { display: none; } }
