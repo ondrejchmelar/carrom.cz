@@ -97,25 +97,42 @@ export function forward(color, vy) {
 
 // ---------------------------------------------------------------- physics
 
-function collide(a, b) {
+// Pieces closer than this count as touching, so a push travels through a packed rack at once.
+const CONTACT = 0.6;
+
+/** Separate an overlapping pair and return its impulse [a, b, jx, jy] when they approach, else null. */
+function contact(a, b) {
   const dx = b.x - a.x, dy = b.y - a.y;
   const dist = Math.hypot(dx, dy), min = a.r + b.r;
-  if (dist >= min || dist === 0) return false;
+  if (dist >= min + CONTACT || dist === 0) return null;
   const nx = dx / dist, ny = dy / dist;
-  // separate
-  const overlap = min - dist, tot = a.m + b.m;
-  a.x -= nx * overlap * (b.m / tot); a.y -= ny * overlap * (b.m / tot);
-  b.x += nx * overlap * (a.m / tot); b.y += ny * overlap * (a.m / tot);
+  if (dist < min) {
+    const overlap = min - dist, tot = a.m + b.m;
+    a.x -= nx * overlap * (b.m / tot); a.y -= ny * overlap * (b.m / tot);
+    b.x += nx * overlap * (a.m / tot); b.y += ny * overlap * (a.m / tot);
+  }
   const rel = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
-  if (rel > 0) return true;
+  if (rel >= -1e-3) return null;
   const j = (-(1 + E_BALL) * rel) / (1 / a.m + 1 / b.m);
-  a.vx -= (j / a.m) * nx; a.vy -= (j / a.m) * ny;
-  b.vx += (j / b.m) * nx; b.vy += (j / b.m) * ny;
-  return true;
+  return [a, b, j * nx, j * ny];
 }
 
-/** Advance the bodies by one fixed step. Returns pieces that fell into a pocket during it. */
+/**
+ * Advance the bodies by one frame step. Fast shots are split into sub-steps of at most ~1.5 mm of
+ * travel, so the striker never skips into the pack, and contacts are resolved repeatedly within a
+ * sub-step: hitting the front of a touching row sends the coin at the far end off along that row
+ * (as in a real break), instead of the force scattering. Returns pieces that fell into a pocket.
+ */
 export function step(bodies, dt = DT, g = FULL_GEOM) {
+  let vmax = 0;
+  for (const p of bodies) if (p.inPlay) vmax = Math.max(vmax, Math.abs(p.vx) + Math.abs(p.vy));
+  const n = Math.min(40, Math.max(1, Math.ceil((vmax * dt) / 1.5)));
+  const fell = [];
+  for (let i = 0; i < n; i++) fell.push(...subStep(bodies, dt / n, g));
+  return fell;
+}
+
+function subStep(bodies, dt, g) {
   const fell = [];
   for (const p of bodies) {
     if (!p.inPlay) continue;
@@ -125,12 +142,26 @@ export function step(bodies, dt = DT, g = FULL_GEOM) {
     p.vx *= nv / v; p.vy *= nv / v;
     p.x += p.vx * dt; p.y += p.vy * dt;
   }
-  for (let i = 0; i < bodies.length; i++) {
-    const a = bodies[i];
-    if (!a.inPlay) continue;
-    for (let k = i + 1; k < bodies.length; k++) {
-      const b = bodies[k];
-      if (b.inPlay) collide(a, b);
+  // Contacts are solved together (all impulses from the same velocities, then applied), repeated
+  // until nothing approaches. Solving pairs one by one would bias the push towards list order.
+  for (let pass = 0; pass < 40; pass++) {
+    const imp = [];
+    for (let i = 0; i < bodies.length; i++) {
+      const a = bodies[i];
+      if (!a.inPlay) continue;
+      for (let k = i + 1; k < bodies.length; k++) {
+        const b = bodies[k];
+        if (b.inPlay) { const j = contact(a, b); if (j) imp.push(j); }
+      }
+    }
+    if (!imp.length) break;
+    // A piece pressed from several sides shares its push between them (keeps energy in check).
+    const cnt = new Map();
+    for (const [a, b] of imp) { cnt.set(a, (cnt.get(a) ?? 0) + 1); cnt.set(b, (cnt.get(b) ?? 0) + 1); }
+    for (const [a, b, jx, jy] of imp) {
+      const k = 1 / Math.sqrt(Math.max(cnt.get(a), cnt.get(b)));
+      a.vx -= (k * jx) / a.m; a.vy -= (k * jy) / a.m;
+      b.vx += (k * jx) / b.m; b.vy += (k * jy) / b.m;
     }
   }
   for (const p of bodies) {
@@ -157,7 +188,7 @@ export const moving = (bodies) => bodies.some((p) => p.inPlay && (p.vx || p.vy))
 export function startShot(state, x, angle, power) {
   const color = state.turn;
   const v = Math.max(0.015, Math.min(1, power)) * MAX_SPEED;
-  state.striker = { id: 'striker', kind: 'striker', color, x: clampStrikerX(x), y: BASE_Y[side(color)], r: geom(state).striker, m: MASS.striker, vx: Math.cos(angle) * v, vy: Math.sin(angle) * v, inPlay: true };
+  state.striker = { id: 'striker', kind: 'striker', color: 'striker', by: color, x: clampStrikerX(x), y: BASE_Y[side(color)], r: geom(state).striker, m: MASS.striker, vx: Math.cos(angle) * v, vy: Math.sin(angle) * v, inPlay: true };
   state.fell = [];
   state.shots++;
 }
@@ -383,6 +414,17 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   }
   // Fallback: a firm break, or a medium shot at the middle to open things up.
   const opening = state.pieces.every((p) => p.inPlay && Math.hypot(p.x - CENTER, p.y - CENTER) < 120);
+  if (opening && !simple) {
+    // Break along the rack's diagonal: hit the nearest coin on it so that the push runs through the
+    // pack and drives the coin at the far end into the far pocket.
+    const near = state.pieces.reduce((a, p) => ((me === 'white' ? p.x + p.y > a.x + a.y : p.x + p.y < a.x + a.y) ? p : a));
+    const k = (me === 'white' ? 1 : -1) * Math.SQRT1_2 * (near.r + SR);
+    cands.length = 0;
+    for (const x of [BASE_X[1] - 10, BASE_X[1] - 60, BASE_X[0] + 10, BASE_X[0] + 60]) {
+      if (!strikerFree(state, x, me)) continue;
+      cands.push({ x, angle: Math.atan2(near.y + k - y, near.x + k - x), power: 0.8, h: 5 });
+    }
+  }
   if (!cands.length) {
     for (let xi = 0; xi <= 8; xi++) {
       const x = BASE_X[0] + ((BASE_X[1] - BASE_X[0]) * xi) / 8;

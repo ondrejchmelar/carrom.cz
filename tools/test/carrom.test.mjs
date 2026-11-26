@@ -100,3 +100,23 @@ test('easy computer returns a valid shot', () => {
   assert.ok(Number.isFinite(shot.angle) && shot.power > 0 && shot.power <= 1);
   assert.ok(C.strikerFree(s, shot.x, s.turn));
 });
+
+test('a pocketed striker never counts as a coin', () => {
+  for (const easy of [false, true]) {
+    const s = C.newGame({ easy });
+    C.startShot(s, C.CENTER, -Math.PI / 2, 0.1);
+    s.fell = [s.striker];
+    C.endShot(s);
+    assert.equal(s.pocketed.white, 0);
+    assert.equal(s.winner, null);
+  }
+});
+
+test('full rules: striker foul after a coin costs that coin', () => {
+  const s = C.newGame();
+  s.fell = []; pocket(s, (q) => q.color === 'white'); C.endShot(s);
+  C.startShot(s, C.CENTER, -Math.PI / 2, 0.1);
+  s.fell = [s.striker];
+  C.endShot(s);
+  assert.equal(s.pocketed.white, 0);
+});
