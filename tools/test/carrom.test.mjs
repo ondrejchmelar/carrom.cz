@@ -120,3 +120,11 @@ test('full rules: striker foul after a coin costs that coin', () => {
   C.endShot(s);
   assert.equal(s.pocketed.white, 0);
 });
+
+test('aiming guide: straight up from the centre hits a coin and pushes it on', () => {
+  const s = C.newGame();
+  const pr = C.predictShot(s, C.CENTER, -Math.PI / 2);
+  assert.ok(pr.coins.length >= 1);
+  assert.ok(pr.striker.to[1] < C.BASE_Y.bottom && pr.striker.to[1] > C.CENTER);
+  assert.ok(pr.coins[0].to[1] < pr.coins[0].from[1]);
+});

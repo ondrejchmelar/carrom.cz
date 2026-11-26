@@ -250,9 +250,32 @@ const T = {
         const sh = cpuGhost ? { angle: cpuGhost.angle, power: cpuGhost.power * Math.min(1, cpuGhost.t), ok: true } : aim ? shotFromAim() : charging || kbPower ? { angle: kbAngle, power: kbPower, ok: true } : null;
         if (sh && sh.power > 0) {
           const len = 180 + sh.power * 620;
+          const live = sh.ok && !blocked;
           ctx.save();
-          ctx.setLineDash([10, 9]); ctx.lineWidth = 3; ctx.strokeStyle = sh.ok && !blocked ? COL.navy : '#9AA3B8';
-          line(showStriker.x, showStriker.y, showStriker.x + Math.cos(sh.angle) * len, showStriker.y + Math.sin(sh.angle) * len);
+          ctx.setLineDash([10, 9]); ctx.lineWidth = 3; ctx.strokeStyle = live ? COL.navy : '#9AA3B8';
+          if (!cpuGhost && levelSel.value !== 'hard') {
+            // Aiming guide (not on Hard): the striker up to the first coin, then where that coin goes,
+            // and the next coin it would push.
+            const pr = C.predictShot(state, showStriker.x, sh.angle);
+            line(pr.striker.from[0], pr.striker.from[1], pr.striker.to[0], pr.striker.to[1]);
+            ctx.setLineDash([]);
+            if (pr.coins.length) ring(pr.striker.to[0], pr.striker.to[1], G.striker, 'rgba(14,27,61,.45)', 2);
+            pr.coins.forEach((c, i) => {
+              ctx.globalAlpha = live ? (i ? 0.55 : 0.95) : 0.5;
+              ctx.strokeStyle = live ? COL.red : '#9AA3B8'; ctx.lineWidth = i ? 2.4 : 3.2;
+              ctx.setLineDash(i ? [6, 7] : []);
+              // In a packed rack the next coin touches at once, so draw at least a short arrow.
+              const dx = c.to[0] - c.from[0], dy = c.to[1] - c.from[1], d = Math.hypot(dx, dy) || 1;
+              const L = Math.max(d, c.piece.r + 55);
+              const to = [c.from[0] + (dx / d) * L, c.from[1] + (dy / d) * L];
+              line(c.from[0], c.from[1], to[0], to[1]);
+              arrow(c.from, to, i ? 9 : 12);
+              ring(c.piece.x, c.piece.y, c.piece.r + 3, ctx.strokeStyle as string, 2.4);
+            });
+            ctx.globalAlpha = 1;
+          } else {
+            line(showStriker.x, showStriker.y, showStriker.x + Math.cos(sh.angle) * len, showStriker.y + Math.sin(sh.angle) * len);
+          }
           ctx.restore();
           // power arc
           ctx.lineWidth = 5; ctx.strokeStyle = sh.ok && !blocked ? COL.red : '#9AA3B8';
@@ -264,6 +287,16 @@ const T = {
     function rr(x: number, y: number, w: number, h: number, r: number, c: string) { ctx.fillStyle = c; ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
     function circle(x: number, y: number, r: number, c: string) { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); }
     function ring(x: number, y: number, r: number, c: string, w: number) { if (!w) return; ctx.strokeStyle = c; ctx.lineWidth = w; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke(); }
+    function arrow(from: number[], to: number[], size: number) {
+      const a = Math.atan2(to[1] - from[1], to[0] - from[0]);
+      if (Math.hypot(to[0] - from[0], to[1] - from[1]) < size * 2) return;
+      ctx.setLineDash([]);
+      ctx.beginPath();
+      ctx.moveTo(to[0] - Math.cos(a - 0.45) * size, to[1] - Math.sin(a - 0.45) * size);
+      ctx.lineTo(to[0], to[1]);
+      ctx.lineTo(to[0] - Math.cos(a + 0.45) * size, to[1] - Math.sin(a + 0.45) * size);
+      ctx.stroke();
+    }
     function line(a: number, b: number, c: number, d: number) { ctx.beginPath(); ctx.moveTo(a, b); ctx.lineTo(c, d); ctx.stroke(); }
     function coin(x: number, y: number, r: number, color: string) {
       circle(x + 1.6, y + 2.2, r, 'rgba(59,36,22,.28)');

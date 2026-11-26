@@ -331,6 +331,60 @@ function endShotEasy(state) {
   return summary;
 }
 
+// ---------------------------------------------------------------- aiming guide
+
+/** First piece a circle of radius r moving from (ax, ay) along unit (dx, dy) touches, within max mm. */
+function cast(state, ax, ay, dx, dy, r, ignore, max) {
+  let best = null;
+  for (const p of state.pieces) {
+    if (!p.inPlay || p === ignore) continue;
+    const fx = p.x - ax, fy = p.y - ay, R = r + p.r;
+    const along = fx * dx + fy * dy;
+    if (along <= 0) continue;
+    const off2 = fx * fx + fy * fy - along * along;
+    if (off2 >= R * R) continue;
+    const t = along - Math.sqrt(R * R - off2);
+    if (t < max && (!best || t < best.t)) best = { t, piece: p };
+  }
+  return best;
+}
+
+/** Distance from (x, y) along (dx, dy) to the cushion for a piece of radius r. */
+function toWall(x, y, dx, dy, r) {
+  let t = Infinity;
+  if (dx > 0) t = Math.min(t, (BOARD - r - x) / dx); else if (dx < 0) t = Math.min(t, (r - x) / dx);
+  if (dy > 0) t = Math.min(t, (BOARD - r - y) / dy); else if (dy < 0) t = Math.min(t, (r - y) / dy);
+  return t;
+}
+
+/**
+ * Where a shot from x at angle goes: the striker's straight path up to the first coin it touches,
+ * that coin's direction (along the line of centres) and, if it runs into another coin, that one too.
+ * Each line is { from: [x, y], to: [x, y], piece? }. Speed and friction are ignored.
+ */
+export function predictShot(state, x, angle) {
+  const g = geom(state);
+  const y = BASE_Y[side(state.turn)];
+  const dx = Math.cos(angle), dy = Math.sin(angle);
+  const wall = toWall(x, y, dx, dy, g.striker);
+  const hit = cast(state, x, y, dx, dy, g.striker, null, wall);
+  const t = hit ? hit.t : wall;
+  const striker = { from: [x, y], to: [x + dx * t, y + dy * t] };
+  const out = { striker, coins: [] };
+  let cur = hit?.piece, from = striker.to;
+  for (let k = 0; k < 2 && cur; k++) {
+    const ux = cur.x - from[0], uy = cur.y - from[1], ul = Math.hypot(ux, uy) || 1;
+    const cx = ux / ul, cy = uy / ul;
+    const w = toWall(cur.x, cur.y, cx, cy, cur.r);
+    const next = cast(state, cur.x, cur.y, cx, cy, cur.r, cur, w);
+    const len = next ? next.t : w;
+    const to = [cur.x + cx * len, cur.y + cy * len];
+    out.coins.push({ from: [cur.x, cur.y], to, piece: cur });
+    from = to; cur = next?.piece;
+  }
+  return out;
+}
+
 // ---------------------------------------------------------------- computer opponent
 
 function clone(state) {
