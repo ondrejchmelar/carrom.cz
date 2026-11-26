@@ -37,7 +37,8 @@ test('PCL 2026: table and playoff match the real sheet and playoff page', () => 
   const g = s.groups[0];
   const by = Object.fromEntries(g.slots.map((x) => [x.id, x]));
   assert.equal(by.f1.players[0].player, 'zdenek-svitak');
-  assert.equal(by.f1.players[1].player, 'frantisek-cervenka');
+  assert.equal(by.f1.players[1].player, 'ajay-sekhesh'); // SF2 went to Sekhesh (Ondrej, 2026-11-26)
+  assert.equal(by.f3.players[1].player, 'frantisek-cervenka');
   assert.equal(by.f5.players[0].player, 'tomas-chmelar');
   assert.equal(g.next, 'l-sf2');
   assert.equal(s.complete, false);
