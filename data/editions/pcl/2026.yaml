@@ -1,0 +1,44 @@
+competition: pcl
+year: 2026
+status: running             # planned | registration_open | running | finished
+phase: playoff              # group | playoff | finished
+start_date: 2026-01-21
+venue: { name: Čítárna Unijazz, address: "Husitská 22, Praha 3" }
+
+links:                      # web jen odkazuje, nic nečte
+  signup_url: ~             # přihláška na sezónu (Google Form)
+  evening_signup_url: ~     # zápis na večery (Google Sheet)
+
+format:                     # z propozic PCL 2026, jednou za sezónu
+  group_stage:
+    until: 2026-10-31
+    legs: 1                 # každý s každým jednou
+    points: { win: 2, draw: 1 }
+    tiebreak: [points, diff, h2h_points, h2h_diff, scored]
+  playoff:
+    bracket: pcl-8          # skupiny po 8: ČF, SF, F + zápasy o umístění
+    groups: ["1-8", "9-16"]
+    best_of: { "1-8": 3, "1-8/5-8": 1, "9-16": 1 }
+    dates: { qf: 2026-11-04, sf: 2026-11-18, f: 2026-12-02 }   # UKÁZKA: termíny ověřit
+
+roster:                     # soupiska z přihlášek
+  - shoeb-ahmed-khan
+  - horst-simunsky
+  - frantisek-rezek
+  - jan-tesitel
+  - raj-patil
+  - lukas-navratil
+  - selvamani-thirumurugan
+  - michal-fucik
+  - frantisek-cervenka
+  - neel-vasanth
+  - ondrej-chmelar
+  - pavel-schierl
+  - romana-kralova
+  - tomas-chmelar
+  - zdenek-svitak
+  - ajay-sekhesh
+  - shiv-sah
+
+results:
+  singles: []               # konečné pořadí doplní build po finále, nevyplňuje se

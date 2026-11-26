@@ -1,0 +1,34 @@
+# Menu webu. Pořadí položek = pořadí na webu. Nic z toho není natvrdo v kódu.
+main:
+  - { page: hra-carrom, label: { cs: Hra carrom,     en: The game } }
+  - { page: kalendar,   label: { cs: Kalendář,       en: Calendar } }
+  - { page: vysledky,   label: { cs: Výsledky,       en: Results } }
+  - { page: ligy,       label: { cs: Ligy,           en: Leagues } }
+  - { page: novinky,    label: { cs: Novinky,        en: News } }
+  - { page: galerie,    label: { cs: Galerie,        en: Gallery } }
+  - { page: asociace,   label: { cs: Asociace,       en: Association } }
+
+# Tlačítko vpravo v hlavičce
+cta: { page: ligy, label: { cs: Přijď si zahrát, en: Come and play } }
+
+# Spodní lišta na mobilu (max. 5 položek, poslední otevírá „Více“)
+tabbar:
+  - { page: domu,     label: { cs: Domů,     en: Home },     icon: home }
+  - { page: novinky,  label: { cs: Novinky,  en: News },     icon: news }
+  - { page: kalendar, label: { cs: Kalendář, en: Calendar }, icon: calendar }
+  - { page: vysledky, label: { cs: Výsledky, en: Results },  icon: trophy }
+  - { page: vice,     label: { cs: Více,     en: More },     icon: menu }
+
+# Menu „Více“ na mobilu
+more:
+  - { page: hra-carrom, label: { cs: Hra carrom,      en: The game },    note: { cs: Pravidla a hra v prohlížeči, en: Rules and the browser game } }
+  - { page: ligy,       label: { cs: Ligy a kde hrát, en: Leagues },     note: { cs: "Praha, Medlešice, Opočnice", en: "Prague, Medlešice, Opočnice" } }
+  - { page: galerie,    label: { cs: Galerie,         en: Gallery },     note: { cs: Fotky od roku 2006, en: Photos since 2006 } }
+  - { page: asociace,   label: { cs: Asociace,        en: Association }, note: { cs: "Historie, dokumenty, kontakty", en: "History, documents, contacts" } }
+  - { url: "https://eurocup.carrom.cz", label: { cs: Euro Cup, en: Euro Cup } }
+
+footer:
+  - { page: asociace, anchor: kontakty, label: { cs: Kontakty, en: Contacts } }
+  - { page: asociace, anchor: dokumenty, label: { cs: Stanovy a zápisy, en: Statutes and minutes } }
+  - { url: "https://www.facebook.com/carromcz", label: { cs: Facebook, en: Facebook } }
+  - { page: en, label: { cs: English, en: Česky } }

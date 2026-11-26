@@ -1,0 +1,27 @@
+---
+import Base from '../../../layouts/Base.astro';
+import McrTable from '../../../components/McrTable.astro';
+import { model } from '../../../lib/data';
+import { url, t, editionName, editionUrl } from '../../../lib/site';
+export function getStaticPaths() {
+  return Object.values(model().rankings).map((r: any) => ({ params: { year: String(r.year) }, props: { id: r.id } }));
+}
+const m = model();
+const r = m.rankings[(Astro.props as any).id];
+---
+<Base title={t(r.name)} current="vysledky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={url('/vysledky/mcr/')}>Mistrovství ČR</a>
+      <h1>{t(r.name)}</h1>
+      <p class="lede">
+        Počítají se {r.best_of} nejlepší ze {r.editions.length} turnajů (šedé body se nepočítají).
+        {r.points === 'published' ? ` Body jsou převzaté ze starého webu (vítěz ${r.scale}).` : ` Vítěz turnaje má ${r.table.scale} bodů, poslední 1, body jsou zaokrouhlené na celá čísla. Počítají se jen hráči, kteří hrají o titul MČR.`}
+      </p>
+    </div>
+    {r.table.rows.length ? <McrTable id={r.id} /> : <p class="notice">Tabulka se začne plnit po prvním turnaji.</p>}
+    <div class="btn-row">
+      {r.editions.map((id: string) => m.editions[id] && <a class="btn btn-ghost" href={editionUrl(m.editions[id])}>{editionName(m.editions[id])}</a>)}
+    </div>
+  </div>
+</Base>

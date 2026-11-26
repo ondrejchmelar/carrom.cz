@@ -1,0 +1,42 @@
+---
+// MČR table: best N of 3 tournaments count. Uncounted results are greyed.
+import { model } from '../lib/data';
+import { t, num, playerLink, plainName, type Lang } from '../lib/site';
+interface Props { id?: string; limit?: number; lang?: Lang }
+const { id, limit, lang = 'cs' } = Astro.props;
+const m = model();
+const r = id ? m.rankings[id] : m.latestRanking;
+const rows = r ? (limit ? r.table.rows.slice(0, limit) : r.table.rows) : [];
+const colName = (eid: string) => {
+  const ed = m.editions[eid];
+  return ed ? t(ed.competition.short_name, lang) || ed.code : eid.split('/')[0];
+};
+---
+{r && (
+  <div class="table-box">
+    <table class="data">
+      <caption class="sr-only">{t(r.name, lang)}</caption>
+      <thead>
+        <tr>
+          <th class="l">#</th><th class="l">{lang === 'en' ? 'Player' : 'Hráč'}</th>
+          {r.table.columns.map((c: string) => <th>{colName(c)}</th>)}
+          <th>{lang === 'en' ? 'Total' : 'Součet'}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row: any) => {
+          const href = playerLink(row.player, m.players);
+          const name = plainName(m.players[row.player], row.player);
+          return (
+            <tr class={row.place <= 3 ? 'top' : ''}>
+              <td class="rk l">{row.place}</td>
+              <td class="name">{href ? <a href={href}>{name}</a> : name}</td>
+              {row.points.map((p: number | null, i: number) => <td class={row.counted[i] ? '' : 'dim'}>{num(p)}</td>)}
+              <td class="strong">{num(row.total)}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+)}

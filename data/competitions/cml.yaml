@@ -1,0 +1,10 @@
+code: cml
+kind: league
+category: league
+name: { cs: Medlešická liga, en: Medlešice League }
+short_name: { cs: Medlešická liga, en: Medlešice league }
+description:
+  cs: Liga u Chrudimi, hraje se od roku 2011. Otevřená i úplným nováčkům.
+  en: A league near Chrudim, played since 2011. Open to complete beginners.
+contact_email: cml@carrom.cz
+since: 2011

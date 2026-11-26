@@ -1,0 +1,10 @@
+code: jarni
+kind: tournament
+category: mcr
+name: { cs: Jarní turnaj MČR, en: Spring Czech Championship tournament }
+short_name: { cs: Jarní turnaj, en: Spring tournament }
+description:
+  cs: První turnaj série Mistrovství ČR, obvykle v dubnu v Pelhřimově.
+  en: First tournament of the Czech Championship series, usually in April in Pelhřimov.
+contact_email: mcr@carrom.cz
+since: 2011

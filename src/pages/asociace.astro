@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry, render } from 'astro:content';
+import { model } from '../lib/data';
+import { url, t } from '../lib/site';
+const m = model();
+const s = m.settings.site ?? {};
+const pay = m.settings.payment ?? {};
+const page = await getEntry('pages', 'asociace.cs');
+const { Content } = page ? await render(page) : { Content: null };
+const contacts = [
+  ['Obecné dotazy', 'carrom@carrom.cz'], ['Asociace', 'cca@carrom.cz'], ['Mistrovství ČR', 'mcr@carrom.cz'],
+  ['Carrom Open Cup', 'opencup@carrom.cz'], ['Pražská liga', 'pcl@carrom.cz'], ['Medlešická liga', 'cml@carrom.cz'],
+];
+const docs = m.documents.filter((d: any) => ['statutes', 'minutes'].includes(d.kind));
+---
+<Base title="Asociace" current="asociace">
+  <div class="wrap page">
+    <div class="page-head">
+      <h1>Asociace</h1>
+      <p class="lede">{page?.data.description}</p>
+    </div>
+    <div class="cols">
+      <div class="prose">{Content && <Content />}</div>
+      <div class="side">
+        <section class="card pad" id="platba">
+          <h2 class="h">Platba startovného a ligových poplatků</h2>
+          <p class="small">{t(pay.note)}</p>
+          {pay.qr_image ? <img class="qr" src={url(pay.qr_image)} alt="QR kód pro platbu na účet ČCA" width="220" height="220" /> : <p class="notice">QR kód a číslo účtu doplníme.</p>}
+          {pay.account && <p><strong>Účet: {pay.account}</strong></p>}
+        </section>
+        <section class="card pad" id="dokumenty">
+          <h2 class="h">Dokumenty</h2>
+          {docs.length ? docs.map((d: any) => <a href={url(t(d.file))}>{t(d.title)}</a>) : <span class="small">Stanovy a zápisy převezmeme ze starého webu.</span>}
+        </section>
+        <section class="card pad" id="kontakty">
+          <h2 class="h">Kontakty</h2>
+          <dl class="contacts">
+            {contacts.map(([k, v]) => <div><dt>{k}</dt><dd><a href={`mailto:${v}`}>{v}</a></dd></div>)}
+          </dl>
+          <p class="small">{t(s.org)}, z.s. · {s.address} · IČ {s.ico}</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>
+<style>
+  .cols { display: grid; gap: 32px; }
+  .side { display: flex; flex-direction: column; gap: 16px; }
+  .pad { padding: 22px; gap: 10px; border-radius: 18px; }
+  .h { font-size: 22px; }
+  .qr { width: 220px; height: 220px; }
+  .contacts { margin: 0; display: grid; gap: 8px; }
+  .contacts div { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid #EEF0F5; padding-bottom: 8px; }
+  .contacts dt { color: var(--muted); }
+  .contacts dd { margin: 0; font-weight: 600; }
+  .contacts a { color: var(--red); }
+  @media (min-width: 960px) { .cols { grid-template-columns: minmax(0, 1fr) 420px; gap: 64px; align-items: start; } }
+</style>

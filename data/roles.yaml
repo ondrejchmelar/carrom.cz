@@ -1,0 +1,13 @@
+# Kdo smí co měnit. Jen GitHub přihlašovací jména, žádné osobní údaje (repo je veřejné).
+#
+# admin    – všechno, včetně kódu (src/**, .github/**)
+# editors  – obsah a data (content/**, data/**, uploads/**)
+# results  – jen výsledky jedné ligy; klíč = kód ligy, hodnota = seznam GitHub jmen
+#
+# Kontrolu dělá .github/workflows/pr-check.yml (tools/check-scope.mjs).
+admin: [ondrejchmelar]
+editors: []
+results:
+  pcl: []
+  cml: []
+  ol: []

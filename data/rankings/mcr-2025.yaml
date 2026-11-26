@@ -1,0 +1,38 @@
+year: 2025
+audience: open
+name: { cs: Mistrovství ČR 2025, en: Czech Championship 2025 }
+editions: [jarni/2025, druhy/2025, cocp/2025]
+best_of: 2
+points: published           # published = opsané ze starého webu | computed = spočítá build
+scale: 100
+check: true                 # build spočítá body i vzorcem a rozdíly nahlásí (nic nepřepíše)
+
+# body za [jarní, druhý, open cup]; ~ = nehrál
+standings:
+  karlos-novak:          [91,  100, 100]
+  ajay-sekhesh:          [100, 67,  91]
+  matej-bednar:          [73,  78,  95.5]
+  zdenek-svitak:         [82,  89,  59.5]
+  frantisek-cervenka:    [64,  ~,   82]
+  jan-tesitel:           [28,  56,  73]
+  ondrej-kubicek:        [19,  34,  86.5]
+  tomas-chmelar:         [46,  45,  55]
+  lukas-navratil:        [~,   ~,   77.5]
+  ondrej-chmelar:        [~,   ~,   68.5]
+  miroslav-cernohous:    [10,  ~,   64]
+  jakub-muller:          [55,  ~,   ~]
+  frantisek-rezek:       [~,   23,  28]
+  pavel-schierl:         [~,   ~,   50.5]
+  ales-formanek:         [~,   ~,   46]
+  rostislav-borsky:      [~,   ~,   41.5]
+  neel-vasanth:          [37,  ~,   ~]
+  romana-kralova:        [~,   ~,   37]
+  michal-fucik:          [~,   ~,   32.5]
+  vratislav-borsky:      [~,   ~,   23.5]
+  magdalena-novotna:     [~,   ~,   19]
+  vendula-ferancova:     [~,   ~,   14.5]
+  savindu-jayasooriya:   [~,   12,  ~]
+  veronika-stejskalova:  [10,  ~,   1]
+  filip-vitek:           [~,   ~,   10]
+  zdenek-taborsky:       [~,   1,   5.5]
+  jaroslav-kucera:       [1,   ~,   ~]

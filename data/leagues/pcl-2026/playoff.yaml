@@ -1,0 +1,17 @@
+# Playoff PCL 2026. Jen skóre, podle slotů. Kdo hraje který slot, spočítá build z tabulky.
+# Každá položka v seznamu je jedna hra ve tvaru "horní:dolní".
+seeds: auto                 # auto = pořadí po základním kole; nebo seznam hráčů v pořadí
+games:
+  "1-8":
+    qf1: ["25:0", "25:0"]
+    qf2: ["1:25", "7:25"]
+    qf3: ["19:17", "16:25", "25:0"]
+    qf4: ["0:25", "1:25"]
+    sf1: ["25:11", "17:11"]
+    sf2: ["25:0", "25:0"]
+    l-sf1: ["24:18"]
+    l-sf2: []
+    f1: []
+    f3: []
+    f5: []
+    f7: []

@@ -1,0 +1,13 @@
+---
+import Base from '../../../layouts/Base.astro';
+import YearView from '../_YearView.astro';
+import { model } from '../../../lib/data';
+export function getStaticPaths() {
+  const m = model();
+  const today = new Date().toISOString().slice(0, 10);
+  const years = [...new Set(m.editionList.filter((e: any) => (e.start_date ?? '') <= today).map((e: any) => e.year))].sort((a: any, b: any) => b - a) as number[];
+  return years.slice(1).map((y) => ({ params: { year: String(y) }, props: { year: y, years } }));
+}
+const { year, years } = Astro.props;
+---
+<Base title={`Výsledky ${year}`} current="vysledky"><YearView year={year} years={years} /></Base>

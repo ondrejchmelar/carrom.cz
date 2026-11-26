@@ -1,0 +1,12 @@
+title:
+  cs: Propozice Carrom Open Cup Praha 2026
+  en: Carrom Open Cup Prague 2026, tournament rules
+kind: propozice             # propozice | poster | itinerary | results | minutes | statutes | rules | other
+date: 2026-11-21
+edition: cocp/2026
+file:                       # soubory doplní import ze starého webu
+  cs: /uploads/documents/2026/COCP_2026_CZ.pdf
+  en: /uploads/documents/2026/COCP_2026_EN.pdf
+old_urls:                   # → přesměrování ze starých adres
+  - /adresar_dokumenty/COCP_2026_CZ.pdf
+  - /adresar_dokumenty/COCP_2026_EN.pdf

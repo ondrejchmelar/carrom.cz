@@ -1,0 +1,8 @@
+competition: ecc
+year: 2026
+status: finished
+start_date: 2026-09-01      # UKÁZKA: přesné datum doplnit
+edition_name: { cs: 28. Carrom Eurocup, en: 28th Carrom Eurocup }
+venue: { name: Eurocup, city: "" }
+external_url: "https://eurocup.carrom.cz"
+results: {}

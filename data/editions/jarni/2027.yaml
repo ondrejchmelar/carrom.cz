@@ -1,0 +1,14 @@
+# UKÁZKA: plánovaný turnaj, jak vypadá před odehráním. Datum je vymyšlené.
+competition: jarni
+year: 2027
+status: planned
+start_date: 2027-04-10
+end_date: 2027-04-10
+venue: { name: SPŠ a SOU Pelhřimov, city: Pelhřimov }
+signup_url: ~                # odkaz na Google Form; přihlášené web neukazuje
+signup_deadline: 2027-04-03
+schedule:
+  cs: "9:00 prezence, 9:30 zahájení, 18:00 vyhlášení"
+  en: "9:00 check-in, 9:30 start, 18:00 prize-giving"
+documents: []
+results: {}

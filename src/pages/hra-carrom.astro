@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import Board from '../components/Board.astro';
+import { getEntry, render } from 'astro:content';
+import { url, nbsp } from '../lib/site';
+const page = await getEntry('pages', 'hra-carrom.cs');
+const { Content } = page ? await render(page) : { Content: null };
+---
+<Base title="Hra carrom" description={page?.data.description} current="hra-carrom" alt={url('/en/the-game/')}>
+  <div class="wrap page">
+    <div class="intro">
+      <div class="page-head">
+        <span class="eyebrow">Kulečník na prsty</span>
+        <h1>{page?.data.title ?? 'Hra carrom'}</h1>
+        <div class="prose">{Content && <Content />}</div>
+        <div class="btn-row">
+          <a class="btn btn-red" href={url('/ligy/')}>Kde si zahrát naživo</a>
+        </div>
+      </div>
+      <div id="hra" class="game">
+        <Board class="board" />
+        <p class="notice">{nbsp('Hru v prohlížeči připravujeme. Zatím si deskou můžeš jen prohlédnout, jak carrom vypadá.')}</p>
+      </div>
+    </div>
+  </div>
+</Base>
+<style>
+  .intro { display: grid; gap: 32px; }
+  .game { display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
+  .board { width: 100%; height: auto; }
+  @media (min-width: 960px) { .intro { grid-template-columns: minmax(0, 1fr) 440px; gap: 64px; align-items: start; } .game { position: sticky; top: 24px; } }
+</style>

@@ -1,0 +1,9 @@
+competition: cocp
+year: 2025
+status: finished
+start_date: 2025-11-15
+end_date: 2025-11-15
+venue: { name: Praha, city: Praha }
+edition_name: { cs: XX. Carrom Open Cup Praha, en: 20th Carrom Open Cup Prague }
+source: old-site
+results: {}                 # konečné pořadí doplní import ze SoL

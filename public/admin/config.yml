@@ -1,0 +1,323 @@
+# Administrace carrom.cz (Sveltia CMS). Každé uložení = commit do repozitáře, web se sám přestaví (1–2 min).
+# Přihlášení: GitHub. Dokud neběží přihlašovací služba (viz README), použijte „Sign in with Token“
+# s osobním tokenem GitHubu (fine-grained, jen repo carrom.cz, práva Contents: read and write).
+backend:
+  name: github
+  repo: ondrejchmelar/carrom.cz
+  branch: main
+  # base_url: https://<přihlašovací-služba>   # doplní se po zprovoznění OAuth (README, krok 4)
+  commit_messages:
+    create: "Přidáno: {{collection}} {{slug}}"
+    update: "Upraveno: {{collection}} {{slug}}"
+    delete: "Smazáno: {{collection}} {{slug}}"
+    uploadMedia: "Nahráno: {{path}}"
+    deleteMedia: "Smazáno: {{path}}"
+
+site_url: https://ondrejchmelar.github.io/carrom.cz/
+locale: cs
+media_folder: public/uploads
+public_folder: /uploads
+
+i18n:
+  structure: multiple_files
+  locales: [cs, en]
+  default_locale: cs
+
+collections:
+  # ---------------- Obsah ----------------
+  - name: articles
+    label: Novinky
+    label_singular: Zpráva
+    folder: content/articles
+    path: "{{year}}/{{year}}-{{month}}-{{day}}-{{slug}}"
+    slug: "{{fields.slug}}"
+    extension: md
+    format: frontmatter
+    create: true
+    i18n: true
+    sortable_fields: { fields: [publish_at, title], default: { field: publish_at, direction: descending } }
+    summary: "{{publish_at | date('D. M. YYYY')}} · {{title}}"
+    fields:
+      - { name: title, label: Nadpis, widget: string, i18n: true }
+      - { name: slug, label: Adresa (slug), widget: string, i18n: duplicate, hint: "Malá písmena bez diakritiky, např. open-cup-2026" }
+      - { name: perex, label: Perex, widget: text, required: false, i18n: true }
+      - { name: publish_at, label: Zveřejnit, widget: datetime, i18n: duplicate }
+      - { name: status, label: Stav, widget: select, options: [{ label: Koncept, value: draft }, { label: Zveřejněno, value: published }], default: published, i18n: duplicate }
+      - { name: pinned, label: Připnout nahoru, widget: boolean, default: false, i18n: duplicate }
+      - { name: cover, label: Úvodní fotka, widget: image, required: false, i18n: duplicate }
+      - { name: edition, label: Ročník soutěže (výsledky pod článkem), widget: relation, collection: editions, value_field: "{{competition}}/{{year}}", search_fields: [competition, year], display_fields: ["{{competition}} {{year}}"], required: false, i18n: duplicate }
+      - { name: tags, label: Štítky, widget: select, multiple: true, options: [turnaje, ligy, asociace, zahranici], required: false, i18n: duplicate }
+      - { name: body, label: Text, widget: markdown, i18n: true }
+
+  - name: pages
+    label: Stránky
+    label_singular: Stránka
+    folder: content/pages
+    path: "{{slug}}"
+    slug: "{{fields.slug}}"
+    extension: md
+    format: frontmatter
+    create: true
+    i18n: true
+    fields:
+      - { name: title, label: Nadpis, widget: string, i18n: true }
+      - { name: slug, label: Adresa (slug), widget: string, i18n: duplicate }
+      - { name: description, label: Popis (pro vyhledávače), widget: text, required: false, i18n: true }
+      - { name: layout, label: Rozvržení, widget: select, options: [text, text-sidebar, gallery], default: text, i18n: duplicate }
+      - { name: body, label: Text, widget: markdown, i18n: true }
+
+  # ---------------- Turnaje a výsledky ----------------
+  - name: editions
+    label: Ročníky turnajů a lig
+    label_singular: Ročník
+    folder: data/editions
+    path: "{{competition}}/{{year}}"
+    extension: yaml
+    format: yaml
+    create: true
+    i18n: false
+    summary: "{{competition}} {{year}} · {{status}}"
+    sortable_fields: { fields: [start_date, competition], default: { field: start_date, direction: descending } }
+    view_groups: [{ label: Soutěž, field: competition }, { label: Rok, field: year }]
+    fields:
+      - { name: competition, label: Soutěž, widget: relation, collection: competitions, value_field: code, search_fields: [code, name.cs], display_fields: ["{{name.cs}}"] }
+      - { name: year, label: Rok, widget: number, value_type: int }
+      - { name: edition_name, label: Vlastní název ročníku, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: string, required: false }, { name: en, label: Anglicky, widget: string, required: false }] }
+      - { name: status, label: Stav, widget: select, options: [{ label: Plánovaný, value: planned }, { label: Přihlášky otevřené, value: registration_open }, { label: Probíhá (liga), value: running }, { label: Odehraný, value: finished }] }
+      - { name: phase, label: Fáze ligy, widget: select, required: false, options: [{ label: Základní kolo, value: group }, { label: Playoff, value: playoff }, { label: Skončila, value: finished }], hint: "Jen pro ligy. Po přepnutí na Playoff web zmrazí nasazení podle tabulky." }
+      - { name: start_date, label: Začátek, widget: datetime, time_format: false, format: YYYY-MM-DD }
+      - { name: end_date, label: Konec, widget: datetime, time_format: false, format: YYYY-MM-DD, required: false }
+      - name: venue
+        label: Místo
+        widget: object
+        fields:
+          - { name: name, label: Název, widget: string }
+          - { name: city, label: Město, widget: string, required: false }
+          - { name: address, label: Adresa, widget: string, required: false }
+      - { name: signup_url, label: Přihláška (odkaz na Google Form), widget: string, required: false }
+      - { name: signup_deadline, label: Přihlášky do, widget: datetime, time_format: false, format: YYYY-MM-DD, required: false }
+      - { name: schedule, label: Program, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
+      - { name: report, label: Zpráva o turnaji, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
+      - { name: sol_lit_url, label: Detailní výsledky v SoL lit, widget: string, required: false }
+      - { name: source, label: Odkud výsledky, widget: select, options: [old-site, sol, admin], default: admin, required: false }
+      - name: roster
+        label: Soupiska ligy
+        label_singular: hráč
+        widget: list
+        required: false
+        hint: "Jen pro ligy. Hráči z přihlášek na sezónu."
+        field: { name: player, label: Hráč, widget: relation, collection: players, value_field: "{{slug}}", search_fields: [first_name, last_name, nickname], display_fields: ["{{first_name}} {{last_name}}"] }
+      - name: results
+        label: Konečné pořadí
+        widget: object
+        required: false
+        hint: "Turnaje doplňuje import ze SoL. U lig s playoff ho počítá web sám, nevyplňujte."
+        fields:
+          - name: singles
+            label: Jednotlivci
+            widget: list
+            required: false
+            fields:
+              - { name: place, label: Místo, widget: number, value_type: int }
+              - { name: player, label: Hráč, widget: relation, collection: players, value_field: "{{slug}}", search_fields: [first_name, last_name, nickname], display_fields: ["{{first_name}} {{last_name}}"] }
+          - name: juniors
+            label: Junioři
+            widget: list
+            required: false
+            fields:
+              - { name: place, label: Místo, widget: number, value_type: int }
+              - { name: player, label: Hráč, widget: relation, collection: players, value_field: "{{slug}}", search_fields: [first_name, last_name], display_fields: ["{{first_name}} {{last_name}}"] }
+              - { name: club_at_time, label: Klub / škola, widget: string, required: false }
+
+  - name: league_evenings
+    label: PCL – hrací večery
+    label_singular: Hrací večer
+    folder: data/leagues
+    path: "{{season}}/{{date}}"
+    extension: yaml
+    format: yaml
+    create: true
+    summary: "{{season}} · {{date}}"
+    filter: { field: season, pattern: "^pcl-" }
+    fields:
+      - { name: season, label: Sezóna, widget: string, default: pcl-2027, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "pcl-<rok>" }
+      - { name: date, label: Datum, widget: datetime, time_format: false, format: YYYY-MM-DD }
+      - { name: venue, label: Jiné místo než obvykle, widget: string, required: false, hint: "Prázdné = místo sezóny" }
+      - name: matches
+        label: Zápasy
+        label_singular: zápas
+        widget: list
+        fields:
+          - { name: a, label: Hráč A, widget: relation, collection: players, value_field: "{{slug}}", search_fields: [first_name, last_name, short_name], display_fields: ["{{first_name}} {{last_name}}"] }
+          - { name: b, label: Hráč B, widget: relation, collection: players, value_field: "{{slug}}", search_fields: [first_name, last_name, short_name], display_fields: ["{{first_name}} {{last_name}}"] }
+          - { name: score, label: "Skóre (A:B)", widget: string, pattern: ["^\\d{1,2}:\\d{1,2}$", "Ve tvaru 25:11"] }
+          - { name: forfeit, label: Kontumace, widget: boolean, default: false, required: false }
+      - { name: scorecard, label: Fotka zápisu, widget: image, required: false }
+      - { name: note, label: Poznámka, widget: string, required: false }
+
+  - name: league_playoff
+    label: PCL – playoff
+    files:
+      - name: pcl-2026
+        label: Playoff PCL 2026
+        file: data/leagues/pcl-2026/playoff.yaml
+        fields:
+          - { name: seeds, label: Nasazení, widget: string, default: auto, hint: "auto = podle tabulky po základním kole" }
+          - name: games
+            label: Hry
+            widget: object
+            hint: "Každá hra ve tvaru horní:dolní, např. 25:11. Kdo hraje který zápas, spočítá web."
+            fields:
+              - name: "1-8"
+                label: Skupina o 1.–8. místo
+                widget: object
+                fields:
+                  - { name: qf1, label: "Čtvrtfinále 1 (1–8)", widget: list, required: false }
+                  - { name: qf2, label: "Čtvrtfinále 2 (5–4)", widget: list, required: false }
+                  - { name: qf3, label: "Čtvrtfinále 3 (3–6)", widget: list, required: false }
+                  - { name: qf4, label: "Čtvrtfinále 4 (7–2)", widget: list, required: false }
+                  - { name: sf1, label: Semifinále 1, widget: list, required: false }
+                  - { name: sf2, label: Semifinále 2, widget: list, required: false }
+                  - { name: l-sf1, label: "O 5.–8. místo (1)", widget: list, required: false }
+                  - { name: l-sf2, label: "O 5.–8. místo (2)", widget: list, required: false }
+                  - { name: f1, label: Finále, widget: list, required: false }
+                  - { name: f3, label: O 3. místo, widget: list, required: false }
+                  - { name: f5, label: O 5. místo, widget: list, required: false }
+                  - { name: f7, label: O 7. místo, widget: list, required: false }
+
+  - name: players
+    label: Hráči
+    label_singular: Hráč
+    folder: data/players
+    extension: yaml
+    format: yaml
+    create: true
+    identifier_field: last_name
+    slug: "{{first_name}}-{{last_name}}"
+    summary: "{{last_name}} {{first_name}}{{nickname | ternary(' „' + nickname + '“', '')}}"
+    sortable_fields: { fields: [last_name, first_name], default: { field: last_name } }
+    view_filters:
+      - { label: Hrají o titul MČR, field: mcr, pattern: true }
+      - { label: Nehrají o MČR, field: mcr, pattern: "^(false|)$" }
+    fields:
+      - { name: first_name, label: Jméno, widget: string }
+      - { name: last_name, label: Příjmení, widget: string }
+      - { name: nickname, label: Přezdívka, widget: string, required: false }
+      - { name: short_name, label: Krátké jméno do ligových tabulek, widget: string, required: false }
+      - { name: country, label: Země (kód), widget: string, default: CZ }
+      - { name: mcr, label: Hraje o titul MČR, widget: boolean, default: false, required: false, hint: "Zaškrtnutí se počítají do tabulky Mistrovství ČR." }
+      - { name: page, label: Vlastní stránka, widget: select, options: [{ label: Automaticky, value: auto }, { label: Vždy, value: always }, { label: Nikdy, value: never }], default: auto, required: false }
+      - { name: spellings, label: Jiné zápisy jména (pro import), widget: list, required: false }
+
+  - name: competitions
+    label: Soutěže
+    label_singular: Soutěž
+    folder: data/competitions
+    extension: yaml
+    format: yaml
+    create: true
+    identifier_field: code
+    slug: "{{code}}"
+    summary: "{{name.cs}}"
+    fields:
+      - { name: code, label: Kód, widget: string, hint: "Krátký kód bez mezer, např. cocp" }
+      - { name: kind, label: Druh, widget: select, options: [{ label: Turnaj, value: tournament }, { label: Liga, value: league }] }
+      - { name: category, label: Kategorie v kalendáři, widget: select, options: [{ label: Turnaj MČR, value: mcr }, { label: Liga, value: league }, { label: Junioři, value: junior }, { label: Zahraničí, value: abroad }, { label: Ostatní, value: other }] }
+      - { name: name, label: Název, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
+      - { name: short_name, label: Krátký název (odpočet), widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
+      - { name: description, label: Popis, widget: object, required: false, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
+      - { name: contact_email, label: Kontaktní e-mail (jen adresy asociace), widget: string, required: false }
+      - { name: since, label: Hraje se od roku, widget: number, value_type: int, required: false }
+
+  - name: rankings
+    label: Tabulky MČR
+    label_singular: Tabulka MČR
+    folder: data/rankings
+    extension: yaml
+    format: yaml
+    create: true
+    identifier_field: year
+    slug: "mcr-{{year}}"
+    summary: "MČR {{year}}"
+    fields:
+      - { name: year, label: Rok, widget: number, value_type: int }
+      - { name: audience, label: Kategorie, widget: hidden, default: open }
+      - { name: name, label: Název, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
+      - { name: editions, label: Turnaje (soutěž/rok), widget: list, hint: "Např. jarni/2027, druhy/2027, cocp/2027" }
+      - { name: best_of, label: Počet započítaných turnajů, widget: number, value_type: int, default: 2 }
+      - { name: points, label: Body, widget: select, options: [{ label: Spočítá web, value: computed }, { label: Převzaté ze starého webu, value: published }], default: computed }
+      - { name: top_points, label: Body za vítězství, widget: number, value_type: int, default: 1000, required: false }
+      - { name: rounding, label: Zaokrouhlení, widget: hidden, default: whole }
+      - { name: eligible, label: Kdo se počítá, widget: hidden, default: mcr }
+
+  - name: clubs
+    label: Kluby a ligy (Kde hrát)
+    label_singular: Klub
+    folder: data/clubs
+    extension: yaml
+    format: yaml
+    create: true
+    summary: "{{name}}"
+    fields:
+      - { name: name, label: Název, widget: string }
+      - { name: area, label: Místo (štítek), widget: string }
+      - { name: order, label: Pořadí, widget: number, value_type: int, required: false }
+      - { name: league, label: Liga (kód soutěže), widget: string, required: false }
+      - { name: summary, label: Krátký popis, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string, required: false }] }
+      - { name: description, label: Delší popis, widget: object, required: false, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
+      - { name: email, label: E-mail (jen adresy asociace/klubu), widget: string, required: false }
+      - { name: active, label: Aktivní, widget: boolean, default: true }
+      - { name: home, label: Na úvodní stránce, widget: boolean, default: true, required: false }
+
+  - name: documents
+    label: Dokumenty
+    label_singular: Dokument
+    folder: data/documents
+    path: "{{year}}/{{slug}}"
+    extension: yaml
+    format: yaml
+    create: true
+    summary: "{{title.cs}}"
+    fields:
+      - { name: title, label: Název, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string, required: false }] }
+      - { name: kind, label: Druh, widget: select, options: [propozice, poster, itinerary, results, minutes, statutes, rules, other] }
+      - { name: date, label: Datum, widget: datetime, time_format: false, format: YYYY-MM-DD }
+      - { name: edition, label: Ročník (soutěž/rok), widget: string, required: false }
+      - { name: file, label: Soubor, widget: object, fields: [{ name: cs, label: Česky, widget: file }, { name: en, label: Anglicky, widget: file, required: false }] }
+
+  # ---------------- Nastavení ----------------
+  - name: settings
+    label: Nastavení webu
+    files:
+      - name: settings
+        label: Nastavení
+        file: data/settings.yaml
+        fields:
+          - { name: preview_banner, label: Pruh „Testovací verze“, widget: boolean }
+          - name: player_page
+            label: Stránky hráčů
+            widget: object
+            fields:
+              - { name: min_wins, label: Aspoň vítězství, widget: number, value_type: int }
+              - { name: min_results, label: Nebo aspoň výsledků, widget: number, value_type: int }
+          - name: payment
+            label: Platby (startovné a ligové poplatky)
+            widget: object
+            fields:
+              - { name: preferred, label: Preferovaný způsob, widget: hidden, default: bank_transfer }
+              - { name: account, label: Číslo účtu, widget: string, required: false }
+              - { name: qr_image, label: QR kód pro platbu, widget: image, required: false }
+              - { name: note, label: Text u plateb, widget: object, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text }] }
+          - { name: site, label: Údaje asociace, widget: object, collapsed: true, fields: [{ name: email, label: E-mail, widget: string }, { name: address, label: Sídlo, widget: string }, { name: ico, label: IČ, widget: string }] }
+      - name: home
+        label: Úvodní stránka
+        file: data/home.yaml
+        fields:
+          - name: hero
+            label: Hlavní text
+            widget: object
+            fields:
+              - { name: title, label: Nadpis, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
+              - { name: text, label: Text, widget: object, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text }] }
+              - { name: play_button, label: Tlačítko hry, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
+          - { name: where_to_play, label: "Kluby v bloku Kde hrát", widget: relation, collection: clubs, value_field: "{{slug}}", search_fields: [name], display_fields: [name], multiple: true }

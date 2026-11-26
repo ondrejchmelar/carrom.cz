@@ -1,0 +1,33 @@
+competition: mcrj
+year: 2025
+status: finished
+start_date: 2025-04-11
+end_date: 2025-04-11
+venue: { name: Pelhřimov, city: Pelhřimov }
+report:
+  cs: Mistrovství ČR juniorů U19 se uskutečnilo v pátek 11. dubna v Pelhřimově.
+  en: The Czech U19 junior championship took place on Friday 11 April in Pelhřimov.
+source: old-site
+
+results:
+  juniors:
+    - { place: 1,  player: ondrej-kubicek,    club_at_time: Letohradské soukromé gymnázium }
+    - { place: 2,  player: magdalena-novotna, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 3,  player: prokop-novak,      club_at_time: Letohradské soukromé gymnázium }
+    - { place: 4,  player: jan-docekal,       club_at_time: Letohradské soukromé gymnázium }
+    - { place: 5,  player: ales-lipensky,     club_at_time: Letohradské soukromé gymnázium }
+    - { place: 6,  player: patrik-vaca,       club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 7,  player: jakub-lyko,        club_at_time: Letohradské soukromé gymnázium }
+    - { place: 8,  player: robin-pribyl,      club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 9,  player: vendula-ferancova, club_at_time: Letohradské soukromé gymnázium }
+    - { place: 10, player: adam-koch,         club_at_time: ZŠ Košetice }
+    - { place: 11, player: denis-kundrat,     club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 12, player: radek-prikryl,     club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 13, player: bohumil-napravnik, club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 14, player: vitek-kupsa,       club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 15, player: leo-pecl,          club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 16, player: denis-trecha,      club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 17, player: adam-zadrazil,     club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 18, player: vojtech-bican,     club_at_time: SPŠ a SOU Pelhřimov }
+    - { place: 19, player: tomas-smetana,     club_at_time: ZŠ Košetice }
+    - { place: 20, player: daniel-sebek,      club_at_time: SPŠ a SOU Pelhřimov }

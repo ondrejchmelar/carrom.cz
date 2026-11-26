@@ -1,0 +1,26 @@
+# Texty úvodní stránky pro nové návštěvníky.
+hero:
+  title:  { cs: "Cvrnkni si.", en: "Give it a flick." }
+  text:
+    cs: Carrom je hra pro dva či čtyři hráče. Podobá se kulečníku, jen se hraje na dřevěné desce, prsty a dřevěnými kameny. V Česku ho hrajeme organizovaně od roku 2006.
+    en: Carrom is a game for two or four players. It is a bit like pool, played with your fingers and wooden pieces on a wooden board. We have played it in the Czech Republic since 2006.
+  play_button: { cs: Zahraj si přímo v prohlížeči, en: Play in your browser }
+
+how_to_play:
+  - title: { cs: Cvrnkni strikerem, en: Flick the striker }
+    text:  { cs: "Striker položíš na svou čáru a prstem jím cvrnkneš do kamenů.", en: "Place the striker on your baseline and flick it at the pieces." }
+  - title: { cs: Dostaň své kameny do děr, en: Pocket your pieces }
+    text:  { cs: "Bílé, nebo černé. Kdo je má všechny dřív, vyhrává sadu.", en: "White or black. Whoever pockets all of theirs first wins the board." }
+  - title: { cs: Potvrď královnu, en: Cover the queen }
+    text:  { cs: "Červená královna se počítá, jen když ji hned potvrdíš dalším svým kamenem.", en: "The red queen only counts if you cover it with one of your own pieces straight after." }
+
+# Kluby na úvodní stránce (soubory v data/clubs/)
+where_to_play: [praha, medlesice, opocnice, juniori]
+
+returning:
+  title: { cs: Už hraješ?, en: Already playing? }
+  text:  { cs: "Kalendář, tabulka MČR a výsledky jsou v Novinkách.", en: "The calendar, championship table and results are under News." }
+
+next_tournament:
+  # Nejbližší edice se stavem planned nebo registration_open. Když žádná není, box se skryje.
+  label: { cs: "Do startu:", en: "Starts in:" }

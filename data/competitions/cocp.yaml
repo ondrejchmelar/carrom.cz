@@ -1,0 +1,10 @@
+code: cocp
+kind: tournament
+category: mcr          # mcr | league | junior | abroad | other (filtr v kalendáři)
+name: { cs: Carrom Open Cup Praha, en: Carrom Open Cup Prague }
+short_name: { cs: Open Cup, en: Open Cup }
+description:
+  cs: Největší český turnaj, mezinárodní, od roku 2006. Třetí turnaj série Mistrovství ČR.
+  en: The biggest Czech tournament, international, held since 2006. Third tournament of the Czech Championship series.
+contact_email: opencup@carrom.cz
+since: 2006

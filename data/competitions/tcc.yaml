@@ -1,0 +1,10 @@
+code: tcc
+kind: tournament
+category: other
+name: { cs: Terrace Carrom Cup, en: Terrace Carrom Cup }
+short_name: { cs: Terrace Cup, en: Terrace Cup }
+description:
+  cs: Letní turnaj, hrál se v letech 2009–2016.
+  en: A summer tournament held from 2009 to 2016.
+since: 2009
+until: 2016

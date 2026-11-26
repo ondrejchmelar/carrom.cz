@@ -1,0 +1,9 @@
+year: 2027
+audience: open
+name: { cs: Mistrovství ČR 2027, en: Czech Championship 2027 }
+editions: [jarni/2027, druhy/2027, cocp/2027]
+best_of: 2
+points: computed
+top_points: 1000
+rounding: whole
+eligible: mcr               # jen hráči s mcr: true; ostatní se přeskočí a pořadí se přepočítá

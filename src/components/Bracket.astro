@@ -1,0 +1,85 @@
+---
+// One playoff group (pcl-8): quarter-finals, semi-finals, finals and the 5th–8th matches.
+import { t, type Lang } from '../lib/site';
+interface Props { group: any; names: Record<string, string>; lang?: Lang }
+const { group, names, lang = 'cs' } = Astro.props;
+const by = Object.fromEntries(group.slots.map((s: any) => [s.id, s]));
+const cols = [
+  { title: lang === 'en' ? 'Quarter-finals' : 'Čtvrtfinále', ids: ['qf1', 'qf2', 'qf3', 'qf4'] },
+  { title: lang === 'en' ? 'Semi-finals' : 'Semifinále', ids: ['sf1', 'sf2'], lower: ['l-sf1', 'l-sf2'] },
+  { title: lang === 'en' ? 'Finals' : 'Finále', ids: ['f1', 'f3'], lower: ['f5', 'f7'] },
+];
+const label = (p: any) => (p.player ? names[p.player] ?? p.player : lang === 'en' ? p.feedEn : p.feed);
+---
+<div class="bracket-scroll">
+  <div class="bracket">
+    {cols.map((c) => (
+      <div class="col">
+        <h4>{c.title}</h4>
+        <div class="col-main">
+          {c.ids.map((id) => {
+            const s = by[id];
+            return (
+              <div class:list={['bm', { next: group.next === id }]}>
+                <div class="bm-top"><span>{t(s.label, lang)}</span>{s.places && <span class="for">{lang === 'en' ? `for ${s.places[0]}.` : `o ${s.places[0]}. místo`}</span>}{!s.places && <span>{s.bestOf > 1 ? (lang === 'en' ? `best of ${s.bestOf}` : `na ${Math.ceil(s.bestOf / 2)} výhry`) : ''}</span>}</div>
+                {s.players.map((p: any, i: number) => (
+                  <div class:list={['bp', { win: s.winner === i, lose: s.winner === 1 - i, tbd: !p.player }]}>
+                    <span class="sd">{p.seed ?? ''}</span>
+                    <span class="nm">{label(p)}</span>
+                    <span class="gs">{s.games.map((g: number[]) => <i class:list={{ g: g[i] > g[1 - i] }}>{g[i]}</i>)}</span>
+                  </div>
+                ))}
+              </div>
+            );
+          })}
+        </div>
+        {c.lower && (
+          <div class="col-lower">
+            <h5>{lang === 'en' ? '5th–8th place' : 'O 5.–8. místo'}</h5>
+            {c.lower.map((id) => {
+              const s = by[id];
+              return (
+                <div class:list={['bm', { next: group.next === id }]}>
+                  <div class="bm-top"><span>{t(s.label, lang)}</span></div>
+                  {s.players.map((p: any, i: number) => (
+                    <div class:list={['bp', { win: s.winner === i, lose: s.winner === 1 - i, tbd: !p.player }]}>
+                      <span class="sd">{p.seed ?? ''}</span>
+                      <span class="nm">{label(p)}</span>
+                      <span class="gs">{s.games.map((g: number[]) => <i class:list={{ g: g[i] > g[1 - i] }}>{g[i]}</i>)}</span>
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+</div>
+<style>
+  .bracket-scroll { overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; -webkit-overflow-scrolling: touch; }
+  .bracket { display: grid; grid-template-columns: repeat(3, 236px); gap: 16px; width: max-content; }
+  .col { display: flex; flex-direction: column; gap: 12px; }
+  .col-main { display: flex; flex-direction: column; justify-content: space-around; gap: 12px; flex: 1; }
+  .col-lower { display: flex; flex-direction: column; gap: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+  h4, h5 { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .bm { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #E3E6EE; }
+  .bm.next { border: 2px solid var(--red); }
+  .bm-top { display: flex; justify-content: space-between; gap: 8px; padding: 6px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: #F7F8FB; }
+  .bm-top .for { color: var(--red); }
+  .bp { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 8px 12px; font-size: 15px; min-height: 40px; }
+  .bp + .bp { border-top: 1px solid #EEF0F5; }
+  .sd { font-size: 12px; font-weight: 700; color: var(--muted); text-align: center; }
+  .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bp.win .nm { font-weight: 700; }
+  .bp.lose .nm { color: var(--muted); }
+  .bp.tbd .nm { color: #8A93A8; font-style: italic; font-size: 14px; }
+  .gs { display: flex; gap: 4px; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .gs i { font-style: normal; min-width: 24px; text-align: center; color: var(--muted); }
+  .gs i.g { color: var(--navy); font-weight: 800; }
+  @media (min-width: 960px) {
+    .bracket-scroll { margin: 0; padding: 0; overflow: visible; }
+    .bracket { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; width: auto; }
+  }
+</style>

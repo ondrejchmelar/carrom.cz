@@ -1,0 +1,10 @@
+competition: cocp
+year: 2026
+status: finished
+edition_name: { cs: XXI. Carrom Open Cup Praha, en: 21st Carrom Open Cup Prague }
+start_date: 2026-11-21
+end_date: 2026-11-21
+venue: { name: Praha, city: Praha }
+source: sol
+sol_lit_url: ~
+results: {}                 # doplní import ze SoL

@@ -1,0 +1,103 @@
+# Zápis výsledků lig (pro pomocníky). Úpravy mimo výsledky své ligy web nepustí ven (tools/check-scope.mjs).
+# Administrace carrom.cz (Sveltia CMS). Každé uložení = commit do repozitáře, web se sám přestaví (1–2 min).
+# Přihlášení: GitHub. Dokud neběží přihlašovací služba (viz README), použijte „Sign in with Token“
+# s osobním tokenem GitHubu (fine-grained, jen repo carrom.cz, práva Contents: read and write).
+backend:
+  name: github
+  repo: ondrejchmelar/carrom.cz
+  branch: main
+  # base_url: https://<přihlašovací-služba>   # doplní se po zprovoznění OAuth (README, krok 4)
+  commit_messages:
+    create: "Přidáno: {{collection}} {{slug}}"
+    update: "Upraveno: {{collection}} {{slug}}"
+    delete: "Smazáno: {{collection}} {{slug}}"
+    uploadMedia: "Nahráno: {{path}}"
+    deleteMedia: "Smazáno: {{path}}"
+
+site_url: https://ondrejchmelar.github.io/carrom.cz/
+locale: cs
+media_folder: public/uploads
+public_folder: /uploads
+
+
+collections:
+  - name: league_evenings
+    label: PCL – hrací večery
+    label_singular: Hrací večer
+    folder: data/leagues
+    path: "{{season}}/{{date}}"
+    extension: yaml
+    format: yaml
+    create: true
+    summary: "{{season}} · {{date}}"
+    filter: { field: season, pattern: "^pcl-" }
+    fields:
+      - { name: season, label: Sezóna, widget: string, default: pcl-2027, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "pcl-<rok>" }
+      - { name: date, label: Datum, widget: datetime, time_format: false, format: YYYY-MM-DD }
+      - { name: venue, label: Jiné místo než obvykle, widget: string, required: false, hint: "Prázdné = místo sezóny" }
+      - name: matches
+        label: Zápasy
+        label_singular: zápas
+        widget: list
+        fields:
+          - { name: a, label: Hráč A, widget: relation, collection: players, value_field: "{{slug}}", search_fields: [first_name, last_name, short_name], display_fields: ["{{first_name}} {{last_name}}"] }
+          - { name: b, label: Hráč B, widget: relation, collection: players, value_field: "{{slug}}", search_fields: [first_name, last_name, short_name], display_fields: ["{{first_name}} {{last_name}}"] }
+          - { name: score, label: "Skóre (A:B)", widget: string, pattern: ["^\\d{1,2}:\\d{1,2}$", "Ve tvaru 25:11"] }
+          - { name: forfeit, label: Kontumace, widget: boolean, default: false, required: false }
+      - { name: scorecard, label: Fotka zápisu, widget: image, required: false }
+      - { name: note, label: Poznámka, widget: string, required: false }
+
+  - name: league_playoff
+    label: PCL – playoff
+    files:
+      - name: pcl-2026
+        label: Playoff PCL 2026
+        file: data/leagues/pcl-2026/playoff.yaml
+        fields:
+          - { name: seeds, label: Nasazení, widget: string, default: auto, hint: "auto = podle tabulky po základním kole" }
+          - name: games
+            label: Hry
+            widget: object
+            hint: "Každá hra ve tvaru horní:dolní, např. 25:11. Kdo hraje který zápas, spočítá web."
+            fields:
+              - name: "1-8"
+                label: Skupina o 1.–8. místo
+                widget: object
+                fields:
+                  - { name: qf1, label: "Čtvrtfinále 1 (1–8)", widget: list, required: false }
+                  - { name: qf2, label: "Čtvrtfinále 2 (5–4)", widget: list, required: false }
+                  - { name: qf3, label: "Čtvrtfinále 3 (3–6)", widget: list, required: false }
+                  - { name: qf4, label: "Čtvrtfinále 4 (7–2)", widget: list, required: false }
+                  - { name: sf1, label: Semifinále 1, widget: list, required: false }
+                  - { name: sf2, label: Semifinále 2, widget: list, required: false }
+                  - { name: l-sf1, label: "O 5.–8. místo (1)", widget: list, required: false }
+                  - { name: l-sf2, label: "O 5.–8. místo (2)", widget: list, required: false }
+                  - { name: f1, label: Finále, widget: list, required: false }
+                  - { name: f3, label: O 3. místo, widget: list, required: false }
+                  - { name: f5, label: O 5. místo, widget: list, required: false }
+                  - { name: f7, label: O 7. místo, widget: list, required: false }
+
+  - name: players
+    label: Hráči
+    label_singular: Hráč
+    folder: data/players
+    extension: yaml
+    format: yaml
+    create: false
+    identifier_field: last_name
+    slug: "{{first_name}}-{{last_name}}"
+    summary: "{{last_name}} {{first_name}}{{nickname | ternary(' „' + nickname + '“', '')}}"
+    sortable_fields: { fields: [last_name, first_name], default: { field: last_name } }
+    view_filters:
+      - { label: Hrají o titul MČR, field: mcr, pattern: true }
+      - { label: Nehrají o MČR, field: mcr, pattern: "^(false|)$" }
+    fields:
+      - { name: first_name, label: Jméno, widget: string }
+      - { name: last_name, label: Příjmení, widget: string }
+      - { name: nickname, label: Přezdívka, widget: string, required: false }
+      - { name: short_name, label: Krátké jméno do ligových tabulek, widget: string, required: false }
+      - { name: country, label: Země (kód), widget: string, default: CZ }
+      - { name: mcr, label: Hraje o titul MČR, widget: boolean, default: false, required: false, hint: "Zaškrtnutí se počítají do tabulky Mistrovství ČR." }
+      - { name: page, label: Vlastní stránka, widget: select, options: [{ label: Automaticky, value: auto }, { label: Vždy, value: always }, { label: Nikdy, value: never }], default: auto, required: false }
+      - { name: spellings, label: Jiné zápisy jména (pro import), widget: list, required: false }
+

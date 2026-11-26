@@ -1,0 +1,15 @@
+name: Pražská carromová liga
+area: Praha 3
+city: Praha
+order: 1
+league: pcl
+venue: { name: Čítárna Unijazz, address: "Husitská 22, Praha 3 – Žižkov" }
+summary:
+  cs: Čítárna Unijazz, Husitská 22. Na hraní se zapiš v tabulce.
+  en: Čítárna Unijazz, Husitská 22. Book your evening in the sheet.
+description:
+  cs: Nejstarší běžící liga. Zápasy se hrají průběžně v Čítárně Unijazz, termín si zarezervuješ v tabulce. Sezónu uzavírá playoff.
+  en: The oldest running league. Matches are played through the season at Čítárna Unijazz; book an evening in the sheet. A playoff closes the season.
+email: pcl@carrom.cz
+facebook: "https://www.facebook.com/carromcz"
+active: true

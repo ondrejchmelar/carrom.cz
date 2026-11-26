@@ -1,0 +1,13 @@
+name: Medlešická liga
+area: Medlešice
+city: Medlešice
+order: 2
+league: cml
+summary:
+  cs: Liga u Chrudimi, hraje se od roku 2011.
+  en: A league near Chrudim, played since 2011.
+description:
+  cs: Jmenuje se podle piva z medlešického pivovaru. Otevřená i úplným nováčkům.
+  en: Named after the beer from the Medlešice brewery. Open to complete beginners.
+email: cml@carrom.cz
+active: true

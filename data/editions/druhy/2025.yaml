@@ -1,0 +1,28 @@
+competition: druhy
+year: 2025
+status: finished            # planned | registration_open | finished
+start_date: 2025-10-04
+end_date: 2025-10-04
+venue: { name: Letohrad, city: Letohrad }
+report:
+  cs: |
+    Druhý turnaj MČR 2025 nabídl mnoho vyrovnaných zápasů i překvapení.
+    Pro vítězství si nakonec došel Karlos Novák.
+  en: |
+    The second Czech Championship tournament of 2025 brought many close
+    matches and a few surprises. In the end Karlos Novák took the win.
+sol_lit_url: ~              # odkaz na detailní výsledky v SoL lit, když existuje
+source: old-site            # old-site | sol | admin
+
+results:
+  singles:
+    - { place: 1,  player: karlos-novak }
+    - { place: 2,  player: zdenek-svitak }
+    - { place: 3,  player: matej-bednar }
+    - { place: 4,  player: ajay-sekhesh }
+    - { place: 5,  player: jan-tesitel }
+    - { place: 6,  player: tomas-chmelar }
+    - { place: 7,  player: ondrej-kubicek }
+    - { place: 8,  player: frantisek-rezek }
+    - { place: 9,  player: savindu-jayasooriya }
+    - { place: 10, player: zdenek-taborsky }

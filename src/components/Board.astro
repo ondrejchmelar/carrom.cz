@@ -1,0 +1,25 @@
+---
+// The drawn carrom board from the design. Later replaced by the playable game.
+interface Props { class?: string }
+const { class: cls } = Astro.props;
+const N = '#0E1B3D', R = '#D3242B', W = '#FBF7EE';
+const pieces: [number, number, string][] = [
+  [161, 161, R], [161, 137, W], [161, 185, N], [140, 149, N], [182, 149, W], [140, 173, W], [182, 173, N],
+];
+---
+<svg class={cls} viewBox="0 0 358 358" role="img" aria-label="Carromová deska">
+  <rect width="358" height="358" rx="14" fill="#3B2416" />
+  <g transform="translate(18 18)">
+    <rect width="322" height="322" rx="4" fill="#E8D3A9" />
+    {[[23, 23], [299, 23], [23, 299], [299, 299]].map(([x, y]) => <circle cx={x} cy={y} r="17" fill={N} />)}
+    <g fill="none" stroke={N} stroke-width="3">
+      <rect x="63.5" y="41.5" width="195" height="13" rx="6.5" />
+      <rect x="63.5" y="267.5" width="195" height="13" rx="6.5" />
+      <rect x="41.5" y="63.5" width="13" height="195" rx="6.5" />
+      <rect x="267.5" y="63.5" width="13" height="195" rx="6.5" />
+    </g>
+    <circle cx="161" cy="161" r="48.5" fill="none" stroke={R} stroke-width="3" />
+    {pieces.map(([x, y, c]) => <circle cx={x} cy={y} r="11" fill={c} />)}
+    <circle cx="160" cy="269" r="14.5" fill={W} stroke="#3B2416" stroke-width="3" />
+  </g>
+</svg>

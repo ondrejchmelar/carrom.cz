@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import PaymentNote from '../../components/PaymentNote.astro';
+import { model } from '../../lib/data';
+import { url, t, nbsp, dateShort } from '../../lib/site';
+const m = model();
+const clubs = m.clubs;
+const main = clubs[0];
+const rest = clubs.slice(1);
+const seasonOf = (code: string) => m.editionList.filter((e: any) => e.code === code).at(-1);
+const mainSeason = main?.league ? seasonOf(main.league) : null;
+---
+<Base title="Ligy a kde si zahrát" current="ligy">
+  <div class="wrap page">
+    <div class="page-head">
+      <h1>Ligy a kde si zahrát</h1>
+      <p class="lede">Carrom se nejlíp naučíš u desky s ostatními. Do lig se může přihlásit každý, nováčky rádi uvidíme.</p>
+    </div>
+    {main && (
+      <section class="card-navy feature" id={main.id}>
+        <span class="eyebrow">{main.area}{mainSeason?.start_date ? ` · od ${dateShort(mainSeason.start_date, false)}` : ''}</span>
+        <h2>{main.name}</h2>
+        <p class="muted">{nbsp(t(main.description ?? main.summary))}</p>
+        <dl class="facts">
+          {main.venue && <div><dt>{main.venue.name}</dt><dd>{main.venue.address}</dd></div>}
+          {main.email && <div><dt><a href={`mailto:${main.email}`}>{main.email}</a></dt><dd>Dotazy a přihlášky</dd></div>}
+        </dl>
+        <div class="btn-row">
+          {mainSeason && <a class="btn btn-red" href={url(`/ligy/${mainSeason.code}/${mainSeason.year}/`)}>Tabulka a playoff {mainSeason.year}</a>}
+          {mainSeason?.links?.evening_signup_url && <a class="btn btn-ghost-light" href={mainSeason.links.evening_signup_url}>Rezervační tabulka</a>}
+        </div>
+      </section>
+    )}
+    <PaymentNote />
+    <section class="section">
+      <h2>Další ligy a kluby</h2>
+      <div class="grid more">
+        {rest.map((c: any) => {
+          const s = c.league ? seasonOf(c.league) : null;
+          return (
+            <div class="card" id={c.id}>
+              <span class="eyebrow">{c.area}</span>
+              <strong class="nm">{c.name}</strong>
+              <span class="small">{nbsp(t(c.description ?? c.summary))}</span>
+              <span class="links">
+                {s && <a href={url(`/ligy/${s.code}/`)}>Výsledky</a>}
+                {c.link?.competition && <a href={url(`/vysledky/${c.link.competition}/`)}>Výsledky</a>}
+                {c.email && <a href={`mailto:${c.email}`}>{c.email}</a>}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+    <section class="card-navy">
+      <h2>Nemáš ligu poblíž?</h2>
+      <p class="muted">Rádi pomůžeme založit klub nebo ligu ve tvém městě.</p>
+      <a class="btn btn-red" style="align-self: flex-start" href={`mailto:${m.settings.site?.email}`}>Napiš na {m.settings.site?.email}</a>
+    </section>
+  </div>
+</Base>
+<style>
+  .feature { gap: 14px; }
+  .feature h2 { color: #fff; }
+  .facts { margin: 0; display: grid; gap: 10px; }
+  .facts dt { font-weight: 700; color: #fff; }
+  .facts dt a { color: #fff; }
+  .facts dd { margin: 0; color: var(--on-navy-muted); font-size: 15px; }
+  .nm { font-size: 18px; }
+  .links { display: flex; flex-wrap: wrap; gap: 4px 16px; font-weight: 600; }
+  .links a { color: var(--red); min-height: 44px; display: inline-flex; align-items: center; }
+  @media (min-width: 960px) {
+    .feature { padding: 40px; border-radius: 24px; }
+    .facts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .more { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .more .card { padding: 22px; border-radius: 18px; }
+  }
+</style>

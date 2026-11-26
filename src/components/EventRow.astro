@@ -1,0 +1,16 @@
+---
+import { t, editionName, editionUrl, dayOfMonth, monthShort, dateShort, weekday, type Lang } from '../lib/site';
+interface Props { ed: any; hot?: boolean; lang?: Lang }
+const { ed, hot = false, lang = 'cs' } = Astro.props;
+const CAT: Record<string, string> = { mcr: 'Turnaj MČR', league: 'Liga', junior: 'Junioři', abroad: 'Zahraničí', other: 'Turnaj' };
+const open = ed.status === 'registration_open' && ed.signup_url;
+---
+<a class:list={['event', { hot }]} href={editionUrl(ed)}>
+  <span class:list={['date-badge', { hot }]}><b>{dayOfMonth(ed.start_date)}</b><span>{monthShort(ed.start_date)}</span></span>
+  <span class="what">
+    <span class="eyebrow">{CAT[ed.competition.category] ?? 'Akce'}</span>
+    <strong>{editionName(ed, lang)}</strong>
+    <span class="small">{`${weekday(ed.start_date)} ${dateShort(ed.start_date)}`}{ed.venue?.city ? ` · ${ed.venue.city}` : ed.venue?.name ? ` · ${ed.venue.name}` : ''}</span>
+  </span>
+  {open && <span class="btn btn-red cta">{lang === 'en' ? 'Sign up' : 'Přihlásit se'}</span>}
+</a>

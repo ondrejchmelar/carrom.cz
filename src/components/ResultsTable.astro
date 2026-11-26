@@ -1,0 +1,43 @@
+---
+// Final places of one edition, one table per division.
+import { model } from '../lib/data';
+import { t, playerLink, fullName, type Lang } from '../lib/site';
+import { divisionLabel } from '../lib/core/model.js';
+interface Props { ed: any; lang?: Lang; limit?: number }
+const { ed, lang = 'cs', limit } = Astro.props;
+const m = model();
+const divisions = Object.entries(ed.results ?? {}).filter(([, rows]: any) => rows?.length);
+const multi = divisions.length > 1;
+---
+{divisions.length === 0 && (
+  <p class="notice">
+    {ed.status === 'finished' || ed.status === 'running'
+      ? 'Konečné pořadí zatím není na webu.'
+      : 'Výsledky budou po turnaji.'}
+    {ed.sol_lit_url && <> Podrobné výsledky jsou v <a href={ed.sol_lit_url} style="color: var(--red); font-weight: 600">SoL lit</a>.</>}
+  </p>
+)}
+{divisions.map(([div, rows]: any) => (
+  <div class="section">
+    {multi && <h3>{t(divisionLabel(div), lang)}</h3>}
+    <div class="table-box">
+      <table class="data">
+        <thead><tr><th class="l">#</th><th class="l">{lang === 'en' ? 'Player' : 'Hráč'}</th>{rows.some((r: any) => r.club_at_time) && <th class="l">{lang === 'en' ? 'Club / school' : 'Klub / škola'}</th>}</tr></thead>
+        <tbody>
+          {(limit ? rows.slice(0, limit) : rows).map((r: any) => {
+            const href = playerLink(r.player, m.players);
+            const name = fullName(m.players[r.player], r.player);
+            return (
+              <tr class={r.place <= 3 ? 'top' : ''}>
+                <td class="rk l">{r.place}.</td>
+                <td class="name">{href ? <a href={href}>{name}</a> : name}</td>
+                {rows.some((x: any) => x.club_at_time) && <td class="l muted">{r.club_at_time ?? ''}</td>}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+))}
+{ed.resultsComputed && <p class="small">Konečné pořadí spočítal web z výsledků ligy a playoff.</p>}

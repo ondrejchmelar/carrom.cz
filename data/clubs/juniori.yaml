@@ -1,0 +1,8 @@
+name: Juniorské turnaje
+area: Pelhřimov a Letohrad
+order: 4
+link: { competition: mcrj }
+summary:
+  cs: Školy, kde se carrom hraje do 19 let.
+  en: Schools where under-19s play carrom.
+active: true

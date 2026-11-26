@@ -1,0 +1,9 @@
+code: ol
+kind: league
+category: league
+name: { cs: Bernard Opoliga, en: Bernard Opoliga }
+short_name: { cs: Opoliga, en: Opoliga }
+description:
+  cs: Nejmladší liga v republice, od roku 2026.
+  en: The youngest league in the country, since 2026.
+since: 2026

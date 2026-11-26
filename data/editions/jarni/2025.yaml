@@ -1,0 +1,7 @@
+competition: jarni
+year: 2025
+status: finished
+start_date: 2025-04-12      # UKÁZKA: datum odhadnuto, opraví import ze starého webu
+venue: { name: Pelhřimov, city: Pelhřimov }
+source: old-site
+results: {}                 # pořadí doplní import; body MČR jsou v rankings/mcr-2025.yaml

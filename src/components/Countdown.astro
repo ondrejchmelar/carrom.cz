@@ -1,0 +1,48 @@
+---
+// "Do startu: <short name>" box. Hidden when there is no upcoming tournament.
+import { model } from '../lib/data';
+import { t, url, editionName, dateShort, weekday, type Lang } from '../lib/site';
+interface Props { lang?: Lang; compact?: boolean }
+const { lang = 'cs', compact = false } = Astro.props;
+const m = model();
+const ed = m.nextTournament;
+const label = t(m.home.next_tournament?.label, lang) || 'Do startu:';
+---
+{ed && (
+  <div class="card-navy countdown" data-start={`${ed.start_date}T09:00:00+01:00`}>
+    <span class="eyebrow">{`${label} ${t(ed.competition.short_name, lang) || t(ed.competition.name, lang)}`}</span>
+    {!compact && <strong class="name">{editionName(ed, lang)}</strong>}
+    {!compact && <span class="muted">{`${weekday(ed.start_date)} ${dateShort(ed.start_date)} · ${ed.venue?.city ?? ed.venue?.name ?? ''}`}</span>}
+    <div class="units" aria-live="off">
+      <div><b data-u="d">–</b><span>{lang === 'en' ? 'days' : 'dní'}</span></div>
+      <div><b data-u="h">–</b><span>{lang === 'en' ? 'hours' : 'hodin'}</span></div>
+      <div><b data-u="m">–</b><span>{lang === 'en' ? 'minutes' : 'minut'}</span></div>
+    </div>
+    <div class="btn-row">
+      {ed.status === 'registration_open' && ed.signup_url && <a class="btn btn-red" href={ed.signup_url} rel="noopener">{lang === 'en' ? 'Sign up' : 'Přihlásit se'}</a>}
+      <a class="btn btn-ghost-light" href={url(`/vysledky/${ed.code}/${ed.year}/`)}>{lang === 'en' ? 'Details' : 'Propozice a info'}</a>
+    </div>
+  </div>
+)}
+<style>
+  .countdown .name { font-family: var(--f-head); font-size: 26px; line-height: 1.05; }
+  .units { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .units div { background: var(--navy-2); border-radius: 10px; padding: 10px 0; text-align: center; }
+  .units b { display: block; font-family: var(--f-head); font-size: 28px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .units span { font-size: 12px; color: var(--on-navy-muted); }
+</style>
+<script>
+  for (const el of document.querySelectorAll<HTMLElement>('.countdown[data-start]')) {
+    const start = new Date(el.dataset.start!).getTime();
+    const tick = () => {
+      let s = Math.max(0, Math.floor((start - Date.now()) / 1000));
+      const d = Math.floor(s / 86400); s -= d * 86400;
+      const h = Math.floor(s / 3600); s -= h * 3600;
+      const m = Math.floor(s / 60);
+      const set = (u: string, v: number) => { const b = el.querySelector(`[data-u="${u}"]`); if (b) b.textContent = String(v).padStart(2, '0'); };
+      set('d', d); set('h', h); set('m', m);
+    };
+    tick();
+    setInterval(tick, 30000);
+  }
+</script>

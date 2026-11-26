@@ -1,0 +1,71 @@
+---
+// Shared body of /vysledky/ and /vysledky/rok/<year>/.
+import McrTable from '../../components/McrTable.astro';
+import { model } from '../../lib/data';
+import { url, t, editionName, editionUrl, dateShort, fullName } from '../../lib/site';
+interface Props { year: number; years: number[] }
+const { year, years } = Astro.props;
+const m = model();
+const ranking = Object.values(m.rankings).find((r: any) => r.year === year && r.table.rows.length) as any;
+const eds = m.editionList.filter((e: any) => e.year === year).reverse();
+const comps = Object.entries(m.competitions).map(([code, c]: any) => {
+  const ys = m.editionList.filter((e: any) => e.code === code).map((e: any) => e.year);
+  return { code, ...c, from: c.since ?? (ys.length ? Math.min(...ys) : ''), to: c.until ?? (ys.length ? Math.max(...ys) : null) };
+});
+const winner = (e: any) => {
+  const w = (e.results?.singles ?? e.results?.juniors ?? []).find((r: any) => r.place === 1);
+  return w ? fullName(m.players[w.player], w.player) : null;
+};
+const league = (e: any) => e.competition.kind === 'league';
+---
+<div class="wrap page">
+  <div class="page-head">
+    <h1>Výsledky</h1>
+    <nav class="chips" aria-label="Rok">
+      {years.map((y, i) => <a class="chip" href={url(i === 0 ? '/vysledky/' : `/vysledky/rok/${y}/`)} aria-current={y === year ? 'page' : undefined}>{y}</a>)}
+    </nav>
+  </div>
+  <div class:list={['cols', { two: !!ranking }]}>
+    {ranking && (
+      <section class="section">
+        <div class="section-head"><h2>{t(ranking.name)}</h2><a href={url(`/vysledky/mcr/${year}/`)}>Celá tabulka</a></div>
+        <p class="small">Počítají se {ranking.best_of} nejlepší ze {ranking.editions.length} turnajů. Podtržená jména mají vlastní stránku hráče.</p>
+        <McrTable id={ranking.id} limit={8} />
+      </section>
+    )}
+    <section class="section">
+      <h2>Turnaje a ligy {year}</h2>
+      <div class="row-list">
+        {eds.map((e: any) => (
+          <a href={editionUrl(e)}>
+            <span class="when">{e.start_date ? dateShort(e.start_date, false) : ''}</span>
+            <span class="what"><strong>{editionName(e)}</strong><span class="small">{e.venue?.city ?? e.venue?.name ?? ''}</span></span>
+            <span class="tail">{league(e) ? (e.status === 'running' ? 'Probíhá · tabulka a playoff' : 'Tabulka') : winner(e) ? `Vítěz ${winner(e)}` : e.status === 'finished' ? 'Výsledky doplníme' : 'Výsledky budou po turnaji'}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+  <section class="section">
+    <h2>Archiv od roku 2006</h2>
+    <div class="grid arch">
+      {comps.map((c: any) => (
+        <a class="card" href={url(c.kind === 'league' ? `/ligy/${c.code}/` : `/vysledky/${c.code}/`)}>
+          <span class="eyebrow">{c.kind === 'league' ? 'Liga' : c.category === 'abroad' ? 'Zahraničí' : 'Turnaj'}</span>
+          <strong>{t(c.name)}</strong>
+          <span class="small">{c.from}{c.to && c.to !== c.from ? `–${c.to}` : ''}</span>
+        </a>
+      ))}
+      <a class="card" href={url('/vysledky/mcr/')}><span class="eyebrow">Seriál</span><strong>Mistrovství ČR</strong><span class="small">Tabulky podle let</span></a>
+    </div>
+  </section>
+</div>
+<style>
+  .cols { display: grid; gap: 40px; }
+  .arch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 960px) {
+    .cols.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+    .cols:not(.two) { max-width: 760px; }
+    .arch { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  }
+</style>

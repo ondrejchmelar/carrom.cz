@@ -1,0 +1,32 @@
+# Přepínače, které mění chování webu bez zásahu do kódu.
+
+site:
+  name: carrom.cz
+  org: { cs: Česká carromová asociace, en: Czech Carrom Association }
+  email: carrom@carrom.cz
+  facebook: "https://www.facebook.com/carromcz"
+  address: Mělnická 4/624, Praha 5
+  ico: "228 74 551"
+
+# Pruh nahoře „Testovací verze“. Vypnout před spuštěním na carrom.cz.
+preview_banner: true
+
+# Kdo dostane vlastní stránku hráče (ostatní jsou jen jména v tabulkách)
+player_page:
+  min_wins: 1        # aspoň jedno vítězství…
+  min_results: 5     # …nebo aspoň 5 výsledků
+
+# Výchozí pravidla MČR pro nové roky (ročník je může přepsat)
+mcr:
+  top_points: 1000   # vítěz 1000, poslední 1, mezi nimi rovnoměrně
+  best_of: 2         # počítají se 2 nejlepší turnaje ze 3
+  rounding: whole    # body za turnaj zaokrouhlené na celá čísla
+
+# Startovné a ligové poplatky: přednostně převodem. QR kód je na stránce Asociace.
+payment:
+  preferred: bank_transfer
+  account: ~                # číslo účtu ČCA (doplnit)
+  qr_image: ~               # např. /uploads/platba-qr.png (doplnit)
+  note:
+    cs: Startovné i ligové poplatky prosíme přednostně převodem na účet asociace. QR kód pro platbu najdete na stránce Asociace.
+    en: Please pay entry and league fees by bank transfer to the association's account. The payment QR code is on the Association page.

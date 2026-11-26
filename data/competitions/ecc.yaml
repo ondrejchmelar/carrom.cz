@@ -1,0 +1,9 @@
+code: ecc
+kind: tournament
+category: abroad
+name: { cs: Carrom Eurocup, en: Carrom Eurocup }
+short_name: { cs: Eurocup, en: Eurocup }
+description:
+  cs: Mistrovství Evropy klubů a národních týmů. Na webu jsou výsledky českých hráčů.
+  en: The European club and national team championship. The site lists Czech players' results.
+website: "https://eurocup.carrom.cz"

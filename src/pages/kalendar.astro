@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import EventRow from '../components/EventRow.astro';
+import Countdown from '../components/Countdown.astro';
+import PaymentNote from '../components/PaymentNote.astro';
+import Icon from '../components/Icon.astro';
+import { model } from '../lib/data';
+import { url, editionName, editionUrl, dateShort, monthTitle } from '../lib/site';
+const m = model();
+const today = new Date().toISOString().slice(0, 10);
+const year = Number(today.slice(0, 4));
+const upcoming = m.editionList.filter((e: any) => e.start_date && (e.end_date ?? e.start_date) >= today);
+const byMonth = new Map<string, any[]>();
+for (const e of upcoming) {
+  const k = e.start_date.slice(0, 7);
+  byMonth.set(k, [...(byMonth.get(k) ?? []), e]);
+}
+const past = m.editionList.filter((e: any) => e.start_date && e.start_date < today && e.year === year).reverse();
+const cats = [
+  ['all', 'Vše'], ['mcr', 'Turnaje MČR'], ['league', 'Ligy'], ['junior', 'Junioři'], ['abroad', 'Zahraničí'],
+];
+const nextId = m.nextTournament?.id;
+---
+<Base title="Kalendář akcí" current="kalendar">
+  <div class="wrap page">
+    <div class="page-head head">
+      <h1>Kalendář akcí</h1>
+      <div class="chips" role="group" aria-label="Filtr akcí">
+        {cats.map(([k, label], i) => <button type="button" class="chip" data-filter={k} aria-pressed={i === 0 ? 'true' : 'false'}>{label}</button>)}
+      </div>
+    </div>
+    <div class="layout">
+      <div class="main">
+        {byMonth.size === 0 && <p class="muted">Žádné další akce zatím nejsou v kalendáři.</p>}
+        {[...byMonth.entries()].map(([k, list]) => (
+          <section class="month" data-month>
+            <h2 class="month-title">{monthTitle(`${k}-01`)}</h2>
+            {list.map((e: any) => <div data-cat={e.competition.category}><EventRow ed={e} hot={e.id === nextId} /></div>)}
+          </section>
+        ))}
+        <section class="section">
+          <h2>Proběhlo v roce {year}</h2>
+          <div class="row-list">
+            {past.map((e: any) => (
+              <a href={editionUrl(e)} data-cat={e.competition.category}>
+                <span class="when">{dateShort(e.start_date, false)}</span>
+                <span class="what"><strong>{editionName(e)}</strong></span>
+                <span class="tail">{e.results && Object.keys(e.results).some((k) => e.results[k]?.length) ? 'Výsledky' : 'Detail'}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+      <aside class="side">
+        <Countdown compact />
+        <div class="card pad">
+          <strong class="side-title">Mějte akce v telefonu</strong>
+          <span class="small">Přidejte si kalendář ČCA do Google, Apple nebo Outlook kalendáře. Nové akce se objeví samy.</span>
+          <a class="btn btn-ghost" href={url('/kalendar.ics')}><Icon name="calplus" size={18} />Přidat do kalendáře</a>
+        </div>
+        <PaymentNote />
+        <div class="card pad">
+          <strong class="side-title">Pořádáte akci?</strong>
+          <span class="small">Turnaj, veřejné hraní nebo ukázku carromu zapíšeme do kalendáře. Napište na <a href={`mailto:${m.settings.site?.email}`} style="color: var(--red); font-weight: 600">{m.settings.site?.email}</a>.</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Base>
+<style>
+  .head { gap: 16px; }
+  .layout { display: flex; flex-direction: column; gap: 32px; }
+  .main { display: flex; flex-direction: column; gap: 28px; }
+  .month { display: flex; flex-direction: column; gap: 10px; }
+  .month-title { font-family: var(--f-body); font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .side { display: flex; flex-direction: column; gap: 16px; }
+  .pad { padding: 22px; gap: 12px; border-radius: 18px; }
+  .side-title { font-size: 18px; }
+  [hidden] { display: none !important; }
+  @media (min-width: 960px) {
+    .head { flex-direction: row; align-items: flex-end; justify-content: space-between; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: start; }
+  }
+</style>
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  buttons.forEach((b) => b.addEventListener('click', () => {
+    const f = b.dataset.filter;
+    buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll<HTMLElement>('[data-cat]').forEach((el) => { el.hidden = f !== 'all' && el.dataset.cat !== f; });
+    document.querySelectorAll<HTMLElement>('[data-month]').forEach((sec) => {
+      sec.hidden = ![...sec.querySelectorAll<HTMLElement>('[data-cat]')].some((x) => !x.hidden);
+    });
+  }));
+</script>

@@ -1,0 +1,9 @@
+code: mcrj
+kind: tournament
+category: junior
+name: { cs: Mistrovství ČR juniorů U19, en: Czech Junior Championship U19 }
+short_name: { cs: MČR juniorů, en: Junior championship }
+description:
+  cs: Mistrovství republiky pro hráče do 19 let, hlavně ze škol v Pelhřimově a Letohradě.
+  en: The national championship for players under 19, mostly from schools in Pelhřimov and Letohrad.
+contact_email: mcr@carrom.cz

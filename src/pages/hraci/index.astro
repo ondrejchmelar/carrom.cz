@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { model } from '../../lib/data';
+import { url, fullName } from '../../lib/site';
+const m = model();
+const list = Object.values(m.players).filter((p: any) => p.hasPage).sort((a: any, b: any) => a.last_name.localeCompare(b.last_name, 'cs')) as any[];
+const pp = m.settings.player_page ?? {};
+---
+<Base title="Hráči" current="vysledky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={url('/vysledky/')}>Výsledky</a>
+      <h1>Hráči</h1>
+      <p class="lede">Vlastní stránku má každý, kdo vyhrál aspoň {pp.min_wins ?? 1} turnaj nebo má aspoň {pp.min_results ?? 5} výsledků.</p>
+    </div>
+    <div class="grid two">
+      {list.map((p) => (
+        <a class="card" href={url(`/hraci/${p.slug}/`)}>
+          <strong>{fullName(p)}</strong>
+          <span class="small">{p.results.length} výsledků · {p.wins} vítězství</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
+<style>@media (min-width: 960px) { .two { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }</style>

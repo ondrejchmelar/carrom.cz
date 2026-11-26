@@ -1,0 +1,9 @@
+competition: mcrj
+year: 2026
+status: finished
+start_date: 2026-04-10
+end_date: 2026-04-10
+venue: { name: Pelhřimov, city: Pelhřimov }
+source: sol
+sol_lit_url: ~
+results: {}                 # doplní import ze SoL

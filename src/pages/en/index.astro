@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import Board from '../../components/Board.astro';
+import Countdown from '../../components/Countdown.astro';
+import { model } from '../../lib/data';
+import { t, url } from '../../lib/site';
+const m = model();
+const h = m.home;
+---
+<Base lang="en" current="domu" alt={url('/')}>
+  <div class="wrap page">
+    <div class="grid hero">
+      <div class="page-head">
+        <h1>{t(h.hero?.title, 'en')}</h1>
+        <p class="lede">{t(h.hero?.text, 'en')}</p>
+        <div class="btn-row">
+          <a class="btn btn-red" href={url('/en/the-game/')}>The game</a>
+          <a class="btn btn-ghost" href={url('/ligy/')}>Where to play (Czech)</a>
+        </div>
+        <p class="small">The English section is being rebuilt. Results, the calendar and leagues are in Czech for now.</p>
+      </div>
+      <Board class="board" />
+    </div>
+    <Countdown lang="en" />
+  </div>
+</Base>
+<style>.board { width: 100%; max-width: 420px; height: auto; } @media (min-width: 960px) { .hero { grid-template-columns: minmax(0, 1fr) 420px; gap: 64px; align-items: center; } }</style>

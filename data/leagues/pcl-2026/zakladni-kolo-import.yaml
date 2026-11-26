@@ -1,0 +1,52 @@
+# Základní kolo 2026 převzaté z Google tabulky PCL_tabulka_2026.
+# Tabulka nemá data zápasů, proto jsou všechny zápasy v jednom souboru bez data.
+# Od sezóny 2027 má každý hrací večer vlastní soubor <datum>.yaml.
+date: ~
+venue: ~
+note: Převzato z tabulky 2026
+matches:
+  - { a: frantisek-rezek, b: jan-tesitel, score: "23:16" }
+  - { a: frantisek-rezek, b: lukas-navratil, score: "25:0" }
+  - { a: frantisek-rezek, b: michal-fucik, score: "25:9" }
+  - { a: frantisek-rezek, b: frantisek-cervenka, score: "11:15" }
+  - { a: frantisek-rezek, b: neel-vasanth, score: "22:9" }
+  - { a: frantisek-rezek, b: pavel-schierl, score: "25:15" }
+  - { a: frantisek-rezek, b: tomas-chmelar, score: "25:14" }
+  - { a: frantisek-rezek, b: zdenek-svitak, score: "7:25" }
+  - { a: frantisek-rezek, b: ajay-sekhesh, score: "1:25" }
+  - { a: jan-tesitel, b: lukas-navratil, score: "12:25" }
+  - { a: jan-tesitel, b: michal-fucik, score: "25:6" }
+  - { a: jan-tesitel, b: frantisek-cervenka, score: "10:25" }
+  - { a: jan-tesitel, b: neel-vasanth, score: "25:6" }
+  - { a: jan-tesitel, b: pavel-schierl, score: "12:9" }
+  - { a: jan-tesitel, b: tomas-chmelar, score: "16:7" }
+  - { a: jan-tesitel, b: zdenek-svitak, score: "7:25" }
+  - { a: jan-tesitel, b: ajay-sekhesh, score: "16:20" }
+  - { a: lukas-navratil, b: michal-fucik, score: "17:22" }
+  - { a: lukas-navratil, b: frantisek-cervenka, score: "22:17" }
+  - { a: lukas-navratil, b: neel-vasanth, score: "7:21" }
+  - { a: lukas-navratil, b: pavel-schierl, score: "25:0" }
+  - { a: lukas-navratil, b: tomas-chmelar, score: "18:14" }
+  - { a: lukas-navratil, b: zdenek-svitak, score: "6:25" }
+  - { a: lukas-navratil, b: ajay-sekhesh, score: "11:9" }
+  - { a: michal-fucik, b: frantisek-cervenka, score: "4:25" }
+  - { a: michal-fucik, b: neel-vasanth, score: "19:10" }
+  - { a: michal-fucik, b: pavel-schierl, score: "16:25" }
+  - { a: michal-fucik, b: tomas-chmelar, score: "6:17" }
+  - { a: michal-fucik, b: zdenek-svitak, score: "13:25" }
+  - { a: michal-fucik, b: ajay-sekhesh, score: "6:25" }
+  - { a: frantisek-cervenka, b: neel-vasanth, score: "25:8" }
+  - { a: frantisek-cervenka, b: pavel-schierl, score: "25:0" }
+  - { a: frantisek-cervenka, b: tomas-chmelar, score: "25:4" }
+  - { a: frantisek-cervenka, b: zdenek-svitak, score: "0:20" }
+  - { a: frantisek-cervenka, b: ajay-sekhesh, score: "1:25" }
+  - { a: neel-vasanth, b: pavel-schierl, score: "25:0" }
+  - { a: neel-vasanth, b: tomas-chmelar, score: "22:9" }
+  - { a: neel-vasanth, b: zdenek-svitak, score: "0:25" }
+  - { a: neel-vasanth, b: ajay-sekhesh, score: "9:23" }
+  - { a: pavel-schierl, b: tomas-chmelar, score: "16:17" }
+  - { a: pavel-schierl, b: zdenek-svitak, score: "0:25" }
+  - { a: pavel-schierl, b: ajay-sekhesh, score: "10:25" }
+  - { a: tomas-chmelar, b: zdenek-svitak, score: "7:25" }
+  - { a: tomas-chmelar, b: ajay-sekhesh, score: "12:25" }
+  - { a: zdenek-svitak, b: ajay-sekhesh, score: "24:11" }

@@ -1,0 +1,7 @@
+competition: pcl
+year: 2025
+status: finished
+start_date: 2025-01-15
+venue: { name: Čítárna Unijazz, address: "Husitská 22, Praha 3" }
+results:
+  singles: []               # konečné pořadí doplní import ze starého webu

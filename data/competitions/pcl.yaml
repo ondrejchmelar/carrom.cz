@@ -1,0 +1,10 @@
+code: pcl
+kind: league
+category: league
+name: { cs: Pražská carromová liga, en: Prague Carrom League }
+short_name: { cs: Pražská liga, en: Prague league }
+description:
+  cs: Nejstarší běžící liga. Zápasy se hrají průběžně v Čítárně Unijazz, sezónu uzavírá playoff.
+  en: The oldest running league. Matches are played through the season at Čítárna Unijazz, and a playoff closes the season.
+contact_email: pcl@carrom.cz
+since: 2007

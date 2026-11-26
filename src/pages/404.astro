@@ -1,0 +1,30 @@
+---
+// GitHub Pages has no server-side redirects. Old URLs land here and are sent on by script.
+import Base from '../layouts/Base.astro';
+import { model } from '../lib/data';
+import { url } from '../lib/site';
+const m = model();
+const map: Record<string, string> = {};
+for (const [from, to] of Object.entries(m.redirects ?? {})) map[from] = url(String(to));
+for (const d of m.documents) for (const u of d.old_urls ?? []) map[u] = url(typeof d.file === 'string' ? d.file : d.file?.cs);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<Base title="Stránka nenalezena" noindex>
+  <div class="wrap page">
+    <h1>Tuhle stránku jsme nenašli</h1>
+    <p class="lede">Web carrom.cz má novou podobu a některé adresy se změnily.</p>
+    <div class="btn-row">
+      <a class="btn btn-red" href={url('/')}>Na úvod</a>
+      <a class="btn btn-ghost" href={url('/vysledky/')}>Výsledky</a>
+      <a class="btn btn-ghost" href={url('/kalendar/')}>Kalendář</a>
+    </div>
+  </div>
+  <script is:inline define:vars={{ map, base }}>
+    (function () {
+      var p = location.pathname;
+      if (base && p.indexOf(base) === 0) p = p.slice(base.length) || '/';
+      var to = map[p] || map[p.replace(/\/$/, '')] || map[p + '/'];
+      if (to) location.replace(to + location.hash);
+    })();
+  </script>
+</Base>

@@ -1,0 +1,9 @@
+competition: jarni
+year: 2026
+status: finished
+start_date: 2026-04-11
+end_date: 2026-04-11
+venue: { name: Pelhřimov, city: Pelhřimov }
+source: sol
+sol_lit_url: ~
+results: {}                 # doplní import ze SoL

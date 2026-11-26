@@ -1,0 +1,8 @@
+# Staré adresy → nové. GitHub Pages neumí přesměrování na serveru, proto je řeší stránka 404.
+# Úplný seznam vygeneruje import ze sitemap/pages.csv. Tady jsou jen první ukázky.
+/index.php: /
+/kalendar.php: /kalendar/
+/vysledky.php: /vysledky/
+/mcr_2025.php: /vysledky/mcr/2025/
+/pcl/: /ligy/pcl/
+/english/: /en/

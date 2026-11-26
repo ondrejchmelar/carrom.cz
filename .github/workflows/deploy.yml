@@ -1,0 +1,70 @@
+# Build and publish the site to GitHub Pages on every change to main.
+# Admin edits (Sveltia) are commits to main, so they go live in 1–2 minutes.
+name: Web
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * *"   # nightly rebuild: countdowns and "upcoming" lists move with the date
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  scope:
+    name: Oprávnění
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Kdo co změnil (data/roles.yaml)
+        run: node tools/check-scope.mjs --push "$GITHUB_EVENT_PATH"
+
+  build:
+    name: Sestavení
+    needs: scope
+    if: always() && (needs.scope.result == 'success' || needs.scope.result == 'skipped')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: Kontrola dat
+        run: npm run check:data
+      - name: Testy
+        run: npm test
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Astro build
+        run: npm run build
+        env:
+          # Until carrom.cz points here: https://ondrejchmelar.github.io/carrom.cz/
+          # After the DNS move set repo variables SITE_URL=https://carrom.cz and BASE_PATH=/
+          SITE_URL: ${{ vars.SITE_URL || steps.pages.outputs.origin }}
+          BASE_PATH: ${{ vars.BASE_PATH || steps.pages.outputs.base_path || '/' }}
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist }
+
+  deploy:
+    name: Zveřejnění
+    needs: build
+    if: always() && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

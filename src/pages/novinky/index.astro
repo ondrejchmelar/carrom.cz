@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import Countdown from '../../components/Countdown.astro';
+import EventRow from '../../components/EventRow.astro';
+import McrTable from '../../components/McrTable.astro';
+import { model } from '../../lib/data';
+import { articles } from '../../lib/articles';
+import { url, t, nbsp, dateShort } from '../../lib/site';
+const m = model();
+const today = new Date().toISOString().slice(0, 10);
+const upcoming = m.editionList.filter((e: any) => e.start_date && (e.end_date ?? e.start_date) >= today).slice(0, 4);
+const news = await articles('cs');
+const latest = news.slice(0, 6);
+const years = [...new Set(news.map((a) => a.year))].sort((a, b) => b - a);
+const r = m.latestRanking;
+const leagues = m.clubs.filter((c: any) => c.active && c.league);
+---
+<Base title="Novinky" current="novinky">
+  <div class="wrap page">
+    <div class="page-head">
+      <h1>Novinky</h1>
+      <p class="lede">Turnaje, Mistrovství ČR, ligy a výsledky na jednom místě.</p>
+    </div>
+    <div class="top">
+      <Countdown />
+      <section class="section">
+        <div class="section-head"><h2>Kalendář</h2><a href={url('/kalendar/')}>Všechny akce</a></div>
+        {upcoming.length ? upcoming.map((e: any) => <EventRow ed={e} hot={e.id === m.nextTournament?.id} />) : <p class="muted">Další akce zatím nejsou v kalendáři.</p>}
+      </section>
+    </div>
+    {r && (
+      <section class="section">
+        <div class="section-head"><h2>{t(r.name)}</h2><a href={url(`/vysledky/mcr/${r.year}/`)}>Celá tabulka</a></div>
+        <McrTable id={r.id} limit={4} />
+      </section>
+    )}
+    <section class="section">
+      <h2>Ligy</h2>
+      <div class="grid three">
+        {leagues.map((c: any) => (
+          <a class="card" href={url(`/ligy/#${c.id}`)}>
+            <span class="eyebrow">{c.area}</span>
+            <strong>{c.name}</strong>
+            <span class="small">{nbsp(t(c.summary))}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="section">
+      <h2>Zprávy</h2>
+      {latest.length === 0 && <p class="muted">Zatím žádné zprávy.</p>}
+      <div class="grid news">
+        {latest.map((a) => (
+          <a class="card" href={url(`/novinky/${a.year}/${a.slug}/`)}>
+            <span class="eyebrow">{dateShort(a.date)}</span>
+            <strong class="news-title">{a.entry.data.title}</strong>
+            {a.entry.data.perex && <span class="small">{nbsp(a.entry.data.perex)}</span>}
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="section">
+      <h2>Archiv podle let</h2>
+      <p class="muted">Všechny zprávy ze starého webu, od roku 2006.</p>
+      <div class="chips">{years.map((y) => <a class="chip" href={url(`/novinky/${y}/`)}>{y}</a>)}</div>
+    </section>
+  </div>
+</Base>
+<style>
+  .top { display: grid; gap: 24px; }
+  .three, .news { gap: 12px; }
+  .news-title { font-size: 18px; }
+  @media (min-width: 960px) {
+    .top { grid-template-columns: 400px minmax(0, 1fr); gap: 48px; align-items: start; }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .news { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  }
+</style>

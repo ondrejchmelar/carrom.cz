@@ -1,0 +1,38 @@
+# Admin assistant: an editor writes a request in a GitHub issue (label "asistent") or mentions
+# @claude in a comment; Claude Code opens a pull request; "Kontrola PR" checks it; a person merges.
+# Needs the repo secret ANTHROPIC_API_KEY (see README). Without it this workflow does nothing.
+name: Asistent
+
+on:
+  issues:
+    types: [opened, labeled]
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  claude:
+    if: |
+      (github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'asistent')) ||
+      (github.event_name != 'issues' && contains(github.event.comment.body, '@claude'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          label_trigger: asistent
+          claude_args: >-
+            --max-turns 30
+            --allowedTools "Read,Edit,Write,Glob,Grep,Bash(npm run check:data),Bash(npm test),Bash(npm run build)"

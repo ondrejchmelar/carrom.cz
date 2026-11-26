@@ -1,0 +1,32 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { model } from '../../../lib/data';
+import { url, t, nbsp, editionName, editionUrl, dateShort, fullName } from '../../../lib/site';
+export function getStaticPaths() {
+  const m = model();
+  return Object.entries(m.competitions).filter(([, c]: any) => c.kind !== 'league').map(([code, c]) => ({ params: { code }, props: { code, c } }));
+}
+const { code, c } = Astro.props as any;
+const m = model();
+const eds = m.editionList.filter((e: any) => e.code === code).reverse();
+const winner = (e: any) => { const w = (e.results?.singles ?? e.results?.juniors ?? []).find((r: any) => r.place === 1); return w ? fullName(m.players[w.player], w.player) : null; };
+---
+<Base title={t(c.name)} current="vysledky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={url('/vysledky/')}>Výsledky</a>
+      <h1>{t(c.name)}</h1>
+      {c.description && <p class="lede">{nbsp(t(c.description))}</p>}
+      {c.contact_email && <p class="small">Kontakt: <a href={`mailto:${c.contact_email}`} style="color: var(--red)">{c.contact_email}</a></p>}
+    </div>
+    <div class="row-list">
+      {eds.map((e: any) => (
+        <a href={editionUrl(e)}>
+          <span class="when">{e.year}</span>
+          <span class="what"><strong>{editionName(e)}</strong><span class="small">{dateShort(e.start_date)} · {e.venue?.city ?? e.venue?.name}</span></span>
+          <span class="tail">{winner(e) ? `Vítěz ${winner(e)}` : e.status === 'finished' ? 'Výsledky doplníme' : 'Připravujeme'}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

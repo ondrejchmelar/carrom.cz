@@ -1,0 +1,10 @@
+code: druhy
+kind: tournament
+category: mcr
+name: { cs: Druhý turnaj MČR, en: Second Czech Championship tournament }
+short_name: { cs: Druhý turnaj, en: Second tournament }
+description:
+  cs: Podzimní turnaj série Mistrovství ČR, tradičně první říjnový víkend v Letohradě.
+  en: The autumn tournament of the Czech Championship series, traditionally on the first weekend of October in Letohrad.
+contact_email: mcr@carrom.cz
+since: 2011
