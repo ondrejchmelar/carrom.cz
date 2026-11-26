@@ -215,7 +215,8 @@ const T = {
       g.addColorStop(0, COL.birch); g.addColorStop(1, COL.birch2);
       ctx.fillStyle = g; ctx.fillRect(0, 0, C.BOARD, C.BOARD);
       // pockets
-      for (const [x, y] of C.POCKETS) circle(x, y, C.POCKET_R, COL.navy);
+      const G = C.geom(state);
+      for (const [x, y] of G.pockets) circle(x, y, G.pocket, COL.navy);
       // base lines
       ctx.strokeStyle = COL.navy; ctx.lineWidth = 2.4;
       const L1 = 135, L2 = C.BOARD - 135;
@@ -255,7 +256,7 @@ const T = {
           ctx.restore();
           // power arc
           ctx.lineWidth = 5; ctx.strokeStyle = sh.ok && !blocked ? COL.red : '#9AA3B8';
-          ctx.beginPath(); ctx.arc(showStriker.x, showStriker.y, C.STRIKER_R + 9, -Math.PI / 2, -Math.PI / 2 + sh.power * Math.PI * 2); ctx.stroke();
+          ctx.beginPath(); ctx.arc(showStriker.x, showStriker.y, G.striker + 9, -Math.PI / 2, -Math.PI / 2 + sh.power * Math.PI * 2); ctx.stroke();
         }
         striker(showStriker.x, showStriker.y, blocked);
       }
@@ -272,10 +273,11 @@ const T = {
       ring(x, y, r - 0.8, color === 'white' ? 'rgba(14,27,61,.35)' : 'rgba(0,0,0,.35)', 1.2);
     }
     function striker(x: number, y: number, blocked: boolean) {
-      circle(x + 2, y + 2.6, C.STRIKER_R, 'rgba(59,36,22,.3)');
-      circle(x, y, C.STRIKER_R, '#F4F1EA');
-      ring(x, y, C.STRIKER_R - 1, blocked ? COL.red : COL.frame, 2.6);
-      ring(x, y, C.STRIKER_R * 0.55, blocked ? COL.red : COL.navy, 2);
+      const SR = C.geom(state).striker;
+      circle(x + 2, y + 2.6, SR, 'rgba(59,36,22,.3)');
+      circle(x, y, SR, '#F4F1EA');
+      ring(x, y, SR - 1, blocked ? COL.red : COL.frame, 2.6);
+      ring(x, y, SR * 0.55, blocked ? COL.red : COL.navy, 2);
       circle(x, y, 3.5, blocked ? COL.red : COL.navy);
     }
 
@@ -348,7 +350,7 @@ const T = {
       canvas.setPointerCapture(e.pointerId);
       dragStart = p;
       message = '';
-      const nearStriker = Math.hypot(p.x - strikerX, p.y - baseY()) < C.STRIKER_R * 2.2;
+      const nearStriker = Math.hypot(p.x - strikerX, p.y - baseY()) < C.geom(state).striker * 2.2;
       drag = nearStriker ? 'undecided' : 'aim';
       if (drag === 'aim') aim = { px: p.x, py: p.y };
       draw();

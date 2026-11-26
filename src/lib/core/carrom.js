@@ -21,6 +21,20 @@ export const POCKETS = [
   [POCKET_R, BOARD - POCKET_R], [BOARD - POCKET_R, BOARD - POCKET_R],
 ];
 
+/**
+ * Piece and pocket sizes. The full game uses ICF sizes. The easy game uses the proportions of the
+ * drawn board on the home page (Board.astro: 322 units wide, coin r 11, striker r 14.5, pocket r 17
+ * centred 23 from the edges), so coins, striker and pockets are about 1.6× bigger.
+ */
+const HOME = BOARD / 322;
+const FULL_GEOM = { friction: FRICTION, coin: COIN_R, striker: STRIKER_R, pocket: POCKET_R, pockets: POCKETS };
+const EP = 23 * HOME;
+const EASY_GEOM = {
+  friction: 1600, coin: 11 * HOME, striker: 14.5 * HOME, pocket: 17 * HOME,
+  pockets: [[EP, EP], [BOARD - EP, EP], [EP, BOARD - EP], [BOARD - EP, BOARD - EP]],
+};
+export const geom = (state) => (state?.easy ? EASY_GEOM : FULL_GEOM);
+
 const other = (c) => (c === 'white' ? 'black' : 'white');
 
 /**
@@ -28,8 +42,9 @@ const other = (c) => (c === 'white' ? 'black' : 'white');
  * The easy game uses only the queen and the inner ring: 7 pieces, 3 coins per colour.
  */
 export function rack({ easy = false } = {}) {
+  const R = geom({ easy }).coin;
   const pieces = [{ id: 0, kind: 'queen', color: 'queen', x: CENTER, y: CENTER }];
-  const d = COIN_R * 2 + 0.2;
+  const d = R * 2 + 0.2;
   // Colours alternate in both rings. One ray points at the far-left pocket (top left, seen by white),
   // and both coins on it are white: inner ring W B W B W B, outer ring corners white, edges black.
   const ray = Math.atan2(-1, -1);
@@ -40,7 +55,7 @@ export function rack({ easy = false } = {}) {
     put(ray + (k * Math.PI) / 3, 2 * d, 'white');
     put(ray + (k * Math.PI) / 3 + Math.PI / 6, Math.sqrt(3) * d, 'black');
   }
-  for (const p of pieces) Object.assign(p, { vx: 0, vy: 0, r: COIN_R, m: MASS[p.kind], inPlay: true });
+  for (const p of pieces) Object.assign(p, { vx: 0, vy: 0, r: R, m: MASS[p.kind], inPlay: true });
   return pieces;
 }
 
@@ -71,7 +86,7 @@ export function clampStrikerX(x) {
 /** Can the striker sit at x on the colour's base line without lying on a coin? */
 export function strikerFree(state, x, color = state.turn) {
   const y = BASE_Y[side(color)];
-  return state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + STRIKER_R);
+  return state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + geom(state).striker);
 }
 
 /** Is a shot direction allowed? ICF rules allow any direction, back shots included. */
@@ -99,13 +114,13 @@ function collide(a, b) {
 }
 
 /** Advance the bodies by one fixed step. Returns pieces that fell into a pocket during it. */
-export function step(bodies, dt = DT) {
+export function step(bodies, dt = DT, g = FULL_GEOM) {
   const fell = [];
   for (const p of bodies) {
     if (!p.inPlay) continue;
     const v = Math.hypot(p.vx, p.vy);
     if (v < STOP) { p.vx = p.vy = 0; continue; }
-    const nv = Math.max(0, v - (FRICTION + DAMP * v) * dt);
+    const nv = Math.max(0, v - (g.friction + DAMP * v) * dt);
     p.vx *= nv / v; p.vy *= nv / v;
     p.x += p.vx * dt; p.y += p.vy * dt;
   }
@@ -119,8 +134,8 @@ export function step(bodies, dt = DT) {
   }
   for (const p of bodies) {
     if (!p.inPlay) continue;
-    for (const [px, py] of POCKETS) {
-      if (Math.hypot(p.x - px, p.y - py) < POCKET_R) {
+    for (const [px, py] of g.pockets) {
+      if (Math.hypot(p.x - px, p.y - py) < g.pocket) {
         p.inPlay = false; p.vx = p.vy = 0; p.x = px; p.y = py;
         fell.push(p);
         break;
@@ -141,7 +156,7 @@ export const moving = (bodies) => bodies.some((p) => p.inPlay && (p.vx || p.vy))
 export function startShot(state, x, angle, power) {
   const color = state.turn;
   const v = Math.max(0.015, Math.min(1, power)) * MAX_SPEED;
-  state.striker = { id: 'striker', kind: 'striker', color, x: clampStrikerX(x), y: BASE_Y[side(color)], r: STRIKER_R, m: MASS.striker, vx: Math.cos(angle) * v, vy: Math.sin(angle) * v, inPlay: true };
+  state.striker = { id: 'striker', kind: 'striker', color, x: clampStrikerX(x), y: BASE_Y[side(color)], r: geom(state).striker, m: MASS.striker, vx: Math.cos(angle) * v, vy: Math.sin(angle) * v, inPlay: true };
   state.fell = [];
   state.shots++;
 }
@@ -150,7 +165,7 @@ export const bodiesOf = (state) => (state.striker ? [...state.pieces, state.stri
 
 /** One fixed step of a running shot. Returns true while something still moves. */
 export function tick(state) {
-  const fell = step(bodiesOf(state));
+  const fell = step(bodiesOf(state), DT, geom(state));
   if (fell.length) state.fell.push(...fell);
   return moving(bodiesOf(state));
 }
@@ -158,12 +173,13 @@ export function tick(state) {
 // ---------------------------------------------------------------- rules (simplified ICF)
 
 function freeSpot(state) {
+  const R = geom(state).coin;
   for (let ring = 0; ring < 12; ring++) {
     const steps = ring === 0 ? 1 : ring * 8;
     for (let s = 0; s < steps; s++) {
       const a = (s / steps) * Math.PI * 2;
-      const x = CENTER + Math.cos(a) * ring * COIN_R * 1.2, y = CENTER + Math.sin(a) * ring * COIN_R * 1.2;
-      if (state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + COIN_R + 0.5)) return [x, y];
+      const x = CENTER + Math.cos(a) * ring * R * 1.2, y = CENTER + Math.sin(a) * ring * R * 1.2;
+      if (state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + R + 0.5)) return [x, y];
     }
   }
   return [CENTER, CENTER];
@@ -306,7 +322,7 @@ export function simulate(state, shot, maxSteps = 2400) {
   // Leave the opponent little: own coins near pockets are good, theirs are bad.
   for (const p of s.pieces) {
     if (!p.inPlay || p.kind !== 'coin') continue;
-    const d = Math.min(...POCKETS.map(([x, y]) => Math.hypot(p.x - x, p.y - y)));
+    const d = Math.min(...geom(state).pockets.map(([x, y]) => Math.hypot(p.x - x, p.y - y)));
     if (d < 140) score += (p.color === me ? 0.6 : -0.8) * (1 - d / 140);
   }
   return { score, mine, theirs, foul, queen };
@@ -331,20 +347,21 @@ function pathClear(state, ax, ay, bx, by, r, ignore) {
 export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 90, simple = false } = {}) {
   const me = state.turn;
   const y = BASE_Y[side(me)];
+  const { striker: SR, pockets } = geom(state);
   const targets = state.pieces.filter((p) => p.inPlay && (p.color === me || (p.kind === 'queen' && (state.easy || state.pocketed[me] > 0))));
   const cands = [];
   for (let xi = 0; xi <= 16; xi++) {
     const x = BASE_X[0] + ((BASE_X[1] - BASE_X[0]) * xi) / 16;
     if (!strikerFree(state, x, me)) continue;
     for (const t of targets) {
-      for (const [px, py] of POCKETS) {
+      for (const [px, py] of pockets) {
         const ux = px - t.x, uy = py - t.y, ul = Math.hypot(ux, uy);
-        const cx = t.x - (ux / ul) * (t.r + STRIKER_R), cy = t.y - (uy / ul) * (t.r + STRIKER_R);
+        const cx = t.x - (ux / ul) * (t.r + SR), cy = t.y - (uy / ul) * (t.r + SR);
         const sx = cx - x, sy = cy - y, sl = Math.hypot(sx, sy);
         const cut = (sx * ux + sy * uy) / (sl * ul); // cos of the cut angle
         if (cut < 0.3) continue;
         if (!pathClear(state, t.x, t.y, px, py, t.r, t)) continue;
-        if (!pathClear(state, x, y, cx, cy, STRIKER_R, t)) continue;
+        if (!pathClear(state, x, y, cx, cy, SR, t)) continue;
         const dist = sl + ul;
         const power = Math.min(1, 0.22 + dist / 1500 / Math.max(0.45, cut));
         cands.push({ x, angle: Math.atan2(sy, sx), power, h: cut * 3 - dist / 400 + (t.kind === 'queen' ? 1 : 0) });
@@ -363,7 +380,7 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   cands.sort((a, b) => b.h - a.h);
   if (simple) {
     const c = cands[Math.floor(rand() * Math.min(cands.length, 6))];
-    const noise = 0.075;
+    const noise = 0.12;
     return { x: c.x, angle: c.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, Math.max(0.15, c.power * (1 + (rand() - 0.5) * 0.3))) };
   }
   let best = null;
