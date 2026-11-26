@@ -15,3 +15,5 @@ games:
     f3: []
     f5: []
     f7: []
+  "9-16":                   # jen 10 hráčů: 9. a 10. hrají jeden zápas o 9. místo
+    f1: ["18:14"]

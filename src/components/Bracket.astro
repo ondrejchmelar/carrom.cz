@@ -14,6 +14,7 @@ const tag = (s: any) =>
   : { long: en ? '1 game' : '1 hra', short: en ? '1 game' : '1 hra', red: !!s.places };
 // line from each source match to the match its winner goes to
 const wires = [['qf1', 'sf1'], ['qf2', 'sf1'], ['qf3', 'sf2'], ['qf4', 'sf2'], ['sf1', 'f1'], ['sf2', 'f1'], ['l-sf1', 'f5'], ['l-sf2', 'f5']]
+  .filter(([a, b]) => by[a] && by[b])
   .map(([a, b]) => {
     const s = by[a], w = s.winner == null ? null : s.players[s.winner]?.player;
     return `${a}>${b}>${w && by[b].players.some((p: any) => p.player === w) ? 'won' : 'open'}`;
@@ -61,11 +62,31 @@ const wires = [['qf1', 'sf1'], ['qf2', 'sf1'], ['qf3', 'sf2'], ['qf4', 'sf2'], [
 </div>
 <p class="small hint">{en ? 'Scroll sideways for the later rounds.' : 'Posuň do strany pro další kola.'}</p>
 )}
+{group.mini && (() => {
+  const s = by.f1;
+  const g = tag(s);
+  return (
+    <div class="brk mini">
+      <h4>{t(s.label, lang)}{d('qf')}</h4>
+      <div class:list={['bm', { next: group.next === 'f1' }]}>
+        <div class="bm-top"><span>{t(s.label, lang)}</span><span class:list={{ for: g.red }}>{g.long}</span></div>
+        {s.players.map((p: any, i: number) => (
+          <div class:list={['bp', { win: s.winner === i, lose: s.winner === 1 - i }]}>
+            <span class="sd">{p.seed}</span>
+            <span class="nm"><span class="lg">{full[p.player] ?? p.player}</span><span class="sh">{names[p.player] ?? p.player}</span></span>
+            <span class="gs">{s.games.map((x: number[]) => <i class:list={{ g: x[i] > x[1 - i] }}>{x[i]}</i>)}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+})()}
 <style>
   .brk-scroll { overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; -webkit-overflow-scrolling: touch; }
   .brk { position: relative; display: grid; grid-template-columns: repeat(3, 236px); column-gap: 26px; row-gap: 10px; width: max-content; }
   .brk h4 { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); align-self: end; }
   .brk h4.po { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .brk.mini { grid-template-columns: minmax(0, 300px); width: auto; }
   .brk h4.sub { margin: 8px 0 -2px; align-self: flex-start; }
   .bc { display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 1; }
   .bc.sa { justify-content: space-around; }

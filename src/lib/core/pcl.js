@@ -138,7 +138,22 @@ export function buildGroup(groupKey, seeds, games = {}, bestOf = {}) {
   const g = parseGroup(groupKey);
   const offset = g.first - 1;
   const groupSeeds = seeds.slice(offset, offset + 8);
-  if (groupSeeds.length < 8) return null; // not enough players for this group
+  if (groupSeeds.length < 2) return null; // not enough players for this group
+  if (groupSeeds.length < 8) {
+    // A short group (e.g. 10 players: seeds 9 and 10) plays one match for its top place, as in PCL 2026.
+    // The rest of a short group keeps its table places.
+    const first = g.first;
+    const players = [0, 1].map((i) => ({ player: groupSeeds[i], seed: first + i }));
+    const list = games.f1 ?? [];
+    const winner = seriesWinner(list, bestOf[groupKey] ?? 1);
+    const slot = {
+      id: 'f1', round: 'f', places: [first, first + 1], bestOf: bestOf[groupKey] ?? 1, players,
+      label: { cs: `O ${first}. místo`, en: `Place ${first}` },
+      games: list.map((x) => parseScore(x)).filter(Boolean), winner,
+    };
+    const places = winner === null ? [] : [{ place: first, player: players[winner].player }, { place: first + 1, player: players[1 - winner].player }];
+    return { key: groupKey, first, last: first + 1, mini: true, slots: [slot], places, complete: winner !== null, next: winner === null ? 'f1' : null };
+  }
   const bo = (slot) => (slot.lower ? bestOf[`${groupKey}/5-8`] : undefined) ?? bestOf[groupKey] ?? 1;
   const bySlot = {};
   const slots = PCL8.map((def) => {

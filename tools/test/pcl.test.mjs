@@ -42,4 +42,8 @@ test('PCL 2026: table and playoff match the real sheet and playoff page', () => 
   assert.equal(by.f5.players[0].player, 'tomas-chmelar');
   assert.equal(g.next, 'l-sf2');
   assert.equal(s.complete, false);
+  // only 10 players: 9th and 10th play one match (playoff2026.html, group B)
+  const mini = s.groups[1].slots[0];
+  assert.deepEqual(mini.players.map((p) => p.player), ['michal-fucik', 'pavel-schierl']);
+  assert.equal(mini.winner, 0);
 });
