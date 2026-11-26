@@ -8,4 +8,22 @@ report:
 source: old-site
 old_url: /pcl/pcl_2019.php
 
-results: {}
+# Konečné pořadí z pavouků playoff na starém webu (skupina A = 1.–8., B = 9.–16.)
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: frantisek-rezek }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: raj-patil }
+    - { place: 5, player: ondrej-chmelar }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: tadeas-matys }
+    - { place: 8, player: neel-vasanth }
+    - { place: 9, player: tomas-chmelar }
+    - { place: 10, player: frantisek-cervenka }
+    - { place: 11, player: lukas-navratil }
+    - { place: 12, player: michal-fucik }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: romana-kralova }
+    - { place: 15, player: adrian-dean }
+    - { place: 16, player: zdenka-chmelarova }

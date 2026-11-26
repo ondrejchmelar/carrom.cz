@@ -8,4 +8,22 @@ report:
 source: old-site
 old_url: /pcl/pcl_2024.php
 
-results: {}
+# Konečné pořadí z pavouků playoff na starém webu (skupina A = 1.–8., B = 9.–16.)
+results:
+  singles:
+    - { place: 1, player: ajay-sekhesh }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: raj-patil }
+    - { place: 4, player: zdenek-svitak }
+    - { place: 5, player: tomas-chmelar }
+    - { place: 6, player: neel-vasanth }
+    - { place: 7, player: frantisek-rezek }
+    - { place: 8, player: shoeb-ahmed-khan }
+    - { place: 9, player: frantisek-cervenka }
+    - { place: 10, player: ondrej-chmelar }
+    - { place: 11, player: romana-kralova }
+    - { place: 12, player: pavel-schierl }
+    - { place: 13, player: michal-fucik }
+    - { place: 14, player: jan-tesitel }
+    - { place: 15, player: lukas-navratil }
+    - { place: 16, player: selvamani-thirumurugan }

@@ -3,5 +3,19 @@ year: 2025
 status: finished
 start_date: 2025-01-15
 venue: { name: Čítárna Unijazz, address: "Husitská 22, Praha 3" }
+
+# Konečné pořadí z pavouků playoff na starém webu (skupina A = 1.–8., B = 9.–16.)
 results:
-  singles: []               # konečné pořadí doplní import ze starého webu
+  singles:
+    - { place: 1, player: ajay-sekhesh }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: frantisek-cervenka }
+    - { place: 4, player: raj-patil }
+    - { place: 5, player: frantisek-rezek }
+    - { place: 6, player: neel-vasanth }
+    - { place: 7, player: tomas-chmelar }
+    - { place: 8, player: pavel-schierl }
+    - { place: 9, player: jan-tesitel }
+    - { place: 10, player: lukas-navratil }
+    - { place: 11, player: michal-fucik }
+    - { place: 12, player: romana-kralova }

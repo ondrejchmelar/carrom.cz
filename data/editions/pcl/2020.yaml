@@ -8,4 +8,14 @@ report:
 source: old-site
 old_url: /pcl/pcl_2020.php
 
-results: {}
+# Konečné pořadí z pavouků playoff na starém webu (skupina A = 1.–8., B = 9.–16.)
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: tadeas-matys }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, player: frantisek-rezek }
+    - { place: 5, player: horst-simunsky }
+    - { place: 6, player: ondrej-chmelar }
+    - { place: 7, player: raj-patil }
+    - { place: 8, player: frantisek-cervenka }

@@ -8,4 +8,22 @@ report:
 source: old-site
 old_url: /pcl/pcl_2022.php
 
-results: {}
+# Konečné pořadí z pavouků playoff na starém webu (skupina A = 1.–8., B = 9.–16.)
+results:
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: tadeas-matys }
+    - { place: 4, player: raj-patil }
+    - { place: 5, player: frantisek-rezek }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: frantisek-cervenka }
+    - { place: 8, player: ondrej-chmelar }
+    - { place: 9, player: lukas-navratil }
+    - { place: 10, player: michal-fucik }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: romana-kralova }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: zdenka-chmelarova }
+    - { place: 15, player: adrian-dean }
+    - { place: 16, player: dominika-krestanova }

@@ -7,4 +7,19 @@ report:
 source: old-site
 old_url: /pcl/pcl_2021.php
 
-results: {}
+# Konečné pořadí z pavouků playoff na starém webu (skupina A = 1.–8., B = 9.–16.)
+results:
+  singles:
+    - { place: 1, player: zdenek-svitak }
+    - { place: 2, player: raj-patil }
+    - { place: 3, player: tadeas-matys }
+    - { place: 4, player: ondrej-chmelar }
+    - { place: 5, player: frantisek-rezek }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: lukas-navratil }
+    - { place: 8, player: frantisek-cervenka }
+    - { place: 9, player: tomas-chmelar }
+    - { place: 10, player: michal-fucik }
+    - { place: 11, player: pavel-schierl }
+    - { place: 12, player: romana-kralova }
+    - { place: 13, player: adrian-dean }

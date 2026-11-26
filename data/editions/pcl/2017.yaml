@@ -7,4 +7,22 @@ report:
 source: old-site
 old_url: /pcl/pcl_2017.php
 
-results: {}
+# Konečné pořadí z pavouků playoff na starém webu (skupina A = 1.–8., B = 9.–16.)
+results:
+  singles:
+    - { place: 1, player: frantisek-rezek }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: ondrej-chmelar }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: neel-vasanth }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: raj-patil }
+    - { place: 8, player: michal-fucik }
+    - { place: 9, player: romana-kralova }
+    - { place: 10, player: tomas-chmelar }
+    - { place: 11, player: frantisek-cervenka }
+    - { place: 12, player: pavel-schierl }
+    - { place: 13, player: lukas-navratil }
+    - { place: 14, player: adrian-dean }
+    - { place: 15, player: zdenka-chmelarova }
+    - { place: 16, player: lenka-prazakova }
