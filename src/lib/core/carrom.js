@@ -56,13 +56,17 @@ export function rack({ easy = false, rand = Math.random, jitter = 0.25 } = {}) {
     put(ray + (k * Math.PI) / 3, 2 * d, 'white');
     put(ray + (k * Math.PI) / 3 + Math.PI / 6, Math.sqrt(3) * d, 'black');
   }
-  // Hands never set a rack perfectly: turn it a little and nudge every piece by up to jitter × R,
-  // then push apart any that overlap. So the same break does not always end the same way.
-  const turn = (rand() - 0.5) * 2 * jitter * 0.25, J = jitter * R;
+  // Hands never set a rack perfectly: leave small, uneven gaps between the coins (each coin sits a
+  // little further out, by up to jitter × R per ring, and slightly to the side), never turned.
+  // Then push apart any that overlap. So the same break does not always end the same way.
+  const J = jitter * R;
   for (const p of pieces) {
-    const dx = p.x - CENTER, dy = p.y - CENTER, a = rand() * Math.PI * 2, m = rand() * J;
-    p.x = CENTER + dx * Math.cos(turn) - dy * Math.sin(turn) + Math.cos(a) * m;
-    p.y = CENTER + dx * Math.sin(turn) + dy * Math.cos(turn) + Math.sin(a) * m;
+    const dx = p.x - CENTER, dy = p.y - CENTER, dist = Math.hypot(dx, dy);
+    if (!dist) continue;
+    const ux = dx / dist, uy = dy / dist, ring = dist > 1.5 * d ? 2 : 1;
+    const out = rand() * J * ring, side = (rand() - 0.5) * J;
+    p.x += ux * out - uy * side;
+    p.y += uy * out + ux * side;
   }
   for (let it = 0; it < 60; it++) {
     let moved = false;
