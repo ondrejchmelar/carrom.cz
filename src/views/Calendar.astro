@@ -56,8 +56,19 @@ const nextId = m.nextTournament?.id;
         <Countdown compact lang={lang} />
         <div class="card pad">
           <strong class="side-title">{tr(lang, 'Mějte akce v telefonu', 'Events on your phone')}</strong>
-          <span class="small">{tr(lang, 'Přidejte si kalendář ČCA do Google, Apple nebo Outlook kalendáře. Nové akce se objeví samy.', 'Add the association calendar to Google, Apple or Outlook. New events appear on their own.')}</span>
-          <a class="btn btn-ghost" href={url('/kalendar.ics')}><Icon name="calplus" size={18} />{tr(lang, 'Přidat do kalendáře', 'Add to calendar')}</a>
+          <span class="small">{tr(lang, 'Odebírejte sdílené kalendáře ČCA v\u00a0Google, Apple nebo Outlook kalendáři. Nové akce se objeví samy.', 'Subscribe to the association calendars in Google, Apple or Outlook. New events appear on their own.')}</span>
+          <ul class="cals">
+            {(m.settings.calendars ?? []).map((c: any) => (
+              <li>
+                <span class="cal-name"><Icon name="calplus" size={18} />{lang === 'en' ? c.en : c.cs}</span>
+                <span class="cal-links">
+                  <a href={`https://calendar.google.com/calendar/u/0/r?cid=${encodeURIComponent(c.id)}`} target="_blank" rel="noopener">Google</a>
+                  <a href={`webcal://calendar.google.com/calendar/ical/${encodeURIComponent(c.id)}/public/basic.ics`}>{tr(lang, 'Apple / Outlook', 'Apple / Outlook')}</a>
+                  <a href={`https://calendar.google.com/calendar/embed?src=${encodeURIComponent(c.id)}&ctz=Europe%2FPrague`} target="_blank" rel="noopener">{tr(lang, 'Zobrazit', 'View')}</a>
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
         <div class="card pad">
           <strong class="side-title">{tr(lang, 'Pořádáte akci?', 'Organising an event?')}</strong>
@@ -76,6 +87,11 @@ const nextId = m.nextTournament?.id;
   .side { display: flex; flex-direction: column; gap: 16px; }
   .pad { padding: 22px; gap: 12px; border-radius: 18px; }
   .side-title { font-size: 18px; }
+  .cals { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .cals li { display: flex; flex-direction: column; gap: 4px; padding: 10px 0; border-top: 1px solid #EEF0F5; }
+  .cal-name { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--navy); }
+  .cal-links { display: flex; flex-wrap: wrap; gap: 4px 14px; padding-left: 26px; font-size: 14px; }
+  .cal-links a { color: var(--red); font-weight: 600; }
   [hidden] { display: none !important; }
   @media (min-width: 960px) {
     .head { flex-direction: row; align-items: flex-end; justify-content: space-between; }
