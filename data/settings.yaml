@@ -25,8 +25,8 @@ mcr:
 # Startovné a ligové poplatky: přednostně převodem. QR kód je na stránce Asociace.
 payment:
   preferred: bank_transfer
-  account: ~                # číslo účtu ČCA (doplnit)
-  qr_image: ~               # např. /uploads/platba-qr.png (doplnit)
+  account: 250250256/5500    # transparentní účet u Raiffeisenbank
+  qr_image: /uploads/platba-qr.svg   # QR Platba (SPD), vytvořeno nástrojem, bez částky
   note:
     cs: Startovné i ligové poplatky prosíme přednostně převodem na účet asociace. QR kód pro platbu najdete na stránce Asociace.
     en: Please pay entry and league fees by bank transfer to the association's account. The payment QR code is on the Association page.
