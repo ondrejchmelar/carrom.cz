@@ -10,4 +10,106 @@ external_url: "http://www.eurocup2012.carrom.de/"
 source: old-site
 old_url: /ecc/ecc_2012.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/a710aab8841711e3ac012e92809967e5
+results:
+  singles:
+    - { place: 1, name: "Pierre Dubois", country: FR }
+    - { place: 2, name: "Karnal Abdin", country: UK }
+    - { place: 3, player: peter-bocker }
+    - { place: 4, player: tobias-kruger }
+    - { place: 5, name: "Fabian Pereira", country: FR }
+    - { place: 6, name: "Mouraly Venou", country: FR }
+    - { place: 7, name: "Ish Kumar", country: UK }
+    - { place: 8, hidden: true }
+    - { place: 9, name: "Nazrul Islam", country: UK }
+    - { place: 10, name: "Carlito Bollin", country: CH }
+    - { place: 11, name: "Gianluca Cristiani", country: IT }
+    - { place: 12, player: dirk-polchow }
+    - { place: 13, name: "Sebastian Holtmann", country: DE }
+    - { place: 14, name: "Mehedi Hassan", country: IE }
+    - { place: 15, name: "Wolfgang Peter", country: DE }
+    - { place: 16, hidden: true }
+    - { place: 17, hidden: true }
+    - { place: 18, name: "Shaheen Miah", country: UK }
+    - { place: 19, hidden: true }
+    - { place: 20, player: lorenzo-hurlimann }
+    - { place: 21, name: "Johannes Jörg", country: DE }
+    - { place: 22, name: "Thibault Colin", country: FR }
+    - { place: 23, hidden: true }
+    - { place: 24, name: "Saravanan Babu", country: SE }
+    - { place: 25, hidden: true }
+    - { place: 26, name: "Alfred Rajadurai", country: FR }
+    - { place: 27, hidden: true }
+    - { place: 28, hidden: true }
+    - { place: 29, player: steffen-eder }
+    - { place: 30, hidden: true }
+    - { place: 31, name: "Soundararajah Rangasamy", country: DE }
+    - { place: 32, name: "Stefano Stucchi", country: IT }
+    - { place: 33, hidden: true }
+    - { place: 34, hidden: true }
+    - { place: 35, name: "Shuab Ahmed", country: UK }
+    - { place: 36, name: "Viktor Baumgartner", country: CH }
+    - { place: 37, hidden: true }
+    - { place: 38, hidden: true }
+    - { place: 39, player: armin-steiner }
+    - { place: 40, name: "Yoann Pidial", country: FR }
+    - { place: 41, name: "Josef Meyer", country: CH }
+    - { place: 42, player: andreas-hurtig }
+    - { place: 43, hidden: true }
+    - { place: 44, name: "Santhakumar Kanagan", country: DE }
+    - { place: 45, player: paulina-nowakowska }
+    - { place: 46, player: sascha-essinger }
+    - { place: 47, name: "Norbert Mothe", country: FR }
+    - { place: 48, name: "Armin Schneider", country: DE }
+    - { place: 49, player: claudio-motta }
+    - { place: 50, player: paolo-martinelli }
+    - { place: 51, name: "Walter Buchmann", country: CH }
+    - { place: 52, player: francesco-pedicini }
+    - { place: 53, name: "Stefano Fabiano", country: IT }
+    - { place: 54, name: "Balendran Kanagan", country: DE }
+    - { place: 55, name: "Daniele Da Fatti", country: IT }
+    - { place: 56, hidden: true }
+    - { place: 57, name: "Nick Humbert", country: DE }
+    - { place: 58, name: "Uwe Schneider", country: DE }
+    - { place: 59, player: elisa-zucchiatti }
+    - { place: 60, name: "Andrea Martinelli", country: IT }
+    - { place: 61, player: sylwester-pogorzelski }
+    - { place: 62, hidden: true }
+    - { place: 63, name: "Theivendran Kanagan", country: DE }
+    - { place: 64, name: "Kurt Scherrer", country: CH }
+    - { place: 65, hidden: true }
+    - { place: 66, hidden: true }
+    - { place: 67, name: "Florence Roumegous", country: FR }
+    - { place: 68, name: "Jack Bouillon", country: FR }
+    - { place: 69, hidden: true }
+    - { place: 70, name: "Pablo Kriegler", country: DE }
+    - { place: 71, hidden: true }
+    - { place: 72, player: romana-kralova }
+    - { place: 73, name: "Ansar Abdin", country: UK }
+    - { place: 74, player: fabio-tomasi }
+    - { place: 75, name: "Amar Sanakal", country: UK }
+    - { place: 76, player: jakub-nowakowski }
+    - { place: 77, name: "Kristian Rosin", country: DE }
+    - { place: 78, player: nitesh-sinha }
+    - { place: 79, player: filip-smoljak }
+    - { place: 80, player: frank-fehr }
+    - { place: 81, player: bodo-schnoor }
+    - { place: 82, name: "Giorgio Balicchi", country: IT }
+    - { place: 83, name: "Thomas Chobe", country: FR }
+    - { place: 84, name: "Harvey Gomes", country: UK }
+    - { place: 85, hidden: true }
+    - { place: 86, hidden: true }
+    - { place: 87, name: "Kandasamy Nandakumar", country: FR }
+    - { place: 88, name: "Julian Perkin", country: FR }
+    - { place: 89, name: "Giulio Martinelli", country: IT }
+    - { place: 90, player: hans-faller }
+    - { place: 91, name: "Sebastian Morsch", country: DE }
+    - { place: 92, name: "Sattirabady Jupiter", country: FR }
+    - { place: 93, name: "Barbara Thomas", country: CH }
+    - { place: 94, player: bernhard-sander }
+    - { place: 95, name: "Ariane Garjah", country: FR }
+    - { place: 96, hidden: true }
+    - { place: 97, player: pavel-schierl }
+    - { place: 98, hidden: true }
+    - { place: 99, name: "Igor Khattry Paniagua", country: ES }
+    - { place: 100, hidden: true }

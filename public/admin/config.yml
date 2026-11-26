@@ -234,6 +234,7 @@ collections:
       - { name: short_name, label: Krátký název (odpočet), widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
       - { name: description, label: Popis, widget: object, required: false, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
       - { name: contact_email, label: Kontaktní e-mail (jen adresy asociace), widget: string, required: false }
+      - { name: archive_url, label: Archiv všech ročníků (odkaz), widget: string, required: false, hint: "Např. šampionát v SoL lit" }
       - { name: since, label: Hraje se od roku, widget: string, pattern: ['^\d{4}$', 'Rok čtyřmi číslicemi'], required: false }
 
   - name: rankings

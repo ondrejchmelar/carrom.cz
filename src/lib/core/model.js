@@ -37,6 +37,14 @@ export function buildModel(raw, { today = new Date() } = {}) {
     };
   }
 
+  // ---------- abroad (Eurocup): only editions with Czech players (Ondrej, 2026-11-26) ----------
+  const isCzech = (r) => r.country === 'CZ' || (r.player != null && (players[r.player]?.country ?? 'CZ') === 'CZ');
+  for (const [id, ed] of Object.entries(editions)) {
+    if (ed.competition.category !== 'abroad') continue;
+    ed.czech = Object.values(ed.results).some((rows) => (rows ?? []).some(isCzech));
+    if (!ed.czech && ed.status === 'finished') delete editions[id];
+  }
+
   // ---------- leagues (PCL-style seasons) ----------
   const seasons = {};
   for (const [id, lg] of Object.entries(raw.leagues ?? {})) {

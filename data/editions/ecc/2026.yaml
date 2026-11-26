@@ -5,4 +5,150 @@ start_date: 2026-09-01      # UKÁZKA: přesné datum doplnit
 edition_name: { cs: 28. Carrom Eurocup, en: 28th Carrom Eurocup }
 venue: { name: Eurocup, city: "" }
 external_url: "https://eurocup.carrom.cz"
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/a61d130076e211f1b82f901b0edac7fa
+results:
+  singles:
+    - { place: 1, name: "Pierre Dubois", country: FR }
+    - { place: 2, name: "Ayesh Nilan Vanderlan", country: IT }
+    - { place: 3, name: "Mehedi Hassan", country: IE }
+    - { place: 4, name: "Johannes Jörg", country: DE }
+    - { place: 5, name: "Bartek Sasinski", country: PL }
+    - { place: 6, name: "Raphel Dix", country: UK }
+    - { place: 7, name: "Gianluca Cristiani", country: IT }
+    - { place: 8, name: "Ish Kumar", country: UK }
+    - { place: 9, player: tobias-kruger }
+    - { place: 10, name: "Swapnil Deshpande", country: DK }
+    - { place: 11, name: "Prashant Pangare", country: UK }
+    - { place: 12, name: "Yoann Olivier", country: FR }
+    - { place: 13, player: lorenzo-hurlimann }
+    - { place: 14, name: "Sampath Swamy", country: DK }
+    - { place: 15, name: "Yogesh Kulkarni", country: DE }
+    - { place: 16, name: "Nisanthan Thavarajasingam", country: FR }
+    - { place: 17, name: "Mohamed Sadurdeen Nilam", country: UK }
+    - { place: 18, name: "Lahiru Fernando", country: IT }
+    - { place: 19, name: "Frédéric Lusardi", country: FR }
+    - { place: 20, player: karlos-novak }
+    - { place: 21, name: "Alfred Rajadurai", country: FR }
+    - { place: 22, name: "Natvarsingh Chavda", country: UK }
+    - { place: 23, name: "Heiko Wurst", country: DE }
+    - { place: 24, name: "Sajith Kumara Thenahandi", country: IT }
+    - { place: 25, name: "Lucien Cano", country: FR }
+    - { place: 26, name: "Mathieu Chatelain", country: FR }
+    - { place: 27, name: "Paul Schneider", country: DE }
+    - { place: 28, player: maghesh-babu }
+    - { place: 29, player: pawel-wroczynski }
+    - { place: 30, name: "Kevin Sieger", country: FR }
+    - { place: 31, name: "Wipul Priyantha Neleththi", country: IT }
+    - { place: 32, name: "Josef Meyer", country: CH }
+    - { place: 33, name: "Sarah Stroebe", country: DE }
+    - { place: 34, player: ajay-sekhesh }
+    - { place: 35, name: "Selvarasha Kugathas", country: FR }
+    - { place: 36, name: "Nirupam Purkayastha", country: DE }
+    - { place: 37, name: "Mürsel Günes", country: DE }
+    - { place: 38, name: "Amitha Ubhayathunga", country: IT }
+    - { place: 39, name: "Francesco Ventola", country: IT }
+    - { place: 40, name: "Longin Kowalski", country: DE }
+    - { place: 41, name: "Chandan Narkar", country: UK }
+    - { place: 42, name: "Mouraly Venou", country: FR }
+    - { place: 43, name: "Raja Krishnan", country: DE }
+    - { place: 44, name: "Yuvaraj Eswaramoorthy", country: DK }
+    - { place: 45, player: dirk-polchow }
+    - { place: 46, name: "Nicolò Gallo", country: IT }
+    - { place: 47, name: "Amar Sanakal", country: UK }
+    - { place: 48, name: "Patrice Girault", country: FR }
+    - { place: 49, name: "Mohamed Fazloon Muzamil", country: UK }
+    - { place: 50, name: "Benoit Lerouge", country: FR }
+    - { place: 51, name: "Kristian Rosin", country: DE }
+    - { place: 52, name: "Tifenn Cano", country: FR }
+    - { place: 53, player: robert-bany }
+    - { place: 54, player: jakub-sasinski }
+    - { place: 55, name: "Wolfgang Peter", country: DE }
+    - { place: 56, player: matej-bednar }
+    - { place: 57, name: "Patrick Joiko", country: DE }
+    - { place: 58, name: "Vinay Palande", country: FR }
+    - { place: 59, name: "Haritha Weerawarnakula", country: IT }
+    - { place: 60, name: "Uwe Schneider", country: DE }
+    - { place: 61, player: paolo-martinelli }
+    - { place: 62, name: "Kalyan Pushpala", country: DK }
+    - { place: 63, name: "Yoann Pidial", country: FR }
+    - { place: 64, name: "Wasantha Welikumbura", country: IT }
+    - { place: 65, name: "Rémy Toubert", country: FR }
+    - { place: 66, player: steffen-eder }
+    - { place: 67, name: "Witold Blaut", country: PL }
+    - { place: 68, name: "Malik Suleman Nathoo", country: FR }
+    - { place: 69, name: "Alexander Vatchev", country: BG }
+    - { place: 70, name: "Anjula Wannuka Fernando", country: FR }
+    - { place: 71, player: jakub-nowakowski }
+    - { place: 72, name: "Gladwin Hettiyakandage", country: FR }
+    - { place: 73, name: "Anuradha Fernando", country: IT }
+    - { place: 74, name: "Dragomir Protic", country: RS }
+    - { place: 75, name: "Sumith Wickrama", country: IT }
+    - { place: 76, name: "Alain Sieger", country: FR }
+    - { place: 77, player: zdenek-svitak }
+    - { place: 78, name: "Nick Humbert", country: DE }
+    - { place: 79, name: "Antonio Sylvester Vethanayagam", country: DK }
+    - { place: 80, name: "Lucas Keram", country: FR }
+    - { place: 81, name: "Patrick Philips", country: IT }
+    - { place: 82, player: armin-steiner }
+    - { place: 83, name: "Christian Wendker", country: DE }
+    - { place: 84, player: frank-fehr }
+    - { place: 85, name: "Packiyaraj Indiraraj", country: UK }
+    - { place: 86, name: "Harvey Gomes", country: UK }
+    - { place: 87, name: "Jan-Oliver Rock", country: DE }
+    - { place: 88, name: "Aleksandar Bankovic", country: RS }
+    - { place: 89, name: "Vladimir Saric", country: RS }
+    - { place: 90, player: ales-formanek }
+    - { place: 91, player: andreas-hurtig }
+    - { place: 92, name: "Daniele Da Fatti", country: IT }
+    - { place: 93, name: "Momcilo Danic", country: RS }
+    - { place: 94, name: "Antoine Warnakulasuriya", country: FR }
+    - { place: 95, player: ondrej-kubicek }
+    - { place: 96, player: frantisek-rezek }
+    - { place: 97, name: "Dix Premsingh Prasad", country: UK }
+    - { place: 98, player: elisa-zucchiatti }
+    - { place: 99, player: filip-smoljak }
+    - { place: 100, name: "Deepanie Fonseka", country: IT }
+    - { place: 101, name: "Aleksandar Tanaskovic", country: RS }
+    - { place: 102, name: "Prasad Aluthgama", country: IT }
+    - { place: 103, name: "Armin Schneider", country: DE }
+    - { place: 104, name: "Thomas Janßen", country: DE }
+    - { place: 105, name: "Barbara Thomas", country: CH }
+    - { place: 106, player: lukas-navratil }
+    - { place: 107, player: paulina-nowakowska }
+    - { place: 108, name: "Aleksandar Pavlovic", country: RS }
+    - { place: 109, name: "David Kariyawasam", country: IT }
+    - { place: 110, player: frantisek-cervenka }
+    - { place: 111, name: "Stéphane Cano", country: FR }
+    - { place: 112, name: "Rudy Roussel", country: FR }
+    - { place: 113, name: "Michael Schäfer", country: DE }
+    - { place: 114, name: "Eric Messeant", country: FR }
+    - { place: 115, player: ondrej-chmelar }
+    - { place: 116, name: "Luigi Cartolano", country: IT }
+    - { place: 117, player: romana-kralova }
+    - { place: 118, name: "Anita Muruganandam", country: CH }
+    - { place: 119, name: "Stefan Eigenmann", country: CH }
+    - { place: 120, name: "Nikodem Blaut", country: PL }
+    - { place: 121, name: "Thomas Messeant", country: FR }
+    - { place: 122, name: "Ivaylo Aleksandrov", country: BG }
+    - { place: 123, name: "Emanuele Gaifas", country: IT }
+    - { place: 124, name: "Piotr Hink", country: PL }
+    - { place: 125, name: "Nadège Dugué", country: FR }
+    - { place: 126, name: "Nagarajah Thavanesan", country: UK }
+    - { place: 127, name: "Kirthi Edirisinghe", country: IT }
+    - { place: 128, player: hans-faller }
+    - { place: 129, name: "Kurt Scherrer", country: CH }
+    - { place: 130, name: "Werner Samland", country: CH }
+    - { place: 131, name: "Grzegorz Gora", country: PL }
+    - { place: 132, name: "Viktoria Gora", country: PL }
+    - { place: 133, name: "Eliza Lipinska-Wroczynska", country: PL }
+    - { place: 134, name: "Princila Jain Dix", country: UK }
+    - { place: 135, player: magdalena-novotna }
+    - { place: 136, name: "Thushari Gosthinna", country: IT }
+    - { place: 137, name: "Rachel Dix", country: UK }
+    - { place: 138, name: "Thierry Berthélémy", country: FR }
+    - { place: 139, name: "Pawel Gajda", country: PL }
+    - { place: 140, name: "Rosanna Stedile", country: IT }
+    - { place: 141, name: "Sissy Schäfer", country: DE }
+    - { place: 142, name: "Nebojsa Radenovic", country: CR }
+    - { place: 143, name: "Robert Didara", country: CR }
+    - { place: 144, name: "Priscilla Dix", country: UK }

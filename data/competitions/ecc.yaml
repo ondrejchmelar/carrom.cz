@@ -4,6 +4,7 @@ category: abroad
 name: { cs: Carrom Eurocup, en: Carrom Eurocup }
 short_name: { cs: Eurocup, en: Eurocup }
 description:
-  cs: Mistrovství Evropy klubů a národních týmů. Na webu jsou výsledky českých hráčů.
-  en: The European club and national team championship. The site lists Czech players' results.
+  cs: Mistrovství Evropy klubů a národních týmů. Na webu jsou ročníky, kde hráli čeští hráči.
+  en: The European club and national team championship. The site lists the years with Czech players.
 website: "https://eurocup.carrom.cz"
+archive_url: "https://sol5.metapensiero.it/lit/championship/938238f28cd411e3ac012e92809967e5"   # všechny ročníky v SoL lit
