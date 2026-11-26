@@ -22,6 +22,7 @@ python3 tools/import/sol.py https://sol5.metapensiero.it/lit/championship/<id>  
   v adminu existovat. Ročníky, které už výsledky mají, přeskočí (přepíše `--force`). `--dry-run` nic nezapíše.
 - Hráče pozná podle pole `sol` (ID v SoL), pak podle jména, přezdívky a `spellings`. Nového hráče z ČR založí
   s `mcr: true`. Hráče ze zahraničí bez vlastní stránky zapíše jen jménem a státem.
+- V GitHubu: Actions → „Import ze SoL“ → Run workflow, vlož odkaz. Workflow otevře pull request s výpisem.
 - Výpis (nebo `--report soubor.md`) ukazuje odhadnuté shody jmen a nové hráče. Ty zkontroluj před commitem.
 - SoL lit chrání kontrola proti robotům (Anubis). Skript ji vyřeší výpočtem, představí se v User-Agent
   a mezi požadavky čeká 1,5 s.

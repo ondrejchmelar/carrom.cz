@@ -189,8 +189,8 @@ def editions():
         t = open(f, encoding='utf-8').read()
         code = os.path.basename(os.path.dirname(f))
         m = re.search(r'^start_date:\s*(\S+)', t, re.M)
-        has = bool(re.search(r'^results:\s*\n\s+\w+:\s*\n\s+- ', t, re.M))
-        out[f'{code}/{os.path.basename(f)[:-5]}'] = {'path': f, 'date': m.group(1) if m else None, 'has_results': has, 'text': t}
+        divs = set(re.findall(r'^  (\w+):\s*\n\s+- ', t.split('\nresults:', 1)[1], re.M)) if '\nresults:' in t else set()
+        out[f'{code}/{os.path.basename(f)[:-5]}'] = {'path': f, 'date': m.group(1) if m else None, 'text': t, 'divisions': divs}
     return out
 
 
@@ -206,8 +206,20 @@ def write_edition(ed, division, rows, url, dry):
             lines.append(f"    - {{ place: {r['place']}, player: {r['player']} }}")
         else:
             lines.append(f"    - {{ place: {r['place']}, name: {json.dumps(r['name'], ensure_ascii=False)}, country: {r['country']} }}")
-    t = re.sub(r'^results:.*(\n[ \t]+.*)*', '\n'.join(lines), t, count=1, flags=re.M) if re.search(r'^results:', t, re.M) else t.rstrip('\n') + '\n\n' + '\n'.join(lines) + '\n'
-    t = re.sub(r'^sol_lit_url:.*$', f'sol_lit_url: {url}', t, count=1, flags=re.M) if re.search(r'^sol_lit_url:', t, re.M) else t.replace('\nresults:', f'\nsol_lit_url: {url}\nresults:', 1)
+    m = re.search(r'^results:.*(\n[ \t]+.*)*', t, re.M)
+    if m:
+        # keep the other divisions (e.g. singles) and replace only this one
+        keep, skip = [], False
+        for ln in m.group(0).split('\n')[1:]:
+            d = re.match(r'^  (\w+):', ln)
+            if d:
+                skip = d.group(1) == division
+            if not skip and ln.strip():
+                keep.append(ln)
+        t = t[:m.start()] + '\n'.join(['results:'] + keep + lines[1:]) + t[m.end():]
+    else:
+        t = t.rstrip('\n') + '\n\n' + '\n'.join(lines) + '\n'
+    t = t if url is None else re.sub(r'^sol_lit_url:.*$', f'sol_lit_url: {url}', t, count=1, flags=re.M) if re.search(r'^sol_lit_url:', t, re.M) else t.replace('\nresults:', f'\nsol_lit_url: {url}\nresults:', 1)
     t = re.sub(r'^status:\s*\S+', 'status: finished', t, count=1, flags=re.M)
     if not dry:
         open(ed['path'], 'w', encoding='utf-8').write(t if t.endswith('\n') else t + '\n')
@@ -246,7 +258,8 @@ def main():
             report.append(f'- {head}: žádný ročník s datem {t["date"]} – přeskočeno. Založ ročník v adminu a pusť import znovu.')
             continue
         ed = eds[eid]
-        if ed['has_results'] and not a.force:
+        division = a.division or default_division(eid)
+        if division in ed['divisions'] and not a.force:
             report.append(f'- {head} → `{eid}`: výsledky už jsou, přeskočeno (přepíše `--force`).')
             continue
         guessed, new, foreign = [], [], []
@@ -272,7 +285,7 @@ def main():
             else:
                 foreign.append(f'{first} {last} ({cc})')
                 out.append({'place': r['place'], 'name': f'{first} {last}', 'country': cc})
-        write_edition(ed, a.division or default_division(eid), out, full, a.dry_run)
+        write_edition(ed, division, out, full if division == default_division(eid) or not re.search(r'^sol_lit_url:\s*http', ed['text'], re.M) else None, a.dry_run)
         report.append(f'- {head} → `{eid}`: zapsáno {len(out)} míst.')
         if guessed:
             report.append('  - Odhadnutá shoda jména, zkontroluj: ' + '; '.join(guessed))

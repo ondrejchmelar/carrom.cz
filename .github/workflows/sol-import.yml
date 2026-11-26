@@ -1,0 +1,58 @@
+# Actions → "Import ze SoL" → Run workflow, vlož odkaz na turnaj nebo šampionát v SoL lit.
+# Skript zapíše konečné pořadí do ročníku se stejným datem a otevře pull request ke kontrole.
+# Potřebuje v Settings → Actions → General zapnuté „Allow GitHub Actions to create and approve pull requests“.
+name: Import ze SoL
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Odkaz na SoL lit (…/lit/tourney/… nebo …/lit/championship/…)"
+        required: true
+      edition:
+        description: "Ročník, jen když nesedí datum (např. cocp/2027)"
+        required: false
+      force:
+        description: "Přepsat už zapsané výsledky"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v5
+        with: { node-version: 22, cache: npm }
+      - run: pip install requests==2.32.3 && npm ci
+      - name: Import
+        env:
+          SOL_URL: ${{ inputs.url }}
+          SOL_EDITION: ${{ inputs.edition }}
+          SOL_FORCE: ${{ inputs.force }}
+        run: |
+          args=("$SOL_URL" --report report.md)
+          [ -n "$SOL_EDITION" ] && args+=(--edition "$SOL_EDITION")
+          [ "$SOL_FORCE" = "true" ] && args+=(--force)
+          python3 tools/import/sol.py "${args[@]}"
+      - run: npm run check:data && npm test
+      - name: Pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then echo "Nic nového k importu."; cat report.md; exit 0; fi
+          branch="sol-import-${{ github.run_id }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add data
+          git commit -m "Import výsledků ze SoL"
+          git push -u origin "$branch"
+          gh pr create --title "Import výsledků ze SoL" --body-file report.md --base main --head "$branch"

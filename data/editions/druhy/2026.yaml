@@ -29,3 +29,19 @@ results:
     - { place: 19, player: milos-konvalina }
     - { place: 20, name: "Marina Altmann", country: DE }
     - { place: 21, name: "Nico Altmann", country: DE }
+  juniors:
+    - { place: 1, player: ondrej-kubicek }
+    - { place: 2, player: ales-lipensky }
+    - { place: 3, player: radek-prikryl }
+    - { place: 4, player: prokop-novak }
+    - { place: 5, player: jakub-lyko }
+    - { place: 6, player: marie-cervinkova }
+    - { place: 7, player: maxim-novotny }
+    - { place: 8, player: jakub-stransky }
+    - { place: 9, player: filip-vitek }
+    - { place: 10, player: kristian-vecerka }
+    - { place: 11, player: jakub-krnac }
+    - { place: 12, player: jan-vesely }
+    - { place: 13, player: vendula-ferancova }
+    - { place: 14, player: lukas-chlad }
+    - { place: 15, player: martin-schoula }
