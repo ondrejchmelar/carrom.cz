@@ -68,8 +68,8 @@ const T = {
 
   const TXT = {
     cs: {
-      you: 'Ty', cpu: 'Počítač', p1: 'Bílý', p2: 'Černý', white: 'bílé', black: 'černé',
-      yourTurn: 'Jsi na tahu. Hraješ bílými zdola.', cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
+      you: 'Ty', cpu: 'Počítač', p1: 'Hráč 1', p2: 'Hráč 2', white: 'bílé', black: 'černé',
+      yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Rozstřel je tvůj: bílé hraje ten, kdo rozstřeluje.', cpuBreaks: 'Tuhle sadu rozstřeluje počítač, ty hraješ černé.', cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
       blocked: 'Striker nesmí ležet na kameni. Posuň ho.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
@@ -100,8 +100,8 @@ const T = {
       youWon: 'Vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
     },
     en: {
-      you: 'You', cpu: 'Computer', p1: 'White', p2: 'Black', white: 'white', black: 'black',
-      yourTurn: 'Your turn. You play white from the bottom.', cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
+      you: 'You', cpu: 'Computer', p1: 'Player 1', p2: 'Player 2', white: 'white', black: 'black',
+      yourTurn: (c: string) => `Your turn, you play ${c}.`, youBreak: 'Your break: the breaker plays white.', cpuBreaks: 'The computer breaks this board, you play black.', cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
       turnOf: (n: string, c: string) => `${n} to play (${c}).`,
       blocked: 'The striker may not touch a coin. Move it.',
       own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
@@ -165,7 +165,12 @@ const T = {
 
     // ---------- view ----------
     let scale = 1;
-    const flipped = () => mode === 'two' && state.turn === 'black'; // the player on turn always sits at the bottom
+    // The break alternates between boards and the breaker plays white (ECC law 29). Board 1, 3, …:
+    // you (or player 1) break with white; board 2, 4, …: the computer (or player 2) does.
+    let board = 1;
+    const myColor = () => (board % 2 ? 'white' : 'black'); // you, or player 1
+    // You always sit at the bottom; in a two-player game the player on turn does.
+    const flipped = () => (mode === 'two' ? state.turn === 'black' : myColor() === 'black');
     function resize() {
       const w = canvas.clientWidth || 360;
       const dpr = Math.min(2, devicePixelRatio || 1);
@@ -182,9 +187,9 @@ const T = {
     }
 
     // ---------- helpers ----------
-    const human = () => phase === 'aim' && (mode === 'two' || state.turn === 'white');
+    const human = () => phase === 'aim' && (mode === 'two' || state.turn === myColor());
     const baseY = () => C.BASE_Y[C.side(state.turn)];
-    const nameOf = (c: 'white' | 'black') => (mode === 'computer' ? (c === 'white' ? L.you : L.cpu) : c === 'white' ? L.p1 : L.p2);
+    const nameOf = (c: 'white' | 'black') => (c === myColor() ? (mode === 'computer' ? L.you : L.p1) : mode === 'computer' ? L.cpu : L.p2);
     function setStriker(x: number) {
       strikerX = C.clampStrikerX(x);
       const k = (strikerX - C.BASE_X[0]) / (C.BASE_X[1] - C.BASE_X[0]);
@@ -202,7 +207,8 @@ const T = {
       if (phase === 'cpu') return L.cpuThinks;
       if (human() && !C.strikerFree(state, strikerX)) return `${message ? message + ' ' : ''}${L.blocked}`;
       if (message) return message;
-      if (mode === 'computer') return state.turn === 'white' ? L.yourTurn : L.cpuShoots;
+      const breaking = !state.broken && !state.shots;
+      if (mode === 'computer') return state.turn === myColor() ? (breaking ? L.youBreak : L.yourTurn(L[state.turn])) : breaking ? L.cpuBreaks : L.cpuShoots;
       return L.turnOf(nameOf(state.turn), L[state.turn]);
     }
     function ui() {
@@ -219,7 +225,7 @@ const T = {
       const over = $('[data-over]');
       over.hidden = !state.winner;
       if (state.winner) {
-        $('[data-over-title]').textContent = mode === 'computer' ? (state.winner === 'white' ? L.youWon : L.lost) : L.won(nameOf(state.winner));
+        $('[data-over-title]').textContent = mode === 'computer' ? (state.winner === myColor() ? L.youWon : L.lost) : L.won(nameOf(state.winner));
         $('[data-over-text]').textContent = nb(`${state.reason ? L.reason[state.reason] + ' ' : ''}${L.pts(state.points)}`);
       }
     }
@@ -349,7 +355,9 @@ const T = {
     }
     function run() {
       let last = performance.now(), acc = 0;
+      const game = state; // a new game started meanwhile stops this loop
       const frame = (now: number) => {
+        if (state !== game) return;
         acc += Math.min(0.05, (now - last) / 1000) * (reduceMotion ? 3 : 1);
         last = now;
         let more = true;
@@ -373,16 +381,19 @@ const T = {
       }
       kbAngle = state.turn === 'white' ? -Math.PI / 2 : Math.PI / 2;
       ui(); draw();
-      if (!state.winner && mode === 'computer' && state.turn === 'black') cpuTurn();
+      if (!state.winner && mode === 'computer' && state.turn !== myColor()) cpuTurn();
     }
     function cpuTurn() {
       phase = 'cpu'; ui();
+      const game = state;
       setTimeout(() => {
+        if (state !== game) return;
         const shot = C.chooseShot(state, state.easy ? { simple: true } : { skill: SKILL[levelSel.value] ?? 0.6 });
         // show where it plays, then shoot
         const from = strikerX, t0 = performance.now(), dur = reduceMotion ? 1 : 900;
         cpuGhost = { ...shot, t: 0 };
         const anim = (now: number) => {
+          if (state !== game) return;
           const k = Math.min(1, (now - t0) / dur);
           cpuGhost!.x = from + (shot.x - from) * Math.min(1, k * 1.6);
           cpuGhost!.t = Math.max(0, (k - 0.55) / 0.45);
@@ -394,11 +405,14 @@ const T = {
       }, 350);
     }
     function reset() {
-      state = C.newGame({ mode, easy: easy() });
+      state = C.newGame({ mode, easy: easy() }); // white breaks
       phase = 'aim'; message = ''; aim = null; cpuGhost = null; kbPower = 0; kbAngle = -Math.PI / 2;
       setStriker(C.CENTER);
       ui(); draw();
+      if (mode === 'computer' && myColor() !== 'white') cpuTurn();
     }
+    const nextBoard = () => { board++; reset(); };
+    const firstBoard = () => { board = 1; reset(); };
 
     // ---------- input ----------
     canvas.addEventListener('pointerdown', (e) => {
@@ -464,11 +478,11 @@ const T = {
     root.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((b) => b.addEventListener('click', () => {
       mode = b.dataset.mode as 'computer' | 'two';
       root.querySelectorAll('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-      reset();
+      firstBoard();
     }));
-    levelSel.addEventListener('change', reset);
-    $('[data-reset]').addEventListener('click', reset);
-    $('[data-again]').addEventListener('click', reset);
+    levelSel.addEventListener('change', firstBoard);
+    $('[data-reset]').addEventListener('click', nextBoard);
+    $('[data-again]').addEventListener('click', nextBoard);
     new ResizeObserver(resize).observe(canvas);
     reset();
     resize();

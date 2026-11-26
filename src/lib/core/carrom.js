@@ -42,7 +42,7 @@ const other = (c) => (c === 'white' ? 'black' : 'white');
  * Starting position: queen in the centre, 6 coins around it, 12 in the outer ring (hexagonal packing).
  * The easy game uses only the queen and the inner ring: 7 pieces, 3 coins per colour.
  */
-export function rack({ easy = false } = {}) {
+export function rack({ easy = false, rand = Math.random, jitter = 0.25 } = {}) {
   const R = geom({ easy }).coin;
   const pieces = [{ id: 0, kind: 'queen', color: 'queen', x: CENTER, y: CENTER }];
   const d = R * 2 + 0.2;
@@ -55,6 +55,23 @@ export function rack({ easy = false } = {}) {
   for (let k = 0; k < 6 && !easy; k++) {
     put(ray + (k * Math.PI) / 3, 2 * d, 'white');
     put(ray + (k * Math.PI) / 3 + Math.PI / 6, Math.sqrt(3) * d, 'black');
+  }
+  // Hands never set a rack perfectly: turn it a little and nudge every piece by up to jitter × R,
+  // then push apart any that overlap. So the same break does not always end the same way.
+  const turn = (rand() - 0.5) * 2 * jitter * 0.25, J = jitter * R;
+  for (const p of pieces) {
+    const dx = p.x - CENTER, dy = p.y - CENTER, a = rand() * Math.PI * 2, m = rand() * J;
+    p.x = CENTER + dx * Math.cos(turn) - dy * Math.sin(turn) + Math.cos(a) * m;
+    p.y = CENTER + dx * Math.sin(turn) + dy * Math.cos(turn) + Math.sin(a) * m;
+  }
+  for (let it = 0; it < 60; it++) {
+    let moved = false;
+    for (let i = 0; i < pieces.length; i++) for (let k = i + 1; k < pieces.length; k++) {
+      const a = pieces[i], b = pieces[k];
+      const dx = b.x - a.x, dy = b.y - a.y, dist = Math.hypot(dx, dy) || 1, over = 2 * R + 0.1 - dist;
+      if (over > 0) { a.x -= (dx / dist) * over / 2; a.y -= (dy / dist) * over / 2; b.x += (dx / dist) * over / 2; b.y += (dy / dist) * over / 2; moved = true; }
+    }
+    if (!moved) break;
   }
   for (const p of pieces) Object.assign(p, { vx: 0, vy: 0, r: R, m: MASS[p.kind], inPlay: true });
   return pieces;
