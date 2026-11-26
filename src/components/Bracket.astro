@@ -10,8 +10,8 @@ const d = (k: string) => (dates?.[k] ? ` · ${dateShort(dates[k], false, lang)}`
 const short = (s: any) => t(s.label, lang).replace(/^Čtvrtfinále/, 'ČF').replace(/^Semifinále/, 'SF').replace(/^Quarter-final/, 'QF').replace(/^Semi-final/, 'SF');
 const tag = (s: any) =>
   group.next === s.id ? { long: en ? 'Next match' : 'Další zápas', short: en ? 'Next' : 'Další', red: false }
-  : s.bestOf > 1 ? { long: en ? `best of ${s.bestOf}` : `na ${Math.ceil(s.bestOf / 2)} vítězné`, short: en ? `best of ${s.bestOf}` : `${Math.ceil(s.bestOf / 2)} výhry`, red: !!s.places }
-  : { long: en ? '1 game' : '1 hra', short: en ? '1 game' : '1 hra', red: !!s.places };
+  : s.bestOf > 1 ? { long: en ? `best of ${s.bestOf}` : `na ${Math.ceil(s.bestOf / 2)} vítězné`, short: en ? `best of ${s.bestOf}` : `${Math.ceil(s.bestOf / 2)} výhry`, red: !!s.places && s.winner == null }
+  : { long: en ? '1 game' : '1 hra', short: en ? '1 game' : '1 hra', red: !!s.places && s.winner == null };
 // line from each source match to the match its winner goes to
 const wires = [['qf1', 'sf1'], ['qf2', 'sf1'], ['qf3', 'sf2'], ['qf4', 'sf2'], ['sf1', 'f1'], ['sf2', 'f1'], ['l-sf1', 'f5'], ['l-sf2', 'f5']]
   .filter(([a, b]) => by[a] && by[b])
