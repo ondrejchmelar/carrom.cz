@@ -12,6 +12,7 @@ report:
     The second Czech Championship tournament of 2025 brought many close
     matches and a few surprises. In the end Karlos Novák took the win.
 sol_lit_url: ~              # odkaz na detailní výsledky v SoL lit, když existuje
+final_video: ~              # volitelné: odkaz na video finále na YouTube
 source: old-site            # old-site | sol | admin
 
 results:

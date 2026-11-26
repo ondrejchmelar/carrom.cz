@@ -99,6 +99,7 @@ collections:
       - { name: schedule, label: Program, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
       - { name: report, label: Zpráva o turnaji, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
       - { name: sol_lit_url, label: Detailní výsledky v SoL lit, widget: string, required: false }
+      - { name: final_video, label: Video finále (odkaz na YouTube), widget: string, required: false, pattern: ["^(https://(www\\.)?(youtube\\.com|youtu\\.be)/.+)?$", "Odkaz na YouTube, např. https://youtu.be/…"] }
       - { name: source, label: Odkud výsledky, widget: select, options: [old-site, sol, admin], default: admin, required: false }
       - name: roster
         label: Soupiska ligy

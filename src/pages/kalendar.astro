@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import EventRow from '../components/EventRow.astro';
 import Countdown from '../components/Countdown.astro';
-import PaymentNote from '../components/PaymentNote.astro';
 import Icon from '../components/Icon.astro';
 import { model } from '../lib/data';
 import { url, editionName, editionUrl, dateShort, monthTitle } from '../lib/site';
@@ -58,7 +57,6 @@ const nextId = m.nextTournament?.id;
           <span class="small">Přidejte si kalendář ČCA do Google, Apple nebo Outlook kalendáře. Nové akce se objeví samy.</span>
           <a class="btn btn-ghost" href={url('/kalendar.ics')}><Icon name="calplus" size={18} />Přidat do kalendáře</a>
         </div>
-        <PaymentNote />
         <div class="card pad">
           <strong class="side-title">Pořádáte akci?</strong>
           <span class="small">Turnaj, veřejné hraní nebo ukázku carromu zapíšeme do kalendáře. Napište na <a href={`mailto:${m.settings.site?.email}`} style="color: var(--red); font-weight: 600">{m.settings.site?.email}</a>.</span>

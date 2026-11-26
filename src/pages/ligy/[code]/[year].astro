@@ -24,6 +24,7 @@ for (const x of s?.matches ?? []) { res.set(`${x.a}|${x.b}`, [x.sa, x.sb]); res.
 const order = s?.table.map((r: any) => r.player) ?? [];
 const phaseLabel: Record<string, string> = { group: 'Základní kolo', playoff: 'Playoff', finished: 'Sezóna skončila' };
 const venue = ed.venue;
+const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].includes(ed.status);
 ---
 <Base title={`${t(ed.competition.name)} ${ed.year}`} current="ligy">
   <div class="wrap page">
@@ -147,11 +148,20 @@ const venue = ed.venue;
         </section>
       </div>
     )}
-    <PaymentNote />
+    {signupOpen && (
+      <section class="card-navy signup">
+        <strong class="su-title">Přihláška na sezónu {ed.year}</strong>
+        <a class="btn btn-red" href={ed.links.signup_url} rel="noopener">Přihlásit se</a>
+        <PaymentNote />
+      </section>
+    )}
   </div>
 </Base>
 <style>
   .phase { gap: 6px; }
+  .signup { max-width: 720px; gap: 14px; }
+  .su-title { font-family: var(--f-head); font-size: 24px; }
+  .signup .btn { align-self: flex-start; }
   .pill { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: #fff; color: var(--muted); border: 1px solid var(--line); }
   .pill.on { background: var(--navy); color: #fff; border-color: var(--navy); }
   .tabs { display: flex; flex-direction: column; gap: 20px; }

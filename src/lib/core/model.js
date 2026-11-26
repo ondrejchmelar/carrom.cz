@@ -55,6 +55,11 @@ export function buildModel(raw, { today = new Date() } = {}) {
     }
   }
 
+  for (const ed of Object.values(editions)) {
+    if (ed.final_video && !/(?:youtu\.be\/|[?&]v=|\/(?:embed|live|shorts)\/)[A-Za-z0-9_-]{11}/.test(String(ed.final_video)))
+      warnings.push(`editions/${ed.id}: final_video není odkaz na YouTube video`);
+  }
+
   // ---------- references ----------
   for (const ed of Object.values(editions)) {
     for (const [div, rows] of Object.entries(ed.results ?? {})) {

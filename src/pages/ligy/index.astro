@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import PaymentNote from '../../components/PaymentNote.astro';
 import { model } from '../../lib/data';
 import { url, t, nbsp, dateShort } from '../../lib/site';
 const m = model();
@@ -31,7 +30,6 @@ const mainSeason = main?.league ? seasonOf(main.league) : null;
         </div>
       </section>
     )}
-    <PaymentNote />
     <section class="section">
       <h2>Další ligy a kluby</h2>
       <div class="grid more">
