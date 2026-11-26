@@ -78,7 +78,6 @@ const T = {
       'queen-back': 'Královnu se nepodařilo potvrdit, vrací se doprostřed.',
       'queen-early': 'Královnu lze dát až po prvním vlastním kameni. Vrací se doprostřed.',
       'last-coin': 'Poslední kámen nejde dát dřív než královnu. Vrací se na desku.',
-      'their-last': 'Poslední soupeřův kámen musí dát on sám. Vrací se doprostřed, bez trestu.',
       'queen-easy': 'Královna v díře (+3 body), hraješ znovu.', 'foul-easy': 'Striker v díře, na tahu je soupeř.',
       queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená', easy: 'Královna v díře' },
       rules: {
@@ -99,7 +98,6 @@ const T = {
       'queen-back': 'Queen not covered, back to the centre.',
       'queen-early': 'The queen counts only after your first coin. Back to the centre.',
       'last-coin': 'Your last coin cannot go before the queen. It goes back.',
-      'their-last': 'Only its owner may pocket the last coin. It goes back to the centre, no penalty.',
       'queen-easy': 'Queen pocketed (+3 points), shoot again.', 'foul-easy': 'Striker pocketed, your turn ends.',
       queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered', easy: 'Queen pocketed' },
       rules: {
@@ -340,7 +338,7 @@ const T = {
     }
     function finish() {
       const r = C.endShot(state);
-      const key = r.msg.includes('their-last') ? 'their-last' : r.msg.find((m: string) => m !== 'own' || r.msg.length === 1) ?? r.msg[0];
+      const key = r.msg.find((m: string) => m !== 'own' || r.msg.length === 1) ?? r.msg[0];
       message = key ? (L as any)[key] ?? '' : '';
       if (r.again && !r.foul && r.msg.includes('own') && !r.msg.includes('pending') && !r.msg.includes('covered')) message = L.own;
       phase = state.winner ? 'over' : 'aim';

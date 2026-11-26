@@ -274,8 +274,6 @@ export function endShot(state) {
     if (!fell.length) msg.push('miss');
   }
 
-  // The opponent's last coin may only be pocketed by its owner: it goes back, no penalty.
-  if (theirs.length && state.pocketed[opp] === 9) { returnOne(state, opp); msg.push('their-last'); }
   // You may not clear your coins while the queen is still in play: the last coin goes back.
   for (const c of [me, opp]) {
     if (state.pocketed[c] === 9 && state.queen.state !== 'covered') {
@@ -320,8 +318,6 @@ function endShotEasy(state) {
   if (!fell.length) msg.push('miss');
   const again = !foul && (mine.length > 0 || queenIn);
   const n = coinsOf(state);
-  // The opponent's last coin may only be pocketed by its owner: it goes back, no penalty.
-  if (theirs.length && state.pocketed[opp] >= n) { returnOne(state, opp); msg.push('their-last'); }
   // Pocketing the opponent's last coin hands them the board, as in the full game.
   const done = [me, opp].filter((c) => state.pocketed[c] >= n);
   if (done.length) {
