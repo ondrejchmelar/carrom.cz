@@ -69,7 +69,7 @@ const T = {
   const TXT = {
     cs: {
       you: 'Ty', cpu: 'Počítač', p1: 'Hráč 1', p2: 'Hráč 2', white: 'bílé', black: 'černé',
-      yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Rozstřel je tvůj: bílé hraje ten, kdo rozstřeluje.', cpuBreaks: 'Tuhle sadu rozstřeluje počítač, ty hraješ černé.', cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
+      yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Začínáš ty, a proto máš bílé kameny. Rozstřel!', cpuBreaks: 'Tuhle sadu začíná počítač, a proto má bílé. Ty máš černé.', starts: (n: string) => `Začíná ${n}, a proto má bílé kameny. Rozstřel!`, cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
       blocked: 'Striker nesmí ležet na kameni. Posuň ho.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
@@ -93,15 +93,15 @@ const T = {
       'queen-easy': 'Královna v díře (+3 body), hraješ znovu.', 'foul-easy': 'Striker v díře, na tahu je soupeř.',
       queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená', easy: 'Královna v díře' },
       rules: {
-        easy: 'Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, královna dává +3 body hned. Striker v díře jen ukončí tah, nic se nevrací. Vyhrává, kdo má první venku své 3 kameny.',
-        full: 'Pravidla ECC: 9 kamenů na hráče. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
+        easy: 'Kdo začíná, má bílé kameny; začíná se střídavě. Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, královna dává +3 body hned. Striker v díře jen ukončí tah, nic se nevrací. Vyhrává, kdo má první venku své 3 kameny.',
+        full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
       },
       won: (n: string) => `${n} vyhrává!`, lost: 'Vyhrál počítač.', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
       youWon: 'Vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
     },
     en: {
       you: 'You', cpu: 'Computer', p1: 'Player 1', p2: 'Player 2', white: 'white', black: 'black',
-      yourTurn: (c: string) => `Your turn, you play ${c}.`, youBreak: 'Your break: the breaker plays white.', cpuBreaks: 'The computer breaks this board, you play black.', cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
+      yourTurn: (c: string) => `Your turn, you play ${c}.`, youBreak: 'You begin, so you have the white coins. Break!', cpuBreaks: 'The computer begins this board, so it has white. You have black.', starts: (n: string) => `${n} begins, so they have the white coins. Break!`, cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
       turnOf: (n: string, c: string) => `${n} to play (${c}).`,
       blocked: 'The striker may not touch a coin. Move it.',
       own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
@@ -125,8 +125,8 @@ const T = {
       'queen-easy': 'Queen pocketed (+3 points), shoot again.', 'foul-easy': 'Striker pocketed, your turn ends.',
       queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered', easy: 'Queen pocketed' },
       rules: {
-        easy: 'Easy game: 3 coins each and the queen. Every pocketed coin counts and the queen gives +3 points straight away. A pocketed striker only ends your turn, nothing goes back. First to pocket all 3 coins wins.',
-        full: 'ECC laws: 9 coins each. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
+        easy: 'Whoever begins has the white coins; players take turns to begin. Easy game: 3 coins each and the queen. Every pocketed coin counts and the queen gives +3 points straight away. A pocketed striker only ends your turn, nothing goes back. First to pocket all 3 coins wins.',
+        full: 'ECC laws: whoever begins (breaks) has the white coins; players take turns to begin. 9 coins each. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
       },
       won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
       youWon: 'You win!', aimHint: 'Pull back and let go.',
@@ -209,7 +209,7 @@ const T = {
       if (message) return message;
       const breaking = !state.broken && !state.shots;
       if (mode === 'computer') return state.turn === myColor() ? (breaking ? L.youBreak : L.yourTurn(L[state.turn])) : breaking ? L.cpuBreaks : L.cpuShoots;
-      return L.turnOf(nameOf(state.turn), L[state.turn]);
+      return breaking ? L.starts(nameOf(state.turn)) : L.turnOf(nameOf(state.turn), L[state.turn]);
     }
     function ui() {
       $('[data-count="white"]').textContent = String(state.pocketed.white);

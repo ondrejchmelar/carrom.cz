@@ -11,10 +11,11 @@ Pochází nejspíš z Indie. Posledních sto let se hraje na celém indickém su
 
 ## Pravidla v kostce
 
-1. **Cvrnkni strikerem.** Striker položíš na svou čáru a prstem jím cvrnkneš do kamenů.
-2. **Dostaň své kameny do děr.** Když se trefíš, hraješ znovu. Kdo má své kameny venku první, vyhrává sadu.
-3. **Potvrď královnu.** Červená královna se počítá, jen když ji hned potvrdíš dalším svým kamenem.
-4. **Pozor na fauly.** Spadne ti do díry striker? Jeden svůj kámen vracíš zpět na desku.
+1. **Kdo začíná, má bílé.** Začínající hráč rozstřeluje a hraje bílými kameny, soupeř černými. V další sadě začíná druhý.
+2. **Cvrnkni strikerem.** Striker položíš na svou čáru a prstem jím cvrnkneš do kamenů.
+3. **Dostaň své kameny do děr.** Když se trefíš, hraješ znovu. Kdo má své kameny venku první, vyhrává sadu.
+4. **Potvrď královnu.** Červená královna se počítá, jen když ji hned potvrdíš dalším svým kamenem.
+5. **Pozor na fauly.** Spadne ti do díry striker? Jeden svůj kámen vracíš zpět na desku.
 
 ## Co je na desce
 
