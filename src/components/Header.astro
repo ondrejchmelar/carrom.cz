@@ -27,9 +27,14 @@ const homeHref = url(lang === 'en' ? '/en/' : '/');
   /* The emblem is larger than the bar and hangs below it (Ondrej, 2026-11-26). */
   .site-header { background: var(--navy); position: relative; z-index: 20; }
   .bar { display: flex; align-items: center; gap: 16px; height: 68px; }
-  .logo { position: relative; align-self: stretch; display: flex; align-items: center; flex: none; padding-left: 78px; }
-  .emblem { position: absolute; left: 0; top: 6px; width: 68px; height: 68px; border-radius: 50%; box-shadow: 0 0 0 3px var(--navy), 0 4px 12px rgba(14, 27, 61, 0.3); }
-  .wordmark { display: block; width: 176px; height: 24px; }
+  .logo { position: relative; align-self: stretch; display: flex; align-items: center; flex: none; padding-left: 68px; }
+  .emblem { position: absolute; left: 0; top: 6px; width: 60px; height: 60px; border-radius: 50%; box-shadow: 0 0 0 3px var(--navy), 0 4px 12px rgba(14, 27, 61, 0.3); }
+  .wordmark { display: block; width: 150px; height: 20px; }
+  @media (min-width: 360px) {
+    .logo { padding-left: 78px; }
+    .emblem { width: 68px; height: 68px; }
+    .wordmark { width: 176px; height: 24px; }
+  }
   @media (min-width: 400px) {
     .logo { padding-left: 86px; }
     .emblem { top: 7px; width: 76px; height: 76px; }

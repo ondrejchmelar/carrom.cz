@@ -60,7 +60,7 @@ p { margin: 0; }
 .section-head a { font-weight: 600; color: var(--red); }
 
 /* buttons & chips (taps ≥ 44px, buttons 48) */
-.btn { min-height: 48px; padding: 0 24px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-weight: 700; font-size: 16px; border: 1.5px solid transparent; cursor: pointer; font-family: inherit; white-space: nowrap; }
+.btn { min-height: 48px; max-width: 100%; padding: 8px 24px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-weight: 700; font-size: 16px; line-height: 1.25; text-align: center; border: 1.5px solid transparent; cursor: pointer; font-family: inherit; }
 .btn-red { background: var(--red); color: #fff; }
 .btn-red:hover { color: #fff; background: #b81e24; }
 .btn-navy { background: var(--navy); color: #fff; }
@@ -79,6 +79,8 @@ a.card:hover strong { color: var(--red); }
 .card-navy .eyebrow { color: var(--amber); }
 .card-navy .muted { color: #D5DBEA; }
 .grid { display: grid; gap: 12px; }
+/* Grid items must not grow to a wide table's width (that stretched the page on phones). */
+:where(.grid, .cols, .intro, .top, .duo, .layout) > * { min-width: 0; }
 .prose { max-width: 680px; font-size: 17px; line-height: 1.6; }
 .prose h2 { margin: 32px 0 12px; }
 .prose p, .prose ul, .prose ol { margin: 0 0 14px; }
@@ -106,6 +108,11 @@ table.data tr.cut td { border-bottom: 2px solid var(--red); }
 .row-list .when { font-weight: 700; color: var(--muted); }
 .row-list .what { display: flex; flex-direction: column; gap: 2px; }
 .row-list .tail { color: var(--muted); text-align: right; }
+@media (max-width: 599px) {
+  /* phones: the tail (winner, status) goes under the name instead of squeezing it */
+  .row-list > a, .row-list > div { grid-template-columns: 64px minmax(0, 1fr); row-gap: 4px; }
+  .row-list .tail { grid-column: 2; text-align: left; font-size: 14px; }
+}
 
 .date-badge { width: 64px; height: 64px; border-radius: 12px; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; flex: none; }
 .date-badge b { font-family: var(--f-head); font-size: 26px; font-weight: 800; line-height: 1; }
