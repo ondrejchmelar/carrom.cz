@@ -71,7 +71,6 @@ const T = {
       yourTurn: 'Jsi na tahu. Hraješ bílými zdola.', cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
       blocked: 'Striker nesmí ležet na kameni. Posuň ho.',
-      backward: 'Cvrnkni dopředu, směrem od své čáry.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
       foul: 'Faul: striker v díře, jeden tvůj kámen se vrací na desku.', 'foul-free': 'Faul: striker v díře.',
       pending: 'Královna v díře! Teď ji potvrď svým kamenem.', covered: 'Královna potvrzená (+3 body).',
@@ -87,7 +86,6 @@ const T = {
       yourTurn: 'Your turn. You play white from the bottom.', cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
       turnOf: (n: string, c: string) => `${n} to play (${c}).`,
       blocked: 'The striker may not touch a coin. Move it.',
-      backward: 'Shoot forward, away from your base line.',
       own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
       foul: 'Foul: striker pocketed, one of your coins goes back.', 'foul-free': 'Foul: striker pocketed.',
       pending: 'Queen pocketed! Now cover it with your coin.', covered: 'Queen covered (+3 points).',
@@ -157,7 +155,7 @@ const T = {
       const y = baseY();
       const dx = strikerX - aim.px, dy = y - aim.py;
       const pull = Math.hypot(dx, dy);
-      return { angle: Math.atan2(dy, dx), power: Math.min(1, pull / 210), ok: C.forward(state.turn, dy) && pull > 12 };
+      return { angle: Math.atan2(dy, dx), power: Math.min(1, pull / 210), ok: pull > 12 };
     }
     function statusText() {
       if (state.winner) return '';
@@ -231,7 +229,7 @@ const T = {
       else if (!state.striker && showStriker && !state.winner) {
         const blocked = !C.strikerFree(state, showStriker.x);
         // aim line
-        const sh = cpuGhost ? { angle: cpuGhost.angle, power: cpuGhost.power * Math.min(1, cpuGhost.t), ok: true } : aim ? shotFromAim() : charging || kbPower ? { angle: kbAngle, power: kbPower, ok: C.forward(state.turn, Math.sin(kbAngle)) } : null;
+        const sh = cpuGhost ? { angle: cpuGhost.angle, power: cpuGhost.power * Math.min(1, cpuGhost.t), ok: true } : aim ? shotFromAim() : charging || kbPower ? { angle: kbAngle, power: kbPower, ok: true } : null;
         if (sh && sh.power > 0) {
           const len = 60 + sh.power * 360;
           ctx.save();
@@ -267,7 +265,6 @@ const T = {
     // ---------- game flow ----------
     function shoot(angle: number, power: number) {
       if (!C.strikerFree(state, strikerX)) { message = L.blocked; ui(); draw(); return; }
-      if (!C.forward(state.turn, Math.sin(angle))) { message = L.backward; ui(); draw(); return; }
       message = '';
       C.startShot(state, strikerX, angle, power);
       phase = 'moving';
@@ -356,7 +353,6 @@ const T = {
         const sh = shotFromAim();
         aim = null;
         if (sh && sh.ok) shoot(sh.angle, sh.power);
-        else if (sh && sh.power > 0.06) { message = L.backward; ui(); }
       }
       drag = null;
       draw();

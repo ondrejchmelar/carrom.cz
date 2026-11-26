@@ -72,9 +72,9 @@ export function strikerFree(state, x, color = state.turn) {
   return state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + STRIKER_R);
 }
 
-/** Is a shot direction allowed? The striker must leave the base line forward (towards the centre). */
+/** Is a shot direction allowed? ICF rules allow any direction, back shots included. */
 export function forward(color, vy) {
-  return color === 'white' ? vy < -0.05 : vy > 0.05;
+  return Number.isFinite(vy);
 }
 
 // ---------------------------------------------------------------- physics
@@ -300,7 +300,6 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
         const ux = px - t.x, uy = py - t.y, ul = Math.hypot(ux, uy);
         const cx = t.x - (ux / ul) * (t.r + STRIKER_R), cy = t.y - (uy / ul) * (t.r + STRIKER_R);
         const sx = cx - x, sy = cy - y, sl = Math.hypot(sx, sy);
-        if (!forward(me, sy)) continue;
         const cut = (sx * ux + sy * uy) / (sl * ul); // cos of the cut angle
         if (cut < 0.3) continue;
         if (!pathClear(state, t.x, t.y, px, py, t.r, t)) continue;
