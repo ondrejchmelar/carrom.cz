@@ -1,6 +1,15 @@
 competition: pcl
 year: 2021
 status: finished
+phase: finished
+format:                     # playoff převzaté ze starého webu, viz data/leagues/pcl-2021/playoff.yaml
+  playoff:
+    bracket: pcl-8
+    groups: ["1-8"]
+    best_of: { "1-8": 3, "1-8/5-8": 1 }
+    dates: { qf: 2021-11-11, sf: 2021-11-25, f: 2021-12-09 }
+links:
+  table_url: "https://docs.google.com/spreadsheets/d/1ueX-XvDHUzxpQmZvLoWX-WPcnDg2dVjM/edit#gid=249250102"   # tabulka základního kola (Google tabulka)
 report:
   cs: |
     Letošní Pražskou carromovou ligu odehrajeme v Café Bar Manta, Kořenského 1053/5, Praha 5. Termíny jsou v kalendáři na hlavní stránce. Na jednotlivá hraní je nutné se přihlásit v tabulce, viz níže. Více informací na pcl@carrom.cz a Rezervační tabulka pro aktuální termín Neváhejte se zapsat.

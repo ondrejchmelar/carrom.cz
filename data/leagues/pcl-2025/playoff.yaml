@@ -1,0 +1,25 @@
+# Playoff PCL 2025 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - zdenek-svitak
+  - ajay-sekhesh
+  - raj-patil
+  - frantisek-cervenka
+  - neel-vasanth
+  - frantisek-rezek
+  - tomas-chmelar
+  - pavel-schierl
+games:
+  "1-8":
+    qf1: ["25:8", "25:6"]
+    qf2: ["4:25", "18:25"]
+    qf3: ["12:22", "14:10", "25:6"]
+    qf4: ["0:25", "8:25"]
+    sf1: ["22:9", "25:0"]
+    sf2: ["0:25", "0:25"]
+    l-sf1: ["11:24"]
+    l-sf2: ["20:9"]
+    f1: ["24:9", "5:19", "2:25"]
+    f3: ["25:0"]
+    f5: ["14:22"]
+    f7: ["12:14"]

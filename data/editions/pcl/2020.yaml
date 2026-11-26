@@ -1,6 +1,15 @@
 competition: pcl
 year: 2020
 status: finished
+phase: finished
+format:                     # playoff převzaté ze starého webu, viz data/leagues/pcl-2020/playoff.yaml
+  playoff:
+    bracket: pcl-8
+    groups: ["1-8"]
+    best_of: { "1-8": 1 }
+    dates: { qf: 2020-12-10, sf: 2020-12-10, f: 2020-12-10 }
+links:
+  table_url: "https://docs.google.com/spreadsheets/d/1cZgC1yJtfG2l8A0jeJLn5kj1cuD1Bb7Fz5hrrViK8wI/edit#gid=1571005299"   # tabulka základního kola (Google tabulka)
 start_date: 2020-12-10
 report:
   cs: |

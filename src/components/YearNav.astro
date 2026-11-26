@@ -1,0 +1,31 @@
+---
+// Quick jump to another year of the same competition: previous, a year picker, next.
+import { model } from '../lib/data';
+import { editionUrl, tr, type Lang } from '../lib/site';
+interface Props { ed: any; lang?: Lang }
+const { ed, lang = 'cs' } = Astro.props;
+const list = Object.values(model().editions)
+  .filter((e: any) => e.code === ed.code)
+  .sort((a: any, b: any) => a.year - b.year);
+const i = list.findIndex((e: any) => e.id === ed.id);
+const prev: any = list[i - 1], next: any = list[i + 1];
+---
+{list.length > 1 && (
+  <nav class="yn" aria-label={tr(lang, 'Další ročníky', 'Other years')}>
+    {prev ? <a class="yn-step" href={editionUrl(prev, lang)} rel="prev">‹ {prev.year}</a> : <span class="yn-step off" aria-hidden="true">‹</span>}
+    <select class="yn-sel" aria-label={tr(lang, 'Ročník', 'Year')} data-year-nav>
+      {[...list].reverse().map((e: any) => <option value={editionUrl(e, lang)} selected={e.id === ed.id}>{e.year}</option>)}
+    </select>
+    {next ? <a class="yn-step" href={editionUrl(next, lang)} rel="next">{next.year} ›</a> : <span class="yn-step off" aria-hidden="true">›</span>}
+  </nav>
+)}
+<style>
+  .yn { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .yn-step { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-size: 14px; font-weight: 700; color: var(--navy); }
+  .yn-step:hover { border-color: var(--navy); }
+  .yn-step.off { color: #C3CAD9; }
+  .yn-sel { min-height: 36px; padding: 0 30px 0 12px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font: 700 14px var(--f-body); color: var(--navy); }
+</style>
+<script>
+  for (const s of document.querySelectorAll<HTMLSelectElement>('[data-year-nav]')) s.addEventListener('change', () => { location.href = s.value; });
+</script>

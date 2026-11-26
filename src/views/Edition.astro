@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import ResultsTable from '../components/ResultsTable.astro';
 import PaymentNote from '../components/PaymentNote.astro';
+import YearNav from '../components/YearNav.astro';
 import fs from 'node:fs';
 import { model } from '../lib/data';
 import { url, L, t, tr, nbsp, editionName, dateLong, weekday, dateShort, type Lang } from '../lib/site';
@@ -28,6 +29,7 @@ const videoId = (() => {
     <div class="page-head">
       <a class="small" href={L(`/vysledky/${ed.code}/`, lang)}>{t(ed.competition.name, lang)}</a>
       <h1>{editionName(ed, lang)}</h1>
+      <YearNav ed={ed} lang={lang} />
       <span class="eyebrow">{`${weekday(ed.start_date, lang)} ${dateLong(ed.start_date, lang)}`}{ed.venue?.name ? ` · ${ed.venue.name}` : ''}</span>
       {ed.report && <p class="lede" lang={lang === 'en' && !ed.report?.en ? 'cs' : undefined}>{nbsp(t(ed.report, lang), lang)}</p>}
     </div>

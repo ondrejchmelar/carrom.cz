@@ -1,0 +1,25 @@
+# Playoff PCL 2021 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - zdenek-svitak
+  - tadeas-matys
+  - raj-patil
+  - ondrej-chmelar
+  - frantisek-cervenka
+  - jan-tesitel
+  - lukas-navratil
+  - frantisek-rezek
+games:
+  "1-8":
+    qf1: ["25:10", "25:0"]
+    qf2: ["0:25", "0:25"]
+    qf3: ["25:9", "20:6"]
+    qf4: ["1:25", "15:18"]
+    sf1: ["25:9", "19:23", "25:9"]
+    sf2: ["25:16", "25:6"]
+    l-sf1: ["25:0"]
+    l-sf2: ["25:0"]
+    f1: ["21:7", "8:21", "23:12"]
+    f3: ["20:8", "13:21", "20:21"]
+    f5: ["21:18"]
+    f7: ["0:25"]

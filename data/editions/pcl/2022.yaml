@@ -1,6 +1,13 @@
 competition: pcl
 year: 2022
 status: finished
+phase: finished
+format:                     # playoff převzaté ze starého webu, viz data/leagues/pcl-2022/playoff.yaml
+  playoff:
+    bracket: pcl-8
+    groups: ["1-8", "9-16"]
+    best_of: { "1-8": 3, "1-8/5-8": 1, "9-16": 1 }
+    dates: { qf: 2022-11-10, sf: 2022-11-24, f: 2022-12-08 }
 start_date: 2022-01-20
 report:
   cs: |

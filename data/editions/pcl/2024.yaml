@@ -1,6 +1,15 @@
 competition: pcl
 year: 2024
 status: finished
+phase: finished
+format:                     # playoff převzaté ze starého webu, viz data/leagues/pcl-2024/playoff.yaml
+  playoff:
+    bracket: pcl-8
+    groups: ["1-8", "9-16"]
+    best_of: { "1-8": 3, "1-8/5-8": 1, "1-8/f3": 1, "9-16": 1 }
+    dates: { qf: 2024-11-06, sf: 2024-11-20, f: 2024-12-04 }
+links:
+  table_url: "https://docs.google.com/spreadsheets/d/1o0ZgGnGJZjALDCF32PF67heOI2G0zs3U/"   # tabulka základního kola (Google tabulka)
 start_date: 2024-09-18
 report:
   cs: |

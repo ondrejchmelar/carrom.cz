@@ -134,7 +134,7 @@ function parseGroup(key) {
  * seeds: overall seed list (index 0 = seed 1). groupKey: "1-8" or "9-16".
  * games: { qf1: ["25:0", ...], ... }; bestOf: { "1-8": 3, "1-8/5-8": 1, "9-16": 1 }.
  */
-export function buildGroup(groupKey, seeds, games = {}, bestOf = {}) {
+export function buildGroup(groupKey, seeds, games = {}, bestOf = {}, winners = {}) {
   const g = parseGroup(groupKey);
   const offset = g.first - 1;
   const groupSeeds = seeds.slice(offset, offset + 8);
@@ -154,7 +154,7 @@ export function buildGroup(groupKey, seeds, games = {}, bestOf = {}) {
     const places = winner === null ? [] : [{ place: first, player: players[winner].player }, { place: first + 1, player: players[1 - winner].player }];
     return { key: groupKey, first, last: first + 1, mini: true, slots: [slot], places, complete: winner !== null, next: winner === null ? 'f1' : null };
   }
-  const bo = (slot) => (slot.lower ? bestOf[`${groupKey}/5-8`] : undefined) ?? bestOf[groupKey] ?? 1;
+  const bo = (slot) => bestOf[`${groupKey}/${slot.id}`] ?? (slot.lower ? bestOf[`${groupKey}/5-8`] : undefined) ?? bestOf[groupKey] ?? 1;
   const bySlot = {};
   const slots = PCL8.map((def) => {
     const players = def.from.map(([kind, ref]) => {
@@ -165,7 +165,8 @@ export function buildGroup(groupKey, seeds, games = {}, bestOf = {}) {
     });
     const ready = players.every((p) => p.player);
     const list = games[def.id] ?? [];
-    const winner = ready ? seriesWinner(list, bo(def)) : null;
+    // winners: set by hand for an old series the scores cannot decide (a drawn game, a walkover without a score)
+    const winner = ready ? seriesWinner(list, bo(def)) ?? (winners[def.id] === 0 || winners[def.id] === 1 ? winners[def.id] : null) : null;
     const slot = {
       ...def,
       bestOf: bo(def),
@@ -210,7 +211,7 @@ export function season(edition, evenings, playoff) {
   if (phase !== 'group' && playoff) {
     seeds = Array.isArray(playoff.seeds) ? playoff.seeds : table.map((r) => r.player);
     for (const key of fmt.playoff?.groups ?? ['1-8']) {
-      const grp = buildGroup(key, seeds, playoff.games?.[key], fmt.playoff?.best_of);
+      const grp = buildGroup(key, seeds, playoff.games?.[key], fmt.playoff?.best_of, playoff.winners?.[key]);
       if (grp) groups.push(grp);
     }
   }

@@ -1,0 +1,49 @@
+# Playoff PCL 2019 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - zdenek-svitak
+  - horst-simunsky
+  - raj-patil
+  - frantisek-rezek
+  - neel-vasanth
+  - tadeas-matys
+  - ondrej-chmelar
+  - jan-tesitel
+  - tomas-chmelar
+  - lukas-navratil
+  - frantisek-cervenka
+  - pavel-schierl
+  - michal-fucik
+  - romana-kralova
+  - adrian-dean
+  - zdenka-chmelarova
+games:
+  "1-8":
+    qf1: ["20:17", "25:9"]
+    qf2: ["0:25", "13:16"]
+    qf3: ["23:10", "25:16"]
+    qf4: ["11:25", "5:24"]
+    sf1: ["10:25", "18:11", "14:19"]
+    sf2: ["7:25", "6:17"]
+    l-sf1: []
+    l-sf2: ["1:25"]
+    f1: ["5:24", "23:18", "2:18"]
+    f3: ["25:14", "17:11"]
+    f5: ["13:23"]
+    f7: []
+  "9-16":
+    qf1: []
+    qf2: ["21:6"]
+    qf3: ["25:4"]
+    qf4: ["5:25"]
+    sf1: ["25:10"]
+    sf2: ["22:13"]
+    l-sf1: ["10:18"]
+    l-sf2: ["25:0"]
+    f1: ["22:17"]
+    f3: ["3:25"]
+    f5: ["25:0"]
+    f7: ["9:21"]
+winners:                    # série, kterou skóre nerozhodne (remíza, kontumace bez skóre): vítěz podle starého webu, 0 horní, 1 dolní
+  "1-8": { l-sf1: 0, f7: 1 }
+  "9-16": { qf1: 0 }

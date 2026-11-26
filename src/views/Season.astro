@@ -4,15 +4,17 @@ import Base from '../layouts/Base.astro';
 import Bracket from '../components/Bracket.astro';
 import ResultsTable from '../components/ResultsTable.astro';
 import PaymentNote from '../components/PaymentNote.astro';
+import YearNav from '../components/YearNav.astro';
+import fs from 'node:fs';
 import { model } from '../lib/data';
-import { L, t, tr, dateShort, shortNames, plainName, playerLink, type Lang } from '../lib/site';
+import { L, url, t, tr, dateShort, shortNames, plainName, playerLink, type Lang } from '../lib/site';
 interface Props { id: string; lang?: Lang }
 const { lang = 'cs' } = Astro.props;
 const m = model();
 const ed = m.editions[Astro.props.id];
 const s = m.seasons[ed.id];
 const fmt = ed.format ?? {};
-const players = s ? [...s.table.map((r: any) => r.player), ...s.idle] : [];
+const players = s ? [...new Set([...s.table.map((r: any) => r.player), ...s.idle, ...s.seeds])] : [];
 const names = shortNames(players, m.players);
 const full = Object.fromEntries(players.map((pid: string) => [pid, plainName(m.players[pid], pid)]));
 const cutAt = fmt.playoff?.groups?.length ? 8 : 0;
@@ -22,6 +24,9 @@ const res = new Map<string, number[]>();
 for (const x of s?.matches ?? []) { res.set(`${x.a}|${x.b}`, [x.sa, x.sb]); res.set(`${x.b}|${x.a}`, [x.sb, x.sa]); }
 const order = s?.table.map((r: any) => r.player) ?? [];
 const venue = ed.venue;
+// Old seasons have only the playoff (no group-stage matches here): show the bracket and final places, and link the old table.
+const archive = !!s && s.matches.length === 0;
+const docs = m.documents.filter((d: any) => d.edition === ed.id && fs.existsSync(`public${t(d.file)}`));
 const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].includes(ed.status);
 ---
 <Base title={`${t(ed.competition.name, lang)} ${ed.year}`} lang={lang} current="ligy">
@@ -29,23 +34,46 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
     <div class="page-head">
       <a class="small" href={L(`/ligy/${ed.code}/`, lang)}>{t(ed.competition.name, lang)}</a>
       <h1>{`${t(ed.competition.short_name, lang) || t(ed.competition.name, lang)} ${ed.year}`}</h1>
-      {s && <div class="chips phase">
+      <YearNav ed={ed} lang={lang} />
+      {s && !archive && <div class="chips phase">
         <span class:list={['pill', { on: s?.phase === 'group' }]}>{tr(lang, 'Základní kolo', 'Group stage')}{fmt.group_stage?.until ? ` ${tr(lang, 'do', 'until')} ${dateShort(fmt.group_stage.until, false, lang)}` : ''}</span>
         <span class:list={['pill', { on: s?.phase === 'playoff' }]}>Playoff</span>
         {s?.complete && <span class="pill on">{tr(lang, 'Dohráno', 'Finished')}</span>}
       </div>}
       {venue && <p class="small">{venue.name}{venue.address ? `, ${venue.address}` : ''}</p>}
-      {!s && ed.report && <p class="lede">{t(ed.report, lang)}</p>}
+      {(!s || archive) && ed.report && <p class="lede">{t(ed.report, lang)}</p>}
     </div>
 
-    {!s && (
-      <section class="section">
-        <h2>{tr(lang, 'Konečné pořadí', 'Final places')}</h2>
-        <ResultsTable ed={ed} lang={lang} />
+    {archive && (
+      <section class="section tabs" data-tabs>
+        <h2>Playoff</h2>
+        {s.groups.length > 1 && (
+          <div class="phase groups" role="tablist">
+            {s.groups.map((g: any, i: number) => <a class:list={['pill', { on: i === 0 }]} href={`#po-${g.key}`} data-group={g.key}>{tr(lang, `${g.first}.–${g.last}. místo`, `Places ${g.first}–${g.last}`)}</a>)}
+          </div>
+        )}
+        {s.groups.map((g: any, i: number) => (
+          <div class="group" id={`po-${g.key}`} data-group-panel={g.key} hidden={i > 0}>
+            <Bracket group={g} names={names} full={full} dates={fmt.playoff?.dates} lang={lang} />
+          </div>
+        ))}
       </section>
     )}
 
-    {s && (
+    {(!s || archive) && (
+      <section class="section">
+        <h2>{tr(lang, 'Konečné pořadí', 'Final places')}</h2>
+        <ResultsTable ed={ed} lang={lang} />
+        {(ed.links?.table_url || docs.length > 0) && (
+          <div class="btn-row">
+            {ed.links?.table_url && <a class="btn btn-ghost" href={ed.links.table_url} rel="noopener">{tr(lang, 'Tabulka základního kola', 'Group-stage table')}</a>}
+            {docs.map((d: any) => <a class="btn btn-ghost" href={url(t(d.file))}>{d.kind === 'results' ? tr(lang, 'Tabulka základního kola', 'Group-stage table') : t(d.title, lang).replace(/\s*–.*$/, '')}</a>)}
+          </div>
+        )}
+      </section>
+    )}
+
+    {s && !archive && (
       <div class="tabs" data-tabs data-default={defaultTab}>
         <div class="seg" role="tablist" aria-label={tr(lang, 'Části sezóny', 'Parts of the season')}>
           <a role="tab" href="#tabulka" data-tab="tabulka">{tr(lang, 'Tabulka', 'Table')}</a>

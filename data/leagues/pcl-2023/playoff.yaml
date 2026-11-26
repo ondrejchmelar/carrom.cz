@@ -1,0 +1,46 @@
+# Playoff PCL 2023 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - zdenek-svitak
+  - raj-patil
+  - ondrej-chmelar
+  - horst-simunsky
+  - tomas-chmelar
+  - neel-vasanth
+  - jan-tesitel
+  - frantisek-rezek
+  - michal-fucik
+  - lukas-navratil
+  - frantisek-cervenka
+  - romana-kralova
+  - pavel-schierl
+  - zdenka-chmelarova
+  - adrian-dean
+  - shiv-sah
+games:
+  "1-8":
+    qf1: ["20:14", "25:4"]
+    qf2: ["5:24", "8:22"]
+    qf3: ["12:14", "16:13", "21:13"]
+    qf4: ["0:25", "4:25"]
+    sf1: ["25:5", "24:11"]
+    sf2: ["14:21", "13:25"]
+    l-sf1: ["25:15"]
+    l-sf2: ["25:7"]
+    f1: ["25:6", "20:15"]
+    f3: ["13:19"]
+    f5: ["10:14"]
+    f7: ["12:25"]
+  "9-16":
+    qf1: ["25:5"]
+    qf2: ["20:14"]
+    qf3: ["25:0"]
+    qf4: ["15:25"]
+    sf1: ["25:0"]
+    sf2: ["25:9"]
+    l-sf1: ["0:25"]
+    l-sf2: ["23:15"]
+    f1: ["8:25"]
+    f3: ["25:0"]
+    f5: ["25:4"]
+    f7: ["9:7"]

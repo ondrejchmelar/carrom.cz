@@ -1,6 +1,13 @@
 competition: pcl
 year: 2025
 status: finished
+phase: finished
+format:                     # playoff převzaté ze starého webu, viz data/leagues/pcl-2025/playoff.yaml
+  playoff:
+    bracket: pcl-8
+    groups: ["1-8"]
+    best_of: { "1-8": 3, "1-8/5-8": 1, "1-8/f3": 1 }
+    dates: { qf: 2025-11-05, sf: 2025-11-19, f: 2025-12-03 }
 start_date: 2025-01-15
 venue: { name: Čítárna Unijazz, address: "Husitská 22, Praha 3" }
 

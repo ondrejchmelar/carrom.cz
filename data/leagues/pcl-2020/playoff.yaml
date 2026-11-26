@@ -1,0 +1,25 @@
+# Playoff PCL 2020 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - zdenek-svitak
+  - karlos-novak
+  - horst-simunsky
+  - frantisek-rezek
+  - raj-patil
+  - tadeas-matys
+  - frantisek-cervenka
+  - ondrej-chmelar
+games:
+  "1-8":
+    qf1: ["17:11"]
+    qf2: ["20:21"]
+    qf3: ["14:16"]
+    qf4: ["11:25"]
+    sf1: ["25:0"]
+    sf2: ["25:15"]
+    l-sf1: ["23:16"]
+    l-sf2: ["25:8"]
+    f1: ["24:12"]
+    f3: ["0:25"]
+    f5: ["10:17"]
+    f7: ["25:0"]

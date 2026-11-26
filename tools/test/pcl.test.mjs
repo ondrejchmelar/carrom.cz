@@ -47,3 +47,17 @@ test('PCL 2026: table and playoff match the real sheet and playoff page', () => 
   assert.deepEqual(mini.players.map((p) => p.player), ['michal-fucik', 'pavel-schierl']);
   assert.equal(mini.winner, 0);
 });
+
+test('PCL 2017–2025: brackets from the old pages agree with the published final places', () => {
+  const M = loadModel({ today: new Date('2026-11-26') });
+  for (let y = 2017; y <= 2025; y++) {
+    const s = M.seasons[`pcl/${y}`];
+    const stored = Object.fromEntries(M.editions[`pcl/${y}`].results.singles.map((r) => [r.place, r.player]));
+    assert.ok(s.groups.length > 0 && s.groups.every((g) => g.complete), `${y}: bracket incomplete`);
+    for (const p of s.groups.flatMap((g) => g.places)) assert.equal(p.player, stored[p.place], `${y}: place ${p.place}`);
+  }
+  // scores are in bracket order: QF2 2024 was Rezek (5) v Raj (4), Raj won 2:1
+  const qf2 = M.seasons['pcl/2024'].groups[0].slots.find((x) => x.id === 'qf2');
+  assert.deepEqual(qf2.games, [[8, 25], [21, 8], [8, 25]]);
+  assert.equal(qf2.players[qf2.winner].player, 'raj-patil');
+});

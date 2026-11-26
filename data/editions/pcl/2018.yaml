@@ -1,6 +1,15 @@
 competition: pcl
 year: 2018
 status: finished
+phase: finished
+format:                     # playoff převzaté ze starého webu, viz data/leagues/pcl-2018/playoff.yaml
+  playoff:
+    bracket: pcl-8
+    groups: ["1-8", "9-16"]
+    best_of: { "1-8": 3, "1-8/5-8": 1, "1-8/f3": 1, "9-16": 1 }
+    dates: { qf: 2018-10-25, sf: 2018-11-08, f: 2018-11-22 }
+links:
+  table_url: "https://drive.google.com/open?id=1qi3aRw0RO_Go1gWpWBuY_bTdQeJLJjQkdUJShWhei1M"   # tabulka základního kola (Google tabulka)
 start_date: 2018-07-19
 report:
   cs: |

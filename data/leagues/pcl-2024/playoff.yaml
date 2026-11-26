@@ -1,0 +1,46 @@
+# Playoff PCL 2024 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - horst-simunsky
+  - ajay-sekhesh
+  - zdenek-svitak
+  - raj-patil
+  - frantisek-rezek
+  - shoeb-ahmed-khan
+  - tomas-chmelar
+  - neel-vasanth
+  - frantisek-cervenka
+  - lukas-navratil
+  - jan-tesitel
+  - romana-kralova
+  - michal-fucik
+  - ondrej-chmelar
+  - pavel-schierl
+  - selvamani-thirumurugan
+games:
+  "1-8":
+    qf1: ["25:11", "24:10"]
+    qf2: ["8:25", "21:8", "8:25"]
+    qf3: ["25:0", "25:0"]
+    qf4: ["0:25", "17:20"]
+    sf1: ["25:5", "23:22"]
+    sf2: ["0:25", "14:19"]
+    l-sf1: ["25:8"]
+    l-sf2: ["0:25"]
+    f1: ["25:6", "5:23", "0:25"]
+    f3: ["25:0"]
+    f5: ["17:25"]
+    f7: ["25:0"]
+  "9-16":
+    qf1: ["25:0"]
+    qf2: ["16:21"]
+    qf3: ["17:21"]
+    qf4: ["18:15"]
+    sf1: ["25:2"]
+    sf2: ["21:17"]
+    l-sf1: ["7:20"]
+    l-sf2: ["25:11"]
+    f1: ["25:0"]
+    f3: ["25:7"]
+    f5: ["25:7"]
+    f7: ["0:25"]

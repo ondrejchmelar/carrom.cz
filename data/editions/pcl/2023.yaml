@@ -1,6 +1,15 @@
 competition: pcl
 year: 2023
 status: finished
+phase: finished
+format:                     # playoff převzaté ze starého webu, viz data/leagues/pcl-2023/playoff.yaml
+  playoff:
+    bracket: pcl-8
+    groups: ["1-8", "9-16"]
+    best_of: { "1-8": 3, "1-8/5-8": 1, "1-8/f3": 1, "9-16": 1 }
+    dates: { qf: 2023-11-09, sf: 2023-11-23, f: 2023-12-07 }
+links:
+  table_url: "https://docs.google.com/spreadsheets/d/1jCv0FSKD9l5Y39iW0nWI4vXOnQe94Yss/edit#gid=105082960"   # tabulka základního kola (Google tabulka)
 start_date: 2023-01-19
 report:
   cs: |

@@ -1,0 +1,46 @@
+# Playoff PCL 2022 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - zdenek-svitak
+  - horst-simunsky
+  - raj-patil
+  - tadeas-matys
+  - jan-tesitel
+  - ondrej-chmelar
+  - frantisek-rezek
+  - frantisek-cervenka
+  - michal-fucik
+  - lukas-navratil
+  - tomas-chmelar
+  - romana-kralova
+  - pavel-schierl
+  - adrian-dean
+  - zdenka-chmelarova
+  - dominika-krestanova
+games:
+  "1-8":
+    qf1: ["11:12", "22:11", "25:0"]
+    qf2: ["3:25", "3:25"]
+    qf3: ["25:0", "25:20"]
+    qf4: ["0:12", "0:12"]
+    sf1: ["25:0", "9:13", "19:5"]
+    sf2: ["9:23", "6:22"]
+    l-sf1: ["17:21"]
+    l-sf2: ["9:25"]
+    f1: ["25:10", "18:22", "15:19"]
+    f3: ["19:7", "21:15"]
+    f5: ["14:20"]
+    f7: ["15:13"]
+  "9-16":
+    qf1: ["25:0"]
+    qf2: ["6:11"]
+    qf3: ["25:0"]
+    qf4: ["0:25"]
+    sf1: ["23:17"]
+    sf2: ["8:17"]
+    l-sf1: ["9:25"]
+    l-sf2: ["2:11"]
+    f1: ["4:19"]
+    f3: ["10:24"]
+    f5: ["25:0"]
+    f7: ["13:15"]

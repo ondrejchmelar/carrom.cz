@@ -1,0 +1,46 @@
+# Playoff PCL 2017 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
+# Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+seeds:
+  - frantisek-rezek
+  - ondrej-chmelar
+  - zdenek-svitak
+  - neel-vasanth
+  - filip-smoljak
+  - jan-tesitel
+  - raj-patil
+  - michal-fucik
+  - tomas-chmelar
+  - romana-kralova
+  - adrian-dean
+  - pavel-schierl
+  - lukas-navratil
+  - frantisek-cervenka
+  - lenka-prazakova
+  - zdenka-chmelarova
+games:
+  "1-8":
+    qf1: ["25:14", "25:12"]
+    qf2: ["16:21", "16:13", "13:11"]
+    qf3: ["25:3", "25:8"]
+    qf4: ["9:22", "15:24"]
+    sf1: ["18:15", "25:14"]
+    sf2: ["4:25", "25:6", "25:15"]
+    l-sf1: ["11:14"]
+    l-sf2: ["20:7"]
+    f1: ["22:13", "22:7"]
+    f3: ["20:25", "18:12", "18:21"]
+    f5: ["24:12"]
+    f7: ["4:25"]
+  "9-16":
+    qf1: ["25:1"]
+    qf2: ["8:17"]
+    qf3: ["7:25"]
+    qf4: ["8:17"]
+    sf1: ["25:4"]
+    sf2: ["4:21"]
+    l-sf1: ["7:24"]
+    l-sf2: ["17:0"]
+    f1: ["12:14"]
+    f3: ["7:21"]
+    f5: ["25:6"]
+    f7: ["9:3"]
