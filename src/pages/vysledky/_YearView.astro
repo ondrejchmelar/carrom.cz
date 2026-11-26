@@ -14,7 +14,7 @@ const comps = Object.entries(m.competitions).map(([code, c]: any) => {
 });
 const winner = (e: any) => {
   const w = (e.results?.singles ?? e.results?.juniors ?? []).find((r: any) => r.place === 1);
-  return w ? fullName(m.players[w.player], w.player) : null;
+  return w ? fullName(m.players[w.player], w.name ?? w.player) : null;
 };
 const league = (e: any) => e.competition.kind === 'league';
 ---

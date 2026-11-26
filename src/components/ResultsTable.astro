@@ -22,15 +22,16 @@ const multi = divisions.length > 1;
     {multi && <h3>{t(divisionLabel(div), lang)}</h3>}
     <div class="table-box">
       <table class="data">
-        <thead><tr><th class="l">#</th><th class="l">{lang === 'en' ? 'Player' : 'Hráč'}</th>{rows.some((r: any) => r.club_at_time) && <th class="l">{lang === 'en' ? 'Club / school' : 'Klub / škola'}</th>}</tr></thead>
+        <thead><tr><th class="l">#</th><th class="l">{lang === 'en' ? 'Player' : 'Hráč'}</th>{rows.some((r: any) => r.country) && <th class="l">{lang === 'en' ? 'Country' : 'Stát'}</th>}{rows.some((r: any) => r.club_at_time) && <th class="l">{lang === 'en' ? 'Club / school' : 'Klub / škola'}</th>}</tr></thead>
         <tbody>
           {(limit ? rows.slice(0, limit) : rows).map((r: any) => {
             const href = playerLink(r.player, m.players);
-            const name = fullName(m.players[r.player], r.player);
+            const name = fullName(m.players[r.player], r.name ?? r.player);
             return (
               <tr class={r.place <= 3 ? 'top' : ''}>
                 <td class="rk l">{r.place}.</td>
                 <td class="name">{href ? <a href={href}>{name}</a> : name}</td>
+                {rows.some((x: any) => x.country) && <td class="l muted">{r.country ?? ''}</td>}
                 {rows.some((x: any) => x.club_at_time) && <td class="l muted">{r.club_at_time ?? ''}</td>}
               </tr>
             );

@@ -9,7 +9,7 @@ export function getStaticPaths() {
 const { code, c } = Astro.props as any;
 const m = model();
 const eds = m.editionList.filter((e: any) => e.code === code).reverse();
-const winner = (e: any) => { const w = (e.results?.singles ?? e.results?.juniors ?? []).find((r: any) => r.place === 1); return w ? fullName(m.players[w.player], w.player) : null; };
+const winner = (e: any) => { const w = (e.results?.singles ?? e.results?.juniors ?? []).find((r: any) => r.place === 1); return w ? fullName(m.players[w.player], w.name ?? w.player) : null; };
 ---
 <Base title={t(c.name)} current="vysledky">
   <div class="wrap page">

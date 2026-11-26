@@ -63,7 +63,10 @@ export function buildModel(raw, { today = new Date() } = {}) {
   // ---------- references ----------
   for (const ed of Object.values(editions)) {
     for (const [div, rows] of Object.entries(ed.results ?? {})) {
-      for (const r of rows ?? []) if (!players[r.player]) warnings.push(`editions/${ed.id}: ${div} – neznámý hráč ${r.player}`);
+      for (const r of rows ?? []) {
+        if (r.player == null && r.name) continue; // plain name (e.g. foreign players at the Eurocup)
+        if (!players[r.player]) warnings.push(`editions/${ed.id}: ${div} – neznámý hráč ${r.player ?? '(bez jména)'}`);
+      }
     }
   }
 
@@ -91,6 +94,7 @@ export function buildModel(raw, { today = new Date() } = {}) {
   for (const ed of editionList) {
     for (const [division, rows] of Object.entries(ed.results ?? {})) {
       for (const r of rows ?? []) {
+        if (r.player == null) continue;
         (resultsByPlayer[r.player] ??= []).push({ edition: ed, division, place: r.place });
       }
     }
