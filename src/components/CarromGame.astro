@@ -1,0 +1,430 @@
+---
+// Playable carrom board (canvas). Engine and computer opponent: src/lib/core/carrom.js.
+import { nbsp } from '../lib/site';
+interface Props { lang?: 'cs' | 'en' }
+const { lang = 'cs' } = Astro.props;
+const T = {
+  cs: {
+    vs: 'Proti počítači', two: 'Dva hráči', level: 'Obtížnost', easy: 'Lehká', mid: 'Střední', hard: 'Těžká',
+    reset: 'Nová hra', place: 'Pozice strikeru', board: 'Carromová deska, hra',
+    help: 'Posuň striker po své čáře (táhni ho, nebo použij posuvník). Pak táhni prstem nebo myší od strikeru dozadu, jako prak, a pusť. Čím dál táhneš, tím silněji cvrnkneš.',
+    keys: 'Klávesnice: ← → posun, ↑ ↓ míření, mezerník síla a výstřel.',
+  },
+  en: {
+    vs: 'Against computer', two: 'Two players', level: 'Level', easy: 'Easy', mid: 'Medium', hard: 'Hard',
+    reset: 'New game', place: 'Striker position', board: 'Carrom board, game',
+    help: 'Slide the striker along your base line (drag it or use the slider). Then drag back from the striker like a slingshot and let go. The further you pull, the harder the shot.',
+    keys: 'Keyboard: ← → move, ↑ ↓ aim, space for power and shot.',
+  },
+}[lang];
+---
+<div class="cg" data-lang={lang}>
+  <div class="cg-bar">
+    <div class="chips" role="group" aria-label={lang === 'en' ? 'Mode' : 'Režim'}>
+      <button type="button" class="chip" data-mode="computer" aria-pressed="true">{T.vs}</button>
+      <button type="button" class="chip" data-mode="two" aria-pressed="false">{T.two}</button>
+    </div>
+    <label class="cg-level">
+      <span>{T.level}</span>
+      <select data-level>
+        <option value="0.35">{T.easy}</option>
+        <option value="0.6" selected>{T.mid}</option>
+        <option value="0.9">{T.hard}</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="cg-score" aria-live="polite">
+    <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/9</span><span data-name="white"></span></span>
+    <span class="cg-queen" data-queen></span>
+    <span class="cg-side" data-side="black"><span data-name="black"></span><span><b data-count="black">0</b>/9</span><i class="dot b"></i></span>
+  </div>
+
+  <div class="cg-stage">
+    <canvas tabindex="0" aria-label={T.board} aria-describedby="cg-help"></canvas>
+    <div class="cg-over" data-over hidden>
+      <strong data-over-title></strong>
+      <span data-over-text></span>
+      <button type="button" class="btn btn-red" data-again>{T.reset}</button>
+    </div>
+  </div>
+
+  <p class="cg-status" data-status aria-live="polite"></p>
+
+  <label class="cg-slider">
+    <span class="sr-only">{T.place}</span>
+    <input type="range" min="0" max="1000" value="500" data-slider aria-label={T.place} />
+  </label>
+
+  <div class="cg-foot">
+    <button type="button" class="btn btn-ghost" data-reset>{T.reset}</button>
+  </div>
+  <p id="cg-help" class="small">{nbsp(T.help)} <span class="cg-keys">{T.keys}</span></p>
+</div>
+
+<script>
+  import * as C from '../lib/core/carrom.js';
+
+  const TXT = {
+    cs: {
+      you: 'Ty', cpu: 'Počítač', p1: 'Bílý', p2: 'Černý', white: 'bílé', black: 'černé',
+      yourTurn: 'Jsi na tahu. Hraješ bílými zdola.', cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
+      turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
+      blocked: 'Striker nesmí ležet na kameni. Posuň ho.',
+      backward: 'Cvrnkni dopředu, směrem od své čáry.',
+      own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
+      foul: 'Faul: striker v díře, jeden tvůj kámen se vrací na desku.', 'foul-free': 'Faul: striker v díře.',
+      pending: 'Královna v díře! Teď ji potvrď svým kamenem.', covered: 'Královna potvrzená (+3 body).',
+      'queen-back': 'Královnu se nepodařilo potvrdit, vrací se doprostřed.',
+      'queen-early': 'Královnu lze dát až po prvním vlastním kameni. Vrací se doprostřed.',
+      'last-coin': 'Poslední kámen nejde dát dřív než královnu. Vrací se na desku.',
+      queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená' },
+      won: (n: string) => `${n} vyhrává!`, lost: 'Vyhrál počítač.', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
+      youWon: 'Vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
+    },
+    en: {
+      you: 'You', cpu: 'Computer', p1: 'White', p2: 'Black', white: 'white', black: 'black',
+      yourTurn: 'Your turn. You play white from the bottom.', cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
+      turnOf: (n: string, c: string) => `${n} to play (${c}).`,
+      blocked: 'The striker may not touch a coin. Move it.',
+      backward: 'Shoot forward, away from your base line.',
+      own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
+      foul: 'Foul: striker pocketed, one of your coins goes back.', 'foul-free': 'Foul: striker pocketed.',
+      pending: 'Queen pocketed! Now cover it with your coin.', covered: 'Queen covered (+3 points).',
+      'queen-back': 'Queen not covered, back to the centre.',
+      'queen-early': 'The queen counts only after your first coin. Back to the centre.',
+      'last-coin': 'Your last coin cannot go before the queen. It goes back.',
+      queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered' },
+      won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
+      youWon: 'You win!', aimHint: 'Pull back and let go.',
+    },
+  };
+
+  const COL = { frame: '#3B2416', frame2: '#4A2F1D', birch: '#E8D3A9', birch2: '#E2C995', navy: '#0E1B3D', red: '#D3242B', white: '#FBF7EE', black: '#1D2233', amber: '#F2B33D' };
+  const FRAME = 46; // frame width in board mm
+
+  for (const root of document.querySelectorAll<HTMLElement>('.cg')) setup(root);
+
+  function setup(root: HTMLElement) {
+    const L = TXT[(root.dataset.lang as 'cs' | 'en') ?? 'cs'];
+    const canvas = root.querySelector('canvas')!;
+    const ctx = canvas.getContext('2d')!;
+    const $ = (s: string) => root.querySelector<HTMLElement>(s)!;
+    const slider = $('[data-slider]') as HTMLInputElement;
+    const levelSel = $('[data-level]') as HTMLSelectElement;
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let mode: 'computer' | 'two' = 'computer';
+    let state = C.newGame({ mode });
+    let strikerX = C.CENTER;
+    let aim: null | { px: number; py: number } = null;     // pointer position while aiming (board coords)
+    let drag: null | 'place' | 'aim' | 'undecided' = null;
+    let dragStart = { x: 0, y: 0 };
+    let kbAngle = -Math.PI / 2, kbPower = 0, charging = false;
+    let phase: 'aim' | 'moving' | 'cpu' | 'over' = 'aim';
+    let message = '';
+    let cpuGhost: null | { x: number; angle: number; power: number; t: number } = null;
+
+    // ---------- view ----------
+    let scale = 1;
+    const flipped = () => mode === 'two' && state.turn === 'black'; // the player on turn always sits at the bottom
+    function resize() {
+      const w = canvas.clientWidth || 360;
+      const dpr = Math.min(2, devicePixelRatio || 1);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(w * dpr);
+      scale = (w * dpr) / (C.BOARD + FRAME * 2);
+      draw();
+    }
+    function toBoard(e: PointerEvent) {
+      const r = canvas.getBoundingClientRect();
+      const s = (C.BOARD + FRAME * 2) / r.width;
+      let x = (e.clientX - r.left) * s - FRAME, y = (e.clientY - r.top) * s - FRAME;
+      if (flipped()) { x = C.BOARD - x; y = C.BOARD - y; }
+      return { x, y };
+    }
+
+    // ---------- helpers ----------
+    const human = () => phase === 'aim' && (mode === 'two' || state.turn === 'white');
+    const baseY = () => C.BASE_Y[C.side(state.turn)];
+    const nameOf = (c: 'white' | 'black') => (mode === 'computer' ? (c === 'white' ? L.you : L.cpu) : c === 'white' ? L.p1 : L.p2);
+    function setStriker(x: number) {
+      strikerX = C.clampStrikerX(x);
+      const k = (strikerX - C.BASE_X[0]) / (C.BASE_X[1] - C.BASE_X[0]);
+      slider.value = String(Math.round((flipped() ? 1 - k : k) * 1000));
+    }
+    function shotFromAim() {
+      if (!aim) return null;
+      const y = baseY();
+      const dx = strikerX - aim.px, dy = y - aim.py;
+      const pull = Math.hypot(dx, dy);
+      return { angle: Math.atan2(dy, dx), power: Math.min(1, pull / 210), ok: C.forward(state.turn, dy) && pull > 12 };
+    }
+    function statusText() {
+      if (state.winner) return '';
+      if (phase === 'cpu') return L.cpuThinks;
+      if (human() && !C.strikerFree(state, strikerX)) return `${message ? message + ' ' : ''}${L.blocked}`;
+      if (message) return message;
+      if (mode === 'computer') return state.turn === 'white' ? L.yourTurn : L.cpuShoots;
+      return L.turnOf(nameOf(state.turn), L[state.turn]);
+    }
+    function ui() {
+      $('[data-count="white"]').textContent = String(state.pocketed.white);
+      $('[data-count="black"]').textContent = String(state.pocketed.black);
+      $('[data-name="white"]').textContent = nameOf('white');
+      $('[data-name="black"]').textContent = nameOf('black');
+      root.querySelectorAll<HTMLElement>('.cg-side').forEach((el) => el.classList.toggle('on', el.dataset.side === state.turn && !state.winner));
+      $('[data-queen]').textContent = L.queen[state.queen.state as 'board'];
+      $('[data-status]').textContent = statusText();
+      slider.disabled = !human();
+      levelSel.disabled = mode === 'two';
+      const over = $('[data-over]');
+      over.hidden = !state.winner;
+      if (state.winner) {
+        $('[data-over-title]').textContent = mode === 'computer' ? (state.winner === 'white' ? L.youWon : L.lost) : L.won(nameOf(state.winner));
+        $('[data-over-text]').textContent = L.pts(state.points);
+      }
+    }
+
+    // ---------- drawing ----------
+    function draw() {
+      const s = scale;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.setTransform(s, 0, 0, s, FRAME * s, FRAME * s);
+      if (flipped()) { ctx.translate(C.BOARD, C.BOARD); ctx.rotate(Math.PI); }
+      // frame
+      rr(-FRAME, -FRAME, C.BOARD + FRAME * 2, C.BOARD + FRAME * 2, 26, COL.frame);
+      rr(-FRAME + 8, -FRAME + 8, C.BOARD + FRAME * 2 - 16, C.BOARD + FRAME * 2 - 16, 20, COL.frame2);
+      // surface
+      const g = ctx.createRadialGradient(C.CENTER, C.CENTER, 60, C.CENTER, C.CENTER, C.BOARD * 0.75);
+      g.addColorStop(0, COL.birch); g.addColorStop(1, COL.birch2);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, C.BOARD, C.BOARD);
+      // pockets
+      for (const [x, y] of C.POCKETS) circle(x, y, C.POCKET_R, COL.navy);
+      // base lines
+      ctx.strokeStyle = COL.navy; ctx.lineWidth = 2.4;
+      const L1 = 135, L2 = C.BOARD - 135;
+      for (const [side, y0] of [['b', C.BOARD - 102], ['t', 102]] as const) {
+        const y1 = side === 'b' ? y0 - 31.8 : y0 + 31.8;
+        line(L1 + 15.9, y0, L2 - 15.9, y0); line(L1 + 15.9, y1, L2 - 15.9, y1);
+        for (const x of [L1 + 15.9, L2 - 15.9]) { ring(x, (y0 + y1) / 2, 15.9, COL.navy, 2.4); circle(x, (y0 + y1) / 2, 11, COL.red); }
+      }
+      for (const [x0, side] of [[102, 'l'], [C.BOARD - 102, 'r']] as const) {
+        const x1 = side === 'l' ? x0 + 31.8 : x0 - 31.8;
+        line(x0, L1 + 15.9, x0, L2 - 15.9); line(x1, L1 + 15.9, x1, L2 - 15.9);
+        for (const y of [L1 + 15.9, L2 - 15.9]) { ring((x0 + x1) / 2, y, 15.9, COL.navy, 2.4); circle((x0 + x1) / 2, y, 11, COL.red); }
+      }
+      // diagonal arrows towards the pockets
+      ctx.strokeStyle = COL.navy; ctx.lineWidth = 1.6;
+      for (const [sx, sy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+        const ax = C.CENTER - sx * 105, ay = C.CENTER - sy * 105, bx = C.CENTER - sx * 265, by = C.CENTER - sy * 265;
+        line(ax, ay, bx, by);
+      }
+      // centre
+      ring(C.CENTER, C.CENTER, 85, COL.red, 2.4);
+      ring(C.CENTER, C.CENTER, 15.9, COL.red, 1.6);
+      // coins
+      for (const p of state.pieces) if (p.inPlay) coin(p.x, p.y, p.r, p.color);
+      // striker
+      const showStriker = state.striker ?? (phase !== 'over' ? { x: cpuGhost?.x ?? strikerX, y: baseY() } : null);
+      if (state.striker && state.striker.inPlay) striker(state.striker.x, state.striker.y, false);
+      else if (!state.striker && showStriker && !state.winner) {
+        const blocked = !C.strikerFree(state, showStriker.x);
+        // aim line
+        const sh = cpuGhost ? { angle: cpuGhost.angle, power: cpuGhost.power * Math.min(1, cpuGhost.t), ok: true } : aim ? shotFromAim() : charging || kbPower ? { angle: kbAngle, power: kbPower, ok: C.forward(state.turn, Math.sin(kbAngle)) } : null;
+        if (sh && sh.power > 0) {
+          const len = 60 + sh.power * 360;
+          ctx.save();
+          ctx.setLineDash([10, 9]); ctx.lineWidth = 3; ctx.strokeStyle = sh.ok && !blocked ? COL.navy : '#9AA3B8';
+          line(showStriker.x, showStriker.y, showStriker.x + Math.cos(sh.angle) * len, showStriker.y + Math.sin(sh.angle) * len);
+          ctx.restore();
+          // power arc
+          ctx.lineWidth = 5; ctx.strokeStyle = sh.ok && !blocked ? COL.red : '#9AA3B8';
+          ctx.beginPath(); ctx.arc(showStriker.x, showStriker.y, C.STRIKER_R + 9, -Math.PI / 2, -Math.PI / 2 + sh.power * Math.PI * 2); ctx.stroke();
+        }
+        striker(showStriker.x, showStriker.y, blocked);
+      }
+    }
+    function rr(x: number, y: number, w: number, h: number, r: number, c: string) { ctx.fillStyle = c; ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
+    function circle(x: number, y: number, r: number, c: string) { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); }
+    function ring(x: number, y: number, r: number, c: string, w: number) { if (!w) return; ctx.strokeStyle = c; ctx.lineWidth = w; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke(); }
+    function line(a: number, b: number, c: number, d: number) { ctx.beginPath(); ctx.moveTo(a, b); ctx.lineTo(c, d); ctx.stroke(); }
+    function coin(x: number, y: number, r: number, color: string) {
+      circle(x + 1.6, y + 2.2, r, 'rgba(59,36,22,.28)');
+      const base = color === 'white' ? COL.white : color === 'black' ? COL.black : COL.red;
+      circle(x, y, r, base);
+      ring(x, y, r * 0.62, color === 'white' ? 'rgba(14,27,61,.18)' : 'rgba(255,255,255,.22)', 1.6);
+      ring(x, y, r - 0.8, color === 'white' ? 'rgba(14,27,61,.35)' : 'rgba(0,0,0,.35)', 1.2);
+    }
+    function striker(x: number, y: number, blocked: boolean) {
+      circle(x + 2, y + 2.6, C.STRIKER_R, 'rgba(59,36,22,.3)');
+      circle(x, y, C.STRIKER_R, '#F4F1EA');
+      ring(x, y, C.STRIKER_R - 1, blocked ? COL.red : COL.frame, 2.6);
+      ring(x, y, C.STRIKER_R * 0.55, blocked ? COL.red : COL.navy, 2);
+      circle(x, y, 3.5, blocked ? COL.red : COL.navy);
+    }
+
+    // ---------- game flow ----------
+    function shoot(angle: number, power: number) {
+      if (!C.strikerFree(state, strikerX)) { message = L.blocked; ui(); draw(); return; }
+      if (!C.forward(state.turn, Math.sin(angle))) { message = L.backward; ui(); draw(); return; }
+      message = '';
+      C.startShot(state, strikerX, angle, power);
+      phase = 'moving';
+      ui();
+      run();
+    }
+    function run() {
+      let last = performance.now(), acc = 0;
+      const frame = (now: number) => {
+        acc += Math.min(0.05, (now - last) / 1000) * (reduceMotion ? 3 : 1);
+        last = now;
+        let more = true;
+        while (acc >= 1 / 240 && more) { more = C.tick(state); acc -= 1 / 240; }
+        draw();
+        if (more) requestAnimationFrame(frame);
+        else finish();
+      };
+      requestAnimationFrame(frame);
+    }
+    function finish() {
+      const r = C.endShot(state);
+      const key = r.msg.find((m: string) => m !== 'own' || r.msg.length === 1) ?? r.msg[0];
+      message = key ? (L as any)[key] ?? '' : '';
+      if (r.again && !r.foul && r.msg.includes('own') && !r.msg.includes('pending') && !r.msg.includes('covered')) message = L.own;
+      phase = state.winner ? 'over' : 'aim';
+      aim = null; kbPower = 0;
+      setStriker(C.CENTER);
+      if (!state.winner && !C.strikerFree(state, strikerX)) {
+        for (let d = 10; d < 400; d += 10) { if (C.strikerFree(state, C.CENTER + d)) { setStriker(C.CENTER + d); break; } if (C.strikerFree(state, C.CENTER - d)) { setStriker(C.CENTER - d); break; } }
+      }
+      kbAngle = state.turn === 'white' ? -Math.PI / 2 : Math.PI / 2;
+      ui(); draw();
+      if (!state.winner && mode === 'computer' && state.turn === 'black') cpuTurn();
+    }
+    function cpuTurn() {
+      phase = 'cpu'; ui();
+      setTimeout(() => {
+        const shot = C.chooseShot(state, { skill: Number(levelSel.value) });
+        // show where it plays, then shoot
+        const from = strikerX, t0 = performance.now(), dur = reduceMotion ? 1 : 900;
+        cpuGhost = { ...shot, t: 0 };
+        const anim = (now: number) => {
+          const k = Math.min(1, (now - t0) / dur);
+          cpuGhost!.x = from + (shot.x - from) * Math.min(1, k * 1.6);
+          cpuGhost!.t = Math.max(0, (k - 0.55) / 0.45);
+          draw();
+          if (k < 1) requestAnimationFrame(anim);
+          else { cpuGhost = null; strikerX = shot.x; phase = 'aim'; message = ''; shoot(shot.angle, shot.power); }
+        };
+        requestAnimationFrame(anim);
+      }, 350);
+    }
+    function reset() {
+      state = C.newGame({ mode });
+      phase = 'aim'; message = ''; aim = null; cpuGhost = null; kbPower = 0; kbAngle = -Math.PI / 2;
+      setStriker(C.CENTER);
+      ui(); draw();
+    }
+
+    // ---------- input ----------
+    canvas.addEventListener('pointerdown', (e) => {
+      if (!human()) return;
+      const p = toBoard(e);
+      canvas.setPointerCapture(e.pointerId);
+      dragStart = p;
+      message = '';
+      const nearStriker = Math.hypot(p.x - strikerX, p.y - baseY()) < C.STRIKER_R * 2.2;
+      drag = nearStriker ? 'undecided' : 'aim';
+      if (drag === 'aim') aim = { px: p.x, py: p.y };
+      draw();
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (!drag) return;
+      const p = toBoard(e);
+      if (drag === 'undecided') {
+        const dx = p.x - dragStart.x, dy = p.y - dragStart.y;
+        if (Math.hypot(dx, dy) < 8) return;
+        drag = Math.abs(dx) > Math.abs(dy) * 1.2 ? 'place' : 'aim';
+      }
+      if (drag === 'place') setStriker(strikerX + (p.x - dragStart.x)), (dragStart = p);
+      else aim = { px: p.x, py: p.y };
+      ui(); draw();
+    });
+    const up = () => {
+      if (drag === 'aim') {
+        const sh = shotFromAim();
+        aim = null;
+        if (sh && sh.ok) shoot(sh.angle, sh.power);
+        else if (sh && sh.power > 0.06) { message = L.backward; ui(); }
+      }
+      drag = null;
+      draw();
+    };
+    canvas.addEventListener('pointerup', up);
+    canvas.addEventListener('pointercancel', () => { drag = null; aim = null; draw(); });
+    canvas.addEventListener('keydown', (e) => {
+      if (!human()) return;
+      const dir = flipped() ? -1 : 1;
+      if (e.key === 'ArrowLeft') setStriker(strikerX - 8 * dir);
+      else if (e.key === 'ArrowRight') setStriker(strikerX + 8 * dir);
+      else if (e.key === 'ArrowUp') kbAngle -= 0.03 * dir;
+      else if (e.key === 'ArrowDown') kbAngle += 0.03 * dir;
+      else if (e.key === ' ' && !charging) {
+        charging = true; kbPower = 0;
+        const t0 = performance.now();
+        const grow = (now: number) => { if (!charging) return; kbPower = 0.1 + (((now - t0) / 1400) % 1) * 0.9; draw(); requestAnimationFrame(grow); };
+        requestAnimationFrame(grow);
+      } else return;
+      e.preventDefault();
+      if (!kbPower) kbPower = 0.0001;
+      ui(); draw();
+    });
+    canvas.addEventListener('keyup', (e) => {
+      if (e.key === ' ' && charging) { charging = false; e.preventDefault(); shoot(kbAngle, kbPower); }
+    });
+    slider.addEventListener('input', () => {
+      const v = Number(slider.value) / 1000;
+      const k = flipped() ? 1 - v : v;
+      strikerX = C.BASE_X[0] + (C.BASE_X[1] - C.BASE_X[0]) * k;
+      message = ''; ui(); draw();
+    });
+    root.querySelectorAll<HTMLButtonElement>('[data-mode]').forEach((b) => b.addEventListener('click', () => {
+      mode = b.dataset.mode as 'computer' | 'two';
+      root.querySelectorAll('[data-mode]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      reset();
+    }));
+    $('[data-reset]').addEventListener('click', reset);
+    $('[data-again]').addEventListener('click', reset);
+    new ResizeObserver(resize).observe(canvas);
+    reset();
+    resize();
+  }
+</script>
+
+<style>
+  .cg { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 560px; }
+  .cg-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .cg-level { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+  .cg-level select { min-height: 44px; border-radius: 22px; border: 1px solid var(--chip-line); background: var(--surface); color: var(--navy); font: 600 15px var(--f-body); padding: 0 14px; }
+  .cg-level select:disabled { opacity: 0.45; }
+  .cg-score { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); }
+  .cg-side { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; }
+  .cg-side b { color: var(--navy); font-size: 16px; }
+  .cg-side.on { background: var(--navy); color: #fff; }
+  .cg-side.on b { color: #fff; }
+  .cg-queen { font-size: 13px; text-align: center; }
+  .dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; border: 1.5px solid var(--navy); }
+  .dot.w { background: #FBF7EE; }
+  .dot.b { background: #1D2233; }
+  .cg-stage { position: relative; }
+  canvas { display: block; width: 100%; aspect-ratio: 1; touch-action: none; border-radius: 14px; cursor: crosshair; }
+  canvas:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+  .cg-over { position: absolute; inset: 22% 12%; background: rgba(14, 27, 61, 0.94); color: #fff; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 20px; }
+  .cg-over[hidden] { display: none; }
+  .cg-over strong { font: 800 32px/1.1 var(--f-head); }
+  .cg-status { min-height: 48px; font-weight: 600; color: var(--navy); }
+  .cg-slider input { width: 100%; accent-color: var(--red); min-height: 44px; }
+  .cg-foot { display: flex; gap: 12px; }
+  @media (hover: none) { .cg-keys { display: none; } }
+</style>

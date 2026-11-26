@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import Board from '../components/Board.astro';
+import CarromGame from '../components/CarromGame.astro';
 import { getEntry, render } from 'astro:content';
 import { url, nbsp } from '../lib/site';
 const page = await getEntry('pages', 'hra-carrom.cs');
@@ -18,15 +18,14 @@ const { Content } = page ? await render(page) : { Content: null };
         </div>
       </div>
       <div id="hra" class="game">
-        <Board class="board" />
-        <p class="notice">{nbsp('Hru v prohlížeči připravujeme. Zatím si deskou můžeš jen prohlédnout, jak carrom vypadá.')}</p>
+        <h2 class="game-title">Zahraj si</h2>
+        <CarromGame lang="cs" />
       </div>
     </div>
   </div>
 </Base>
 <style>
   .intro { display: grid; gap: 32px; }
-  .game { display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
-  .board { width: 100%; height: auto; }
-  @media (min-width: 960px) { .intro { grid-template-columns: minmax(0, 1fr) 440px; gap: 64px; align-items: start; } .game { position: sticky; top: 24px; } }
+  .game { display: flex; flex-direction: column; gap: 12px; max-width: 560px; scroll-margin-top: 16px; }
+  @media (min-width: 960px) { .intro { grid-template-columns: minmax(0, 1fr) 520px; gap: 64px; align-items: start; } }
 </style>
