@@ -177,3 +177,25 @@ test('aiming guide: straight up from the centre hits a coin and pushes it on', (
   assert.ok(pr.striker.to[1] < C.BASE_Y.bottom && pr.striker.to[1] > C.CENTER);
   assert.ok(pr.coins[0].to[1] < pr.coins[0].from[1]);
 });
+
+test('striker over a red base circle: all of it or none of it (law 118), not on Easy', () => {
+  const s = fresh();
+  assert.ok(C.strikerFree(s, 151));          // covers the circle
+  assert.ok(!C.strikerFree(s, 170));         // half on it
+  assert.ok(C.strikerFree(s, 190));          // clear of it
+  assert.equal(C.snapStrikerX(s, 170, 1), C.snapStrikerX(s, 170, 1));
+  assert.ok(C.snapStrikerX(s, 170, 1) > 186 && C.snapStrikerX(s, 170, -1) < 156);
+  const e = fresh({ easy: true });
+  assert.ok(C.strikerFree(e, 170));
+});
+
+test('striker moves forward or back to fit beside a coin on the base line (law 117)', () => {
+  const s = fresh();
+  const c = s.pieces[1];
+  Object.assign(c, { x: 370, y: C.BASE_Y.bottom - 34 }); // just in front, overlapping the striker spot slightly
+  const y = C.strikerSpot(s, 370);
+  const [lo, hi] = C.strikerYRange(s);
+  assert.ok(y !== null && y > C.BASE_Y.bottom && y <= hi && y >= lo);
+  Object.assign(c, { y: C.BASE_Y.bottom }); // right on the line: no room
+  assert.equal(C.strikerSpot(s, 370), null);
+});

@@ -109,10 +109,62 @@ export function clampStrikerX(x) {
   return Math.min(BASE_X[1], Math.max(BASE_X[0], x));
 }
 
-/** Can the striker sit at x on the colour's base line without lying on a coin? */
+// Base lines: two lines 31.8 mm apart, the outer one 102 mm from the edge, red base circles
+// (Ø 31.8 mm) at both ends, centred 150.9 mm from the side edges.
+const LINES = { bottom: [BOARD - 102, BOARD - 102 - 31.8], top: [102, 102 + 31.8] };
+const RING_R = 15.9;
+const RING_X = [135 + RING_R, BOARD - 135 - RING_R];
+
+/** Striker centre heights that still touch both base lines (law 117): the striker may sit a little
+ * forward or back, e.g. to fit next to a coin lying on the line. */
+export function strikerYRange(state, color = state.turn) {
+  const r = geom(state).striker, [a, b] = LINES[side(color)];
+  return [Math.max(a, b) - r, Math.min(a, b) + r];
+}
+
+/** Law 118 (not on Easy): over a red base circle the striker must cover it entirely, or not touch it. */
+function circlesOk(state, x, y, color) {
+  if (state.easy) return true;
+  const r = geom(state).striker, [a, b] = LINES[side(color)], cy = (a + b) / 2;
+  return RING_X.every((cx) => { const d = Math.hypot(x - cx, y - cy); return d + RING_R <= r + 0.01 || d >= r + RING_R; });
+}
+
+const coinsClear = (state, x, y) => state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + geom(state).striker);
+
+/** Where the striker sits at x: the base-line height nearest the middle that is free of coins and
+ * obeys the circle rule, or null when there is none. */
+export function strikerSpot(state, x, color = state.turn) {
+  const base = BASE_Y[side(color)], [lo, hi] = strikerYRange(state, color);
+  for (let d = 0; d <= hi - lo; d += 0.25) {
+    for (const y of d ? [base - d, base + d] : [base]) {
+      if (y < lo - 1e-9 || y > hi + 1e-9) continue;
+      if (circlesOk(state, x, y, color) && coinsClear(state, x, y)) return y;
+    }
+  }
+  return null;
+}
+
+/** Can the striker be placed at x on the colour's base line? */
 export function strikerFree(state, x, color = state.turn) {
+  return strikerSpot(state, x, color) !== null;
+}
+
+/** Nearest x that obeys the circle rule, searching in the direction of movement first (dir ±1). */
+export function snapStrikerX(state, x, dir = 0, color = state.turn) {
+  x = clampStrikerX(x);
   const y = BASE_Y[side(color)];
-  return state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + geom(state).striker);
+  if (circlesOk(state, x, y, color)) return x;
+  const order = dir > 0 ? [1, -1] : dir < 0 ? [-1, 1] : [1, -1];
+  let best = null;
+  for (const sgn of order) {
+    for (let d = 0.25; d < 80; d += 0.25) {
+      const t = x + sgn * d;
+      if (t < BASE_X[0] || t > BASE_X[1]) break;
+      if (circlesOk(state, t, y, color)) { if (dir || !best || d < Math.abs(best - x)) best = t; break; }
+    }
+    if (dir && best !== null) return best;
+  }
+  return best ?? x;
 }
 
 /** Is a shot direction allowed? ICF rules allow any direction, back shots included. */
@@ -215,7 +267,7 @@ export const moving = (bodies) => bodies.some((p) => p.inPlay && (p.vx || p.vy))
 export function startShot(state, x, angle, power) {
   const color = state.turn;
   const v = Math.max(0.015, Math.min(1, power)) * MAX_SPEED;
-  state.striker = { id: 'striker', kind: 'striker', color: 'striker', by: color, x: clampStrikerX(x), y: BASE_Y[side(color)], r: geom(state).striker, m: MASS.striker, vx: Math.cos(angle) * v, vy: Math.sin(angle) * v, inPlay: true };
+  state.striker = { id: 'striker', kind: 'striker', color: 'striker', by: color, x: clampStrikerX(x), y: strikerSpot(state, clampStrikerX(x), color) ?? BASE_Y[side(color)], r: geom(state).striker, m: MASS.striker, vx: Math.cos(angle) * v, vy: Math.sin(angle) * v, inPlay: true };
   state.fell = [];
   state.shots++;
 }
@@ -438,7 +490,7 @@ function toWall(x, y, dx, dy, r) {
  */
 export function predictShot(state, x, angle) {
   const g = geom(state);
-  const y = BASE_Y[side(state.turn)];
+  const y = strikerSpot(state, x) ?? BASE_Y[side(state.turn)];
   const dx = Math.cos(angle), dy = Math.sin(angle);
   const wall = toWall(x, y, dx, dy, g.striker);
   const hit = cast(state, x, y, dx, dy, g.striker, null, wall);
@@ -534,7 +586,8 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   const cands = [];
   for (let xi = 0; xi <= 16; xi++) {
     const x = BASE_X[0] + ((BASE_X[1] - BASE_X[0]) * xi) / 16;
-    if (!strikerFree(state, x, me)) continue;
+    const y = strikerSpot(state, x, me);
+    if (y === null) continue;
     for (const t of targets) {
       for (const [px, py] of pockets) {
         const ux = px - t.x, uy = py - t.y, ul = Math.hypot(ux, uy);

@@ -69,7 +69,7 @@ const T = {
       yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Začínáš ty, a proto máš bílé kameny. Rozstřel!', cpuBreaks: 'Tuhle sadu začíná počítač, a proto má bílé. Ty máš černé.', starts: (n: string) => `Začíná ${n}, a proto má bílé kameny. Rozstřel!`,
       badgeYou: 'Začínáš ty: máš bílé', badgeCpu: 'Začíná počítač: má bílé', badge: (n: string) => `Začíná ${n}: má bílé`, cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
-      blocked: 'Striker nesmí ležet na kameni. Posuň ho.',
+      blocked: 'Tady se striker nevejde mezi kameny. Posuň ho.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
       foul: 'Faul: striker v díře. Jeden tvůj kámen jde zpět na desku (nemáš-li žádný, dlužíš ho) a tah končí.',
       'foul-on': 'Faul: striker v díře. Kameny z tohoto šťouchu a jeden navíc jdou zpět, ale hraješ dál.',
@@ -93,7 +93,7 @@ const T = {
       queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená', easy: 'Královna v díře' },
       rules: {
         easy: 'Kdo začíná, má bílé kameny; začíná se střídavě. Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, nic se nevrací. Když dáš svůj kámen nebo královnu, hraješ dál. Královnu musíš potvrdit svým kamenem (hned nebo dalším šťouchem), pak dává +3 body. Potvrdit ji musí někdo dřív, než padne poslední kámen. Vyhrává, kdo má první venku své 3 kameny.',
-        full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
+        full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Striker se musí dotýkat obou čar (u kamene na čáře ho lze posunout dopředu či dozadu) a červené kolečko na konci čáry zakryje celé, nebo se ho nedotkne. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
       },
       won: (n: string) => `${n} vyhrává!`, lost: 'Vyhrál počítač.', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
       youWon: 'Vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
@@ -103,7 +103,7 @@ const T = {
       yourTurn: (c: string) => `Your turn, you play ${c}.`, youBreak: 'You begin, so you have the white coins. Break!', cpuBreaks: 'The computer begins this board, so it has white. You have black.', starts: (n: string) => `${n} begins, so they have the white coins. Break!`,
       badgeYou: 'You begin: you have white', badgeCpu: 'Computer begins: it has white', badge: (n: string) => `${n} begins: white`, cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
       turnOf: (n: string, c: string) => `${n} to play (${c}).`,
-      blocked: 'The striker may not touch a coin. Move it.',
+      blocked: 'The striker does not fit here between the coins. Move it.',
       own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
       foul: 'Foul: striker pocketed. One of your coins goes back (owed if you have none) and your turn ends.',
       'foul-on': 'Foul: striker pocketed. This stroke\'s coins and one more go back, but you play on.',
@@ -127,7 +127,7 @@ const T = {
       queen: { board: 'Queen on the board', pending: 'Queen waiting to be covered', covered: 'Queen covered', easy: 'Queen pocketed' },
       rules: {
         easy: 'Whoever begins has the white coins; players take turns to begin. Easy game: 3 coins each and the queen. Every pocketed coin counts, nothing goes back. Pocket your coin or the queen and you play on. Cover the queen with your coin (same or next stroke) for +3. It must be covered before anyone\'s last coin. First to pocket all 3 coins wins.',
-        full: 'ECC laws: whoever begins (breaks) has the white coins; players take turns to begin. 9 coins each. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
+        full: 'ECC laws: whoever begins (breaks) has the white coins; players take turns to begin. 9 coins each. The striker must touch both base lines (next to a coin on the line it may sit a little forward or back) and must cover a red end circle entirely or not touch it. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
       },
       won: (n: string) => `${n} wins!`, lost: 'The computer wins.', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
       youWon: 'You win!', aimHint: 'Pull back and let go.',
@@ -188,10 +188,12 @@ const T = {
 
     // ---------- helpers ----------
     const human = () => phase === 'aim' && (mode === 'two' || state.turn === myColor());
-    const baseY = () => C.BASE_Y[C.side(state.turn)];
+    // The striker sits on the base line, nudged forward or back to fit beside a coin (law 117).
+    const yAt = (x: number) => C.strikerSpot(state, x) ?? C.BASE_Y[C.side(state.turn)];
+    const baseY = () => yAt(strikerX);
     const nameOf = (c: 'white' | 'black') => (c === myColor() ? (mode === 'computer' ? L.you : L.p1) : mode === 'computer' ? L.cpu : L.p2);
-    function setStriker(x: number) {
-      strikerX = C.clampStrikerX(x);
+    function setStriker(x: number, dir = 0) {
+      strikerX = C.snapStrikerX(state, x, dir);
     }
     function shotFromAim() {
       if (!aim) return null;
@@ -273,7 +275,7 @@ const T = {
       // coins
       for (const p of state.pieces) if (p.inPlay) coin(p.x, p.y, p.r, p.color);
       // striker
-      const showStriker = state.striker ?? (phase !== 'over' ? { x: cpuGhost?.x ?? strikerX, y: baseY() } : null);
+      const showStriker = state.striker ?? (phase !== 'over' ? { x: cpuGhost?.x ?? strikerX, y: yAt(cpuGhost?.x ?? strikerX) } : null);
       if (state.striker && state.striker.inPlay) striker(state.striker.x, state.striker.y, false);
       else if (!state.striker && showStriker && !state.winner) {
         const blocked = !C.strikerFree(state, showStriker.x);
@@ -435,7 +437,7 @@ const T = {
         if (Math.hypot(dx, dy) < 8) return;
         drag = Math.abs(dx) > Math.abs(dy) * 1.2 ? 'place' : 'aim';
       }
-      if (drag === 'place') setStriker(strikerX + (p.x - dragStart.x)), (dragStart = p);
+      if (drag === 'place') { const dx = p.x - dragStart.x; const before = strikerX; setStriker(strikerX + dx, Math.sign(dx)); if (strikerX !== before) dragStart = p; }
       else aim = { px: p.x, py: p.y };
       ui(); draw();
     });
@@ -453,8 +455,8 @@ const T = {
     canvas.addEventListener('keydown', (e) => {
       if (!human()) return;
       const dir = flipped() ? -1 : 1;
-      if (e.key === 'ArrowLeft') setStriker(strikerX - 8 * dir);
-      else if (e.key === 'ArrowRight') setStriker(strikerX + 8 * dir);
+      if (e.key === 'ArrowLeft') setStriker(strikerX - 8 * dir, -dir);
+      else if (e.key === 'ArrowRight') setStriker(strikerX + 8 * dir, dir);
       else if (e.key === 'ArrowUp') kbAngle -= 0.03 * dir;
       else if (e.key === 'ArrowDown') kbAngle += 0.03 * dir;
       else if (e.key === ' ' && !charging) {
