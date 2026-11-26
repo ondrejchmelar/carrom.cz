@@ -5,5 +5,27 @@ start_date: 2026-10-03
 end_date: 2026-10-03
 venue: { name: Letohrad, city: Letohrad }
 source: sol
-sol_lit_url: ~
-results: {}                 # doplní import ze SoL
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/e678de82be4c11f1b5ea901b0edac7fa
+results:
+  singles:
+    - { place: 1, player: ajay-sekhesh }
+    - { place: 2, player: karlos-novak }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: matej-bednar }
+    - { place: 5, player: pavel-schierl }
+    - { place: 6, player: tomas-chmelar }
+    - { place: 7, player: frantisek-rezek }
+    - { place: 8, player: jan-tesitel }
+    - { place: 9, name: "Sandeep Surakarapu", country: DE }
+    - { place: 10, player: waldemar-havranek }
+    - { place: 11, player: martin-rosulek }
+    - { place: 12, name: "Mathias Forlivesi", country: IT }
+    - { place: 13, player: zdenek-taborsky }
+    - { place: 14, player: petr-stary }
+    - { place: 15, name: "Maximilian Holzer", country: DE }
+    - { place: 16, player: vaclav-hercik }
+    - { place: 17, player: jana-brzkova }
+    - { place: 18, player: lubos-ladislav }
+    - { place: 19, player: milos-konvalina }
+    - { place: 20, name: "Marina Altmann", country: DE }
+    - { place: 21, name: "Nico Altmann", country: DE }

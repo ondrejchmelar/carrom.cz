@@ -213,6 +213,7 @@ collections:
       - { name: mcr, label: Hraje o titul MČR, widget: boolean, default: false, required: false, hint: "Zaškrtnutí se počítají do tabulky Mistrovství ČR." }
       - { name: page, label: Vlastní stránka, widget: select, options: [{ label: Automaticky, value: auto }, { label: Vždy, value: always }, { label: Nikdy, value: never }], default: auto, required: false }
       - { name: spellings, label: Jiné zápisy jména (pro import), widget: list, required: false }
+      - { name: sol, label: ID hráče v SoL, widget: string, required: false, hint: "Doplní import ze SoL. Podle něj se hráč pozná při dalším importu." }
 
   - name: competitions
     label: Soutěže

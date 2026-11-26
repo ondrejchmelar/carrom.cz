@@ -6,5 +6,49 @@ start_date: 2026-11-21
 end_date: 2026-11-21
 venue: { name: Praha, city: Praha }
 source: sol
-sol_lit_url: ~
-results: {}                 # doplní import ze SoL
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/61692372e4d611f1a9c6901b0edac7fa
+results:
+  singles:
+    - { place: 1, name: "Hariramkumar Vennilavan Thenmozhi", country: IN }
+    - { place: 2, name: "Yogesh Kulkarni", country: DE }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, name: "Heiko Wurst", country: DE }
+    - { place: 5, player: sylwester-pogorzelski }
+    - { place: 6, name: "Witold Blaut", country: PL }
+    - { place: 7, player: ajay-sekhesh }
+    - { place: 8, player: jakub-sasinski }
+    - { place: 9, name: "Josef Meyer", country: CH }
+    - { place: 10, name: "Uwe Schneider", country: DE }
+    - { place: 11, player: pawel-wroczynski }
+    - { place: 12, player: frank-fehr }
+    - { place: 13, player: zdenek-svitak }
+    - { place: 14, player: tomas-chmelar }
+    - { place: 15, name: "Paul Schneider", country: DE }
+    - { place: 16, player: jan-tesitel }
+    - { place: 17, name: "Simon Nebeling", country: DE }
+    - { place: 18, player: frantisek-cervenka }
+    - { place: 19, player: matej-bednar }
+    - { place: 20, player: hans-faller }
+    - { place: 21, player: filip-smoljak }
+    - { place: 22, player: miroslav-cernohous }
+    - { place: 23, player: lukas-navratil }
+    - { place: 24, name: "Francesco Ventola", country: IT }
+    - { place: 25, player: ondrej-kubicek }
+    - { place: 26, player: frantisek-rezek }
+    - { place: 27, player: romana-kralova }
+    - { place: 28, name: "Nhu Kevin Tieu", country: DE }
+    - { place: 29, name: "Eliza Lipinska-Wroczynska", country: PL }
+    - { place: 30, name: "Nikodem Blaut", country: PL }
+    - { place: 31, name: "Marcin Weiss", country: PL }
+    - { place: 32, player: dominika-krestanova }
+    - { place: 33, player: zdenek-taborsky }
+    - { place: 34, name: "Marika Valeruz", country: IT }
+    - { place: 35, player: martin-rosulek }
+    - { place: 36, player: petr-stary }
+    - { place: 37, player: waldemar-havranek }
+    - { place: 38, name: "Guido Maurizio Ciocca", country: IT }
+    - { place: 39, player: vaclav-hercik }
+    - { place: 40, name: "Sharon Marcu", country: DE }
+    - { place: 41, player: jana-kubickova }
+    - { place: 42, player: milos-konvalina }
+    - { place: 43, player: jana-brzkova }

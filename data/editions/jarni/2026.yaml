@@ -5,5 +5,20 @@ start_date: 2026-04-11
 end_date: 2026-04-11
 venue: { name: Pelhřimov, city: Pelhřimov }
 source: sol
-sol_lit_url: ~
-results: {}                 # doplní import ze SoL
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/804d0a5a344711f18ee6901b0edac7fa
+results:
+  singles:
+    - { place: 1, player: ajay-sekhesh }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: karlos-novak }
+    - { place: 4, player: matej-bednar }
+    - { place: 5, player: frantisek-cervenka }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: pavel-schierl }
+    - { place: 8, player: frantisek-rezek }
+    - { place: 9, player: tomas-chmelar }
+    - { place: 10, player: petr-stary }
+    - { place: 11, player: veronika-stejskalova }
+    - { place: 12, player: vaclav-hercik }
+    - { place: 13, player: martin-rosulek }
+    - { place: 14, player: milos-konvalina }
