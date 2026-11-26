@@ -1,0 +1,125 @@
+# Fotogalerie: alba na externích webech (jAlbum, Rajče, Flickr, Google Fotky…).
+# Nové album přidej nahoru. cover = náhledový obrázek v /uploads/galerie/ (nepovinné).
+albums:
+  - title: { cs: "Veřejné hraní Praha 2023", en: "Open play Prague 2023" }
+    year: "2023"
+    photographer: Zdeněk Tichý
+    url: "https://zdenektichy.jalbum.net/carrom/2023-08_verejne/index.html"
+  - title: { cs: "18. Carrom Open Cup Praha 2023", en: "18th Carrom Open Cup Prague 2023" }
+    year: "2023"
+    edition: cocp/2023
+    photographer: Zdeněk Tichý
+    url: "http://zdenektichy.jalbum.net/carrom/2023_open/index.html"
+  - title: { cs: "Carromový turnaj na indickém velvyslanectví v Praze", en: "Carrom tournament at the Indian Embassy, Prague" }
+    year: "2023"
+    url: "https://photos.google.com/share/AF1QipPLZDbE91o8L6hwDmwi62W3skGs1EDETXsiMZ9dOpgwAr3reI2K0H1c7MkUnmBahw?pli=1&key=M2lJMTdNby1tQ0ZUV2JZTlpvYllzR2ZRc0hyd0d3"
+  - title: { cs: "17. Carrom Open Cup Praha 2022", en: "17th Carrom Open Cup Prague 2022" }
+    year: "2022"
+    edition: cocp/2022
+    photographer: Zdeněk Tichý
+    url: "http://zdenektichy.jalbum.net/carrom/2022_open/index.html"
+  - title: { cs: "16. Carrom Open Cup Praha 2021", en: "16th Carrom Open Cup Prague 2021" }
+    year: "2021"
+    edition: cocp/2021
+    cover: /uploads/galerie/cocp-2021.jpg
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2021_open/index.html"
+  - title: { cs: "15. Carrom Open Cup Praha 2020 on-line", en: "15th Carrom Open Cup Prague 2020 (online)" }
+    year: "2020"
+    edition: cocp/2020
+    cover: /uploads/galerie/cocp-2020.jpg
+    url: "/uploads/galerie/cocp-2020.jpg"
+  - title: { cs: "14. Carrom Open Cup Praha 2019", en: "14th Carrom Open Cup Prague 2019" }
+    year: "2019"
+    edition: cocp/2019
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2019_open/index.html"
+  - title: { cs: "13. Carrom Open Cup Praha 2018", en: "13th Carrom Open Cup Prague 2018" }
+    year: "2018"
+    edition: cocp/2018
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2018_open/index.html"
+  - title: { cs: "Odhalení sochy CARROM Praha 2017", en: "Unveiling of the CARROM statue, Prague 2017" }
+    year: "2017"
+    photographer: Michal Fučík
+    url: "https://www.flickr.com/photos/184612779@N02/sets/72157716845229503/"
+  - title: { cs: "12. Carrom Open Cup Praha 2017", en: "12th Carrom Open Cup Prague 2017" }
+    year: "2017"
+    edition: cocp/2017
+    cover: /uploads/galerie/cocp-2017.jpg
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2017_open/index.html"
+  - title: { cs: "PCL 2017", en: "PCL 2017" }
+    year: "2017"
+    edition: pcl/2017
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2017_trpaslik/index.html"
+  - title: { cs: "11. Carrom Open Cup Praha 2016", en: "11th Carrom Open Cup Prague 2016" }
+    year: "2016"
+    edition: cocp/2016
+    cover: /uploads/galerie/cocp-2016.jpg
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2016_open/index.html"
+  - title: { cs: "10. Carrom Open Cup Praha 2015", en: "10th Carrom Open Cup Prague 2015" }
+    year: "2015"
+    edition: cocp/2015
+    cover: /uploads/galerie/cocp-2015.jpg
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2015_open/index.html"
+  - title: { cs: "9. Carrom Open Cup Praha 2014", en: "9th Carrom Open Cup Prague 2014" }
+    year: "2014"
+    edition: cocp/2014
+    photographer: Aleš Formánek
+    url: "http://carrom.rajce.idnes.cz/9._Carrom_Open_Cup_Praha"
+  - title: { cs: "9. Carrom Open Cup Praha 2014", en: "9th Carrom Open Cup Prague 2014" }
+    year: "2014"
+    edition: cocp/2014
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2014_open/index.html"
+  - title: { cs: "8. Carrom Open Cup Praha 2013", en: "8th Carrom Open Cup Prague 2013" }
+    year: "2013"
+    edition: cocp/2013
+    photographer: Aleš Formánek
+    url: "http://carrom.rajce.idnes.cz/8_Carrom_Open_Cup_Praha_2013"
+  - title: { cs: "8. Carrom Open Cup Praha 2013", en: "8th Carrom Open Cup Prague 2013" }
+    year: "2013"
+    edition: cocp/2013
+    photographer: Zdeněk Tichý
+    url: "https://www.lib.cas.cz/zt/carrom/album/2013_open/index.html"
+  - title: { cs: "Pakistán Karáčí 2013", en: "Karachi, Pakistan 2013" }
+    year: "2013"
+    url: "http://carrom.rajce.idnes.cz/carrom_-_Pakistan_2013/"
+  - title: { cs: "Pelhřimov 2012", en: "Pelhřimov 2012" }
+    year: "2012"
+    url: "http://carrom.rajce.idnes.cz/Pelhrimov_carrom/"
+  - title: { cs: "7. Carrom Open Cup Praha 2012", en: "7th Carrom Open Cup Prague 2012" }
+    year: "2012"
+    edition: cocp/2012
+    url: "https://www.lib.cas.cz/zt/carrom/album/2012_open/index.html"
+  - title: { cs: "6. Carrom Open Cup Praha 2011", en: "6th Carrom Open Cup Prague 2011" }
+    year: "2011"
+    edition: cocp/2011
+    url: "https://www.lib.cas.cz/zt/carrom/album/2011_open/index.html"
+  - title: { cs: "5. Carrom Open Cup Praha 2010", en: "5th Carrom Open Cup Prague 2010" }
+    year: "2010"
+    edition: cocp/2010
+    url: "http://carrom.rajce.idnes.cz/5._Carrom_Open_Cup_Praha_2010/"
+  - title: { cs: "Carrom Doubles Tournament Gokarna 2010", en: "Carrom Doubles Tournament Gokarna 2010" }
+    year: "2010"
+    url: "http://carrom.rajce.idnes.cz/Carrom_Gokarna_Doubles_Turnament"
+  - title: { cs: "4. Carrom Open Cup Praha 2009", en: "4th Carrom Open Cup Prague 2009" }
+    year: "2009"
+    edition: cocp/2009
+    url: "http://fosgo.rajce.idnes.cz/4._Carrom_Open_Cup_Praha/"
+  - title: { cs: "3. Carrom Open Cup Praha 2008", en: "3rd Carrom Open Cup Prague 2008" }
+    year: "2008"
+    edition: cocp/2008
+    url: "http://pardubice.carrom.cz/gallery.php?akce=galerie_ukaz&galerie_id=22"
+  - title: { cs: "2. Carrom Open Cup Praha 2007", en: "2nd Carrom Open Cup Prague 2007" }
+    year: "2007"
+    edition: cocp/2007
+    url: "http://pardubice.carrom.cz/gallery.php?akce=galerie_ukaz&galerie_id=21"
+  - title: { cs: "1. Carrom Open Cup Praha 2006", en: "1st Carrom Open Cup Prague 2006" }
+    year: "2006"
+    edition: cocp/2006
+    url: "http://pardubice.carrom.cz/gallery.php?akce=galerie_ukaz&galerie_id=14"

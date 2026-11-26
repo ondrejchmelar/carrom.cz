@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import Countdown from '../components/Countdown.astro';
+import EventRow from '../components/EventRow.astro';
+import McrTable from '../components/McrTable.astro';
+import { model } from '../lib/data';
+import { articles } from '../lib/articles';
+import { L, t, tr, nbsp, dateShort, type Lang } from '../lib/site';
+interface Props { lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const today = new Date().toISOString().slice(0, 10);
+const upcoming = m.editionList.filter((e: any) => e.start_date && (e.end_date ?? e.start_date) >= today).slice(0, 4);
+const news = await articles(lang);
+const latest = news.slice(0, 6);
+const years = [...new Set(news.map((a) => a.year))].sort((a, b) => b - a);
+const r = m.latestRanking;
+const leagues = m.clubs.filter((c: any) => c.active && c.league);
+---
+<Base title={tr(lang, 'Novinky', 'News')} lang={lang} current="novinky">
+  <div class="wrap page">
+    <div class="page-head">
+      <h1>{tr(lang, 'Novinky', 'News')}</h1>
+      <p class="lede">{tr(lang, 'Turnaje, Mistrovství ČR, ligy a výsledky na jednom místě.', 'Tournaments, the Czech Championship, leagues and results in one place.')}</p>
+    </div>
+    <div class="top">
+      <Countdown lang={lang} />
+      <section class="section">
+        <div class="section-head"><h2>{tr(lang, 'Kalendář', 'Calendar')}</h2><a href={L('/kalendar/', lang)}>{tr(lang, 'Všechny akce', 'All events')}</a></div>
+        {upcoming.length ? upcoming.map((e: any) => <EventRow ed={e} hot={e.id === m.nextTournament?.id} lang={lang} />) : <p class="muted">{tr(lang, 'Další akce zatím nejsou v kalendáři.', 'No upcoming events in the calendar yet.')}</p>}
+      </section>
+    </div>
+    {r && (
+      <section class="section">
+        <div class="section-head"><h2>{t(r.name, lang)}</h2><a href={L(`/vysledky/mcr/${r.year}/`, lang)}>{tr(lang, 'Celá tabulka', 'Full table')}</a></div>
+        <McrTable id={r.id} limit={4} lang={lang} />
+      </section>
+    )}
+    <section class="section">
+      <h2>{tr(lang, 'Ligy', 'Leagues')}</h2>
+      <div class="grid three">
+        {leagues.map((c: any) => (
+          <a class="card" href={L(`/ligy/#${c.id}`, lang)}>
+            <span class="eyebrow">{c.area}</span>
+            <strong>{c.name}</strong>
+            <span class="small">{nbsp(t(c.summary, lang), lang)}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="section">
+      <h2>{tr(lang, 'Zprávy', 'Stories')}</h2>
+      {lang === 'en' && <p class="small">{'Most stories are written in Czech. Those marked “in Czech” have no English version yet.'}</p>}
+      {latest.length === 0 && <p class="muted">{tr(lang, 'Zatím žádné zprávy.', 'No stories yet.')}</p>}
+      <div class="grid news">
+        {latest.map((a) => (
+          <a class="card" href={L(`/novinky/${a.year}/${a.slug}/`, lang)}>
+            <span class="eyebrow">{dateShort(a.date, true, lang)}{a.czechOnly ? ' · in Czech' : ''}</span>
+            <strong class="news-title">{a.entry.data.title}</strong>
+            {a.entry.data.perex && <span class="small">{nbsp(a.entry.data.perex, a.czechOnly ? 'cs' : lang)}</span>}
+          </a>
+        ))}
+      </div>
+    </section>
+    <section class="section">
+      <h2>{tr(lang, 'Archiv podle let', 'Archive by year')}</h2>
+      <p class="muted">{tr(lang, 'Všechny zprávy ze starého webu, od roku 2006.', 'All stories from the old site, since 2006 (in Czech).')}</p>
+      <div class="chips">{years.map((y) => <a class="chip" href={L(`/novinky/${y}/`, lang)}>{y}</a>)}</div>
+    </section>
+  </div>
+</Base>
+<style>
+  .top { display: grid; gap: 24px; }
+  .three, .news { gap: 12px; }
+  .news-title { font-size: 18px; }
+  @media (min-width: 960px) {
+    .top { grid-template-columns: 400px minmax(0, 1fr); gap: 48px; align-items: start; }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .news { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  }
+</style>

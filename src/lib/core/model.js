@@ -109,12 +109,18 @@ export function buildModel(raw, { today = new Date() } = {}) {
     playerInfo[slug] = { slug, ...p, results: res, wins, hasPage };
   }
 
+  const gallery = (raw.gallery?.albums ?? []).map((a) => ({ ...a, year: Number(a.year) }));
+  for (const a of gallery) {
+    if (!a.url) warnings.push(`gallery: album „${a.title?.cs ?? '?'}“ nemá odkaz`);
+    if (a.edition && !editions[a.edition]) warnings.push(`gallery: album „${a.title?.cs ?? '?'}“ – neznámý ročník ${a.edition}`);
+  }
   return {
     settings: raw.settings ?? {},
     navigation: raw.navigation ?? {},
     home: raw.home ?? {},
     roles: raw.roles ?? {},
     redirects: raw.redirects ?? {},
+    gallery,
     competitions,
     editions,
     editionList,

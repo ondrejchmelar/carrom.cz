@@ -9,7 +9,7 @@ const homeHref = url(lang === 'en' ? '/en/' : '/');
 <header class="site-header">
   <div class="wrap bar">
     <a class="logo" href={homeHref} aria-current={current === 'domu' ? 'page' : undefined}>
-      <img src={url('/brand/logo-header-mirrored-white.svg')} alt="carrom.cz · Česká carromová asociace" width="218" height="48" />
+      <img src={url('/brand/logo-header-mirrored-white.svg')} alt={lang === 'en' ? 'carrom.cz · Czech Carrom Association' : 'carrom.cz · Česká carromová asociace'} width="218" height="48" />
     </a>
     <nav class="main-nav" aria-label={lang === 'en' ? 'Main menu' : 'Hlavní menu'}>
       {(nav.main ?? []).map((item: any) => (

@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import { getEntry, render } from 'astro:content';
+import { model } from '../lib/data';
+import { url, t, tr, type Lang } from '../lib/site';
+interface Props { lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const s = m.settings.site ?? {};
+const pay = m.settings.payment ?? {};
+const page = (await getEntry('pages', `asociace.${lang}`)) ?? (await getEntry('pages', 'asociace.cs'));
+const { Content } = page ? await render(page) : { Content: null };
+const contacts = [
+  [tr(lang, 'Obecné dotazy', 'General questions'), 'carrom@carrom.cz'], [tr(lang, 'Asociace', 'Association'), 'cca@carrom.cz'], [tr(lang, 'Mistrovství ČR', 'Czech Championship'), 'mcr@carrom.cz'],
+  ['Carrom Open Cup', 'opencup@carrom.cz'], [tr(lang, 'Pražská liga', 'Prague League'), 'pcl@carrom.cz'], [tr(lang, 'Medlešická liga', 'Medlešice League'), 'cml@carrom.cz'],
+];
+const docs = m.documents.filter((d: any) => ['statutes', 'minutes'].includes(d.kind));
+---
+<Base title={tr(lang, 'Asociace', 'Association')} lang={lang} current="asociace">
+  <div class="wrap page">
+    <div class="page-head">
+      <h1>{page?.data.title ?? tr(lang, 'Asociace', 'Association')}</h1>
+      <p class="lede">{page?.data.description}</p>
+    </div>
+    <div class="cols">
+      <div class="prose">{Content && <Content />}</div>
+      <div class="side">
+        <section class="card pad" id="platba">
+          <h2 class="h">{tr(lang, 'Platba startovného a ligových poplatků', 'Paying entry and league fees')}</h2>
+          <p class="small">{t(pay.note, lang)}</p>
+          {pay.qr_image ? <img class="qr" src={url(pay.qr_image)} alt={tr(lang, 'QR kód pro platbu na účet ČCA', 'QR code for payment to the association account')} width="220" height="220" /> : <p class="notice">{tr(lang, 'QR kód a číslo účtu doplníme.', 'QR code and account number coming soon.')}</p>}
+          {pay.account && <p><strong>{tr(lang, 'Účet', 'Account')}: {pay.account}</strong></p>}
+          {pay.iban && <p class="small">IBAN {pay.iban}{pay.bic ? ` · BIC ${pay.bic}` : ''}</p>}
+        </section>
+        <section class="card pad" id="dokumenty">
+          <h2 class="h">{tr(lang, 'Dokumenty', 'Documents')}</h2>
+          {lang === 'en' && <span class="small">The documents are in Czech.</span>}
+          {docs.map((d: any) => <a href={url(t(d.file))}>{t(d.title, lang)}</a>)}
+        </section>
+        <section class="card pad" id="kontakty">
+          <h2 class="h">{tr(lang, 'Kontakty', 'Contacts')}</h2>
+          <dl class="contacts">
+            {contacts.map(([k, v]) => <div><dt>{k}</dt><dd><a href={`mailto:${v}`}>{v}</a></dd></div>)}
+          </dl>
+          <p class="small">{t(s.org, lang)}, z.s. · {s.address} · {tr(lang, 'IČ', 'Reg. no.')} {s.ico}</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</Base>
+<style>
+  .cols { display: grid; gap: 32px; }
+  .side { display: flex; flex-direction: column; gap: 16px; }
+  .pad { padding: 22px; gap: 10px; border-radius: 18px; }
+  .h { font-size: 22px; }
+  .qr { width: 220px; height: 220px; }
+  .contacts { margin: 0; display: grid; gap: 8px; }
+  .contacts div { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid #EEF0F5; padding-bottom: 8px; }
+  .contacts dt { color: var(--muted); }
+  .contacts dd { margin: 0; font-weight: 600; }
+  .contacts a { color: var(--red); }
+  @media (min-width: 960px) { .cols { grid-template-columns: minmax(0, 1fr) 420px; gap: 64px; align-items: start; } }
+</style>

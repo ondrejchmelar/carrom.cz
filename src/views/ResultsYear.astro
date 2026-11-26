@@ -1,0 +1,74 @@
+---
+// Shared body of /vysledky/ and /vysledky/rok/<year>/.
+import Base from '../layouts/Base.astro';
+import McrTable from '../components/McrTable.astro';
+import { model } from '../lib/data';
+import { L, t, tr, editionName, editionUrl, dateShort, fullName, type Lang } from '../lib/site';
+interface Props { year: number; years: number[]; lang?: Lang }
+const { year, years, lang = 'cs' } = Astro.props;
+const m = model();
+const ranking = Object.values(m.rankings).find((r: any) => r.year === year && r.table.rows.length) as any;
+const eds = m.editionList.filter((e: any) => e.year === year).reverse();
+const comps = Object.entries(m.competitions).map(([code, c]: any) => {
+  const ys = m.editionList.filter((e: any) => e.code === code).map((e: any) => e.year);
+  return { code, ...c, from: c.since ?? (ys.length ? Math.min(...ys) : ''), to: c.until ?? (ys.length ? Math.max(...ys) : null) };
+});
+const winner = (e: any) => {
+  const w = (e.results?.singles ?? e.results?.juniors ?? []).find((r: any) => r.place === 1);
+  return w ? fullName(m.players[w.player], w.name ?? w.player) : null;
+};
+const league = (e: any) => e.competition.kind === 'league';
+---
+<Base title={year === years[0] ? tr(lang, 'Výsledky', 'Results') : tr(lang, `Výsledky ${year}`, `Results ${year}`)} lang={lang} current="vysledky">
+<div class="wrap page">
+  <div class="page-head">
+    <h1>{tr(lang, 'Výsledky', 'Results')}</h1>
+    <nav class="chips" aria-label={tr(lang, 'Rok', 'Year')}>
+      {years.map((y, i) => <a class="chip" href={L(i === 0 ? '/vysledky/' : `/vysledky/rok/${y}/`, lang)} aria-current={y === year ? 'page' : undefined}>{y}</a>)}
+    </nav>
+  </div>
+  <div class:list={['cols', { two: !!ranking }]}>
+    {ranking && (
+      <section class="section">
+        <div class="section-head"><h2>{t(ranking.name, lang)}</h2><a href={L(`/vysledky/mcr/${year}/`, lang)}>{tr(lang, 'Celá tabulka', 'Full table')}</a></div>
+        <p class="small">{tr(lang, `Počítají se ${ranking.best_of} nejlepší ze ${ranking.editions.length} turnajů. Podtržená jména mají vlastní stránku hráče.`, `The best ${ranking.best_of} of ${ranking.editions.length} tournaments count. Underlined names have their own player page.`)}</p>
+        <McrTable id={ranking.id} limit={8} lang={lang} />
+      </section>
+    )}
+    <section class="section">
+      <h2>{tr(lang, `Turnaje a ligy ${year}`, `Tournaments and leagues ${year}`)}</h2>
+      <div class="row-list">
+        {eds.map((e: any) => (
+          <a href={editionUrl(e, lang)}>
+            <span class="when">{e.start_date ? dateShort(e.start_date, false, lang) : ''}</span>
+            <span class="what"><strong>{editionName(e, lang)}</strong><span class="small">{e.venue?.city ?? e.venue?.name ?? ''}</span></span>
+            <span class="tail">{league(e) ? (e.status === 'running' ? tr(lang, 'Probíhá · tabulka a playoff', 'Running · table and playoff') : tr(lang, 'Tabulka', 'Table')) : winner(e) ? `${tr(lang, 'Vítěz', 'Winner')} ${winner(e)}` : e.status === 'finished' ? tr(lang, 'Výsledky doplníme', 'Results to follow') : tr(lang, 'Výsledky budou po turnaji', 'Results after the tournament')}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+  <section class="section">
+    <h2>{tr(lang, 'Archiv od roku 2006', 'Archive since 2006')}</h2>
+    <div class="grid arch">
+      {comps.map((c: any) => (
+        <a class="card" href={L(c.kind === 'league' ? `/ligy/${c.code}/` : `/vysledky/${c.code}/`, lang)}>
+          <span class="eyebrow">{c.kind === 'league' ? tr(lang, 'Liga', 'League') : c.category === 'abroad' ? tr(lang, 'Zahraničí', 'Abroad') : tr(lang, 'Turnaj', 'Tournament')}</span>
+          <strong>{t(c.name, lang)}</strong>
+          <span class="small">{c.from}{c.to && c.to !== c.from ? `–${c.to}` : ''}</span>
+        </a>
+      ))}
+      <a class="card" href={L('/vysledky/mcr/', lang)}><span class="eyebrow">{tr(lang, 'Seriál', 'Series')}</span><strong>{tr(lang, 'Mistrovství ČR', 'Czech Championship')}</strong><span class="small">{tr(lang, 'Tabulky podle let', 'Tables by year')}</span></a>
+    </div>
+  </section>
+</div>
+</Base>
+<style>
+  .cols { display: grid; gap: 40px; }
+  .arch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @media (min-width: 960px) {
+    .cols.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+    .cols:not(.two) { max-width: 760px; }
+    .arch { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  }
+</style>

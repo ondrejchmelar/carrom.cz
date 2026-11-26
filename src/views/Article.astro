@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import ResultsTable from '../components/ResultsTable.astro';
+import { render } from 'astro:content';
+import { articles } from '../lib/articles';
+import { model } from '../lib/data';
+import { L, tr, dateLong, nbsp, editionName, type Lang } from '../lib/site';
+interface Props { id: string; lang?: Lang }
+const { id, lang = 'cs' } = Astro.props;
+const a = (await articles(lang)).find((x) => x.id === id)!;
+const entry = a.entry;
+const textLang: Lang = a.czechOnly ? 'cs' : lang;
+const { Content } = await render(entry);
+const m = model();
+const ed = a.cs.data.edition ? m.editions[a.cs.data.edition] : null;
+---
+<Base title={entry.data.title} description={entry.data.perex} lang={lang} current="novinky">
+  <article class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L(`/novinky/${a.year}/`, lang)}>{tr(lang, `Zprávy ${a.year}`, `Stories ${a.year}`)}</a>
+      <h1 lang={a.czechOnly ? 'cs' : undefined}>{entry.data.title}</h1>
+      <span class="eyebrow">{dateLong(a.date, lang)}</span>
+      {a.czechOnly && <p class="notice">This story is only available in Czech.</p>}
+      {entry.data.perex && <p class="lede" lang={a.czechOnly ? 'cs' : undefined}>{nbsp(entry.data.perex, textLang)}</p>}
+    </div>
+    {entry.data.cover && <img class="cover" src={L(entry.data.cover)} alt="" />}
+    <div class="prose" lang={a.czechOnly ? 'cs' : undefined}><Content /></div>
+    {ed && (
+      <section class="section">
+        <div class="section-head"><h2>{tr(lang, 'Výsledky', 'Results')}: {editionName(ed, lang)}</h2><a href={L(`/vysledky/${ed.code}/${ed.year}/`, lang)}>{tr(lang, 'Detail turnaje', 'Tournament details')}</a></div>
+        <ResultsTable ed={ed} lang={lang} />
+      </section>
+    )}
+  </article>
+</Base>
+<style>.cover { width: 100%; max-width: 880px; border-radius: 16px; }</style>

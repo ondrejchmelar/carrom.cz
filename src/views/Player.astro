@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { model } from '../lib/data';
+import { L, t, tr, fullName, editionName, editionUrl, type Lang } from '../lib/site';
+interface Props { slug: string; lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+import { divisionLabel } from '../lib/core/model.js';
+const m = model();
+const p = m.players[Astro.props.slug];
+const ranks = Object.values(m.rankings).map((r: any) => ({ r, row: r.table.rows.find((x: any) => x.player === p.slug) })).filter((x: any) => x.row).sort((a: any, b: any) => b.r.year - a.r.year);
+const medals = p.results.filter((r: any) => r.place <= 3).length;
+---
+<Base title={fullName(p)} lang={lang} current="vysledky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L('/hraci/', lang)}>{tr(lang, 'Hráči', 'Players')}</a>
+      <h1>{fullName(p)}</h1>
+      <div class="stats">
+        <div class="card"><b>{p.results.length}</b><span>{tr(lang, 'výsledků', 'results')}</span></div>
+        <div class="card"><b>{p.wins}</b><span>{tr(lang, 'vítězství', 'wins')}</span></div>
+        <div class="card"><b>{medals}</b><span>{tr(lang, 'na stupních', 'podiums')}</span></div>
+        {ranks[0] && <div class="card"><b>{ranks[0].row.place}.</b><span>{tr(lang, 'MČR', 'CZ champ.')} {ranks[0].r.year}</span></div>}
+      </div>
+    </div>
+    <section class="section">
+      <h2>{tr(lang, 'Výsledky', 'Results')}</h2>
+      <div class="row-list">
+        {p.results.map((r: any) => (
+          <a href={editionUrl(r.edition, lang)}>
+            <span class="when">{r.edition.year}</span>
+            <span class="what"><strong>{editionName(r.edition, lang)}</strong>{r.division !== 'singles' && <span class="small">{t(divisionLabel(r.division), lang)}</span>}</span>
+            <span class="tail"><b class="place">{r.place}.</b> {tr(lang, 'místo', 'place')}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Base>
+<style>
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; max-width: 560px; }
+  .stats .card { align-items: center; padding: 12px 6px; gap: 2px; }
+  .stats b { font-family: var(--f-head); font-size: 24px; }
+  .stats span { font-size: 12px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); text-align: center; }
+  .place { color: var(--navy); }
+</style>

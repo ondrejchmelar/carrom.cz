@@ -1,9 +1,6 @@
 ---
-import Base from '../../layouts/Base.astro';
-import YearView from './_YearView.astro';
-import { model } from '../../lib/data';
-const m = model();
-const today = new Date().toISOString().slice(0, 10);
-const years = [...new Set(m.editionList.filter((e: any) => (e.start_date ?? '') <= today).map((e: any) => e.year))].sort((a: any, b: any) => b - a) as number[];
+import View from '../../views/ResultsYear.astro';
+import { resultYears } from '../../lib/paths';
+const years = resultYears();
 ---
-<Base title="Výsledky" current="vysledky"><YearView year={years[0]} years={years} /></Base>
+<View lang="cs" year={years[0]} years={years} />

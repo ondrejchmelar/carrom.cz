@@ -1,18 +1,18 @@
 ---
 // "Do startu: <short name>" box. Hidden when there is no upcoming tournament.
 import { model } from '../lib/data';
-import { t, url, editionName, dateShort, weekday, type Lang } from '../lib/site';
+import { t, L, editionName, dateShort, weekday, type Lang } from '../lib/site';
 interface Props { lang?: Lang; compact?: boolean }
 const { lang = 'cs', compact = false } = Astro.props;
 const m = model();
 const ed = m.nextTournament;
-const label = t(m.home.next_tournament?.label, lang) || 'Do startu:';
+const label = t(m.home.next_tournament?.label, lang) || (lang === 'en' ? 'Starts in:' : 'Do startu:');
 ---
 {ed && (
   <div class="card-navy countdown" data-start={`${ed.start_date}T09:00:00+01:00`}>
     <span class="eyebrow">{`${label} ${t(ed.competition.short_name, lang) || t(ed.competition.name, lang)}`}</span>
     {!compact && <strong class="name">{editionName(ed, lang)}</strong>}
-    {!compact && <span class="muted">{`${weekday(ed.start_date)} ${dateShort(ed.start_date)} · ${ed.venue?.city ?? ed.venue?.name ?? ''}`}</span>}
+    {!compact && <span class="muted">{`${weekday(ed.start_date, lang)} ${dateShort(ed.start_date, true, lang)} · ${ed.venue?.city ?? ed.venue?.name ?? ''}`}</span>}
     <div class="units" aria-live="off">
       <div><b data-u="d">–</b><span>{lang === 'en' ? 'days' : 'dní'}</span></div>
       <div><b data-u="h">–</b><span>{lang === 'en' ? 'hours' : 'hodin'}</span></div>
@@ -20,7 +20,7 @@ const label = t(m.home.next_tournament?.label, lang) || 'Do startu:';
     </div>
     <div class="btn-row">
       {ed.status === 'registration_open' && ed.signup_url && <a class="btn btn-red" href={ed.signup_url} rel="noopener">{lang === 'en' ? 'Sign up' : 'Přihlásit se'}</a>}
-      <a class="btn btn-ghost-light" href={url(`/vysledky/${ed.code}/${ed.year}/`)}>{lang === 'en' ? 'Details' : 'Propozice a info'}</a>
+      <a class="btn btn-ghost-light" href={L(`/vysledky/${ed.code}/${ed.year}/`, lang)}>{lang === 'en' ? 'Details' : 'Propozice a info'}</a>
     </div>
   </div>
 )}

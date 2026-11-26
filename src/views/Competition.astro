@@ -1,0 +1,47 @@
+---
+// Seasons of one competition: tournaments under /vysledky/<code>/, leagues under /ligy/<code>/.
+import Base from '../layouts/Base.astro';
+import { model } from '../lib/data';
+import { L, t, tr, nbsp, editionName, editionUrl, dateShort, fullName, plainName, type Lang } from '../lib/site';
+interface Props { code: string; lang?: Lang }
+const { code, lang = 'cs' } = Astro.props;
+const m = model();
+const c = m.competitions[code];
+const league = c.kind === 'league';
+const eds = m.editionList.filter((e: any) => e.code === code).reverse();
+const winner = (e: any) => {
+  const w = (e.results?.singles ?? (league ? [] : e.results?.juniors) ?? []).find((r: any) => r.place === 1);
+  if (!w) return null;
+  return league ? plainName(m.players[w.player], w.name ?? w.player) : fullName(m.players[w.player], w.name ?? w.player);
+};
+const tail = (e: any) => {
+  if (league && e.status === 'running') return tr(lang, 'Probíhá', 'Running');
+  const w = winner(e);
+  if (w) return `${tr(lang, 'Vítěz', 'Winner')} ${w}`;
+  if (!league && e.status !== 'finished') return tr(lang, 'Připravujeme', 'Coming up');
+  return tr(lang, 'Výsledky doplníme', 'Results to follow');
+};
+---
+<Base title={t(c.name, lang)} lang={lang} current={league ? 'ligy' : 'vysledky'}>
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L(league ? '/ligy/' : '/vysledky/', lang)}>{league ? tr(lang, 'Ligy', 'Leagues') : tr(lang, 'Výsledky', 'Results')}</a>
+      <h1>{t(c.name, lang)}</h1>
+      {c.description && <p class="lede">{nbsp(t(c.description, lang), lang)}</p>}
+      {c.contact_email && <p class="small">{tr(lang, 'Kontakt', 'Contact')}: <a href={`mailto:${c.contact_email}`} style="color: var(--red)">{c.contact_email}</a></p>}
+    </div>
+    {eds.length === 0 && <p class="muted">{tr(lang, 'Výsledky zatím na webu nejsou.', 'No results on the site yet.')}</p>}
+    <div class="row-list">
+      {eds.map((e: any) => (
+        <a href={editionUrl(e, lang)}>
+          <span class="when">{e.year}</span>
+          <span class="what">
+            <strong>{league ? tr(lang, `Sezóna ${e.year}`, `Season ${e.year}`) : editionName(e, lang)}</strong>
+            {!league && <span class="small">{dateShort(e.start_date, true, lang)} · {e.venue?.city ?? e.venue?.name}</span>}
+          </span>
+          <span class="tail">{tail(e)}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

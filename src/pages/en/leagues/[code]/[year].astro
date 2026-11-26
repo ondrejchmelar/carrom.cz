@@ -1,0 +1,6 @@
+---
+import View from '../../../../views/Season.astro';
+import { leagueSeasonPaths } from '../../../../lib/paths';
+export const getStaticPaths = leagueSeasonPaths;
+---
+<View lang="en" id={Astro.props.id} />

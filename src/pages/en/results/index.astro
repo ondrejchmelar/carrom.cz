@@ -1,0 +1,6 @@
+---
+import View from '../../../views/ResultsYear.astro';
+import { resultYears } from '../../../lib/paths';
+const years = resultYears();
+---
+<View lang="en" year={years[0]} years={years} />

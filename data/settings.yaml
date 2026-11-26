@@ -27,6 +27,8 @@ payment:
   preferred: bank_transfer
   account: 250250256/5500    # transparentní účet u Raiffeisenbank
   qr_image: /uploads/platba-qr.svg   # QR Platba (SPD), vytvořeno nástrojem, bez částky
+  iban: CZ52 5500 0000 0002 5025 0256   # pro platby ze zahraničí
+  bic: RZBCCZPP
   note:
     cs: Startovné i ligové poplatky prosíme přednostně převodem na účet asociace. QR kód pro platbu najdete na stránce Asociace.
     en: Please pay entry and league fees by bank transfer to the association's account. The payment QR code is on the Association page.

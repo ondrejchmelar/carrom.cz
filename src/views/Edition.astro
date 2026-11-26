@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import ResultsTable from '../components/ResultsTable.astro';
+import PaymentNote from '../components/PaymentNote.astro';
+import fs from 'node:fs';
+import { model } from '../lib/data';
+import { url, L, t, tr, nbsp, editionName, dateLong, weekday, dateShort, type Lang } from '../lib/site';
+interface Props { id: string; lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const ed = m.editions[Astro.props.id];
+// Only documents whose file is already in public/ (the rest arrive with the import).
+const docs = m.documents.filter((d: any) => d.edition === ed.id && fs.existsSync(`public${t(d.file)}`));
+const docHref = (d: any) => url(t(d.file, lang) && fs.existsSync(`public${t(d.file, lang)}`) ? t(d.file, lang) : t(d.file));
+const today = new Date().toISOString().slice(0, 10);
+const signupOpen = ed.status === 'registration_open' && ed.signup_url && (!ed.signup_deadline || ed.signup_deadline >= today);
+const upcoming = ed.status !== 'finished';
+// Optional YouTube link to the final: youtu.be/<id>, youtube.com/watch?v=<id>, /live/<id>, /shorts/<id>
+const videoId = (() => {
+  const u = ed.final_video;
+  if (!u) return null;
+  const m = /(?:youtu\.be\/|[?&]v=|\/(?:embed|live|shorts)\/)([A-Za-z0-9_-]{11})/.exec(String(u));
+  return m ? m[1] : null;
+})();
+---
+<Base title={editionName(ed, lang)} lang={lang} current="vysledky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L(`/vysledky/${ed.code}/`, lang)}>{t(ed.competition.name, lang)}</a>
+      <h1>{editionName(ed, lang)}</h1>
+      <span class="eyebrow">{`${weekday(ed.start_date, lang)} ${dateLong(ed.start_date, lang)}`}{ed.venue?.name ? ` · ${ed.venue.name}` : ''}</span>
+      {ed.report && <p class="lede" lang={lang === 'en' && !ed.report?.en ? 'cs' : undefined}>{nbsp(t(ed.report, lang), lang)}</p>}
+    </div>
+    {upcoming && (
+      <section class="section">
+        <div class="card-navy info">
+          {ed.schedule && <p>{t(ed.schedule, lang)}</p>}
+          {ed.signup_deadline && <p class="muted">{tr(lang, 'Přihlášky do', 'Sign up by')} {dateShort(ed.signup_deadline, true, lang)}</p>}
+          <div class="btn-row">
+            {signupOpen && <a class="btn btn-red" href={ed.signup_url} rel="noopener">{tr(lang, 'Přihlásit se', 'Sign up')}</a>}
+            {docs.map((d: any) => <a class="btn btn-ghost-light" href={docHref(d)}>{t(d.title, lang)}</a>)}
+          </div>
+          {signupOpen && <PaymentNote lang={lang} />}
+        </div>
+      </section>
+    )}
+    {!upcoming && docs.length > 0 && (
+      <div class="btn-row">{docs.map((d: any) => <a class="btn btn-ghost" href={docHref(d)}>{t(d.title, lang)}</a>)}</div>
+    )}
+    {!upcoming && (
+      <section class="section">
+        <h2>{tr(lang, 'Konečné pořadí', 'Final places')}</h2>
+        <ResultsTable ed={ed} lang={lang} />
+        {ed.sol_lit_url && <a class="btn btn-ghost" href={ed.sol_lit_url} rel="noopener">{tr(lang, 'Podrobné výsledky v SoL lit', 'Detailed results in SoL lit')}</a>}
+      </section>
+    )}
+    {videoId && (
+      <section class="section">
+        <h2>{tr(lang, 'Finále na videu', 'The final on video')}</h2>
+        <div class="video">
+          <iframe src={`https://www.youtube-nocookie.com/embed/${videoId}`} title={`${tr(lang, 'Finále', 'Final')}: ${editionName(ed, lang)}`} loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </section>
+    )}
+  </div>
+</Base>
+<style>
+  .info { max-width: 720px; }
+  .video { position: relative; width: 100%; max-width: 880px; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: var(--navy); }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+</style>

@@ -1,0 +1,6 @@
+---
+import View from '../../../../views/Edition.astro';
+import { tournamentEditionPaths } from '../../../../lib/paths';
+export const getStaticPaths = tournamentEditionPaths;
+---
+<View lang="en" id={Astro.props.id} />

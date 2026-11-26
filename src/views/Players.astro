@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import { model } from '../lib/data';
+import { L, tr, fullName, type Lang } from '../lib/site';
+interface Props { lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const list = Object.values(m.players).filter((p: any) => p.hasPage).sort((a: any, b: any) => a.last_name.localeCompare(b.last_name, 'cs')) as any[];
+const pp = m.settings.player_page ?? {};
+---
+<Base title={tr(lang, 'Hráči', 'Players')} lang={lang} current="vysledky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L('/vysledky/', lang)}>{tr(lang, 'Výsledky', 'Results')}</a>
+      <h1>{tr(lang, 'Hráči', 'Players')}</h1>
+      <p class="lede">{tr(lang, `Vlastní stránku má každý, kdo vyhrál aspoň ${pp.min_wins ?? 1} turnaj nebo má aspoň ${pp.min_results ?? 5} výsledků.`, `Everyone who has won at least ${pp.min_wins ?? 1} tournament or has at least ${pp.min_results ?? 5} results has a page.`)}</p>
+    </div>
+    <div class="grid two">
+      {list.map((p) => (
+        <a class="card" href={L(`/hraci/${p.slug}/`, lang)}>
+          <strong>{fullName(p)}</strong>
+          <span class="small">{tr(lang, `${p.results.length} výsledků · ${p.wins} vítězství`, `${p.results.length} results · ${p.wins} wins`)}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
+<style>@media (min-width: 960px) { .two { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; } }</style>

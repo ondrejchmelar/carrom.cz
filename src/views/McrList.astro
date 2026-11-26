@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import { model } from '../lib/data';
+import { L, t, tr, plainName, type Lang } from '../lib/site';
+interface Props { lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const list = Object.values(m.rankings).sort((a: any, b: any) => b.year - a.year) as any[];
+---
+<Base title={tr(lang, 'Mistrovství ČR', 'Czech Championship')} lang={lang} current="vysledky">
+  <div class="wrap page">
+    <div class="page-head"><a class="small" href={L('/vysledky/', lang)}>{tr(lang, 'Výsledky', 'Results')}</a><h1>{tr(lang, 'Mistrovství ČR', 'Czech Championship')}</h1>
+      <p class="lede">{tr(lang, 'Seriál tří turnajů: Jarní turnaj, Druhý turnaj a Carrom Open Cup. Počítají se dva nejlepší.', 'A series of three tournaments: the Spring tournament, the Second tournament and the Carrom Open Cup. The best two count.')}</p></div>
+    <div class="row-list">
+      {list.map((r) => (
+        <a href={L(`/vysledky/mcr/${r.year}/`, lang)}>
+          <span class="when">{r.year}</span>
+          <span class="what"><strong>{t(r.name, lang)}</strong></span>
+          <span class="tail">{r.table.rows[0] ? `${tr(lang, 'Mistr', 'Champion')} ${plainName(m.players[r.table.rows[0].player], r.table.rows[0].player)}` : tr(lang, 'Připravujeme', 'Coming up')}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

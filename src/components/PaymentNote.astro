@@ -1,13 +1,13 @@
 ---
 // Entry and league fees: bank transfer preferred, QR code on the Asociace page.
 import { model } from '../lib/data';
-import { t, url, type Lang } from '../lib/site';
+import { t, L, type Lang } from '../lib/site';
 interface Props { lang?: Lang }
 const { lang = 'cs' } = Astro.props;
 const pay = model().settings.payment;
 ---
 {pay && (
   <p class="notice">
-    {t(pay.note, lang)}{' '}<a href={url('/asociace/#platba')} style="color: var(--red); font-weight: 600">{lang === 'en' ? 'Payment QR code' : 'QR kód pro platbu'}</a>
+    {t(pay.note, lang)}{' '}<a href={L('/asociace/', lang) + '#platba'} style="color: var(--red); font-weight: 600">{lang === 'en' ? 'Payment QR code' : 'QR kód pro platbu'}</a>
   </p>
 )}

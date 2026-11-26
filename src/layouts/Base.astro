@@ -4,10 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import TabBar from '../components/TabBar.astro';
 import { model } from '../lib/data';
-import { url, type Lang } from '../lib/site';
+import { url, lp, csPath, type Lang } from '../lib/site';
 interface Props { title?: string; description?: string; lang?: Lang; current?: string; alt?: string; noindex?: boolean }
 const { title, description, lang = 'cs', current, alt, noindex } = Astro.props;
 const m = model();
+// Link to the same page in the other language (every Czech page has an English twin under /en/).
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
+const here = Astro.url.pathname.startsWith(BASE) ? Astro.url.pathname.slice(BASE.length) || '/' : Astro.url.pathname;
+const altHref = alt ?? url(lang === 'en' ? csPath(here) : lp(here, 'en'));
 const siteName = lang === 'en' ? 'carrom.cz · Czech Carrom Association' : 'carrom.cz · Česká carromová asociace';
 const fullTitle = title ? `${title} · carrom.cz` : siteName;
 const desc = description ?? (lang === 'en' ? 'Carrom in the Czech Republic: tournaments, leagues, results and where to play.' : 'Carrom v Česku: turnaje, ligy, výsledky a kde si zahrát.');
@@ -30,14 +34,15 @@ const desc = description ?? (lang === 'en' ? 'Carrom in the Czech Republic: tour
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" />
+    <link rel="alternate" hreflang={lang === 'en' ? 'cs' : 'en'} href={altHref} />
     <link rel="alternate" type="text/calendar" title="Kalendář ČCA" href={url('/kalendar.ics')} />
   </head>
   <body>
     {m.settings.preview_banner && (
       <div class="preview-banner">{lang === 'en' ? 'Test version of the new site. Some data are samples.' : 'Testovací verze nového webu. Část dat je ukázková.'}</div>
     )}
-    <Header lang={lang} current={current} alt={alt} />
-    <main id="obsah">
+    <Header lang={lang} current={current} alt={altHref} />
+    <main id={lang === 'en' ? 'content' : 'obsah'}>
       <slot />
     </main>
     <Footer lang={lang} />

@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { model } from '../lib/data';
+import { t, tr, pageUrl, type Lang } from '../lib/site';
+interface Props { lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const items = model().navigation.more ?? [];
+---
+<Base title={tr(lang, 'Více', 'More')} lang={lang} current="vice">
+  <div class="wrap page">
+    <h1>{tr(lang, 'Více', 'More')}</h1>
+    <nav class="list" aria-label={tr(lang, 'Další stránky', 'More pages')}>
+      {items.map((i: any) => (
+        <a class="card item" href={pageUrl(i, lang)}>
+          <span class="tx"><strong>{t(i.label, lang)}</strong>{i.note && <span class="small">{t(i.note, lang)}</span>}</span>
+          <Icon name={i.url ? 'external' : 'chevron'} size={18} />
+        </a>
+      ))}
+    </nav>
+  </div>
+</Base>
+<style>
+  .list { display: flex; flex-direction: column; gap: 10px; }
+  .item { flex-direction: row; align-items: center; justify-content: space-between; min-height: 64px; }
+  .tx { display: flex; flex-direction: column; gap: 2px; }
+  .tx strong { font-size: 17px; }
+</style>

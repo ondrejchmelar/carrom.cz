@@ -1,0 +1,6 @@
+---
+import View from '../../../../views/NewsYear.astro';
+import { newsYearPaths } from '../../../../lib/paths';
+export const getStaticPaths = newsYearPaths;
+---
+<View lang="en" year={Astro.props.year} />

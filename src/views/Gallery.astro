@@ -1,0 +1,56 @@
+---
+// Photo albums on external sites (data/gallery.yaml), grouped by year.
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { model } from '../lib/data';
+import { url, L, t, tr, editionUrl, type Lang } from '../lib/site';
+interface Props { lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const albums = m.gallery as any[];
+const years = [...new Set(albums.map((a) => a.year))].sort((a, b) => b - a);
+const host = (u: string) => (u.startsWith('http') ? new URL(u).hostname.replace(/^www\./, '') : 'carrom.cz');
+---
+<Base title={tr(lang, 'Galerie', 'Gallery')} lang={lang} current="galerie">
+  <div class="wrap page">
+    <div class="page-head">
+      <h1>{tr(lang, 'Galerie', 'Gallery')}</h1>
+      <p class="lede">{tr(lang, 'Fotky z turnajů a akcí od roku 2006. Většinu nafotil Zdeněk Tichý. Alba se otevřou na webu, kde jsou uložená.', 'Photos from tournaments and events since 2006, most of them by Zdeněk Tichý. Albums open on the site where they are stored.')}</p>
+    </div>
+    {years.map((y) => (
+      <section class="section">
+        <h2>{y}</h2>
+        <div class="grid albums">
+          {albums.filter((a) => a.year === y).map((a) => {
+            const ed = a.edition ? m.editions[a.edition] : null;
+            return (
+              <div class="card album">
+                <a class="cover-link" href={url(a.url)} rel="noopener">
+                  {a.cover ? <img class="cover" src={url(a.cover)} alt="" loading="lazy" /> : <span class="cover ph" aria-hidden="true"><Icon name="image" size={22} /><b>{host(a.url)}</b></span>}
+                  <strong class="nm">{t(a.title, lang)}</strong>
+                </a>
+                <span class="small">
+                  {[a.photographer && `${tr(lang, 'Foto', 'Photos')} ${a.photographer}`, a.cover && host(a.url)].filter(Boolean).join(' · ')}
+                </span>
+                {ed && <a class="small res" href={editionUrl(ed, lang)}>{tr(lang, 'Výsledky turnaje', 'Tournament results')}</a>}
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    ))}
+    <p class="small">{tr(lang, 'Máte fotky z akce? Pošlete odkaz na album na', 'Have photos from an event? Send a link to the album to')} <a href={`mailto:${m.settings.site?.email}`} style="color: var(--red); font-weight: 600">{m.settings.site?.email}</a>.</p>
+  </div>
+</Base>
+<style>
+  .albums { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .album { padding: 10px 10px 14px; gap: 6px; }
+  .cover-link { display: flex; flex-direction: column; gap: 10px; color: inherit; }
+  .cover { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; background: var(--cream); }
+  .ph { display: flex; flex-direction: column; gap: 6px; align-items: center; justify-content: center; color: var(--on-navy-muted); background: var(--navy); aspect-ratio: 16 / 7; }
+  .ph b { font-size: 13px; font-weight: 600; color: #fff; }
+  .nm { font-size: 16px; line-height: 1.25; }
+  .cover-link:hover .nm { color: var(--red); }
+  .res { color: var(--red); font-weight: 600; }
+  @media (min-width: 960px) { .albums { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; } .nm { font-size: 17px; } }
+</style>

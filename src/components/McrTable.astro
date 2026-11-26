@@ -25,7 +25,7 @@ const colName = (eid: string) => {
       </thead>
       <tbody>
         {rows.map((row: any) => {
-          const href = playerLink(row.player, m.players);
+          const href = playerLink(row.player, m.players, lang);
           const name = plainName(m.players[row.player], row.player);
           return (
             <tr class={row.place <= 3 ? 'top' : ''}>

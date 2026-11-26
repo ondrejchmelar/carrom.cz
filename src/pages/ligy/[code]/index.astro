@@ -1,32 +1,6 @@
 ---
-import Base from '../../../layouts/Base.astro';
-import { model } from '../../../lib/data';
-import { url, t, nbsp, plainName } from '../../../lib/site';
-export function getStaticPaths() {
-  const m = model();
-  return Object.entries(m.competitions).filter(([, c]: any) => c.kind === 'league').map(([code, c]) => ({ params: { code }, props: { code, c } }));
-}
-const { code, c } = Astro.props as any;
-const m = model();
-const eds = m.editionList.filter((e: any) => e.code === code).reverse();
-const winner = (e: any) => { const w = (e.results?.singles ?? []).find((r: any) => r.place === 1); return w ? plainName(m.players[w.player], w.name ?? w.player) : null; };
+import View from '../../../views/Competition.astro';
+import { leaguePaths } from '../../../lib/paths';
+export const getStaticPaths = leaguePaths;
 ---
-<Base title={t(c.name)} current="ligy">
-  <div class="wrap page">
-    <div class="page-head">
-      <a class="small" href={url('/ligy/')}>Ligy</a>
-      <h1>{t(c.name)}</h1>
-      {c.description && <p class="lede">{nbsp(t(c.description))}</p>}
-    </div>
-    {eds.length === 0 && <p class="muted">Výsledky ligy zatím na webu nejsou.</p>}
-    <div class="row-list">
-      {eds.map((e: any) => (
-        <a href={url(`/ligy/${code}/${e.year}/`)}>
-          <span class="when">{e.year}</span>
-          <span class="what"><strong>Sezóna {e.year}</strong></span>
-          <span class="tail">{e.status === 'running' ? 'Probíhá' : winner(e) ? `Vítěz ${winner(e)}` : 'Výsledky doplníme'}</span>
-        </a>
-      ))}
-    </div>
-  </div>
-</Base>
+<View lang="cs" code={Astro.props.code} />

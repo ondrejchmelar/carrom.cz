@@ -12,9 +12,9 @@ const multi = divisions.length > 1;
 {divisions.length === 0 && (
   <p class="notice">
     {ed.status === 'finished' || ed.status === 'running'
-      ? 'Konečné pořadí zatím není na webu.'
-      : 'Výsledky budou po turnaji.'}
-    {ed.sol_lit_url && <> Podrobné výsledky jsou v <a href={ed.sol_lit_url} style="color: var(--red); font-weight: 600">SoL lit</a>.</>}
+      ? (lang === 'en' ? 'Final places are not on the site yet.' : 'Konečné pořadí zatím není na webu.')
+      : (lang === 'en' ? 'Results after the tournament.' : 'Výsledky budou po turnaji.')}
+    {ed.sol_lit_url && <> {lang === 'en' ? 'Detailed results are in' : 'Podrobné výsledky jsou v'} <a href={ed.sol_lit_url} style="color: var(--red); font-weight: 600">SoL lit</a>.</>}
   </p>
 )}
 {divisions.map(([div, rows]: any) => (
@@ -25,7 +25,7 @@ const multi = divisions.length > 1;
         <thead><tr><th class="l">#</th><th class="l">{lang === 'en' ? 'Player' : 'Hráč'}</th>{rows.some((r: any) => r.country) && <th class="l">{lang === 'en' ? 'Country' : 'Stát'}</th>}{rows.some((r: any) => r.club_at_time) && <th class="l">{lang === 'en' ? 'Club / school' : 'Klub / škola'}</th>}</tr></thead>
         <tbody>
           {(limit ? rows.slice(0, limit) : rows).map((r: any) => {
-            const href = playerLink(r.player, m.players);
+            const href = playerLink(r.player, m.players, lang);
             const name = fullName(m.players[r.player], r.name ?? r.player);
             return (
               <tr class={r.place <= 3 ? 'top' : ''}>
@@ -41,4 +41,4 @@ const multi = divisions.length > 1;
     </div>
   </div>
 ))}
-{ed.resultsComputed && <p class="small">Konečné pořadí spočítal web z výsledků ligy a playoff.</p>}
+{ed.resultsComputed && <p class="small">{lang === 'en' ? 'Final places computed from the league and playoff results.' : 'Konečné pořadí spočítal web z výsledků ligy a playoff.'}</p>}

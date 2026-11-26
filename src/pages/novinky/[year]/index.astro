@@ -1,28 +1,6 @@
 ---
-import Base from '../../../layouts/Base.astro';
-import { articles } from '../../../lib/articles';
-import { url, dateShort } from '../../../lib/site';
-export async function getStaticPaths() {
-  const list = await articles('cs');
-  const years = [...new Set(list.map((a) => a.year))];
-  return years.map((year) => ({ params: { year: String(year) }, props: { year, items: list.filter((a) => a.year === year) } }));
-}
-const { year, items } = Astro.props;
+import View from '../../../views/NewsYear.astro';
+import { newsYearPaths } from '../../../lib/paths';
+export const getStaticPaths = newsYearPaths;
 ---
-<Base title={`Zprávy ${year}`} current="novinky">
-  <div class="wrap page">
-    <div class="page-head">
-      <a class="small" href={url('/novinky/')}>Novinky</a>
-      <h1>Zprávy {year}</h1>
-    </div>
-    <div class="row-list">
-      {items.map((a) => (
-        <a href={url(`/novinky/${a.year}/${a.slug}/`)}>
-          <span class="when">{dateShort(a.date, false)}</span>
-          <span class="what"><strong>{a.entry.data.title}</strong>{a.entry.data.perex && <span class="small">{a.entry.data.perex}</span>}</span>
-          <span class="tail"></span>
-        </a>
-      ))}
-    </div>
-  </div>
-</Base>
+<View lang="cs" year={Astro.props.year} />

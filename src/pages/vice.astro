@@ -1,26 +1,4 @@
 ---
-import Base from '../layouts/Base.astro';
-import Icon from '../components/Icon.astro';
-import { model } from '../lib/data';
-import { t, pageUrl } from '../lib/site';
-const items = model().navigation.more ?? [];
+import View from '../views/More.astro';
 ---
-<Base title="Více" current="vice">
-  <div class="wrap page">
-    <h1>Více</h1>
-    <nav class="list" aria-label="Další stránky">
-      {items.map((i: any) => (
-        <a class="card item" href={pageUrl(i)}>
-          <span class="tx"><strong>{t(i.label)}</strong>{i.note && <span class="small">{t(i.note)}</span>}</span>
-          <Icon name={i.url ? 'external' : 'chevron'} size={18} />
-        </a>
-      ))}
-    </nav>
-  </div>
-</Base>
-<style>
-  .list { display: flex; flex-direction: column; gap: 10px; }
-  .item { flex-direction: row; align-items: center; justify-content: space-between; min-height: 64px; }
-  .tx { display: flex; flex-direction: column; gap: 2px; }
-  .tx strong { font-size: 17px; }
-</style>
+<View lang="cs" />

@@ -1,0 +1,218 @@
+---
+// League season: Tabulka (group stage), Zápasy (cross table / per player) and Playoff.
+import Base from '../layouts/Base.astro';
+import Bracket from '../components/Bracket.astro';
+import ResultsTable from '../components/ResultsTable.astro';
+import PaymentNote from '../components/PaymentNote.astro';
+import { model } from '../lib/data';
+import { L, t, tr, dateShort, shortNames, plainName, playerLink, type Lang } from '../lib/site';
+interface Props { id: string; lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const ed = m.editions[Astro.props.id];
+const s = m.seasons[ed.id];
+const fmt = ed.format ?? {};
+const players = s ? [...s.table.map((r: any) => r.player), ...s.idle] : [];
+const names = shortNames(players, m.players);
+const cutAt = fmt.playoff?.groups?.length ? 8 : 0;
+const defaultTab = s && s.phase !== 'group' && s.groups.length ? 'playoff' : 'tabulka';
+// cross table lookup: key "a|b" -> [scoreA, scoreB] from a's side
+const res = new Map<string, number[]>();
+for (const x of s?.matches ?? []) { res.set(`${x.a}|${x.b}`, [x.sa, x.sb]); res.set(`${x.b}|${x.a}`, [x.sb, x.sa]); }
+const order = s?.table.map((r: any) => r.player) ?? [];
+const venue = ed.venue;
+const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].includes(ed.status);
+---
+<Base title={`${t(ed.competition.name, lang)} ${ed.year}`} lang={lang} current="ligy">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L(`/ligy/${ed.code}/`, lang)}>{t(ed.competition.name, lang)}</a>
+      <h1>{`${t(ed.competition.short_name, lang) || t(ed.competition.name, lang)} ${ed.year}`}</h1>
+      {s && <div class="chips phase">
+        <span class:list={['pill', { on: s?.phase === 'group' }]}>{tr(lang, 'Základní kolo', 'Group stage')}{fmt.group_stage?.until ? ` ${tr(lang, 'do', 'until')} ${dateShort(fmt.group_stage.until, false, lang)}` : ''}</span>
+        <span class:list={['pill', { on: s?.phase === 'playoff' }]}>Playoff</span>
+        {s?.complete && <span class="pill on">{tr(lang, 'Dohráno', 'Finished')}</span>}
+      </div>}
+      {venue && <p class="small">{venue.name}{venue.address ? `, ${venue.address}` : ''}</p>}
+      {!s && ed.report && <p class="lede">{t(ed.report, lang)}</p>}
+    </div>
+
+    {!s && (
+      <section class="section">
+        <h2>{tr(lang, 'Konečné pořadí', 'Final places')}</h2>
+        <ResultsTable ed={ed} lang={lang} />
+      </section>
+    )}
+
+    {s && (
+      <div class="tabs" data-tabs data-default={defaultTab}>
+        <div class="seg" role="tablist" aria-label={tr(lang, 'Části sezóny', 'Parts of the season')}>
+          <a role="tab" href="#tabulka" data-tab="tabulka">{tr(lang, 'Tabulka', 'Table')}</a>
+          <a role="tab" href="#zapasy" data-tab="zapasy">{tr(lang, 'Zápasy', 'Matches')}</a>
+          <a role="tab" href="#playoff" data-tab="playoff">Playoff</a>
+        </div>
+
+        <section id="tabulka" class="section panel" role="tabpanel">
+          <h2 class="sr-only">{tr(lang, 'Tabulka', 'Table')}</h2>
+          <div class="table-box">
+            <table class="data league">
+              {lang === 'en'
+                ? <thead><tr><th class="l">#</th><th class="l">Player</th><th title="Played">P</th><th title="Won">W</th><th title="Drawn">D</th><th title="Lost">L</th><th>Score</th><th title="Difference">+/−</th><th>Pts</th><th title="Matches left">Left</th></tr></thead>
+                : <thead><tr><th class="l">#</th><th class="l">Hráč</th><th title="Zápasy">Z</th><th title="Výhry">V</th><th title="Remízy">R</th><th title="Prohry">P</th><th>Skóre</th><th title="Rozdíl">+/−</th><th>Body</th><th title="Zbývá zápasů">Zb.</th></tr></thead>}
+              <tbody>
+                {s.table.map((r: any) => {
+                  const href = playerLink(r.player, m.players, lang);
+                  const nm = plainName(m.players[r.player], r.player);
+                  return (
+                    <tr class:list={{ top: r.place <= 8 && cutAt, cut: cutAt && r.place === cutAt && s.table.length > cutAt }}>
+                      <td class="rk l">{r.place}</td>
+                      <td class="name">{href ? <a href={href}>{nm}</a> : nm}</td>
+                      <td>{r.played}</td><td>{r.won}</td><td>{r.drawn}</td><td>{r.lost}</td>
+                      <td>{r.scored}:{r.conceded}</td><td>{r.diff > 0 ? `+${r.diff}` : r.diff}</td>
+                      <td class="strong">{r.points}</td><td class="dim">{r.remaining}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p class="small">{tr(lang, 'Výhra 2 body, remíza 1. Při rovnosti rozhoduje rozdíl skóre, pak vzájemné zápasy a nakonec vstřelené body.', 'A win is 2 points, a draw 1. Ties are broken by score difference, then head-to-head, then points scored.')}{cutAt ? tr(lang, ' Prvních 8 hraje playoff o 1.–8. místo.', ' The top 8 play the playoff for places 1–8.') : ''}</p>
+          {s.idle.length > 0 && <p class="small">{tr(lang, 'Na soupisce bez odehraného zápasu', 'Signed up, no match played yet')}: {s.idle.map((p: string) => plainName(m.players[p], p)).join(', ')}.</p>}
+        </section>
+
+        <section id="zapasy" class="section panel" role="tabpanel">
+          <h2 class="sr-only">{tr(lang, 'Zápasy', 'Matches')}</h2>
+          <div class="cross-wrap">
+            <table class="cross">
+              <thead><tr><th class="st">{tr(lang, 'Hráč', 'Player')}</th>{order.map((p: string, i: number) => <th title={plainName(m.players[p], p)}>{i + 1}</th>)}<th>{tr(lang, 'Body', 'Pts')}</th></tr></thead>
+              <tbody>
+                {order.map((a: string, i: number) => (
+                  <tr>
+                    <th class="st" scope="row"><b>{i + 1}</b> {names[a]}</th>
+                    {order.map((b: string) => {
+                      if (a === b) return <td class="x-self" aria-label="—"></td>;
+                      const r = res.get(`${a}|${b}`);
+                      if (!r) return <td class="x-none">·</td>;
+                      return <td class:list={[r[0] > r[1] ? 'x-w' : r[0] < r[1] ? 'x-l' : 'x-d']}>{r[0]}:{r[1]}</td>;
+                    })}
+                    <td class="x-pts">{s.table[i].points}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div class="pick">
+            <label for="who">{tr(lang, 'Zápasy hráče', 'Matches of')}</label>
+            <select id="who" class="sel">
+              {order.map((p: string) => <option value={p}>{plainName(m.players[p], p)}</option>)}
+            </select>
+          </div>
+          <div class="card list" data-matches>
+            {order.map((a: string) => (
+              <div class="pl-matches" data-player={a} hidden>
+                {order.filter((b: string) => b !== a).map((b: string) => {
+                  const r = res.get(`${a}|${b}`);
+                  return (
+                    <div class="op">
+                      <span class="nm">{plainName(m.players[b], b)}</span>
+                      <span class="osc">{r ? `${r[0]}:${r[1]}` : tr(lang, 'nehráno', 'not played')}</span>
+                      <span class:list={['res', r ? (r[0] > r[1] ? 'v' : r[0] < r[1] ? 'p' : 'r') : 'n']}>{r ? (r[0] > r[1] ? tr(lang, 'V', 'W') : r[0] < r[1] ? tr(lang, 'P', 'L') : tr(lang, 'R', 'D')) : ''}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="playoff" class="section panel" role="tabpanel">
+          <h2 class="sr-only">Playoff</h2>
+          {s.groups.length === 0 && <p class="notice">{tr(lang, 'Playoff začne po základním kole', 'The playoff starts after the group stage')}{fmt.group_stage?.until ? ` (${tr(lang, 'do', 'until')} ${dateShort(fmt.group_stage.until, true, lang)})` : ''}.</p>}
+          {s.groups.map((g: any) => (
+            <div class="section">
+              <h3>{tr(lang, `Skupina o ${g.first}.–${g.last}. místo`, `Group for places ${g.first}–${g.last}`)}</h3>
+              <Bracket group={g} names={names} lang={lang} />
+            </div>
+          ))}
+          {fmt.playoff?.dates && (
+            <p class="small">{tr(lang, 'Termíny: čtvrtfinále', 'Dates: quarter-finals')} {dateShort(fmt.playoff.dates.qf, true, lang)}, {tr(lang, 'semifinále', 'semi-finals')} {dateShort(fmt.playoff.dates.sf, true, lang)}, {tr(lang, 'finále', 'finals')} {dateShort(fmt.playoff.dates.f, true, lang)}.</p>
+          )}
+          {s.finalPlaces.length > 0 && (
+            <div class="section">
+              <h3>{s.complete ? tr(lang, 'Konečné pořadí', 'Final places') : tr(lang, 'Zatím rozhodnutá místa', 'Places decided so far')}</h3>
+              <div class="table-box"><table class="data"><tbody>
+                {s.finalPlaces.map((r: any) => <tr><td class="rk l">{r.place}.</td><td class="name">{plainName(m.players[r.player], r.player)}</td></tr>)}
+              </tbody></table></div>
+            </div>
+          )}
+        </section>
+      </div>
+    )}
+    {signupOpen && (
+      <section class="card-navy signup">
+        <strong class="su-title">{tr(lang, `Přihláška na sezónu ${ed.year}`, `Sign up for the ${ed.year} season`)}</strong>
+        <a class="btn btn-red" href={ed.links.signup_url} rel="noopener">{tr(lang, 'Přihlásit se', 'Sign up')}</a>
+        <PaymentNote lang={lang} />
+      </section>
+    )}
+  </div>
+</Base>
+<style>
+  .phase { gap: 6px; }
+  .signup { max-width: 720px; gap: 14px; }
+  .su-title { font-family: var(--f-head); font-size: 24px; }
+  .signup .btn { align-self: flex-start; }
+  .pill { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 6px 10px; border-radius: 999px; background: #fff; color: var(--muted); border: 1px solid var(--line); }
+  .pill.on { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .tabs { display: flex; flex-direction: column; gap: 20px; }
+  .seg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); background: #E3E6EE; border-radius: 12px; padding: 4px; gap: 4px; max-width: 480px; }
+  .seg a { min-height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 9px; font-weight: 700; font-size: 15px; color: var(--muted); }
+  .seg a[aria-selected='true'] { background: #fff; color: var(--navy); box-shadow: 0 1px 2px rgba(14, 27, 61, 0.12); }
+  .tabs.js .panel:not(.active) { display: none; }
+  table.league th, table.league td { padding: 10px 8px; }
+  .cross-wrap { background: #fff; border-radius: 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table.cross { border-collapse: separate; border-spacing: 3px; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .cross th { font-size: 12px; font-weight: 700; color: var(--muted); padding: 6px 2px; white-space: nowrap; }
+  .cross .st { position: sticky; left: 0; background: #fff; z-index: 1; text-align: left; padding: 0 8px; min-width: 96px; color: var(--navy); font-size: 13px; }
+  .cross .st b { color: var(--muted); font-size: 11px; margin-right: 2px; }
+  .cross td { height: 32px; min-width: 44px; text-align: center; border-radius: 6px; white-space: nowrap; background: #F5F6F9; }
+  .cross .x-w { font-weight: 800; color: var(--navy); }
+  .cross .x-l { color: #8A93A8; }
+  .cross .x-self { background: repeating-linear-gradient(135deg, #E3E6EE 0 4px, #F3F4F7 4px 8px); }
+  .cross .x-none { color: #8A93A8; background: #F3F4F7; }
+  .cross .x-pts { background: transparent; font-weight: 800; font-size: 15px; }
+  .pick { display: flex; flex-direction: column; gap: 6px; font-weight: 600; color: var(--muted); max-width: 360px; }
+  .sel { height: 48px; padding: 0 14px; border: 1px solid var(--chip-line); border-radius: 12px; background: #fff; font: 600 16px var(--f-body); color: var(--navy); }
+  .list { padding: 0; overflow: hidden; max-width: 520px; }
+  .op { display: grid; grid-template-columns: minmax(0, 1fr) auto 26px; gap: 12px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #EEF0F5; font-size: 15px; }
+  .op .nm { font-weight: 600; }
+  .op .osc { font-variant-numeric: tabular-nums; font-weight: 700; }
+  .res { width: 26px; height: 26px; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; }
+  .res.v { background: var(--navy); color: #fff; }
+  .res.p { background: #F3D5D6; color: #8F1B1F; }
+  .res.r { background: #E3E6EE; color: var(--muted); }
+  .pick, [data-matches] { display: none; }
+  .tabs.js .pick, .tabs.js [data-matches] { display: flex; }
+  [data-matches] { flex-direction: column; }
+  @media (min-width: 960px) {
+    .tabs.js .pick, .tabs.js [data-matches] { display: none; }
+    table.cross { font-size: 14px; }
+  }
+</style>
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>('[data-tabs]')) {
+    root.classList.add('js');
+    const tabs = [...root.querySelectorAll<HTMLAnchorElement>('[data-tab]')];
+    const show = (id: string) => {
+      tabs.forEach((a) => a.setAttribute('aria-selected', String(a.dataset.tab === id)));
+      root.querySelectorAll<HTMLElement>('.panel').forEach((p) => p.classList.toggle('active', p.id === id));
+    };
+    const fromHash = () => tabs.find((a) => `#${a.dataset.tab}` === location.hash)?.dataset.tab;
+    show(fromHash() ?? root.dataset.default ?? 'tabulka');
+    tabs.forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); history.replaceState(null, '', `#${a.dataset.tab}`); show(a.dataset.tab!); }));
+    const sel = root.querySelector<HTMLSelectElement>('#who');
+    const pick = () => root.querySelectorAll<HTMLElement>('[data-player]').forEach((d) => { d.hidden = d.dataset.player !== sel!.value; });
+    sel?.addEventListener('change', pick);
+    if (sel) pick();
+  }
+</script>

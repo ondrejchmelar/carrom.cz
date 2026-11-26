@@ -290,6 +290,27 @@ collections:
       - { name: edition, label: Ročník (soutěž/rok), widget: string, required: false }
       - { name: file, label: Soubor, widget: object, fields: [{ name: cs, label: Česky, widget: file }, { name: en, label: Anglicky, widget: file, required: false }] }
 
+  # ---------------- Galerie ----------------
+  - name: gallery
+    label: Galerie
+    files:
+      - name: albums
+        label: Fotoalba
+        file: data/gallery.yaml
+        fields:
+          - name: albums
+            label: Alba (nejnovější nahoře)
+            label_singular: Album
+            widget: list
+            summary: "{{fields.year}} · {{fields.title.cs}}"
+            fields:
+              - { name: title, label: Název, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string, required: false }] }
+              - { name: year, label: Rok, widget: string, pattern: ['^\d{4}$', 'Rok čtyřmi číslicemi, např. 2027'] }
+              - { name: url, label: Odkaz na album, widget: string, hint: "Adresa alba na jAlbum, Rajče, Google Fotkách apod." }
+              - { name: photographer, label: Fotograf, widget: string, required: false }
+              - { name: cover, label: Náhledový obrázek, widget: image, required: false, media_folder: /public/uploads/galerie, public_folder: /uploads/galerie }
+              - { name: edition, label: "Ročník turnaje (soutěž/rok, např. cocp/2025)", widget: string, required: false }
+
   # ---------------- Nastavení ----------------
   - name: settings
     label: Nastavení webu
@@ -312,6 +333,8 @@ collections:
               - { name: preferred, label: Preferovaný způsob, widget: hidden, default: bank_transfer }
               - { name: account, label: Číslo účtu, widget: string, required: false }
               - { name: qr_image, label: QR kód pro platbu, widget: image, required: false }
+              - { name: iban, label: IBAN (platby ze zahraničí), widget: string, required: false }
+              - { name: bic, label: BIC, widget: string, required: false }
               - { name: note, label: Text u plateb, widget: object, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text }] }
           - { name: site, label: Údaje asociace, widget: object, collapsed: true, fields: [{ name: email, label: E-mail, widget: string }, { name: address, label: Sídlo, widget: string }, { name: ico, label: IČ, widget: string }] }
       - name: home

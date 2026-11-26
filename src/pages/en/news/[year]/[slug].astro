@@ -1,0 +1,6 @@
+---
+import View from '../../../../views/Article.astro';
+import { articlePaths } from '../../../../lib/paths';
+export const getStaticPaths = articlePaths;
+---
+<View lang="en" id={Astro.props.id} />

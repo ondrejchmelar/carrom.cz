@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import CarromGame from '../components/CarromGame.astro';
+import { getEntry, render } from 'astro:content';
+import { L, tr, type Lang } from '../lib/site';
+interface Props { lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const page = await getEntry('pages', `hra-carrom.${lang}`);
+const { Content } = page ? await render(page) : { Content: null };
+---
+<Base title={page?.data.title ?? tr(lang, 'Hra carrom', 'The game')} description={page?.data.description} lang={lang} current="hra-carrom">
+  <div class="wrap page">
+    <div class="intro">
+      <div class="page-head">
+        <span class="eyebrow">{tr(lang, 'Kulečník na prsty', 'Finger billiards')}</span>
+        <h1>{page?.data.title ?? tr(lang, 'Hra carrom', 'The game')}</h1>
+        <div class="prose">{Content && <Content />}</div>
+        <div class="btn-row">
+          <a class="btn btn-red" href={L('/ligy/', lang)}>{tr(lang, 'Kde si zahrát naživo', 'Where to play for real')}</a>
+        </div>
+      </div>
+      <div id={tr(lang, 'hra', 'play')} class="game">
+        <h2 class="game-title">{tr(lang, 'Zahraj si', 'Play in your browser')}</h2>
+        <CarromGame lang={lang} />
+      </div>
+    </div>
+  </div>
+</Base>
+<style>
+  .intro { display: grid; gap: 32px; }
+  .game { display: flex; flex-direction: column; gap: 12px; max-width: 820px; scroll-margin-top: 16px; }
+  @media (min-width: 960px) { .intro { grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 56px; align-items: start; } }
+</style>

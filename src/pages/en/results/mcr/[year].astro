@@ -1,0 +1,6 @@
+---
+import View from '../../../../views/McrYear.astro';
+import { rankingPaths } from '../../../../lib/paths';
+export const getStaticPaths = rankingPaths;
+---
+<View lang="en" id={Astro.props.id} />

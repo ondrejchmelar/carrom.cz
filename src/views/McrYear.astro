@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import McrTable from '../components/McrTable.astro';
+import { model } from '../lib/data';
+import { L, t, tr, editionName, editionUrl, type Lang } from '../lib/site';
+interface Props { id: string; lang?: Lang }
+const { lang = 'cs' } = Astro.props;
+const m = model();
+const r = m.rankings[Astro.props.id];
+---
+<Base title={t(r.name, lang)} lang={lang} current="vysledky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L('/vysledky/mcr/', lang)}>{tr(lang, 'Mistrovství ČR', 'Czech Championship')}</a>
+      <h1>{t(r.name, lang)}</h1>
+      <p class="lede">
+        {lang === 'en'
+          ? `The best ${r.best_of} of ${r.editions.length} tournaments count (grey points do not count).` + (r.points === 'published' ? ` Points are taken from the old site (winner ${r.scale}).` : ` The tournament winner gets ${r.table.scale} points and the last player 1, rounded to whole numbers. Only players who play for the Czech title are counted.`)
+          : `Počítají se ${r.best_of} nejlepší ze ${r.editions.length} turnajů (šedé body se nepočítají).` + (r.points === 'published' ? ` Body jsou převzaté ze starého webu (vítěz ${r.scale}).` : ` Vítěz turnaje má ${r.table.scale} bodů, poslední 1, body jsou zaokrouhlené na celá čísla. Počítají se jen hráči, kteří hrají o titul MČR.`)}
+      </p>
+    </div>
+    {r.table.rows.length ? <McrTable id={r.id} lang={lang} /> : <p class="notice">{tr(lang, 'Tabulka se začne plnit po prvním turnaji.', 'The table fills after the first tournament.')}</p>}
+    <div class="btn-row">
+      {r.editions.map((id: string) => m.editions[id] && <a class="btn btn-ghost" href={editionUrl(m.editions[id], lang)}>{editionName(m.editions[id], lang)}</a>)}
+    </div>
+  </div>
+</Base>

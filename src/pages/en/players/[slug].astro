@@ -1,0 +1,6 @@
+---
+import View from '../../../views/Player.astro';
+import { playerPaths } from '../../../lib/paths';
+export const getStaticPaths = playerPaths;
+---
+<View lang="en" slug={Astro.props.slug} />

@@ -1,0 +1,6 @@
+---
+import View from '../../../../views/Competition.astro';
+import { tournamentPaths } from '../../../../lib/paths';
+export const getStaticPaths = tournamentPaths;
+---
+<View lang="en" code={Astro.props.code} />

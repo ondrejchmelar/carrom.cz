@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import { articles } from '../lib/articles';
+import { L, tr, dateShort, type Lang } from '../lib/site';
+interface Props { year: number; lang?: Lang }
+const { year, lang = 'cs' } = Astro.props;
+const items = (await articles(lang)).filter((a) => a.year === year);
+---
+<Base title={tr(lang, `Zprávy ${year}`, `Stories ${year}`)} lang={lang} current="novinky">
+  <div class="wrap page">
+    <div class="page-head">
+      <a class="small" href={L('/novinky/', lang)}>{tr(lang, 'Novinky', 'News')}</a>
+      <h1>{tr(lang, `Zprávy ${year}`, `Stories ${year}`)}</h1>
+    </div>
+    <div class="row-list">
+      {items.map((a) => (
+        <a href={L(`/novinky/${a.year}/${a.slug}/`, lang)}>
+          <span class="when">{dateShort(a.date, false, lang)}</span>
+          <span class="what"><strong lang={a.czechOnly ? 'cs' : undefined}>{a.entry.data.title}</strong>{a.entry.data.perex && <span class="small" lang={a.czechOnly ? 'cs' : undefined}>{a.entry.data.perex}</span>}</span>
+          <span class="tail">{a.czechOnly ? 'in Czech' : ''}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>
