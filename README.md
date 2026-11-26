@@ -35,8 +35,8 @@ po převodu repozitáře do (bezplatné) GitHub organizace s pravidly větví.
 
 1. **GitHub Pages** – Settings → Pages → Source: *GitHub Actions*. První nasazení proběhne po sloučení do `main`.
    Web pak běží na `https://ondrejchmelar.github.io/carrom.cz/`.
-2. **Admin** – otevřít `/admin/`, zvolit *Sign in with Token* a vložit osobní token GitHubu
-   (Settings → Developer settings → Fine-grained token, jen repo `carrom.cz`, Contents: Read and write).
+2. **Admin** – otevřít `/admin/` a kliknout na *Sign in with GitHub* (účet musí být spolupracovníkem repa).
+   Záložně jde *Sign in with Token* (Fine-grained token, jen repo `carrom.cz`, Contents: Read and write).
 3. **Doména carrom.cz** (až bude web hotový) – Settings → Pages → Custom domain `carrom.cz`.
    U současného poskytovatele DNS změnit jen záznamy webu, pošta zůstává:
    - `carrom.cz` A → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
@@ -44,9 +44,11 @@ po převodu repozitáře do (bezplatné) GitHub organizace s pravidly větví.
    - záznamy **MX, SPF/TXT a DKIM nechat beze změny** (e-mail běží dál u současného hostingu)
    - v Settings → Secrets and variables → Actions → Variables nastavit `SITE_URL=https://carrom.cz`, `BASE_PATH=/`
    - v `data/settings.yaml` vypnout `preview_banner`
-4. **Přihlášení do adminu přes GitHub (volitelné)** – místo tokenu tlačítko „Sign in with GitHub“. GitHub Pages
-   neumí OAuth, je potřeba malá přihlašovací služba, např. [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth)
-   (zdarma). Její adresu pak doplnit jako `base_url` v `public/admin/config.yml`.
+4. **Přihlášení do adminu přes GitHub** – GitHub Pages neumí OAuth, proto běží malá přihlašovací služba
+   [Sveltia CMS Authenticator](https://github.com/sveltia/sveltia-cms-auth) na Cloudflare Workers (zdarma):
+   `https://carrom-cz.chmelar-o.workers.dev`. Je nastavená jako `base_url` v `public/admin/config.yml`
+   a `public/admin/vysledky/config.yml`. GitHub OAuth app má callback `…workers.dev/callback`; client ID a secret
+   jsou jen v proměnných workeru (`GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `ALLOWED_DOMAINS`), nikdy v repu.
 5. **Asistent** – repo secret `ANTHROPIC_API_KEY` (vlastní workspace s limitem $20/měsíc). Bez něj workflow nic nedělá.
 
 ## Vývoj

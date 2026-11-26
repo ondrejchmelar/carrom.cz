@@ -5,7 +5,7 @@ backend:
   name: github
   repo: ondrejchmelar/carrom.cz
   branch: main
-  # base_url: https://<přihlašovací-služba>   # doplní se po zprovoznění OAuth (README, krok 4)
+  base_url: https://carrom-cz.chmelar-o.workers.dev   # přihlášení přes GitHub (sveltia-cms-auth na Cloudflare)
   commit_messages:
     create: "Přidáno: {{collection}} {{slug}}"
     update: "Upraveno: {{collection}} {{slug}}"
