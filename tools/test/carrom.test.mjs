@@ -105,13 +105,25 @@ test('easy rack: queen and 3 coins per colour', () => {
   assert.equal(C.coinsOf(C.newGame({ easy: true })), 3);
 });
 
-test('easy: a pocketed striker returns nothing and ends the turn', () => {
+test('easy: striker with your coin: the coin counts and you play on; striker alone ends the turn', () => {
   const s = fresh({ easy: true });
   s.fell = [{ kind: 'striker' }]; pocket(s, (q) => q.color === 'white');
   const r = C.endShot(s);
   assert.equal(s.pocketed.white, 1);
-  assert.equal(r.again, false);
+  assert.equal(r.again, true);
+  assert.equal(s.turn, 'white');
+  s.fell = [{ kind: 'striker' }]; C.endShot(s);
+  assert.equal(s.pocketed.white, 1);
   assert.equal(s.turn, 'black');
+});
+
+test('easy: no win while the queen is on the board, the last coin comes back', () => {
+  const s = fresh({ easy: true });
+  s.fell = []; pocket(s, (q) => q.color === 'white', 3); const r = C.endShot(s);
+  assert.equal(s.winner, null);
+  assert.equal(s.pocketed.white, 2);
+  assert.equal(s.turn, 'black');
+  assert.equal(r.msg[0], 'queen-first');
 });
 
 test('easy: the queen counts at once and the first to clear wins', () => {

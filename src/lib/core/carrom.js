@@ -354,9 +354,11 @@ export function endShot(state) {
 }
 
 /**
- * Easy rules: every pocketed coin counts for its colour, your own coin or the queen lets you shoot
- * again, the queen is worth 3 points to whoever pockets it, a pocketed striker only ends the turn
- * (no coin goes back). The first colour with all its coins in the pockets wins.
+ * Easy rules: every pocketed coin counts for its colour (no dues). Your own coin or the queen lets
+ * you shoot again, even if the striker went in too; a pocketed striker on its own just ends the turn.
+ * The queen needs no cover and gives +3 to whoever pockets it, but it must go in before a colour's
+ * last coin: a last coin pocketed while the queen is on the board goes back to the centre and the
+ * turn ends. The first colour with all its coins in (queen gone) wins.
  */
 function endShotEasy(state) {
   const me = state.turn, opp = other(me);
@@ -370,14 +372,18 @@ function endShotEasy(state) {
   state.striker = null;
   state.fell = [];
   const msg = [];
+  let again = mine.length > 0 || queenIn;
   if (queenIn) { state.queen = { state: 'covered', by: me }; msg.push('queen-easy'); }
-  if (foul) msg.push('foul-easy');
+  if (foul) msg.push(again ? 'foul-easy-on' : 'foul-easy');
   if (mine.length) msg.push('own');
   if (theirs.length) msg.push('theirs');
   if (!fell.length) msg.push('miss');
-  const again = !foul && (mine.length > 0 || queenIn);
   const n = coinsOf(state);
-  // Pocketing the opponent's last coin hands them the board, as in the full game.
+  if (state.queen.state !== 'covered') {
+    for (const c of [me, opp]) {
+      if (state.pocketed[c] >= n) { returnOne(state, c); msg.unshift('queen-first'); again = false; }
+    }
+  }
   const done = [me, opp].filter((c) => state.pocketed[c] >= n);
   if (done.length) {
     const c = done.length === 2 ? me : done[0];
@@ -464,6 +470,11 @@ export function simulate(state, shot, maxSteps = 2400) {
   let score = mine * 10 - theirs * 6 + (queen && (state.easy || state.pocketed[me] > 0 || mine) ? 8 : 0);
   if (state.queen.state === 'pending' && state.queen.by === me) score += mine ? 12 : -10;
   if (foul) score -= state.easy ? 8 : 18 + mine * 10;
+  if (state.easy && state.queen.state !== 'covered' && !queen) {
+    // Easy: a last coin before the queen just comes back, a wasted shot.
+    if (state.pocketed[me] + mine >= coinsOf(state)) score -= 12;
+    if (state.pocketed[other(me)] + theirs >= coinsOf(state)) score -= 12;
+  }
   if (!state.easy && state.queen.state !== 'covered' && !(queen && mine)) {
     // Clearing a colour while the queen is still in play loses the board (ECC laws 96, 97).
     if (state.pocketed[me] + mine >= 9) score -= 60;
