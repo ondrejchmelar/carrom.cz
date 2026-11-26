@@ -60,11 +60,15 @@ const league = (e: any) => e.competition.kind === 'league';
       ))}
       <a class="card" href={L('/vysledky/mcr/', lang)}><span class="eyebrow">{tr(lang, 'Seriál', 'Series')}</span><strong>{tr(lang, 'Mistrovství ČR', 'Czech Championship')}</strong><span class="small">{tr(lang, 'Tabulky podle let', 'Tables by year')}</span></a>
     </div>
+    {comps.filter((c: any) => c.archive_url).map((c: any) => (
+      <p class="small archive-note">{tr(lang, `${t(c.short_name ?? c.name, lang)}: na webu jsou ročníky s českými hráči, všechny ročníky najdeš v `, `${t(c.short_name ?? c.name, lang)}: the site lists the years with Czech players; all years are in `)}<a href={c.archive_url} rel="noopener">SoL lit</a>.</p>
+    ))}
   </section>
 </div>
 </Base>
 <style>
   .cols { display: grid; gap: 40px; }
+  .archive-note { margin-top: 16px; }
   .arch { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (min-width: 960px) {
     .cols.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
