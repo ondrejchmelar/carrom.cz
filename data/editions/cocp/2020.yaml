@@ -9,4 +9,34 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2020.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/f478dd92277811ebb5ee133d48525cc4
+results:
+  singles:
+    - { place: 1, name: "Johannes Jörg", country: DE }
+    - { place: 2, player: frank-fehr }
+    - { place: 3, player: sylwester-pogorzelski }
+    - { place: 4, name: "Bartek Sasinski", country: PL }
+    - { place: 5, player: dirk-polchow }
+    - { place: 6, name: "Kristian Rosin", country: DE }
+    - { place: 7, player: paulina-nowakowska }
+    - { place: 8, name: "Shriyantha Weerasinghe", country: IT }
+    - { place: 9, player: zdenek-svitak }
+    - { place: 10, name: "Francesco Ventola", country: IT }
+    - { place: 11, player: paolo-martinelli }
+    - { place: 12, player: ondrej-chmelar }
+    - { place: 13, name: "Wipul Priyantha Neleththi", country: IT }
+    - { place: 14, player: pawel-wroczynski }
+    - { place: 15, player: frantisek-cervenka }
+    - { place: 16, player: gunter-seibert }
+    - { place: 17, player: elisa-zucchiatti }
+    - { place: 18, player: jakub-nowakowski }
+    - { place: 19, name: "Daniele Da Fatti", country: IT }
+    - { place: 20, player: tomas-chmelar }
+    - { place: 21, name: "Andreas Zinke", country: DE }
+    - { place: 22, name: "Mauro Lagomarsino", country: IT }
+    - { place: 23, player: tadeas-matys }
+    - { place: 24, player: neel-vasanth }
+    - { place: 25, player: jan-tesitel }
+    - { place: 26, player: vratislav-borsky }
+    - { place: 27, name: "Ugo Maestrelli", country: IT }
+    - { place: 28, name: "Piotr Hink", country: PL }

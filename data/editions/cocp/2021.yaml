@@ -9,4 +9,23 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2021.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/3846886a49dc11eca2a42d7e0e597e91
+results:
+  singles:
+    - { place: 1, player: pawel-wroczynski }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: frantisek-rezek }
+    - { place: 4, player: tomas-chmelar }
+    - { place: 5, player: jan-tesitel }
+    - { place: 6, player: lukas-navratil }
+    - { place: 7, player: ondrej-chmelar }
+    - { place: 8, player: romana-kralova }
+    - { place: 9, player: rostislav-borsky }
+    - { place: 10, player: pavel-schierl }
+    - { place: 11, player: vratislav-borsky }
+    - { place: 12, player: dominika-krestanova }
+    - { place: 13, player: kumar-alok }
+    - { place: 14, name: "Pawel Morga", country: PL }
+    - { place: 15, name: "Eliza Lipinska-Wroczynska", country: PL }
+    - { place: 16, name: "Hugo Morga", country: PL }
+    - { place: 17, player: jakub-dvorak }

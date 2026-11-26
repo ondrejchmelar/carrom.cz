@@ -9,4 +9,53 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2017.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/e332089ec9ef11e7ac012e92809967e5
+results:
+  singles:
+    - { place: 1, name: "Bartek Sasinski", country: PL }
+    - { place: 2, player: sylwester-pogorzelski }
+    - { place: 3, hidden: true }
+    - { place: 4, name: "Sebastian Holtmann", country: DE }
+    - { place: 5, player: nitesh-sinha }
+    - { place: 6, player: jakub-nowakowski }
+    - { place: 7, hidden: true }
+    - { place: 8, player: neel-vasanth }
+    - { place: 9, player: robert-bany }
+    - { place: 10, player: ajay-pal }
+    - { place: 11, player: ondrej-chmelar }
+    - { place: 12, player: horst-simunsky }
+    - { place: 13, player: filip-smoljak }
+    - { place: 14, name: "Daniele Da Fatti", country: IT }
+    - { place: 15, player: hans-faller }
+    - { place: 16, player: gunter-seibert }
+    - { place: 17, player: steffen-eder }
+    - { place: 18, hidden: true }
+    - { place: 19, player: zdenek-svitak }
+    - { place: 20, player: frank-fehr }
+    - { place: 21, name: "Jan Bażyński", country: PL }
+    - { place: 22, player: raj-patil }
+    - { place: 23, name: "Kacper Grzegorczuk", country: PL }
+    - { place: 24, player: frantisek-rezek }
+    - { place: 25, player: bodo-schnoor }
+    - { place: 26, player: tomas-chmelar }
+    - { place: 27, hidden: true }
+    - { place: 28, player: jan-tesitel }
+    - { place: 29, hidden: true }
+    - { place: 30, player: michal-fucik }
+    - { place: 31, player: karlos-novak }
+    - { place: 32, player: thomas-vormwald }
+    - { place: 33, player: ales-krestan }
+    - { place: 34, player: lukas-navratil }
+    - { place: 35, player: jiri-pavela }
+    - { place: 36, player: zdenek-taborsky }
+    - { place: 37, player: romana-kralova }
+    - { place: 38, player: pavel-schierl }
+    - { place: 39, hidden: true }
+    - { place: 40, hidden: true }
+    - { place: 41, player: miroslav-cernohous }
+    - { place: 42, hidden: true }
+    - { place: 43, player: vratislav-borsky }
+    - { place: 44, hidden: true }
+    - { place: 45, hidden: true }
+    - { place: 46, player: rostislav-borsky }
+    - { place: 47, hidden: true }

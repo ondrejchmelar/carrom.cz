@@ -1,6 +1,43 @@
 competition: druhy
 year: 2022
 status: finished
+start_date: 2022-10-07
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/48637944460711edaafd63a79ccd283b
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: raj-patil }
+    - { place: 4, player: filip-smoljak }
+    - { place: 5, player: tomas-chmelar }
+    - { place: 6, player: matej-bednar }
+    - { place: 7, player: frantisek-rezek }
+    - { place: 8, player: pavel-schierl }
+    - { place: 9, player: ales-krestan }
+    - { place: 10, player: zdenek-taborsky }
+    - { place: 11, player: jakub-muller }
+    - { place: 12, player: jiri-pavela }
+  juniors:
+    - { place: 1, player: matej-bednar }
+    - { place: 2, player: jakub-muller }
+    - { place: 3, player: jakub-muller }
+    - { place: 4, player: jachym-chrpa }
+    - { place: 5, player: lukas-krkavec }
+    - { place: 6, player: lubos-prochazka }
+    - { place: 7, player: vojtech-pesek }
+    - { place: 8, player: klara-kubova }
+    - { place: 9, player: vit-voracek }
+    - { place: 10, player: radek-vacha }
+    - { place: 11, player: michal-dolecek }
+    - { place: 12, player: josef-slanina }
+    - { place: 13, player: david-svarovsky }
+    - { place: 14, player: jan-tocik }
+    - { place: 15, player: ondrej-kubicek }
+    - { place: 16, player: bara-doleckova }
+    - { place: 17, player: matej-motycka }
+    - { place: 18, player: pavlina-jahodova }
+    - { place: 19, player: jan-simanek }
+    - { place: 20, player: lucie-malkova }
+    - { place: 21, player: magdalena-novotna }

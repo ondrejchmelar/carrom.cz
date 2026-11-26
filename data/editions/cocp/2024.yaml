@@ -10,4 +10,46 @@ external_url: "http://zdenektichy.jalbum.net/carrom/2024_open/index.html"
 source: old-site
 old_url: /turnaje/cocp/cocp_2024.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/c8a0922da38d11efaf70e32b4f21a210
+results:
+  singles:
+    - { place: 1, name: "Yogesh Kulkarni", country: DE }
+    - { place: 2, name: "John Dcunha", country: UK }
+    - { place: 3, name: "Stefan Baumann", country: DE }
+    - { place: 4, player: ajay-sekhesh }
+    - { place: 5, name: "Swapnil Deshpande", country: DK }
+    - { place: 6, name: "Simon Nebeling", country: DE }
+    - { place: 7, player: zdenek-svitak }
+    - { place: 8, player: karlos-novak }
+    - { place: 9, player: steffen-eder }
+    - { place: 10, name: "Longin Kowalski", country: DE }
+    - { place: 11, name: "Yuvaraj Eswaramoorthy", country: DK }
+    - { place: 12, name: "Nirupam Purkayastha", country: DE }
+    - { place: 13, name: "Vinod Chithirai", country: UK }
+    - { place: 14, name: "Antonio Sylvester Vethanayagam", country: DK }
+    - { place: 15, player: filip-smoljak }
+    - { place: 16, name: "Prasad Aluthgama", country: IT }
+    - { place: 17, name: "Nibakaran Veeramuththu", country: LK }
+    - { place: 18, name: "Prashant Kumar Sharma", country: IN }
+    - { place: 19, player: ondrej-chmelar }
+    - { place: 20, player: stepan-smoljak }
+    - { place: 21, player: pavel-schierl }
+    - { place: 22, player: ales-formanek }
+    - { place: 23, player: hans-faller }
+    - { place: 24, name: "Patrick Joiko", country: DE }
+    - { place: 25, name: "David Kariyawasam", country: IT }
+    - { place: 26, player: tomas-chmelar }
+    - { place: 27, player: ondrej-kubicek }
+    - { place: 28, player: matej-bednar }
+    - { place: 29, player: jan-tesitel }
+    - { place: 30, name: "Mathias Forlivesi", country: IT }
+    - { place: 31, player: kumar-alok }
+    - { place: 32, player: lukas-navratil }
+    - { place: 33, player: frantisek-rezek }
+    - { place: 34, player: magdalena-novotna }
+    - { place: 35, player: selvamani-thirumurugan }
+    - { place: 36, player: romana-kralova }
+    - { place: 37, name: "Andreas Fischer", country: DE }
+    - { place: 38, player: monika-blaskovicova }
+    - { place: 39, player: jana-kubickova }
+    - { place: 40, name: "Jan-Thies Heinrich", country: DE }

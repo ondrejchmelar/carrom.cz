@@ -1,6 +1,27 @@
 competition: jarni
 year: 2024
 status: finished
+start_date: 2024-04-13
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/fa358614f91611ee88ed6162688db8a6
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: ajay-sekhesh }
+    - { place: 3, player: zdenek-svitak }
+    - { place: 4, player: horst-simunsky }
+    - { place: 5, player: lukas-navratil }
+    - { place: 6, player: matej-bednar }
+    - { place: 7, player: neel-vasanth }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, player: frantisek-rezek }
+    - { place: 10, name: "Mathias Forlivesi", country: IT }
+    - { place: 11, player: shoeb-ahmed-khan }
+    - { place: 12, player: frantisek-cervenka }
+    - { place: 13, player: ondrej-kubicek }
+    - { place: 14, player: magdalena-novotna }
+    - { place: 15, player: ondrej-chmelar }
+    - { place: 16, player: kumar-alok }
+    - { place: 17, player: zdenek-taborsky }
+    - { place: 18, player: lukas-krkavec }

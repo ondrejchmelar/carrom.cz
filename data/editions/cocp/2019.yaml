@@ -9,4 +9,56 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2019.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/f3980e24064f11eaac012e92809967e5
+results:
+  singles:
+    - { place: 1, player: sylwester-pogorzelski }
+    - { place: 2, name: "Pim Schee Van Der", country: NL }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, name: "Shriyantha Weerasinghe", country: IT }
+    - { place: 5, player: robert-bany }
+    - { place: 6, name: "Kristian Rosin", country: DE }
+    - { place: 7, player: zdenek-svitak }
+    - { place: 8, name: "Thushara Perera", country: IT }
+    - { place: 9, name: "Amitha Ubhayathunga", country: IT }
+    - { place: 10, name: "Paul Schneider", country: DE }
+    - { place: 11, name: "Simon Nebeling", country: DE }
+    - { place: 12, player: frank-fehr }
+    - { place: 13, player: filip-smoljak }
+    - { place: 14, name: "Uwe Schneider", country: DE }
+    - { place: 15, name: "Thomas Janßen", country: DE }
+    - { place: 16, player: ondrej-chmelar }
+    - { place: 17, player: karlos-novak }
+    - { place: 18, name: "Wipul Priyantha Neleththi", country: IT }
+    - { place: 19, player: raj-patil }
+    - { place: 20, player: tomas-chmelar }
+    - { place: 21, player: pawel-wroczynski }
+    - { place: 22, player: tadeas-matys }
+    - { place: 23, player: jan-tesitel }
+    - { place: 24, player: hans-faller }
+    - { place: 25, name: "Michael Boog", country: DE }
+    - { place: 26, player: bodo-schnoor }
+    - { place: 27, name: "Ronny Kaiser", country: DE }
+    - { place: 28, name: "Tomasz Jastrzębski", country: PL }
+    - { place: 29, player: frantisek-rezek }
+    - { place: 30, player: frantisek-cervenka }
+    - { place: 31, player: darius-brozek }
+    - { place: 32, name: "Wolfgang Neumann", country: DE }
+    - { place: 33, hidden: true }
+    - { place: 34, player: lukas-navratil }
+    - { place: 35, player: michal-fucik }
+    - { place: 36, player: ales-formanek }
+    - { place: 37, name: "Marcin Weiss", country: PL }
+    - { place: 38, player: ales-krestan }
+    - { place: 39, hidden: true }
+    - { place: 40, hidden: true }
+    - { place: 41, player: pavel-schierl }
+    - { place: 42, player: matej-bednar }
+    - { place: 43, player: zdenek-taborsky }
+    - { place: 44, hidden: true }
+    - { place: 45, hidden: true }
+    - { place: 46, name: "Pawel Morga", country: PL }
+    - { place: 47, player: dominika-krestanova }
+    - { place: 48, name: "Witold Blaut", country: PL }
+    - { place: 49, player: jiri-pavela }
+    - { place: 50, name: "Piotr Hink", country: PL }

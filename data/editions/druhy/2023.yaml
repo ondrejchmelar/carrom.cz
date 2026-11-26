@@ -1,6 +1,46 @@
 competition: druhy
 year: 2023
 status: finished
+start_date: 2023-10-07
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/ddca76c364cf11ee886f538bb9e53a0b
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: raj-patil }
+    - { place: 4, player: zdenek-svitak }
+    - { place: 5, player: matej-bednar }
+    - { place: 6, player: jakub-muller }
+    - { place: 7, player: frantisek-cervenka }
+    - { place: 8, player: pavel-schierl }
+    - { place: 9, player: frantisek-rezek }
+    - { place: 10, player: jan-tesitel }
+    - { place: 11, player: tomas-chmelar }
+    - { place: 12, player: kumar-alok }
+    - { place: 13, name: "Mathias Forlivesi", country: IT }
+    - { place: 14, player: magdalena-novotna }
+    - { place: 15, player: lukas-krkavec }
+    - { place: 16, player: selvamani-thirumurugan }
+    - { place: 17, player: jiri-pavela }
+    - { place: 18, player: zdenek-taborsky }
+  juniors:
+    - { place: 1, player: ondrej-kubicek }
+    - { place: 2, player: magdalena-novotna }
+    - { place: 3, player: prokop-novak }
+    - { place: 4, player: filip-vitek }
+    - { place: 5, player: bara-doleckova }
+    - { place: 6, player: jakub-lyko }
+    - { place: 7, player: jan-vesely }
+    - { place: 8, player: vit-voracek }
+    - { place: 9, player: ales-lipensky }
+    - { place: 10, player: klara-kubova }
+    - { place: 11, player: vit-borek }
+    - { place: 12, player: vendula-ferancova }
+    - { place: 13, player: pavel-dolecek }
+    - { place: 14, player: vaclav-vrzak }
+    - { place: 15, player: jan-docekal }
+    - { place: 16, player: ondrej-reich }
+    - { place: 17, player: marie-cervinkova }
+    - { place: 18, player: tobias-samek }

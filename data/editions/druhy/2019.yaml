@@ -1,6 +1,41 @@
 competition: druhy
 year: 2019
 status: finished
+start_date: 2019-10-05
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/07c44654e6c211e9ac012e92809967e5
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, player: neel-vasanth }
+    - { place: 5, player: raj-patil }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: darius-brozek }
+    - { place: 8, player: tomas-chmelar }
+    - { place: 9, player: miroslav-cernohous }
+    - { place: 10, player: lukas-navratil }
+    - { place: 11, player: zdenek-taborsky }
+    - { place: 12, player: frantisek-cervenka }
+    - { place: 13, player: ales-krestan }
+    - { place: 14, player: matej-bednar }
+    - { place: 15, player: jiri-pavela }
+  juniors:
+    - { place: 1, player: matej-bednar }
+    - { place: 2, player: jakub-muller }
+    - { place: 3, hidden: true }
+    - { place: 4, player: jan-skabraha }
+    - { place: 5, hidden: true }
+    - { place: 6, hidden: true }
+    - { place: 7, player: josef-slanina }
+    - { place: 8, hidden: true }
+    - { place: 9, hidden: true }
+    - { place: 10, hidden: true }
+    - { place: 11, player: jan-moravec }
+    - { place: 12, player: lukas-krkavec }
+    - { place: 13, hidden: true }
+    - { place: 14, hidden: true }
+    - { place: 15, player: michal-zelenak }
+    - { place: 16, player: jakub-jircik }

@@ -1,6 +1,26 @@
 competition: jarni
 year: 2022
 status: finished
+start_date: 2022-04-01
 source: old-site
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/764f8e21b17d11ecad77553ad64e84b7
+results:
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: frantisek-cervenka }
+    - { place: 4, player: raj-patil }
+    - { place: 5, player: tomas-chmelar }
+    - { place: 6, player: frantisek-rezek }
+    - { place: 7, player: horst-simunsky }
+    - { place: 8, player: jan-tesitel }
+    - { place: 9, player: filip-smoljak }
+    - { place: 10, player: lukas-navratil }
+    - { place: 11, player: romana-kralova }
+    - { place: 12, player: kumar-alok }
+    - { place: 13, player: pavel-schierl }
+    - { place: 14, player: vratislav-borsky }
+    - { place: 15, player: zdenek-taborsky }
+    - { place: 16, player: rostislav-borsky }
+    - { place: 17, player: vijay-karthikeyan }

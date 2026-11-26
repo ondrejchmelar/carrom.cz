@@ -9,4 +9,47 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2015.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/9a8c5f9a853b11e5ac012e92809967e5
+results:
+  singles:
+    - { place: 1, player: tobias-kruger }
+    - { place: 2, player: sylwester-pogorzelski }
+    - { place: 3, name: "Bartek Sasinski", country: PL }
+    - { place: 4, hidden: true }
+    - { place: 5, player: tadeas-matys }
+    - { place: 6, player: jakub-nowakowski }
+    - { place: 7, player: steffen-eder }
+    - { place: 8, player: gunter-seibert }
+    - { place: 9, player: bernhard-sander }
+    - { place: 10, player: karlos-novak }
+    - { place: 11, player: robert-bany }
+    - { place: 12, player: jan-tesitel }
+    - { place: 13, player: bodo-schnoor }
+    - { place: 14, player: hans-faller }
+    - { place: 15, player: stepan-smoljak }
+    - { place: 16, hidden: true }
+    - { place: 17, player: filip-smoljak }
+    - { place: 18, hidden: true }
+    - { place: 19, hidden: true }
+    - { place: 20, player: zdenek-svitak }
+    - { place: 21, hidden: true }
+    - { place: 22, player: ondrej-chmelar }
+    - { place: 23, player: romana-kralova }
+    - { place: 24, player: frank-fehr }
+    - { place: 25, player: tomas-chmelar }
+    - { place: 26, player: michal-fucik }
+    - { place: 27, hidden: true }
+    - { place: 28, hidden: true }
+    - { place: 29, player: pavel-schierl }
+    - { place: 30, player: frantisek-rezek }
+    - { place: 31, player: zdenek-taborsky }
+    - { place: 32, hidden: true }
+    - { place: 33, hidden: true }
+    - { place: 34, hidden: true }
+    - { place: 35, player: jiri-pavela }
+    - { place: 36, player: monika-blaskovicova }
+    - { place: 37, hidden: true }
+    - { place: 38, hidden: true }
+    - { place: 39, hidden: true }
+    - { place: 40, hidden: true }
+    - { place: 41, hidden: true }

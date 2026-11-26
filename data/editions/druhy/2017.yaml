@@ -9,6 +9,7 @@ report:
 source: old-site
 old_url: /turnaje/druhy/druhy_2017.php
 
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/24756d84a9dc11e7ac012e92809967e5
 results:
   singles:
     - { place: 1, player: zdenek-svitak }
@@ -32,3 +33,20 @@ results:
     - { place: 19, player: ales-krestan }
     - { place: 20, player: jiri-pavela }
     - { place: 21, player: radka-cernohousova }
+  juniors:
+    - { place: 1, hidden: true }
+    - { place: 2, hidden: true }
+    - { place: 3, hidden: true }
+    - { place: 4, player: rostislav-borsky }
+    - { place: 5, hidden: true }
+    - { place: 6, hidden: true }
+    - { place: 7, hidden: true }
+    - { place: 8, hidden: true }
+    - { place: 9, hidden: true }
+    - { place: 10, hidden: true }
+    - { place: 11, hidden: true }
+    - { place: 12, hidden: true }
+    - { place: 13, hidden: true }
+    - { place: 14, player: matej-bednar }
+    - { place: 15, player: jakub-muller }
+    - { place: 16, player: michal-zelenak }

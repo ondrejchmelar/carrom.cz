@@ -9,4 +9,38 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2016.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/3fae406cad7011e6ac012e92809967e5
+results:
+  singles:
+    - { place: 1, player: frank-fehr }
+    - { place: 2, name: "Sebastian Holtmann", country: DE }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, player: tadeas-matys }
+    - { place: 5, player: filip-smoljak }
+    - { place: 6, player: jan-tesitel }
+    - { place: 7, player: gunter-seibert }
+    - { place: 8, player: bodo-schnoor }
+    - { place: 9, player: steffen-eder }
+    - { place: 10, player: hans-faller }
+    - { place: 11, name: "Thomas Janßen", country: DE }
+    - { place: 12, player: thomas-vormwald }
+    - { place: 13, player: neel-vasanth }
+    - { place: 14, player: zdenek-svitak }
+    - { place: 15, player: karlos-novak }
+    - { place: 16, player: tomas-chmelar }
+    - { place: 17, hidden: true }
+    - { place: 18, player: darius-brozek }
+    - { place: 19, player: pavel-schierl }
+    - { place: 20, player: frantisek-rezek }
+    - { place: 21, player: ondrej-chmelar }
+    - { place: 22, player: romana-kralova }
+    - { place: 23, player: ales-krestan }
+    - { place: 24, hidden: true }
+    - { place: 25, hidden: true }
+    - { place: 26, player: zdenek-taborsky }
+    - { place: 27, player: michal-fucik }
+    - { place: 28, player: raj-patil }
+    - { place: 29, hidden: true }
+    - { place: 30, player: frantisek-cervenka }
+    - { place: 31, player: jiri-pavela }
+    - { place: 32, hidden: true }

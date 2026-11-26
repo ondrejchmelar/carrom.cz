@@ -9,4 +9,46 @@ report:
 source: old-site
 old_url: /turnaje/cocp/cocp_2018.php
 
-results: {}
+sol_lit_url: https://sol5.metapensiero.it/lit/tourney/37f1c126e8b711e8ac012e92809967e5
+results:
+  singles:
+    - { place: 1, player: dirk-polchow }
+    - { place: 2, player: sylwester-pogorzelski }
+    - { place: 3, name: "Bartek Sasinski", country: PL }
+    - { place: 4, player: jakub-nowakowski }
+    - { place: 5, name: "Kristian Rosin", country: DE }
+    - { place: 6, player: robert-bany }
+    - { place: 7, player: frank-fehr }
+    - { place: 8, player: steffen-eder }
+    - { place: 9, player: karlos-novak }
+    - { place: 10, player: jakub-sasinski }
+    - { place: 11, player: filip-smoljak }
+    - { place: 12, name: "Ronny Kaiser", country: DE }
+    - { place: 13, player: tadeas-matys }
+    - { place: 14, player: zdenek-svitak }
+    - { place: 15, player: ondrej-chmelar }
+    - { place: 16, player: thomas-vormwald }
+    - { place: 17, name: "Paul Schneider", country: DE }
+    - { place: 18, player: jan-tesitel }
+    - { place: 19, player: hans-faller }
+    - { place: 20, name: "Kacper Grzegorczuk", country: PL }
+    - { place: 21, player: tomas-chmelar }
+    - { place: 22, player: frantisek-cervenka }
+    - { place: 23, player: raj-patil }
+    - { place: 24, player: bodo-schnoor }
+    - { place: 25, player: frantisek-rezek }
+    - { place: 26, player: lukas-navratil }
+    - { place: 27, player: michal-fucik }
+    - { place: 28, player: darius-brozek }
+    - { place: 29, player: miroslav-cernohous }
+    - { place: 30, player: pavel-schierl }
+    - { place: 31, player: jiri-pavela }
+    - { place: 32, hidden: true }
+    - { place: 33, hidden: true }
+    - { place: 34, player: romana-kralova }
+    - { place: 35, player: rostislav-borsky }
+    - { place: 36, player: vratislav-borsky }
+    - { place: 37, name: "Bernd Wegener", country: DE }
+    - { place: 38, player: jakub-muller }
+    - { place: 39, player: matej-bednar }
+    - { place: 40, hidden: true }
