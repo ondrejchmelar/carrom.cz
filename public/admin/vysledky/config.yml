@@ -1,7 +1,6 @@
 # Zápis výsledků lig (pro pomocníky). Úpravy mimo výsledky své ligy web nepustí ven (tools/check-scope.mjs).
 # Administrace carrom.cz (Sveltia CMS). Každé uložení = commit do repozitáře, web se sám přestaví (1–2 min).
-# Přihlášení: GitHub. Dokud neběží přihlašovací služba (viz README), použijte „Sign in with Token“
-# s osobním tokenem GitHubu (fine-grained, jen repo carrom.cz, práva Contents: read and write).
+# Přihlášení: tlačítko „Sign in with GitHub“ (účet musí být spolupracovníkem repa). Záložně „Sign in with Token“.
 backend:
   name: github
   repo: ondrejchmelar/carrom.cz
@@ -15,6 +14,11 @@ backend:
     deleteMedia: "Smazáno: {{path}}"
 
 site_url: https://ondrejchmelar.github.io/carrom.cz/
+app_title: carrom.cz · výsledky lig
+logo:
+  src: ../../brand/emblem.svg
+  show_in_header: true
+logout_redirect_url: ../../
 locale: cs
 media_folder: public/uploads
 public_folder: /uploads

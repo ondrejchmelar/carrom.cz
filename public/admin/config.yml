@@ -1,6 +1,5 @@
 # Administrace carrom.cz (Sveltia CMS). Každé uložení = commit do repozitáře, web se sám přestaví (1–2 min).
-# Přihlášení: GitHub. Dokud neběží přihlašovací služba (viz README), použijte „Sign in with Token“
-# s osobním tokenem GitHubu (fine-grained, jen repo carrom.cz, práva Contents: read and write).
+# Přihlášení: tlačítko „Sign in with GitHub“ (účet musí být spolupracovníkem repa). Záložně „Sign in with Token“.
 backend:
   name: github
   repo: ondrejchmelar/carrom.cz
@@ -14,6 +13,11 @@ backend:
     deleteMedia: "Smazáno: {{path}}"
 
 site_url: https://ondrejchmelar.github.io/carrom.cz/
+app_title: carrom.cz · administrace
+logo:
+  src: ../brand/emblem.svg
+  show_in_header: true
+logout_redirect_url: ../
 locale: cs
 media_folder: public/uploads
 public_folder: /uploads
@@ -81,7 +85,7 @@ collections:
     view_groups: [{ label: Soutěž, field: competition }, { label: Rok, field: year }]
     fields:
       - { name: competition, label: Soutěž, widget: relation, collection: competitions, value_field: code, search_fields: [code, name.cs], display_fields: ["{{name.cs}}"] }
-      - { name: year, label: Rok, widget: number, value_type: int }
+      - { name: year, label: Rok, widget: string, pattern: ['^\d{4}$', 'Rok čtyřmi číslicemi, např. 2027'] }   # text, ne číslo: admin by jinak psal „2 027“
       - { name: edition_name, label: Vlastní název ročníku, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: string, required: false }, { name: en, label: Anglicky, widget: string, required: false }] }
       - { name: status, label: Stav, widget: select, options: [{ label: Plánovaný, value: planned }, { label: Přihlášky otevřené, value: registration_open }, { label: Probíhá (liga), value: running }, { label: Odehraný, value: finished }] }
       - { name: phase, label: Fáze ligy, widget: select, required: false, options: [{ label: Základní kolo, value: group }, { label: Playoff, value: playoff }, { label: Skončila, value: finished }], hint: "Jen pro ligy. Po přepnutí na Playoff web zmrazí nasazení podle tabulky." }
@@ -228,7 +232,7 @@ collections:
       - { name: short_name, label: Krátký název (odpočet), widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
       - { name: description, label: Popis, widget: object, required: false, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
       - { name: contact_email, label: Kontaktní e-mail (jen adresy asociace), widget: string, required: false }
-      - { name: since, label: Hraje se od roku, widget: number, value_type: int, required: false }
+      - { name: since, label: Hraje se od roku, widget: string, pattern: ['^\d{4}$', 'Rok čtyřmi číslicemi'], required: false }
 
   - name: rankings
     label: Tabulky MČR
@@ -241,7 +245,7 @@ collections:
     slug: "mcr-{{year}}"
     summary: "MČR {{year}}"
     fields:
-      - { name: year, label: Rok, widget: number, value_type: int }
+      - { name: year, label: Rok, widget: string, pattern: ['^\d{4}$', 'Rok čtyřmi číslicemi, např. 2027'] }   # text, ne číslo: admin by jinak psal „2 027“
       - { name: audience, label: Kategorie, widget: hidden, default: open }
       - { name: name, label: Název, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
       - { name: editions, label: Turnaje (soutěž/rok), widget: list, hint: "Např. jarni/2027, druhy/2027, cocp/2027" }

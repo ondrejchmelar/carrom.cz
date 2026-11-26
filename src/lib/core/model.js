@@ -80,7 +80,7 @@ export function buildModel(raw, { today = new Date() } = {}) {
   const rankings = {};
   for (const [id, r] of Object.entries(raw.rankings ?? {})) {
     const table = rankingTable(r, editions, players, raw.settings?.mcr);
-    rankings[id] = { ...r, id, table, check: checkPublished(r, editions, players) };
+    rankings[id] = { ...r, id, year: Number(r.year), table, check: checkPublished(r, editions, players) };
     for (const c of rankings[id].check) {
       if (c.status === 'differs') warnings.push(`rankings/${id}: ${c.edition} – ${c.diffs.length} rozdílů mezi zveřejněnými body a vzorcem (jen hlášení)`);
     }
