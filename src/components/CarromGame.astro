@@ -52,7 +52,7 @@ const T = {
   </div>
 
   <p class="cg-status" data-status aria-live="polite"></p>
-  <p class="cg-rules small" data-rules></p>
+  <details class="cg-rules small"><summary>{lang === 'en' ? 'Rules for this level' : 'Pravidla této obtížnosti'}</summary><p data-rules></p></details>
 
 
   <div class="cg-foot">
@@ -71,6 +71,8 @@ const T = {
       badgeYou: 'Začínáš ty: máš bílé', badgeCpu: 'Začíná počítač: má bílé', badge: (n: string) => `Začíná ${n}: má bílé`, cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
       blocked: 'Tady se striker nevejde mezi kameny. Posuň ho.',
+      lastFull: 'Pozor: zbývá ti poslední kámen. Nejdřív dej a potvrď královnu, jinak sadu prohraješ.',
+      lastEasy: 'Pozor: zbývá ti poslední kámen. Nejdřív dej a potvrď královnu, jinak se kámen vrátí.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
       foul: 'Faul: striker v díře. Jeden tvůj kámen jde zpět na desku (nemáš-li žádný, dlužíš ho) a tah končí.',
       'foul-on': 'Faul: striker v díře. Kameny z tohoto šťouchu a jeden navíc jdou zpět, ale hraješ dál.',
@@ -108,6 +110,8 @@ const T = {
       badgeYou: 'You begin: you have white', badgeCpu: 'Computer begins: it has white', badge: (n: string) => `${n} begins: white`, cpuThinks: 'Computer is thinking…', cpuShoots: 'Computer shoots.',
       turnOf: (n: string, c: string) => `${n} to play (${c}).`,
       blocked: 'The striker does not fit here between the coins. Move it.',
+      lastFull: 'Careful: your last coin. Pocket and cover the queen first, or you lose the board.',
+      lastEasy: 'Careful: your last coin. Pocket and cover the queen first, or the coin comes back.',
       own: 'Pocketed, shoot again.', theirs: 'An opponent coin went in.', miss: 'Nothing went in.',
       foul: 'Foul: striker pocketed. One of your coins goes back (owed if you have none) and your turn ends.',
       'foul-on': 'Foul: striker pocketed. This stroke\'s coins and one more go back, but you play on.',
@@ -214,12 +218,23 @@ const T = {
       const pull = Math.hypot(dx, dy);
       return { angle: Math.atan2(dy, dx), power: Math.min(1, pull / 340) ** 1.6, ok: pull > 10 };
     }
+    // Warn the player on turn when only one own coin is left and the queen is not yet covered:
+    // pocketing that coin first would lose the board (Easy: the coin comes back).
+    function lastCoinWarning() {
+      if (!human() || state.winner || state.queen.state === 'covered') return '';
+      if (state.queen.state === 'pending' && state.queen.by === state.turn) return ''; // that coin covers it
+      return C.coinsOf(state) - state.pocketed[state.turn] === 1 ? (state.easy ? L.lastEasy : L.lastFull) : '';
+    }
     function statusText() {
+      const t = statusCore(), w = lastCoinWarning();
+      return w ? `${w}${t ? ' ' + t : ''}` : t;
+    }
+    function statusCore() {
       if (state.winner) return '';
       if (phase === 'cpu') return L.cpuThinks;
       if (human() && !C.strikerFree(state, strikerX)) return `${message ? message + ' ' : ''}${L.blocked}`;
       if (message) return message;
-      const breaking = !state.broken && !state.shots;
+      const breaking = !state.shots;
       if (mode === 'computer') return state.turn === myColor() ? (breaking ? L.youBreak : L.yourTurn(L[state.turn])) : breaking ? L.cpuBreaks : L.cpuShoots;
       return breaking ? L.starts(nameOf(state.turn)) : L.turnOf(nameOf(state.turn), L[state.turn]);
     }
@@ -229,10 +244,11 @@ const T = {
       $('[data-name="white"]').textContent = nameOf('white');
       $('[data-name="black"]').textContent = nameOf('black');
       root.querySelectorAll<HTMLElement>('.cg-side').forEach((el) => el.classList.toggle('on', el.dataset.side === state.turn && !state.winner));
-      $('[data-queen]').textContent = L.queen[state.queen.state as 'board'];
+      $('[data-queen]').textContent = state.queen.state === 'board' ? '' : L.queen[state.queen.state as 'pending'];
       root.querySelectorAll<HTMLElement>('[data-total]').forEach((el) => (el.textContent = String(C.coinsOf(state))));
       $('[data-rules]').textContent = nb(state.easy ? L.rules.easy : L.rules.full);
       $('[data-status]').textContent = nb(statusText());
+      $('[data-status]').classList.toggle('warn', !!lastCoinWarning());
       // Who begins, and so has white, stays on the board until the first shot.
       const start = $('[data-start]');
       start.hidden = state.shots > 0 || !!state.winner;
@@ -543,7 +559,10 @@ const T = {
   @media (max-width: 599px) { .cg-start { font-size: 14px; padding: 8px 14px; } }
   .cg-over strong { font: 800 32px/1.1 var(--f-head); }
   .cg-status { min-height: 48px; font-weight: 600; color: var(--navy); }
+  .cg-status.warn { color: var(--red); }
   .cg-rules { margin: 0; color: var(--muted); }
+  .cg-rules summary { cursor: pointer; color: var(--navy); font-weight: 600; min-height: 32px; }
+  .cg-rules p { margin: 6px 0 0; }
   .cg-foot { display: flex; gap: 12px; }
   @media (hover: none) { .cg-keys { display: none; } }
 </style>
