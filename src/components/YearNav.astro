@@ -2,21 +2,24 @@
 // Quick jump to another year of the same competition: previous, a year picker, next.
 import { model } from '../lib/data';
 import { editionUrl, tr, type Lang } from '../lib/site';
-interface Props { ed: any; lang?: Lang }
+// Either an edition (other years of its competition) or a ready list of { id, year, href } (e.g. MČR rankings).
+interface Props { ed?: any; items?: { id: string; year: number; href: string }[]; current?: string; lang?: Lang }
 const { ed, lang = 'cs' } = Astro.props;
-const list = Object.values(model().editions)
+const list = (Astro.props.items ?? Object.values(model().editions)
   .filter((e: any) => e.code === ed.code)
+  .map((e: any) => ({ id: e.id, year: e.year, href: editionUrl(e, lang) })))
   .sort((a: any, b: any) => a.year - b.year);
-const i = list.findIndex((e: any) => e.id === ed.id);
+const cur = Astro.props.current ?? ed?.id;
+const i = list.findIndex((e: any) => e.id === cur);
 const prev: any = list[i - 1], next: any = list[i + 1];
 ---
 {list.length > 1 && (
   <nav class="yn" aria-label={tr(lang, 'Další ročníky', 'Other years')}>
-    {prev ? <a class="yn-step" href={editionUrl(prev, lang)} rel="prev">‹ {prev.year}</a> : <span class="yn-step off" aria-hidden="true">‹</span>}
+    {prev ? <a class="yn-step" href={prev.href} rel="prev">‹ {prev.year}</a> : <span class="yn-step off" aria-hidden="true">‹</span>}
     <select class="yn-sel" aria-label={tr(lang, 'Ročník', 'Year')} data-year-nav>
-      {[...list].reverse().map((e: any) => <option value={editionUrl(e, lang)} selected={e.id === ed.id}>{e.year}</option>)}
+      {[...list].reverse().map((e: any) => <option value={e.href} selected={e.id === cur}>{e.year}</option>)}
     </select>
-    {next ? <a class="yn-step" href={editionUrl(next, lang)} rel="next">{next.year} ›</a> : <span class="yn-step off" aria-hidden="true">›</span>}
+    {next ? <a class="yn-step" href={next.href} rel="next">{next.year} ›</a> : <span class="yn-step off" aria-hidden="true">›</span>}
   </nav>
 )}
 <style>

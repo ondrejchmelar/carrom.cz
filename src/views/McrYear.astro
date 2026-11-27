@@ -1,18 +1,21 @@
 ---
 import Base from '../layouts/Base.astro';
 import McrTable from '../components/McrTable.astro';
+import YearNav from '../components/YearNav.astro';
 import { model } from '../lib/data';
 import { L, t, tr, editionName, editionUrl, type Lang } from '../lib/site';
 interface Props { id: string; lang?: Lang }
 const { lang = 'cs' } = Astro.props;
 const m = model();
 const r = m.rankings[Astro.props.id];
+const years = Object.values(m.rankings).map((x: any) => ({ id: x.id, year: Number(x.year), href: L(`/vysledky/mcr/${x.year}/`, lang) }));
 ---
 <Base title={t(r.name, lang)} lang={lang} current="vysledky">
   <div class="wrap page">
     <div class="page-head">
       <a class="small" href={L('/vysledky/mcr/', lang)}>{tr(lang, 'Mistrovství ČR', 'Czech Championship')}</a>
       <h1>{t(r.name, lang)}</h1>
+      <YearNav items={years} current={r.id} lang={lang} />
       <p class="lede">
         {lang === 'en'
           ? `The best ${r.best_of} of ${r.editions.length} tournaments count (grey points do not count).` + (r.points === 'published' ? '' : ` The tournament winner gets ${r.table.scale} points and the last player 1, rounded to whole numbers. Only players who play for the Czech title are counted.`)
