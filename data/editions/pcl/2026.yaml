@@ -19,7 +19,7 @@ format:                     # z propozic PCL 2026, jednou za sezónu
     bracket: pcl-8          # skupiny po 8: ČF, SF, F + zápasy o umístění
     groups: ["1-8", "9-16"]
     best_of: { "1-8": 3, "1-8/5-8": 1, "9-16": 1 }
-    dates: { qf: 2026-11-04, sf: 2026-11-11, f: 2026-12-02 }   # podle playoff2026.html
+    dates: { qf: 2026-11-04, sf: 2026-11-11, f: 2027-01-06 }   # finále přesunuto na 6. 1. 2027 (Ondrej, 27. 11. 2026)
 
 roster:                     # soupiska z přihlášek
   - shoeb-ahmed-khan
