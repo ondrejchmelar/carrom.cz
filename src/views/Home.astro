@@ -20,7 +20,7 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
       <p class="hero-p">{nbsp(t(h.hero?.text, lang), lang)}</p>
       <div class="btn-row stack">
         <a class="btn btn-red" href={L('/ligy/', lang)}>{tr(lang, 'Kde si zahrát', 'Where to play')}</a>
-        <a class="btn btn-ghost" href={L('/hra-carrom/', lang)}>{tr(lang, 'Pravidla za dvě minuty', 'The rules in two minutes')}</a>
+        <a class="btn btn-ghost" href="#pravidla">{tr(lang, 'Pravidla za dvě minuty', 'The rules in two minutes')}</a>
       </div>
     </div>
     <div class="hero-board">
@@ -29,7 +29,7 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
     </div>
   </section>
 
-  <section class="how">
+  <section class="how" id="pravidla">
     <div class="wrap section">
       <h2>{tr(lang, 'Jak se hraje', 'How to play')}</h2>
       <ol class="steps">
