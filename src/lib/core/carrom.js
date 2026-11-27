@@ -284,21 +284,32 @@ export function tick(state) {
 
 // ---------------------------------------------------------------- rules
 
-function freeSpot(state) {
+// Placing a piece back (laws 70, 76, 80, 81): the queen goes on the centre spot, or as near as it
+// fits. A returned coin goes inside the outer circle (Ø 170 mm) but must not cover the small centre
+// circle; the spot nearest the centre that is free is used. Only when the circle is full does it go
+// just outside, as near the centre as possible.
+const OUTER_R = 85, CENTRE_R = 15.9;
+function freeSpot(state, kind = 'coin') {
   const R = geom(state).coin;
-  for (let ring = 0; ring < 12; ring++) {
-    const steps = ring === 0 ? 1 : ring * 8;
-    for (let s = 0; s < steps; s++) {
-      const a = (s / steps) * Math.PI * 2;
-      const x = CENTER + Math.cos(a) * ring * R * 1.2, y = CENTER + Math.sin(a) * ring * R * 1.2;
-      if (state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + R + 0.5)) return [x, y];
+  const free = (x, y) => state.pieces.every((p) => !p.inPlay || Math.hypot(p.x - x, p.y - y) >= p.r + R + 0.5);
+  const minD = kind === 'queen' ? 0 : CENTRE_R + R + 0.5;
+  const search = (maxD, stepMm) => {
+    let best = null, bestD = Infinity;
+    for (let dy = -maxD; dy <= maxD; dy += stepMm) {
+      for (let dx = -maxD; dx <= maxD; dx += stepMm) {
+        const d = Math.hypot(dx, dy);
+        if (d < minD || d > maxD || d >= bestD) continue;
+        if (free(CENTER + dx, CENTER + dy)) { best = [CENTER + dx, CENTER + dy]; bestD = d; }
+      }
     }
-  }
-  return [CENTER, CENTER];
+    return best;
+  };
+  if (kind === 'queen' && free(CENTER, CENTER)) return [CENTER, CENTER];
+  return search(OUTER_R - R, 1.5) ?? search(CENTER - R - 40, 3) ?? [CENTER, CENTER];
 }
 
 function returnPiece(state, piece) {
-  const [x, y] = freeSpot(state);
+  const [x, y] = freeSpot(state, piece.kind);
   Object.assign(piece, { x, y, vx: 0, vy: 0, inPlay: true });
   if (piece.kind === 'coin') state.pocketed[piece.color]--;
 }
@@ -359,10 +370,11 @@ export function endShot(state) {
   if (foul) {
     // Striker pocketed = due (L56–L60): your coins of this stroke go back plus one more.
     // With your own coin (or the queen) in the same stroke you play on, otherwise the turn ends.
-    for (const p of mine) returnPiece(state, p);
-    state.dues[me]++;
+    // The queen goes back first so it gets the centre spot (L80).
     if (queenIn) queenBack();                       // L89, L90
     else if (pending && !mine.length) queenBack();  // L91; with an own coin it stays to be covered (L92)
+    for (const p of mine) returnPiece(state, p);
+    state.dues[me]++;
     again = mine.length > 0 || queenIn;
     msg.push(again ? 'foul-on' : 'foul');
   } else {
@@ -394,7 +406,9 @@ export function endShot(state) {
   const queenFor = (c) => (state.queen.by === c ? qp(c) : 0);
   const myAll = state.pocketed[me] === 9, oppAll = state.pocketed[opp] === 9;
   if (foul) {
-    if (!covered && before + mine.length === 9) win(opp, pen(opp) + 1, 'last-own-striker');            // L98
+    // L98 only when the queen is still on the board; with the queen in the same stroke L89 applies:
+    // queen, coin and a due go back and you play on.
+    if (!covered && !queenIn && before + mine.length === 9) win(opp, pen(opp) + 1, 'last-own-striker'); // L98
     else if (oppAll && !covered) win(opp, left(me) + qp(opp) + 1, 'last-their-striker');          // L101
     else if (oppAll) win(opp, left(me) + queenFor(opp));
   } else if (myAll && oppAll) {

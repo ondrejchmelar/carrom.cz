@@ -36,9 +36,9 @@ const T = {
 
   <p class="cg-match" data-match aria-live="polite"></p>
   <div class="cg-score" aria-live="polite">
-    <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/<span data-total>3</span></span><span data-name="white"></span></span>
-    <span class="cg-mid"><span class="cg-total" aria-label={lang === 'en' ? 'Game score' : 'Stav zápasu'}><b data-tot="white">0</b><i>:</i><b data-tot="black">0</b></span><span class="cg-queen" data-queen></span></span>
-    <span class="cg-side" data-side="black"><span data-name="black"></span><span><b data-count="black">0</b>/<span data-total>3</span></span><i class="dot b"></i></span>
+    <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/<span data-total>3</span></span><span data-name="white"></span><i class="dot q" data-q="white" hidden></i></span>
+    <span class="cg-mid"><span class="cg-total" aria-label={lang === 'en' ? 'Game score' : 'Stav zápasu'}><b data-tot="white">0</b><i>:</i><b data-tot="black">0</b></span></span>
+    <span class="cg-side" data-side="black"><i class="dot q" data-q="black" hidden></i><span data-name="black"></span><span><b data-count="black">0</b>/<span data-total>3</span></span><i class="dot b"></i></span>
   </div>
 
   <div class="cg-stage">
@@ -252,7 +252,13 @@ const T = {
       $('[data-name="white"]').textContent = nameOf('white');
       $('[data-name="black"]').textContent = nameOf('black');
       root.querySelectorAll<HTMLElement>('.cg-side').forEach((el) => el.classList.toggle('on', el.dataset.side === state.turn && !state.winner));
-      $('[data-queen]').textContent = state.queen.state === 'board' ? '' : L.queen[state.queen.state as 'pending'];
+      // Red dot on the side of whoever has the queen: full when covered, a ring while waiting for cover.
+      for (const c of ['white', 'black'] as const) {
+        const q = $(`[data-q="${c}"]`);
+        q.hidden = state.queen.by !== c || state.queen.state === 'board';
+        q.classList.toggle('pending', state.queen.state === 'pending');
+        q.title = state.queen.state === 'pending' ? L.queen.pending : L.queen.covered;
+      }
       root.querySelectorAll<HTMLElement>('[data-total]').forEach((el) => (el.textContent = String(C.coinsOf(state))));
       $('[data-rules]').textContent = nb(state.easy ? L.rules.easy : L.rules.full);
       $('[data-status]').textContent = nb(statusText());
@@ -567,7 +573,9 @@ const T = {
   .cg-mid { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; }
   .cg-total { display: inline-flex; align-items: baseline; gap: 8px; font: 800 34px/1 var(--f-head); color: var(--navy); font-variant-numeric: tabular-nums; }
   .cg-total i { font-style: normal; color: var(--muted); font-size: 26px; }
-  .cg-queen { font-size: 13px; text-align: center; min-height: 1em; }
+  .dot.q { background: var(--red); border-color: var(--red); }
+  .dot.q.pending { background: transparent; border: 2.5px solid var(--red); }
+  .dot[hidden] { display: none; }
   .cg-help { position: absolute; left: 50%; top: 9%; transform: translateX(-50%); width: min(84%, 460px); padding: 14px 18px; border-radius: 16px; background: rgba(14, 27, 61, 0.92); color: #fff; font: 600 16px/1.4 var(--f-body); box-shadow: 0 6px 20px rgba(14, 27, 61, 0.25); pointer-events: none; }
   .cg-help[hidden] { display: none; }
   .cg-help strong { display: block; font: 800 18px/1.2 var(--f-head); margin-bottom: 6px; }

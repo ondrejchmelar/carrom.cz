@@ -214,3 +214,35 @@ test('from 22 points the queen adds nothing (law 37)', () => {
   s.fell = []; pocket(s, (q) => q.color === 'white', 8); C.endShot(s);
   assert.equal(s.winner, 'white'); assert.equal(s.points, 9);
 });
+
+test('last own coin + queen + striker in one stroke: queen, coin and a due go back, you play on (L89)', () => {
+  const s = fresh();
+  s.fell = []; pocket(s, (q) => q.color === 'white', 8); C.endShot(s);
+  assert.equal(s.winner, null);
+  s.fell = [{ kind: 'striker' }]; pocket(s, (q) => q.color === 'white'); pocket(s, (q) => q.kind === 'queen');
+  const r = C.endShot(s);
+  assert.equal(s.winner, null);
+  assert.equal(r.again, true);
+  assert.equal(s.pocketed.white, 7);
+  assert.ok(s.pieces[0].inPlay);
+});
+
+test('last own coin + queen without striker: queen covered, board won (L87)', () => {
+  const s = fresh();
+  s.fell = []; pocket(s, (q) => q.color === 'white', 8); C.endShot(s);
+  s.fell = []; pocket(s, (q) => q.color === 'white'); pocket(s, (q) => q.kind === 'queen'); C.endShot(s);
+  assert.equal(s.winner, 'white'); assert.equal(s.points, 9 + 3);
+});
+
+test('returned coins go inside the outer circle, off the centre circle; the queen on the centre (L70, L76, L80)', () => {
+  const s = fresh();
+  for (const p of s.pieces) p.inPlay = false;
+  s.pocketed.white = 9; s.pocketed.black = 9;
+  s.queen = { state: 'pending', by: 'white' }; s.dues.white = 0;
+  s.fell = [{ kind: 'striker' }]; s.turn = 'white';
+  C.endShot(s); // pending queen not covered on a foul: queen back, one due back
+  const q = s.pieces[0], coin = s.pieces.find((p) => p.kind === 'coin' && p.inPlay);
+  assert.ok(Math.hypot(q.x - C.CENTER, q.y - C.CENTER) < 0.01);
+  const d = Math.hypot(coin.x - C.CENTER, coin.y - C.CENTER);
+  assert.ok(d >= 15.9 + coin.r && d <= 85 - coin.r, `coin at ${d}`);
+});
