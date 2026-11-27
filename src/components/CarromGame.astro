@@ -48,7 +48,11 @@ const T = {
     <div class="cg-over" data-over hidden>
       <strong data-over-title></strong>
       <span data-over-text></span>
-      <button type="button" class="btn btn-red" data-again>{T.reset}</button>
+      <span class="cg-harder" data-harder-text hidden></span>
+      <div class="cg-over-btns">
+        <button type="button" class="btn btn-red" data-harder hidden></button>
+        <button type="button" class="btn btn-red" data-again>{T.reset}</button>
+      </div>
     </div>
   </div>
 
@@ -100,6 +104,7 @@ const T = {
         full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Striker se musí dotýkat obou čar (u kamene na čáře ho lze posunout dopředu či dozadu) a červené kolečko na konci čáry zakryje celé, nebo se ho nedotkne. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohraný board.',
       },
       won: (n: string) => `Board vyhrává ${n}.`, lost: 'Board vyhrál počítač.',
+      tryMid: 'Zkusit Střední', harderText: 'Lehká obtížnost je zvládnutá. Zkus Střední: plná pravidla, 9 kamenů a chytřejší soupeř.',
       matchYou: 'Vyhráváš zápas!', matchCpu: 'Zápas vyhrál počítač.', matchWon: (n: string) => `Zápas vyhrává ${n}!`,
       standing: (a: number, b: number) => `Stav zápasu ${a}:${b}.`, final: (a: number, b: number) => `Konečný stav ${a}:${b}.`,
       match: (t: number, b: number) => `Zápas do ${t} bodů, nejvýš 8 boardů · ${b}. board`, draw: 'Zápas skončil remízou.', nextBoard: 'Další board', newMatch: 'Nová hra', pts: (p: number) => `Board za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
@@ -139,6 +144,7 @@ const T = {
         full: 'ECC laws: whoever begins (breaks) has the white coins; players take turns to begin. 9 coins each. The striker must touch both base lines (next to a coin on the line it may sit a little forward or back) and must cover a red end circle entirely or not touch it. The break must touch a coin (three attempts). The queen may go in only after your first coin and must be covered. An opponent coin in a pocket is no foul, it stays out and counts for them. A pocketed striker costs a coin (a due). Your last coin before the queen loses the board.',
       },
       won: (n: string) => `${n} wins the board.`, lost: 'The computer wins the board.',
+      tryMid: 'Try Medium', harderText: 'You have mastered Easy. Try Medium: full rules, 9 coins each and a smarter opponent.',
       matchYou: 'You win the game!', matchCpu: 'The computer wins the game.', matchWon: (n: string) => `${n} wins the game!`,
       standing: (a: number, b: number) => `Game score ${a}:${b}.`, final: (a: number, b: number) => `Final score ${a}:${b}.`,
       match: (t: number, b: number) => `Game to ${t} points, at most 8 boards · board ${b}`, draw: 'The game is a draw.', nextBoard: 'Next board', newMatch: 'New game', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
@@ -274,6 +280,11 @@ const T = {
           $('[data-over-text]').textContent = nb(`${boardText} ${L.standing(totals.me, totals.other)}`);
         }
         $('[data-again]').textContent = matchOver ? L.newMatch : L.nextBoard;
+        // Won a game on Easy against the computer: suggest the next level.
+        const harder = matchOver === 'me' && mode === 'computer' && easy();
+        $('[data-harder]').hidden = !harder; $('[data-harder-text]').hidden = !harder;
+        $('[data-again]').classList.toggle('btn-ghost-light', harder); $('[data-again]').classList.toggle('btn-red', !harder);
+        if (harder) { $('[data-harder]').textContent = L.tryMid; $('[data-harder-text]').textContent = nb(L.harderText); }
       }
     }
 
@@ -532,6 +543,7 @@ const T = {
     }));
     levelSel.addEventListener('change', firstBoard);
     $('[data-reset]').addEventListener('click', firstBoard);
+    $('[data-harder]').addEventListener('click', () => { levelSel.value = 'mid'; firstBoard(); });
     $('[data-again]').addEventListener('click', () => (matchOver ? firstBoard() : nextBoard()));
     new ResizeObserver(resize).observe(canvas);
     reset();
@@ -569,6 +581,10 @@ const T = {
   canvas:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
   .cg-over { position: absolute; inset: 22% 12%; background: rgba(14, 27, 61, 0.94); color: #fff; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; padding: 20px; }
   .cg-over[hidden] { display: none; }
+  .cg-over-btns { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .cg-harder { font-weight: 600; }
+  .cg-harder[hidden], .cg-over-btns [hidden] { display: none; }
+  .cg-over .btn-ghost-light { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.6); }
   .cg-start { position: absolute; left: 50%; top: 60%; transform: translateX(-50%); display: inline-flex; align-items: center; gap: 10px; max-width: 86%; white-space: nowrap; padding: 10px 18px; border-radius: 999px; background: rgba(14, 27, 61, 0.92); color: #fff; font: 700 17px/1.25 var(--f-body); text-align: center; box-shadow: 0 6px 20px rgba(14, 27, 61, 0.25); pointer-events: none; }
   .cg-start[hidden] { display: none; }
   .cg-start .dot { flex: none; width: 16px; height: 16px; border: 2px solid #fff; }
