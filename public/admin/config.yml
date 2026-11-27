@@ -41,6 +41,10 @@ collections:
     summary: "{{competition}} {{year}} · {{status}}"
     sortable_fields: { fields: [start_date, competition], default: { field: start_date, direction: descending } }
     filter: { field: competition, pattern: "^(?!(pcl|cml|ol)$)" }
+    view_filters:
+      - { label: Plánované, field: status, pattern: "^planned$" }
+      - { label: Přihlášky otevřené, field: status, pattern: "^registration_open$" }
+      - { label: Odehrané, field: status, pattern: "^finished$" }
     view_groups: [{ label: Soutěž, field: competition }, { label: Rok, field: year }]
     fields: &edition_fields
       - { name: competition, label: Soutěž, widget: relation, collection: competitions, value_field: code, search_fields: [code, name.cs], display_fields: ["{{name.cs}}"] }
@@ -151,6 +155,10 @@ collections:
     summary: "{{competition}} {{year}} · {{status}}"
     sortable_fields: { fields: [start_date, competition], default: { field: start_date, direction: descending } }
     filter: { field: competition, pattern: "^(pcl|cml|ol)$" }
+    view_filters:
+      - { label: Probíhá, field: status, pattern: "^running$" }
+      - { label: Přihlášky otevřené, field: status, pattern: "^registration_open$" }
+      - { label: Skončené, field: status, pattern: "^finished$" }
     view_groups: [{ label: Soutěž, field: competition }, { label: Rok, field: year }]
     fields: *edition_fields
 
