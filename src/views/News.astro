@@ -31,6 +31,20 @@ const years = [...new Set(news.map((a) => a.year))].sort((a, b) => b - a);
       <h1>{tr(lang, 'Novinky', 'News')}</h1>
       <p class="lede">{tr(lang, 'Co se chystá a co se stalo: kalendář akcí a zprávy z\u00a0turnajů a lig.', 'What is coming and what happened: the event calendar and stories from tournaments and leagues.')}</p>
     </div>
+    <section class="section stories">
+      <h2>{tr(lang, 'Zprávy', 'Stories')}</h2>
+      {lang === 'en' && <p class="small">{'Most stories are written in Czech. Those marked “in Czech” have no English version yet.'}</p>}
+      {latest.length === 0 && <p class="muted">{tr(lang, 'Zatím žádné zprávy.', 'No stories yet.')}</p>}
+      <div class="grid news">
+        {latest.map((a) => (
+          <a class="card" href={L(`/novinky/${a.year}/${a.slug}/`, lang)}>
+            <span class="eyebrow">{dateShort(a.date, true, lang)}{a.czechOnly ? ' · in Czech' : ''}</span>
+            <strong class="news-title">{a.entry.data.title}</strong>
+            {a.entry.data.perex && <span class="small">{nbsp(a.entry.data.perex, a.czechOnly ? 'cs' : lang)}</span>}
+          </a>
+        ))}
+      </div>
+    </section>
     <div class="layout">
       <section class="main" id="kalendar" aria-labelledby="kal-h">
         <div class="cal-head">
@@ -70,21 +84,7 @@ const years = [...new Set(news.map((a) => a.year))].sort((a, b) => b - a);
       </aside>
     </div>
     <section class="section">
-      <h2>{tr(lang, 'Zprávy', 'Stories')}</h2>
-      {lang === 'en' && <p class="small">{'Most stories are written in Czech. Those marked “in Czech” have no English version yet.'}</p>}
-      {latest.length === 0 && <p class="muted">{tr(lang, 'Zatím žádné zprávy.', 'No stories yet.')}</p>}
-      <div class="grid news">
-        {latest.map((a) => (
-          <a class="card" href={L(`/novinky/${a.year}/${a.slug}/`, lang)}>
-            <span class="eyebrow">{dateShort(a.date, true, lang)}{a.czechOnly ? ' · in Czech' : ''}</span>
-            <strong class="news-title">{a.entry.data.title}</strong>
-            {a.entry.data.perex && <span class="small">{nbsp(a.entry.data.perex, a.czechOnly ? 'cs' : lang)}</span>}
-          </a>
-        ))}
-      </div>
-    </section>
-    <section class="section">
-      <h2>{tr(lang, 'Archiv podle let', 'Archive by year')}</h2>
+      <h2>{tr(lang, 'Archiv zpráv', 'News archive')}</h2>
       <p class="muted">{tr(lang, 'Všechny zprávy ze starého webu, od roku 2006.', 'All stories from the old site, since 2006 (in Czech).')}</p>
       <div class="chips">{years.map((y) => <a class="chip" href={L(`/novinky/${y}/`, lang)}>{y}</a>)}</div>
     </section>
