@@ -88,6 +88,10 @@ const warnings: string[] = m.warnings ?? [];
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="robots" content="noindex" />
   <title>Přehled · Administrace carrom.cz</title>
+  <script is:inline define:vars={{ login: url('/admin/') }}>
+    // Jen pro přihlášené do administrace (Sveltia ukládá přihlášení do localStorage). Není to zabezpečení: data jsou veřejná v repozitáři.
+    try { if (!localStorage.getItem('sveltia-cms.user')) location.replace(login); } catch (e) { location.replace(login); }
+  </script>
   <link rel="icon" href={url('/favicon.ico')} />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;600;700&display=swap" />
   <style>
