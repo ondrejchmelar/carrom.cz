@@ -19,6 +19,6 @@ test('MČR 2025: published table, Karlos Novák is champion with 200', () => {
   const r = loadModel().rankings['mcr-2025'];
   assert.equal(r.table.rows[0].player, 'karlos-novak');
   assert.equal(r.table.rows[0].total, 200);
-  const druhy = r.check.find((c) => c.edition === 'druhy/2025');
-  assert.equal(druhy.status, 'ok');
+  const letohrad = r.check.find((c) => c.edition === 'letohrad/2025');
+  assert.equal(letohrad.status, 'ok');
 });

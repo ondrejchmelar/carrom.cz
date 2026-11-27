@@ -1,7 +1,7 @@
 year: 2016
 audience: open
 name: { cs: Mistrovství ČR 2016, en: Czech Championship 2016 }
-editions: [jarni/2016, druhy/2016, cocp/2016]
+editions: [jarni/2016, letohrad/2016, cocp/2016]
 best_of: 2
 points: published           # published = opsané ze starého webu | computed = spočítá build
 scale: 1000

@@ -1,7 +1,7 @@
 year: 2026
 audience: open
 name: { cs: Mistrovství ČR 2026, en: Czech Championship 2026 }
-editions: [jarni/2026, druhy/2026, cocp/2026]
+editions: [jarni/2026, letohrad/2026, cocp/2026]
 best_of: 2
 points: published           # published = opsané ze starého webu | computed = spočítá build
 scale: 100

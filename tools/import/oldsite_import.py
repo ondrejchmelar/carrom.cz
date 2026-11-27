@@ -15,7 +15,8 @@ import yaml
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 DATA = os.path.join(ROOT, 'data')
 DRY = '--dry' in sys.argv
-CZECH_COMPS = {'pcl', 'cml', 'cocp', 'druhy', 'jarni', 'tcc', 'mcr', 'mcrj'}
+NEW_CODE = {'druhy': 'letohrad'}  # old-site code -> new code
+CZECH_COMPS = {'pcl', 'cml', 'cocp', 'letohrad', 'jarni', 'tcc', 'mcr', 'mcrj'}
 
 # ------------------------------------------------------------------ helpers
 
@@ -381,7 +382,7 @@ def main():
         m = (re.match(r'/turnaje/(cocp|druhy|jarni|tcc)/\1_(\d{4})\.php$', path)
              or re.match(r'/(pcl|cml|ecc|ol)/\1_(\d{4})\.php$', path))
         if m:
-            code, year = m.group(1), int(m.group(2))
+            code, year = NEW_CODE.get(m.group(1), m.group(1)), int(m.group(2))
             res = []
             for t in page['tables']:
                 res = parse_results(t, code, czech=(code != 'ecc'), ecc_year=(year if code == 'ecc' else None))
@@ -410,9 +411,9 @@ def main():
                     pts = [num(r[i]) if i < len(r) else None for i in cols]
                     mx = max([mx] + [p for p in pts if p])
                     stand.append((pid, pts))
-                editions_ids = [f'jarni/{year}', f'druhy/{year}', f'cocp/{year}']
+                editions_ids = [f'jarni/{year}', f'letohrad/{year}', f'cocp/{year}']
                 rankings_written(year, stand, editions_ids, 1000 if mx > 100 else 100, path)
-                for c in ('jarni', 'druhy', 'cocp'):
+                for c in ('jarni', 'letohrad', 'cocp'):
                     editions.setdefault((c, year), {'code': c, 'year': year, 'report': '', 'results': {}, 'old_url': [], 'external': None, 'start': None, 'end': None})
             if junior:
                 res = parse_results(junior, 'mcrj')
@@ -494,7 +495,7 @@ def redirects(pages, editions):
         '/carrom/': '/hra-carrom/', '/galerie/': '/galerie/', '/kalendar/': '/kalendar/', '/odkazy/': '/vice/',
         '/kontakty/': '/asociace/#kontakty', '/turnaje/': '/vysledky/', '/turnaje/index.php': '/vysledky/', '/mcr/': '/vysledky/mcr/',
         '/ecc/': '/vysledky/ecc/', '/pcl/': '/ligy/pcl/', '/cml/': '/ligy/cml/', '/ol/': '/ligy/ol/', '/ts/': '/vysledky/',
-        '/ts/ts_2014.php': '/vysledky/', '/turnaje/cocp/': '/vysledky/cocp/', '/turnaje/druhy/': '/vysledky/druhy/',
+        '/ts/ts_2014.php': '/vysledky/', '/turnaje/cocp/': '/vysledky/cocp/', '/turnaje/druhy/': '/vysledky/letohrad/',
         '/turnaje/jarni/': '/vysledky/jarni/', '/turnaje/tcc/': '/vysledky/tcc/', '/ecc/ecc_story_2011.php': '/vysledky/ecc/2011/',
         '/english/': '/en/', '/kalendar.php': '/kalendar/', '/vysledky.php': '/vysledky/',
     }
@@ -505,7 +506,7 @@ def redirects(pages, editions):
             continue
         m = re.match(r'/turnaje/(cocp|druhy|jarni|tcc)/\1_(\d{4})\.php$', p) or re.match(r'/(ecc)/ecc_(\d{4})\.php$', p)
         if m:
-            out[p] = f'/vysledky/{m.group(1)}/{m.group(2)}/'; continue
+            out[p] = f'/vysledky/{NEW_CODE.get(m.group(1), m.group(1))}/{m.group(2)}/'; continue
         m = re.match(r'/(pcl|cml|ol)/\1_(\d{4})\.php$', p)
         if m:
             out[p] = f'/ligy/{m.group(1)}/{m.group(2)}/'; continue

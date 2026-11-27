@@ -12,9 +12,9 @@ DOC_EXT = ('.pdf', '.doc', '.docx', '.xls', '.xlsx')
 MAX_BYTES = 8_000_000
 KIND_CS = {'results': 'Výsledky', 'propozice': 'Propozice', 'rules': 'Pravidla', 'poster': 'Plakát', 'minutes': 'Zápis', 'statutes': 'Stanovy', 'other': 'Dokument'}
 KIND_EN = {'results': 'Results', 'propozice': 'Tournament information', 'rules': 'Rules', 'poster': 'Poster', 'minutes': 'Minutes', 'statutes': 'Statutes', 'other': 'Document'}
-COMP_CS = {'pcl': 'Pražská carromová liga', 'cml': 'Medlešická liga', 'cocp': 'Carrom Open Cup Praha', 'druhy': 'Turnaj MČR Letohrad',
+COMP_CS = {'pcl': 'Pražská carromová liga', 'cml': 'Medlešická liga', 'cocp': 'Carrom Open Cup Praha', 'letohrad': 'Turnaj MČR Letohrad',
            'jarni': 'Jarní turnaj MČR', 'tcc': 'Terrace Carrom Cup', 'ecc': 'Carrom Eurocup', 'mcr': 'Mistrovství ČR', 'ol': 'Bernard Opoliga'}
-COMP_EN = {'pcl': 'Prague Carrom League', 'cml': 'Medlešice League', 'cocp': 'Carrom Open Cup Prague', 'druhy': 'Letohrad Czech Championship tournament',
+COMP_EN = {'pcl': 'Prague Carrom League', 'cml': 'Medlešice League', 'cocp': 'Carrom Open Cup Prague', 'letohrad': 'Letohrad Czech Championship tournament',
            'jarni': 'Spring Czech Championship tournament', 'tcc': 'Terrace Carrom Cup', 'ecc': 'Carrom Eurocup', 'mcr': 'Czech Championship', 'ol': 'Bernard Opoliga'}
 
 
@@ -60,7 +60,7 @@ def main():
         m = (re.match(r'/turnaje/(cocp|druhy|jarni|tcc)/\1_(\d{4})\.php$', page_path)
              or re.match(r'/(pcl|cml|ecc|ol)/\1_(\d{4})\.php$', page_path)
              or re.match(r'/(mcr)/mcr_(\d{4})\.php$', page_path))
-        edition = f'{m.group(1)}/{m.group(2)}' if m and m.group(1) != 'mcr' else None
+        edition = f"{ {'druhy': 'letohrad'}.get(m.group(1), m.group(1))}/{m.group(2)}" if m and m.group(1) != 'mcr' else None
         for href, text in page['links']:
             if not href or href.lower().startswith(('mailto:', 'javascript:')):
                 continue

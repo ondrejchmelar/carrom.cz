@@ -13,4 +13,4 @@ source: old-site
 
 [Jarní turnaj](/vysledky/jarni/2013/) proběhne 29. března 2014 v Pelhřimově.
 
-[Druhý turnaj](/vysledky/druhy/2013/) se odehraje 27. září a rok 2014 uzavře 15. listopadu 9. ročník [Carrom Open Cupu Praha](/vysledky/cocp/2013/).
+[Druhý turnaj](/vysledky/letohrad/2013/) se odehraje 27. září a rok 2014 uzavře 15. listopadu 9. ročník [Carrom Open Cupu Praha](/vysledky/cocp/2013/).

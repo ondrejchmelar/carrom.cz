@@ -13,4 +13,4 @@ source: old-site
 
 proběhl 27. září pod záštitou europoslance pana Tomáše Zdechovského v Letohradě. Vyhrál Filip Smoljak před Zdeňkem Svitákem. Při absenci vítěze Jarního turnaje Tadeáše Matyse se o letošním mistrovi zatím nerozhodlo a na jméno nového mistra si budeme muset počkat až na pražský Open Cup, který proběhne 15. listopadu.
 
-Celkové pořadí [zde](/vysledky/druhy/2014/)
+Celkové pořadí [zde](/vysledky/letohrad/2014/)

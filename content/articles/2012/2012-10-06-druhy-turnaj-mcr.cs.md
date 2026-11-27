@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-byl odehrán 6. října 2012 v restauraci U Sálavců ve Vysoké nad Labem. Velice příjemný turnaj měl sice nižší počet účastníků, ale o to vyrovnanější zápasy. Vyhrál Zdeněk Sviták, který v dramatickém finále porazil Horsta Šimunského 25:20. Celkové pořadí [zde](/vysledky/druhy/2012/).
+byl odehrán 6. října 2012 v restauraci U Sálavců ve Vysoké nad Labem. Velice příjemný turnaj měl sice nižší počet účastníků, ale o to vyrovnanější zápasy. Vyhrál Zdeněk Sviták, který v dramatickém finále porazil Horsta Šimunského 25:20. Celkové pořadí [zde](/vysledky/letohrad/2012/).
