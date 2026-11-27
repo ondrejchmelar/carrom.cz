@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-našla nové útočiště v dejvické kavárně UŽ JSME DOMA, kde se jistě budeme cítit jako doma.
+našla nové útočiště v dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/), kde se jistě budeme cítit jako doma.

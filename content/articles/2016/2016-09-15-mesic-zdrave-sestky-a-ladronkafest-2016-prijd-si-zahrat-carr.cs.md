@@ -13,7 +13,7 @@ source: old-site
 
 Během září máte hned několik možnosti přijít si zahrát carrom.
 
-Čtvrtky 1. a 15. 9. od 19 hodin se na vás budeme těšit v dejvické kavárně UŽ JSME DOMA v rámci Měsíce zdravé šestky.
+Čtvrtky 1. a 15. 9. od 19 hodin se na vás budeme těšit v dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/) v rámci Měsíce zdravé šestky.
 
 Další akce Měsíce zdravé šestky najdete [zde](http://www.zdrava6.cz/).
 

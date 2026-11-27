@@ -15,4 +15,4 @@ Svést urputné boje s evropskou carromovou špičkou a nasbírat další zku�
 
 z letiště Václava Havla
 
-do Londýna 6ti členná výprava. Držte palce. Více informací o Eurocupu na webu 18thcarromeurocup2014.ukcarromfed.com.
+do Londýna 6ti členná výprava. Držte palce. Více informací o Eurocupu [zde](http://www.18thcarromeurocup2014.ukcarromfed.com/).

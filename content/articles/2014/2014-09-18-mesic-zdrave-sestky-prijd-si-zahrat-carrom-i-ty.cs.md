@@ -13,8 +13,8 @@ source: old-site
 
 veřejné hraní
 
-proběhne ve čtvrtek 18. září mezi 19:00 a 23:00 hodinou v dejvické kavárně UŽ JSME DOMA.
+proběhne ve čtvrtek 18. září mezi 19:00 a 23:00 hodinou v dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/).
 
 Všichni jste srdečně zváni.
 
-Další akce Měsíce zdravé šestky najdete zde.
+Další akce Měsíce zdravé šestky najdete [zde](http://www.zdravasestka.cz/).

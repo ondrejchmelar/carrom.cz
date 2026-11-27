@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Další oblíbené hraní carromu proběhne ve čtvrtek 27. června od 18:00 hodin v Café Bar MANTA, Kořenského 5, Praha 5, Smíchov. Všichni jste srdečně zváni.
+Další oblíbené hraní carromu proběhne ve čtvrtek 27. června od 18:00 hodin v [Café Bar MANTA](http://www.dcmanta.cz/cafebarmanta.html), Kořenského 5, Praha 5, Smíchov. Všichni jste srdečně zváni.

@@ -19,4 +19,4 @@ Celkové pořadí jednotlivců najdete [zde](/uploads/archiv/adresar_dokumenty/e
 
 Soutěž týmů vyhrála Francie před Velkou Británii a Polskem.
 
-Více informcí najdete na Eurocup.
+Více informcí najdete na [Eurocup](https://carrom.pl/eurocup2022/).

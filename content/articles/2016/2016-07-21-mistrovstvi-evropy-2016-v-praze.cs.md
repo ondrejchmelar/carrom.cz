@@ -13,11 +13,11 @@ source: old-site
 
 20. Mistrovství Evropy v carromu je za námi. Gratulujeme vítězům.
 
-Děkujeme MČ Praha 3, starostce Vladislavě Hujové,
+Děkujeme [MČ Praha 3, starostce Vladislavě Hujové](http://www.praha3.cz/radnicni-noviny/zpravy/praha-3-hostila-me-v-carromu-n135078.htm),
 
 senátorovi
 
-Petru Šilarovi
+[Petru Šilarovi](http://www.petr-silar.cz/)
 
 a [Německé carromové federaci](http://www.carrom.de/) za velikou pomoc a podporu.
 

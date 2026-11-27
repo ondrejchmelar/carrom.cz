@@ -23,4 +23,4 @@ Výsledky čtyřher najdete [zde](/uploads/archiv/adresar_dokumenty/TourneyRanki
 
 ![](/uploads/archiv/novinky/cr_tym.jpg)
 
-Více informací zde.
+Více informací [zde.](http://eurocup2023.ukcarromfed.com/)

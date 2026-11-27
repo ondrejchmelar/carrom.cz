@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Babí léto vybízí k projíždkám na kole, čí procházkám po pražském nábřeží. Nezapomeňte se zastavit v [BAJKAZYLU](http://www.bajkazyl.cz/). Můžete si zde zahrát carrom a vychutnat  dobrou kávu. Další možnost je 10. až 12. října v Tyršově domě na pražské Malé Straně, kde probíhá 11. ročník festivalu her  DESKOHRANÍ.
+Babí léto vybízí k projíždkám na kole, čí procházkám po pražském nábřeží. Nezapomeňte se zastavit v [BAJKAZYLU](http://www.bajkazyl.cz/). Můžete si zde zahrát carrom a vychutnat  dobrou kávu. Další možnost je 10. až 12. října v Tyršově domě na pražské Malé Straně, kde probíhá 11. ročník festivalu her  [DESKOHRANÍ](http://deskohrani.cz/cgi/mso/index.pl?telo=text.pl&text=uvod.htm&jazyk=cs&rok=2011).

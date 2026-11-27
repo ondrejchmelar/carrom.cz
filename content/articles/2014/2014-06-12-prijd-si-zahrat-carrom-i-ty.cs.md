@@ -11,6 +11,6 @@ date_approx: true
 source: old-site
 ---
 
-veřejné hraní proběhne ve čtvrtek 12. června mezi 20:00 a 23:00 hodinou v dejvické kavárně UŽ JSME DOMA.
+veřejné hraní proběhne ve čtvrtek 12. června mezi 20:00 a 23:00 hodinou v dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/).
 
 Všichni jste srdečně zváni.

@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-V letošním roce se uskuteční dvě významné mezinárodní carromové akce. 16. Carrom Eurocup 2012 od 14. do 18. června v Darmstadtu a v říjnu bude Sri Lanka hostit Mistrovství světa v carromu.
+V letošním roce se uskuteční dvě významné mezinárodní carromové akce. [16. Carrom Eurocup 2012](http://www.eurocup2012.carrom.de/) od 14. do 18. června v Darmstadtu a v říjnu bude Sri Lanka hostit Mistrovství světa v carromu.

@@ -11,6 +11,6 @@ date_approx: true
 source: old-site
 ---
 
-Letošní Eurocup se neuskuteční.
+Letošní [Eurocup](https://carrom.pl/eurocup2020/) se neuskuteční.
 
 Pořadatelství v Polsku se přesouvá na rok 2021.

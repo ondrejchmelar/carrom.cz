@@ -15,6 +15,6 @@ Všechny zveme na pořádný biják! Festival začíná jíž tuto středu 22. 1
 
 trhákem
 
-Sholay 3D
+[Sholay 3D](http://www.kinolucerna.cz/klient-263/kino-68/stranka-2745/film-29974)
 
 a pokračuje až do neděle 26. října v kině Světozor. Mimo bollywoodské klasiky a novinky budou poprvé představeny filmy lollywodské, tedy pakistánské a samozřejmě nebudou chybět zajímavé dokumentární snímky. Program a vše důležité najdete na [bollywood.cz](http://www.bollywood.cz/). A co by to bylo za Bollywood Melu bez carromu.

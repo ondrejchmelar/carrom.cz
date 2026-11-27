@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Poslední letošní veřejné hraní proběhne ve čtvrtek 28. listopadu mezi 19:00 a 22:00 hodinou v dejvické kavárně UŽ JSME DOMA. Všichni jste srdečně zváni.
+Poslední letošní veřejné hraní proběhne ve čtvrtek 28. listopadu mezi 19:00 a 22:00 hodinou v dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/). Všichni jste srdečně zváni.

@@ -15,8 +15,8 @@ Následující dvě kola PCL, tedy 16. 8. a 30. 8. vždy od 19 hodin bude možn
 
 [Čítárně Unijazzu,](http://citarna.unijazz.cz/) Jindřišská 5, Praha 1.
 
-12. a 26. září se hraje v Café Lajka, U Akademie 11, Praha 7.
+12. a 26. září se hraje v [Café Lajka,](http://www.cafelajka.cz/) U Akademie 11, Praha 7.
 
 Další hraní tohoto ročníku PCL budou odehrány v Nízkoprahovém klubu
 
-Husita, Nám. Barikád 1, Praha 3 – Žižkov
+[Husita,](https://npkhusita.husitskecentrum.cz/) Nám. Barikád 1, Praha 3 – Žižkov

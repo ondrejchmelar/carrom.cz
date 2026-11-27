@@ -15,7 +15,7 @@ Všechny srdečně zveme na další veřejné hraní, které se uskuteční v p
 
 tedy 27. října od 19:00 hodin v
 
-dejvické kavárně UŽ JSME DOMA.
+dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/).
 
 Přijďte sami nebo s kamarády. My vás to naučíme.
 

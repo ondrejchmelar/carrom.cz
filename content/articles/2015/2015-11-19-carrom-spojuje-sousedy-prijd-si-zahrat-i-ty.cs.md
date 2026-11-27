@@ -13,7 +13,7 @@ source: old-site
 
 Všechny srdečně zveme na letošní poslední veřejné hraní, které se uskuteční 3. prosince od 20:00 hodin v
 
-dejvické kavárně UŽ JSME DOMA.
+dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/).
 
 Přijďte sami nebo s kamarády. My vás to naučíme.
 

@@ -13,6 +13,6 @@ source: old-site
 
 veřejné hraní proběhne ve čtvrtek 17. dubna mezi 19:00 a 23:00 hodinou v
 
-dejvické kavárně UŽ JSME DOMA.
+dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/).
 
 Všichni jste srdečně zváni.

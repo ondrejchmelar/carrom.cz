@@ -19,6 +19,6 @@ Jarní turnaj - první ze tří turnajů o mistra ČR za rok 2019 proběhl v s
 
 [Zde jsou kompletní výsledky Jarního turnaje.](/uploads/archiv/adresar_dokumenty/jarni_turnaj_2019_vysledky.pdf)
 
-Fotky z carromového víkendu v Pelhřimově najdete zde.
+Fotky z carromového víkendu v Pelhřimově najdete [zde](https://www.irista.com/gallery/ymc51gr98ptv).
 
 Velké díky za přípravu obou turnajů patří SPŠ a SOU Pelhřimov a za podporu městu Pelhřimov a kraji Vysočina.

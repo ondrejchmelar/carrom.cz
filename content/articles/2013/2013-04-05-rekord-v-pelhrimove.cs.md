@@ -11,7 +11,7 @@ date_approx: true
 source: old-site
 ---
 
-5. dubna byl představen agenturou Dobrý den největší carromový board v České republice o rozměrech 164 x 164 cm, který vyrobili studenti [Středního odborného učiliště v Pelhřimově.](http://www.spssou-pe.cz)
+5. dubna byl představen agenturou [Dobrý den](http://www.dobryden.cz/novinky/chysta-se/) největší carromový board v České republice o rozměrech 164 x 164 cm, který vyrobili studenti [Středního odborného učiliště v Pelhřimově.](http://www.spssou-pe.cz)
 
 ![](/uploads/archiv/novinky/rekord.jpg)
 
