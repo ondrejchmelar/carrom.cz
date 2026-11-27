@@ -93,6 +93,7 @@ const rows = editions.map((ed: any) => {
       ? cmsNew('league_evenings', { season: `pcl-${ed.year}` }) : null,
     playoffHref: ed.code === 'pcl' && ed.status !== 'finished' && !(m.seasons as any)[ed.id]?.hasPlayoff
       ? cmsNew('league_playoff', { league: `pcl-${ed.year}`, seeds: 'auto' }) : null,
+    playoffEditHref: ed.code === 'pcl' && ed.phase === 'playoff' && (m.seasons as any)[ed.id]?.hasPlayoff ? cms('league_playoff', `pcl-${ed.year}/playoff`) : null,
     articleHref: cmsNew('articles', { edition: ed.id, tags: ed.competition.kind === 'league' ? 'ligy' : ed.competition.category === 'abroad' ? 'zahranici' : 'turnaje' }),
   };
 });
@@ -193,6 +194,7 @@ const warnings: string[] = m.warnings ?? [];
                 <span class="acts">
                   {r.eveningHref && <a href={r.eveningHref}>Zapsat večer</a>}
                   {r.playoffHref && <a href={r.playoffHref}>Založit playoff</a>}
+                  {r.playoffEditHref && <a href={r.playoffEditHref}>Zapsat playoff</a>}
                   <a href={r.articleHref}>Napsat zprávu</a>
                 </span>
               </span>
