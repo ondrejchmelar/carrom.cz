@@ -31,7 +31,16 @@ const SHOW = 4;
       <p class="lede">{page?.data.description}</p>
     </div>
     <div class="cols">
-      <div class="prose">{Content && <Content />}</div>
+      <div class="main">
+        <div class="prose">{Content && <Content />}</div>
+        <section class="card pad" id="kontakty">
+          <h2 class="h">{tr(lang, 'Kontakty', 'Contacts')}</h2>
+          <dl class="contacts">
+            {contacts.map(([k, v]) => <div><dt>{k}</dt><dd><a href={`mailto:${v}`}>{v}</a></dd></div>)}
+          </dl>
+          <p class="small">{t(s.org, lang)}, z.s. · {s.address} · {tr(lang, 'IČ', 'Reg. no.')} {s.ico}{s.data_box ? ` · ${tr(lang, 'Datová schránka', 'Data box')} ${s.data_box}` : ''}</p>
+        </section>
+      </div>
       <div class="side">
         <section class="card pad" id="platba">
           <h2 class="h">{tr(lang, 'Platba startovného a ligových poplatků', 'Paying entry and league fees')}</h2>
@@ -58,19 +67,13 @@ const SHOW = 4;
             </div>
           ))}
         </section>
-        <section class="card pad" id="kontakty">
-          <h2 class="h">{tr(lang, 'Kontakty', 'Contacts')}</h2>
-          <dl class="contacts">
-            {contacts.map(([k, v]) => <div><dt>{k}</dt><dd><a href={`mailto:${v}`}>{v}</a></dd></div>)}
-          </dl>
-          <p class="small">{t(s.org, lang)}, z.s. · {s.address} · {tr(lang, 'IČ', 'Reg. no.')} {s.ico}{s.data_box ? ` · ${tr(lang, 'Datová schránka', 'Data box')} ${s.data_box}` : ''}</p>
-        </section>
       </div>
     </div>
   </div>
 </Base>
 <style>
   .cols { display: grid; gap: 32px; }
+  .main { display: flex; flex-direction: column; gap: 32px; }
   .side { display: flex; flex-direction: column; gap: 16px; }
   .pad { padding: 22px; gap: 10px; border-radius: 18px; }
   .h { font-size: 22px; }
