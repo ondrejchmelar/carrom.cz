@@ -54,6 +54,8 @@ p { margin: 0; }
 
 /* sections: mobile 24 first / 40 between; desktop 64 */
 .page { padding-block: 24px 40px; display: flex; flex-direction: column; gap: 40px; }
+/* The header emblem hangs 18px below the bar from 400px wide: keep content clear of it. */
+@media (min-width: 400px) { .page { padding-top: 36px; } }
 .page-head { display: flex; flex-direction: column; gap: 12px; }
 .section { display: flex; flex-direction: column; gap: 16px; }
 .section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
