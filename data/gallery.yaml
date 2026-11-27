@@ -38,6 +38,7 @@ albums:
     url: "http://zdenektichy.jalbum.net/carrom/2023_open/index.html"
   - title: { cs: "Carromový turnaj na indickém velvyslanectví v Praze", en: "Carrom tournament at the Indian Embassy, Prague" }
     year: "2023"
+    cover: /uploads/galerie/indicke-velvyslanectvi-2023.jpg
     url: "https://photos.google.com/share/AF1QipPLZDbE91o8L6hwDmwi62W3skGs1EDETXsiMZ9dOpgwAr3reI2K0H1c7MkUnmBahw?pli=1&key=M2lJMTdNby1tQ0ZUV2JZTlpvYllzR2ZRc0hyd0d3"
   - title: { cs: "17. Carrom Open Cup Praha 2022", en: "17th Carrom Open Cup Prague 2022" }
     year: "2022"
