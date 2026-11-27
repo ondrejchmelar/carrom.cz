@@ -139,6 +139,7 @@ albums:
     url: "https://www.lib.cas.cz/zt/carrom/album/2013_open/index.html"
   - title: { cs: "Pakistán Karáčí 2013", en: "Karachi, Pakistan 2013" }
     year: "2013"
+    cover: /uploads/galerie/pakistan-2013.jpg
     url: "http://carrom.rajce.idnes.cz/carrom_-_Pakistan_2013/"
   - title: { cs: "Jarní turnaj Pelhřimov 2013", en: "Spring tournament Pelhřimov 2013" }
     year: "2013"
