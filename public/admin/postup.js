@@ -76,6 +76,10 @@
         links.length ? h('div', { className: 'links' }, links) : null,
         id && !ctx.page && ctxAll ? h('p', { className: 'note' }, 'Odkazy se objeví po uložení a přestavění webu.') : null,
       ),
+      ctx.page ? h('div', { className: 'page' },
+        h('div', { className: 'page-head' }, h('b', null, 'Stránka na webu'), h('span', null, 'zveřejněná verze')),
+        h('iframe', { src: new URL(ctx.page, location.href).href, title: 'Stránka ročníku na webu', loading: 'lazy' }),
+      ) : null,
     );
   }
 
@@ -95,6 +99,10 @@
     .todo { margin: 0 0 14px; padding-left: 18px; font-size: 14px; color: #E6EAF4; display: grid; gap: 6px; }
     .ok, .note { margin: 0 0 14px; font-size: 14px; color: #B9C3DD; }
     .links { display: flex; flex-wrap: wrap; gap: 8px; }
+    .page { margin-top: 20px; }
+    .page-head { display: flex; justify-content: space-between; align-items: baseline; margin: 0 4px 8px; font-size: 14px; }
+    .page-head span { color: #5A6680; }
+    .page iframe { display: block; width: 100%; height: 1400px; border: 1px solid #DDE1EA; border-radius: 12px; background: #fff; }
     .links a { height: 36px; padding: 0 14px; border: 1px solid #3A4B78; border-radius: 18px; display: inline-flex; align-items: center; color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; }
   `, { raw: true });
 })();
