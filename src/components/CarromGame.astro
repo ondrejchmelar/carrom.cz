@@ -67,11 +67,11 @@ const T = {
   const TXT = {
     cs: {
       you: 'Ty', cpu: 'Počítač', p1: 'Hráč 1', p2: 'Hráč 2', white: 'bílé', black: 'černé',
-      yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Začínáš ty, a proto máš bílé kameny. Rozstřel!', cpuBreaks: 'Tuhle sadu začíná počítač, a proto má bílé. Ty máš černé.', starts: (n: string) => `Začíná ${n}, a proto má bílé kameny. Rozstřel!`,
+      yourTurn: (c: string) => `Jsi na tahu, hraješ ${c}.`, youBreak: 'Začínáš ty, a proto máš bílé kameny. Rozstřel!', cpuBreaks: 'Tento board začíná počítač, a proto má bílé. Ty máš černé.', starts: (n: string) => `Začíná ${n}, a proto má bílé kameny. Rozstřel!`,
       badgeYou: 'Začínáš ty: máš bílé', badgeCpu: 'Začíná počítač: má bílé', badge: (n: string) => `Začíná ${n}: má bílé`, cpuThinks: 'Počítač přemýšlí…', cpuShoots: 'Hraje počítač.',
       turnOf: (n: string, c: string) => `Na tahu: ${n} (${c}).`,
       blocked: 'Tady se striker nevejde mezi kameny. Posuň ho.',
-      lastFull: 'Pozor: zbývá ti poslední kámen. Nejdřív dej a potvrď královnu, jinak sadu prohraješ.',
+      lastFull: 'Pozor: zbývá ti poslední kámen. Nejdřív dej a potvrď královnu, jinak board prohraješ.',
       lastEasy: 'Pozor: zbývá ti poslední kámen. Nejdřív dej a potvrď královnu, jinak se kámen vrátí.',
       own: 'Kámen v díře, hraješ znovu.', theirs: 'Do díry šel soupeřův kámen.', miss: 'Nic nespadlo.',
       foul: 'Faul: striker v díře. Jeden tvůj kámen jde zpět na desku (nemáš-li žádný, dlužíš ho) a tah končí.',
@@ -96,13 +96,13 @@ const T = {
       queen: { board: 'Královna na desce', pending: 'Královna čeká na potvrzení', covered: 'Královna potvrzená', easy: 'Královna v díře' },
       rules: {
         easy: 'Kdo začíná, má bílé kameny; začíná se střídavě. Lehká hra: 3 kameny na hráče a královna. Každý kámen v díře se počítá, nic se nevrací. Když dáš svůj kámen nebo královnu, hraješ dál. Královnu musíš potvrdit svým kamenem (hned nebo dalším šťouchem), pak dává +3 body. Potvrdit ji musí někdo dřív, než padne poslední kámen. Vyhrává, kdo má první venku své 3 kameny.',
-        full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Striker se musí dotýkat obou čar (u kamene na čáře ho lze posunout dopředu či dozadu) a červené kolečko na konci čáry zakryje celé, nebo se ho nedotkne. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohranou sadu.',
+        full: 'Pravidla ECC: kdo začíná (rozstřeluje), má bílé kameny; začíná se střídavě. 9 kamenů na hráče. Striker se musí dotýkat obou čar (u kamene na čáře ho lze posunout dopředu či dozadu) a červené kolečko na konci čáry zakryje celé, nebo se ho nedotkne. Rozstřel musí trefit kámen (tři pokusy). Královnu smíš dát až po svém prvním kameni a musíš ji potvrdit. Soupeřův kámen v díře není faul, zůstává venku a počítá se soupeři. Za striker v díře vracíš kámen (dluh). Poslední kámen před královnou znamená prohraný board.',
       },
-      won: (n: string) => `Sadu vyhrává ${n}.`, lost: 'Sadu vyhrál počítač.',
+      won: (n: string) => `Board vyhrává ${n}.`, lost: 'Board vyhrál počítač.',
       matchYou: 'Vyhráváš zápas!', matchCpu: 'Zápas vyhrál počítač.', matchWon: (n: string) => `Zápas vyhrává ${n}!`,
       standing: (a: number, b: number) => `Stav zápasu ${a}:${b}.`, final: (a: number, b: number) => `Konečný stav ${a}:${b}.`,
-      match: (t: number, b: number) => `Zápas do ${t} bodů, nejvýš 8 sad · ${b}. sada`, draw: 'Zápas skončil remízou.', nextBoard: 'Další sada', newMatch: 'Nová hra', pts: (p: number) => `Sada za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
-      youWon: 'Sadu vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
+      match: (t: number, b: number) => `Zápas do ${t} bodů, nejvýš 8 boardů · ${b}. board`, draw: 'Zápas skončil remízou.', nextBoard: 'Další board', newMatch: 'Nová hra', pts: (p: number) => `Board za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
+      youWon: 'Board vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
     },
     en: {
       you: 'You', cpu: 'Computer', p1: 'Player 1', p2: 'Player 2', white: 'white', black: 'black',
