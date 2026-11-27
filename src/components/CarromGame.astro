@@ -7,13 +7,13 @@ const T = {
   cs: {
     vs: 'Proti počítači', two: 'Dva hráči', level: 'Obtížnost', easy: 'Lehká', mid: 'Střední', hard: 'Těžká',
     reset: 'Nová hra', place: 'Pozice strikeru', board: 'Carromová deska, hra',
-    help: 'Posuň striker po své čáře (táhni ho). Pak táhni prstem nebo myší od strikeru dozadu, jako prak, a pusť. Čím dál táhneš, tím silněji cvrnkneš.',
+    howTo: 'Jak hrát', help1: 'Posuň striker po své čáře (táhni ho).', help2: 'Pak táhni prstem nebo myší od strikeru dozadu, jako prak, a pusť.',
     keys: 'Klávesnice: ← → posun, ↑ ↓ míření, mezerník síla a výstřel.',
   },
   en: {
     vs: 'Against computer', two: 'Two players', level: 'Level', easy: 'Easy', mid: 'Medium', hard: 'Hard',
     reset: 'New game', place: 'Striker position', board: 'Carrom board, game',
-    help: 'Slide the striker along your base line (drag it). Then drag back from the striker like a slingshot and let go. The further you pull, the harder the shot.',
+    howTo: 'How to play', help1: 'Slide the striker along your base line (drag it).', help2: 'Then drag back from the striker like a slingshot and let go.',
     keys: 'Keyboard: ← → move, ↑ ↓ aim, space for power and shot.',
   },
 }[lang];
@@ -37,12 +37,13 @@ const T = {
   <p class="cg-match" data-match aria-live="polite"></p>
   <div class="cg-score" aria-live="polite">
     <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/<span data-total>3</span></span><span data-name="white"></span></span>
-    <span class="cg-queen" data-queen></span>
+    <span class="cg-mid"><span class="cg-total" aria-label={lang === 'en' ? 'Game score' : 'Stav zápasu'}><b data-tot="white">0</b><i>:</i><b data-tot="black">0</b></span><span class="cg-queen" data-queen></span></span>
     <span class="cg-side" data-side="black"><span data-name="black"></span><span><b data-count="black">0</b>/<span data-total>3</span></span><i class="dot b"></i></span>
   </div>
 
   <div class="cg-stage">
     <canvas tabindex="0" aria-label={T.board} aria-describedby="cg-help"></canvas>
+    <div class="cg-help" id="cg-help" data-help hidden><strong>{T.howTo}</strong><ol><li>{nbsp(T.help1)}</li><li>{nbsp(T.help2)}</li></ol></div>
     <div class="cg-start" data-start hidden><i class="dot w"></i><span data-start-text></span></div>
     <div class="cg-over" data-over hidden>
       <strong data-over-title></strong>
@@ -58,7 +59,7 @@ const T = {
   <div class="cg-foot">
     <button type="button" class="btn btn-ghost" data-reset>{T.reset}</button>
   </div>
-  <p id="cg-help" class="small">{nbsp(T.help)} <span class="cg-keys">{T.keys}</span></p>
+  <p class="small cg-keys">{T.keys}</p>
 </div>
 
 <script>
@@ -183,6 +184,7 @@ const T = {
     let totals = { me: 0, other: 0 };
     let matchOver: null | 'me' | 'other' | 'draw' = null;
     let counted = false;
+    let helpSeen = false;
     const personOf = (c: string) => (c === myColor() ? 'me' : 'other');
     const myColor = () => (board % 2 ? 'white' : 'black'); // you, or player 1
     // You always sit at the bottom; in a two-player game the player on turn does.
@@ -256,7 +258,12 @@ const T = {
       const over = $('[data-over]');
       over.hidden = !state.winner;
       const meName = mode === 'computer' ? L.you : L.p1, otherName = mode === 'computer' ? L.cpu : L.p2;
-      $('[data-match]').textContent = `${L.match(easy() ? C.MATCH.easy.target : C.MATCH.full.target, board)} · ${meName} ${totals.me} : ${totals.other} ${otherName}`;
+      $('[data-match]').textContent = L.match(easy() ? C.MATCH.easy.target : C.MATCH.full.target, board);
+      // Game score, big between the coin counts, each number on its player's side (colours swap each board).
+      $('[data-tot="white"]').textContent = String(totals[personOf('white')]);
+      $('[data-tot="black"]').textContent = String(totals[personOf('black')]);
+      // Controls overlay until the player's first own shot on this page.
+      $('[data-help]').hidden = helpSeen || !human() || !!state.winner;
       if (state.winner) {
         const boardText = `${state.reason ? L.reason[state.reason] + ' ' : ''}${L.pts(state.points)}`;
         if (matchOver) {
@@ -386,6 +393,7 @@ const T = {
 
     // ---------- game flow ----------
     function shoot(angle: number, power: number) {
+      if (human()) helpSeen = true;
       if (!C.strikerFree(state, strikerX)) { message = L.blocked; ui(); draw(); return; }
       message = '';
       C.startShot(state, strikerX, angle, power);
@@ -544,7 +552,15 @@ const T = {
   .cg-side b { color: var(--navy); font-size: 16px; }
   .cg-side.on { background: var(--navy); color: #fff; }
   .cg-side.on b { color: #fff; }
-  .cg-queen { font-size: 13px; text-align: center; }
+  .cg-mid { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; }
+  .cg-total { display: inline-flex; align-items: baseline; gap: 8px; font: 800 34px/1 var(--f-head); color: var(--navy); font-variant-numeric: tabular-nums; }
+  .cg-total i { font-style: normal; color: var(--muted); font-size: 26px; }
+  .cg-queen { font-size: 13px; text-align: center; min-height: 1em; }
+  .cg-help { position: absolute; left: 50%; top: 9%; transform: translateX(-50%); width: min(84%, 460px); padding: 14px 18px; border-radius: 16px; background: rgba(14, 27, 61, 0.92); color: #fff; font: 600 16px/1.4 var(--f-body); box-shadow: 0 6px 20px rgba(14, 27, 61, 0.25); pointer-events: none; }
+  .cg-help[hidden] { display: none; }
+  .cg-help strong { display: block; font: 800 18px/1.2 var(--f-head); margin-bottom: 6px; }
+  .cg-help ol { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; }
+  @media (max-width: 599px) { .cg-help { font-size: 14px; padding: 10px 14px; } .cg-help strong { font-size: 16px; } .cg-total { font-size: 28px; } }
   .dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; border: 1.5px solid var(--navy); }
   .dot.w { background: #FBF7EE; }
   .dot.b { background: #1D2233; }
