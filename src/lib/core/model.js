@@ -79,6 +79,12 @@ export function buildModel(raw, { today = new Date() } = {}) {
     }
   }
 
+  // ---------- propozice: generated PDF unless one is uploaded (documents kind propozice) or switched off ----------
+  for (const ed of Object.values(editions)) {
+    const uploaded = Object.values(documents).some((d) => d.edition === ed.id && d.kind === 'propozice');
+    ed.propoziceAuto = (ed.propozice ?? 'auto') === 'auto' && !uploaded && ed.status !== 'finished';
+  }
+
   const editionList = Object.values(editions).sort((a, b) => (a.start_date ?? '').localeCompare(b.start_date ?? ''));
   const todayIso = iso(today);
   const upcoming = editionList.filter((e) => (e.end_date ?? e.start_date) >= todayIso && e.status !== 'finished');

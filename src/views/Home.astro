@@ -20,7 +20,7 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
       <p class="hero-p">{nbsp(t(h.hero?.text, lang), lang)}</p>
       <div class="btn-row stack">
         <a class="btn btn-red" href={L('/ligy/', lang)}>{tr(lang, 'Kde si zahrát', 'Where to play')}</a>
-        <a class="btn btn-ghost" href={L('/hra-carrom/', lang)}>{tr(lang, 'Pravidla za dvě minuty', 'The rules in two minutes')}</a>
+        <a class="btn btn-ghost" href={L('/hra-carrom/', lang) + (lang === 'en' ? '#rules-in-a-nutshell' : '#pravidla-v-kostce')}>{tr(lang, 'Pravidla za dvě minuty', 'The rules in two minutes')}</a>
       </div>
     </div>
     <div class="hero-board">
@@ -29,7 +29,7 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
     </div>
   </section>
 
-  <section class="how">
+  <section class="how" id="pravidla">
     <div class="wrap section">
       <h2>{tr(lang, 'Jak se hraje', 'How to play')}</h2>
       <ol class="steps">
@@ -57,6 +57,7 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
     {next && (
       <div class="card-navy nextbox">
         <div class="nb-text">
+          <span class="nb-label">{tr(lang, 'Nejbližší turnaj', 'Next tournament')}</span>
           <span class="eyebrow">{`${weekday(next.start_date, lang)} ${dateShort(next.start_date, true, lang)} · ${next.venue?.city ?? ''}`}</span>
           <strong class="nb-name">{editionName(next, lang)}</strong>
         </div>
@@ -75,7 +76,9 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
 </Base>
 
 <style>
-  .hero { display: flex; flex-direction: column-reverse; gap: 18px; padding-top: 16px; }
+  .nb-label { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-navy); }
+  .hero { display: flex; flex-direction: column-reverse; gap: 18px; padding-top: 24px; }
+  @media (min-width: 400px) { .hero { padding-top: 36px; } }  /* clear of the overhanging header emblem */
   .hero-text { display: flex; flex-direction: column; gap: 18px; }
   .hero h1 { font-size: 52px; line-height: 0.95; letter-spacing: -0.03em; }
   .hero-p { font-size: 17px; line-height: 1.5; max-width: 560px; }
