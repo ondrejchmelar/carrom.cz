@@ -246,3 +246,21 @@ test('returned coins go inside the outer circle, off the centre circle; the quee
   const d = Math.hypot(coin.x - C.CENTER, coin.y - C.CENTER);
   assert.ok(d >= 15.9 + coin.r && d <= 85 - coin.r, `coin at ${d}`);
 });
+
+test('a coin that is too fast does not drop into the pocket', () => {
+  const run = (speed) => {
+    const s = fresh();
+    for (const p of s.pieces) p.inPlay = false;
+    const c = s.pieces[1]; Object.assign(c, { inPlay: true, x: 200, y: 200, vx: -speed * Math.SQRT1_2, vy: -speed * Math.SQRT1_2 });
+    let fell = false;
+    for (let i = 0; i < 2000 && !fell; i++) { const f = C.step(s.pieces); if (f.includes(c)) fell = true; }
+    return { fell, x: c.x, y: c.y, fast: Math.hypot(c.vx, c.vy) };
+  };
+  assert.equal(run(900).fell, true);
+  const fast = C.step; // keep linter quiet
+  const s = fresh();
+  for (const p of s.pieces) p.inPlay = false;
+  const c = s.pieces[1]; Object.assign(c, { inPlay: true, x: 60, y: 60, vx: -3500, vy: -3500 });
+  const f = fast(s.pieces, 1 / 240);
+  assert.equal(f.includes(c), false);
+});

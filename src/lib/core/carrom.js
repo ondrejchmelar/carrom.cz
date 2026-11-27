@@ -11,7 +11,8 @@ export const BASE_X = [151, BOARD - 151];                 // allowed striker cen
 export const MAX_SPEED = 5000;          // mm/s for a full-power break
 // A powdered board is slick: pieces slow down evenly (dry friction, μ ≈ 0.08) and glide a long way,
 // with no extra drag at speed. A firm 2 m/s shot rolls about 2.5 m before it stops.
-export const FRICTION = 780;            // mm/s² sliding deceleration
+export const FRICTION = 780;
+export const POCKET_V = 1500;          // mm/s: a piece faster than ~1.5–2.4 m/s at the pocket does not drop            // mm/s² sliding deceleration
 const E_BALL = 0.9, E_WALL = 0.72;      // restitution
 const MASS = { coin: 5.5, queen: 5.5, striker: 15 };
 const STOP = 6;                         // mm/s below which a piece is at rest
@@ -31,7 +32,7 @@ const HOME = BOARD / 322;
 const FULL_GEOM = { coin: COIN_R, striker: STRIKER_R, pocket: POCKET_R, pockets: POCKETS };
 const EP = 23 * HOME;
 const EASY_GEOM = {
-  coin: 11 * HOME, striker: 14.5 * HOME, pocket: 17 * HOME,
+  coin: 11 * HOME, striker: 14.5 * HOME, pocket: 17 * HOME, pocketV: 1.5, // big, forgiving pockets
   pockets: [[EP, EP], [BOARD - EP, EP], [EP, BOARD - EP], [BOARD - EP, BOARD - EP]],
 };
 export const geom = (state) => (state?.easy ? EASY_GEOM : FULL_GEOM);
@@ -247,7 +248,10 @@ function subStep(bodies, dt, g) {
   for (const p of bodies) {
     if (!p.inPlay) continue;
     for (const [px, py] of g.pockets) {
-      if (Math.hypot(p.x - px, p.y - py) < g.pocket) {
+      const d = Math.hypot(p.x - px, p.y - py);
+      // A piece only drops when slow enough: too fast and it rattles over the hole into the corner
+      // and bounces back. Dead centre allows more speed than the rim.
+      if (d < g.pocket && Math.hypot(p.vx, p.vy) < POCKET_V * (g.pocketV ?? 1) * (1.6 - d / g.pocket)) {
         p.inPlay = false; p.vx = p.vy = 0; p.x = px; p.y = py;
         fell.push(p);
         break;
