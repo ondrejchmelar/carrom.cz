@@ -12,9 +12,9 @@ DOC_EXT = ('.pdf', '.doc', '.docx', '.xls', '.xlsx')
 MAX_BYTES = 8_000_000
 KIND_CS = {'results': 'Výsledky', 'propozice': 'Propozice', 'rules': 'Pravidla', 'poster': 'Plakát', 'minutes': 'Zápis', 'statutes': 'Stanovy', 'other': 'Dokument'}
 KIND_EN = {'results': 'Results', 'propozice': 'Tournament information', 'rules': 'Rules', 'poster': 'Poster', 'minutes': 'Minutes', 'statutes': 'Statutes', 'other': 'Document'}
-COMP_CS = {'pcl': 'Pražská carromová liga', 'cml': 'Medlešická liga', 'cocp': 'Carrom Open Cup Praha', 'druhy': 'Druhý turnaj MČR',
+COMP_CS = {'pcl': 'Pražská carromová liga', 'cml': 'Medlešická liga', 'cocp': 'Carrom Open Cup Praha', 'druhy': 'Turnaj MČR Letohrad',
            'jarni': 'Jarní turnaj MČR', 'tcc': 'Terrace Carrom Cup', 'ecc': 'Carrom Eurocup', 'mcr': 'Mistrovství ČR', 'ol': 'Bernard Opoliga'}
-COMP_EN = {'pcl': 'Prague Carrom League', 'cml': 'Medlešice League', 'cocp': 'Carrom Open Cup Prague', 'druhy': 'Second Czech Championship tournament',
+COMP_EN = {'pcl': 'Prague Carrom League', 'cml': 'Medlešice League', 'cocp': 'Carrom Open Cup Prague', 'druhy': 'Letohrad Czech Championship tournament',
            'jarni': 'Spring Czech Championship tournament', 'tcc': 'Terrace Carrom Cup', 'ecc': 'Carrom Eurocup', 'mcr': 'Czech Championship', 'ol': 'Bernard Opoliga'}
 
 

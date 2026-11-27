@@ -10,7 +10,7 @@ const list = Object.values(m.rankings).sort((a: any, b: any) => b.year - a.year)
 <Base title={tr(lang, 'Mistrovství ČR', 'Czech Championship')} lang={lang} current="vysledky">
   <div class="wrap page">
     <div class="page-head"><a class="small" href={L('/vysledky/', lang)}>{tr(lang, 'Výsledky', 'Results')}</a><h1>{tr(lang, 'Mistrovství ČR', 'Czech Championship')}</h1>
-      <p class="lede">{tr(lang, 'Seriál tří turnajů: Jarní turnaj, Druhý turnaj a Carrom Open Cup. Počítají se dva nejlepší.', 'A series of three tournaments: the Spring tournament, the Second tournament and the Carrom Open Cup. The best two count.')}</p></div>
+      <p class="lede">{tr(lang, 'Seriál tří turnajů: Jarní turnaj, Letohrad a\u00a0Carrom Open Cup. Počítají se dva nejlepší.', 'A series of three tournaments: the Spring tournament, Letohrad and the Carrom Open Cup. The best two count.')}</p></div>
     <div class="row-list">
       {list.map((r) => (
         <a href={L(`/vysledky/mcr/${r.year}/`, lang)}>

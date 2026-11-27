@@ -1,8 +1,8 @@
 code: druhy
 kind: tournament
 category: mcr
-name: { cs: Druhý turnaj MČR, en: Second Czech Championship tournament }
-short_name: { cs: Druhý turnaj, en: Second tournament }
+name: { cs: Turnaj MČR Letohrad, en: Letohrad Czech Championship tournament }
+short_name: { cs: Letohrad, en: Letohrad }
 description:
   cs: Podzimní turnaj série Mistrovství ČR, tradičně první říjnový víkend v Letohradě.
   en: The autumn tournament of the Czech Championship series, traditionally on the first weekend of October in Letohrad.
