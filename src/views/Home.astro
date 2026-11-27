@@ -20,7 +20,7 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
       <p class="hero-p">{nbsp(t(h.hero?.text, lang), lang)}</p>
       <div class="btn-row stack">
         <a class="btn btn-red" href={L('/ligy/', lang)}>{tr(lang, 'Kde si zahrát', 'Where to play')}</a>
-        <a class="btn btn-ghost" href="#pravidla">{tr(lang, 'Pravidla za dvě minuty', 'The rules in two minutes')}</a>
+        <a class="btn btn-ghost" href={L('/hra-carrom/', lang) + (lang === 'en' ? '#rules-in-a-nutshell' : '#pravidla-v-kostce')}>{tr(lang, 'Pravidla za dvě minuty', 'The rules in two minutes')}</a>
       </div>
     </div>
     <div class="hero-board">
