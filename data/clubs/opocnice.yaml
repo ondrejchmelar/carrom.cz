@@ -2,8 +2,12 @@ name: I. Carrom club Opočnice
 area: Opočnice
 city: Opočnice
 order: 3
+league: ol                  # klub hraje Bernard Opoligu (stejný subjekt, Ondrej 2026-11-27)
 summary:
-  cs: Nový klub na východ od Prahy.
-  en: A new club east of Prague.
+  cs: Nový klub na východ od Prahy, hraje Bernard Opoligu.
+  en: A new club east of Prague that runs the Bernard Opoliga.
+description:
+  cs: Klub z Opočnice pořádá od roku 2026 Bernard Opoligu, nejmladší carromovou ligu v republice.
+  en: Since 2026 the Opočnice club has run the Bernard Opoliga, the youngest carrom league in the country.
 web: "https://carrom-opocnice-klub.dustypanda4.chatgpt.site/"   # veřejná prezentace klubu (žádost klubu, 2026-11-27)
 active: true
