@@ -6,11 +6,9 @@ description: The Czech Carrom Association runs the Czech Championship and the Ca
 
 ## History
 
-- **2006** – The first boards arrive from India. People start playing in Pardubice and Prague, and the 1st Carrom Open Cup takes place in the autumn.
-- **2007** – After the Abdul league in Pardubice, the Prague Carrom League starts.
-- **2010** – The Czech Carrom Association is founded at the beginning of the year.
-- **2011** – The association joins the European Carrom Confederation (ECC).
-- **2017** – Full membership of the International Carrom Federation (ICF).
+The Czech Carrom Association was founded in 2010 to promote carrom in this country. Carrom began to be played on an organised basis here in 2006, when Czechs travelling in India brought back carrom boards and set up leagues in Pardubice and Prague.
+
+The first international Carrom Open Cup was held in Prague in 2006 and has been repeated every year since. 2011 saw the launch of the Czech National Championships, and in the same year the association became a member of the [European Carrom Confederation (ECC)](http://www.european-carrom-confederation.com). In 2017 we became full members of the [International Carrom Federation (ICF)](http://www.icfcarrom.com).
 
 ## Visiting Prague?
 

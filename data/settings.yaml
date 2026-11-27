@@ -7,6 +7,7 @@ site:
   facebook: "https://www.facebook.com/carromcz"
   address: Mělnická 4/624, Praha 5
   ico: "228 74 551"
+  data_box: ap838kd   # datová schránka
 
 # Pruh nahoře „Testovací verze“. Vypnout před spuštěním na carrom.cz.
 preview_banner: true
@@ -29,6 +30,7 @@ payment:
   qr_image: /uploads/platba-qr.svg   # QR Platba (SPD), vytvořeno nástrojem, bez částky
   iban: CZ52 5500 0000 0002 5025 0256   # pro platby ze zahraničí
   bic: RZBCCZPP
+  transparent_url: "https://www.rb.cz/povinne-zverejnovane-informace/transparentni-ucty?path=transactions&accountNumber=250250256"
   note:
     cs: Startovné i ligové poplatky prosíme přednostně převodem na účet asociace. QR kód pro platbu najdete na stránce Asociace.
     en: Please pay entry and league fees by bank transfer to the association's account. The payment QR code is on the Association page.

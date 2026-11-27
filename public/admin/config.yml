@@ -381,6 +381,7 @@ collections:
               - { name: qr_image, label: QR kód pro platbu, widget: image, required: false }
               - { name: iban, label: IBAN (platby ze zahraničí), widget: string, required: false }
               - { name: bic, label: BIC, widget: string, required: false }
+              - { name: transparent_url, label: Odkaz na transparentní účet, widget: string, required: false, pattern: ['^https?://', 'Musí začínat http:// nebo https://'] }
               - { name: note, label: Text u plateb, widget: object, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text }] }
           - name: calendars
             label: Sdílené Google kalendáře
@@ -390,7 +391,7 @@ collections:
               - { name: id, label: Adresa kalendáře (…@group.calendar.google.com), widget: string }
               - { name: cs, label: Název česky, widget: string }
               - { name: en, label: Název anglicky, widget: string }
-          - { name: site, label: Údaje asociace, widget: object, collapsed: true, fields: [{ name: email, label: E-mail, widget: string }, { name: address, label: Sídlo, widget: string }, { name: ico, label: IČ, widget: string }] }
+          - { name: site, label: Údaje asociace, widget: object, collapsed: true, fields: [{ name: name, label: Název webu, widget: string }, { name: org, label: Název asociace, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }, { name: email, label: E-mail, widget: string }, { name: facebook, label: Facebook, widget: string, required: false }, { name: address, label: Sídlo, widget: string }, { name: ico, label: IČ, widget: string }, { name: data_box, label: Datová schránka, widget: string, required: false }] }
       - name: home
         label: Úvodní stránka
         file: data/home.yaml
