@@ -14,6 +14,13 @@
 </head>
 <body>
   <!-- Sveltia CMS: Git-based admin. Data are YAML/Markdown files in this repository. -->
+  <script>
+    // Položka menu „Přehled“ otevře stránku přehledu (Sveltia v menu neumí odkaz).
+    // Admin se otevírá na první položce menu, takže přehled je zároveň úvodní stránka.
+    function openOverview() { if (location.hash.indexOf('#/collections/prehled') === 0) location.replace('prehled/'); }
+    window.addEventListener('hashchange', openOverview);
+    openOverview();
+  </script>
   <script src="https://unpkg.com/@sveltia/cms@0.262.4/dist/sveltia-cms.js"></script>
 </body>
 </html>

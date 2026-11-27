@@ -28,6 +28,15 @@ i18n:
   default_locale: cs
 
 collections:
+  # Přehled: položka jen otevře stránku /admin/prehled/ (přesměruje skript v index.html). Soubor je prázdný zástupce.
+  - name: prehled
+    label: Přehled
+    description: Postup všech turnajů a lig. Otevírá se stránka přehledu.
+    files:
+      - { name: prehled, label: Přehled, file: public/admin/prehled.yml, fields: [{ name: info, label: Info, widget: hidden }] }
+
+  - divider: true
+
   # ---------------- Turnaje ----------------
   - name: editions
     label: Turnaje · ročníky
