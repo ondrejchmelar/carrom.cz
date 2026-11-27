@@ -16,7 +16,7 @@ function resultsKey(div: string, rows: any[]) {
 export const GET: APIRoute = () => {
   const m = model();
   const out: Record<string, any> = {};
-  const used: Record<string, Record<string, string>> = { signup: {}, sol: {}, video: {}, results: {} };
+  const used: Record<string, Record<string, any>> = { signup: {}, sol: {}, video: {}, results: {} };
   for (const ed of Object.values(m.editions as Record<string, any>)) {
     const ranking: any = Object.values(m.rankings as Record<string, any>).find((r: any) => (r.editions ?? []).includes(ed.id));
     out[ed.id] = {
@@ -28,9 +28,9 @@ export const GET: APIRoute = () => {
       pdf: ed.propoziceAuto ? url(`/propozice/${ed.code}-${ed.year}.pdf`) : null,
     };
     const signup = ed.signup_url ?? ed.links?.signup_url;
-    if (signup) used.signup[signup] = ed.id;
-    if (ed.sol_lit_url) used.sol[ed.sol_lit_url] = ed.id;
-    if (ed.final_video) used.video[ed.final_video] = ed.id;
+    if (signup) used.signup[signup] = [...(used.signup[signup] ?? []), ed.id];
+    if (ed.sol_lit_url) used.sol[ed.sol_lit_url] = [...(used.sol[ed.sol_lit_url] ?? []), ed.id];
+    if (ed.final_video) used.video[ed.final_video] = [...(used.video[ed.final_video] ?? []), ed.id];
     if (!ed.resultsComputed) {
       for (const [div, rows] of Object.entries(ed.results ?? {}) as [string, any[]][]) {
         if ((rows ?? []).length) used.results[resultsKey(div, rows)] = ed.id;

@@ -34,12 +34,14 @@
       const used = await loadUsed();
       if (used) {
         const other = (map, v) => (v && map && map[v] && map[v] !== id ? map[v] : null);
-        const copied = (label, from) => problems.push(`${label} je stejný jako u ročníku ${from} (zkopírovaný?). Smažte ho nebo vložte nový.`);
+        // Odkazy smí sdílet ročníky téhož roku (páteční junioři, sobotní turnaj, nedělní dvojice mají jednu přihlášku).
+        const otherYear = (map, v) => (v && map && [].concat(map[v] || []).find((o) => o !== id && o.split('/')[1] !== String(d.year))) || null;
+        const copied = (label, from) => problems.push(`${label} je stejný jako u ročníku ${from} z jiného roku (zkopírovaný?). Smažte ho nebo vložte nový.`);
         const signup = d.signup_url || (d.links && d.links.signup_url);
         let from;
-        if ((from = other(used.signup, signup))) copied('Odkaz na přihlášku', from);
-        if ((from = other(used.sol, d.sol_lit_url))) copied('Odkaz na SoL lit', from);
-        if ((from = other(used.video, d.final_video))) copied('Odkaz na video finále', from);
+        if ((from = otherYear(used.signup, signup))) copied('Odkaz na přihlášku', from);
+        if ((from = otherYear(used.sol, d.sol_lit_url))) copied('Odkaz na SoL lit', from);
+        if ((from = otherYear(used.video, d.final_video))) copied('Odkaz na video finále', from);
         for (const [div, rows] of Object.entries(d.results || {})) {
           if (Array.isArray(rows) && rows.length && (from = other(used.results, resultsKey(div, rows)))) {
             problems.push(`Konečné pořadí je stejné jako u ročníku ${from} (zkopírované?). Smažte ho.`);
