@@ -1,12 +1,12 @@
 ---
-// "Do startu: <short name>" box. Hidden when there is no upcoming tournament.
+// "Příští turnaj: <short name>" box. Hidden when there is no upcoming tournament.
 import { model } from '../lib/data';
 import { t, L, editionName, dateShort, weekday, type Lang } from '../lib/site';
 interface Props { lang?: Lang; compact?: boolean }
 const { lang = 'cs', compact = false } = Astro.props;
 const m = model();
 const ed = m.nextTournament;
-const label = t(m.home.next_tournament?.label, lang) || (lang === 'en' ? 'Starts in:' : 'Do startu:');
+const label = t(m.home.next_tournament?.label, lang) || (lang === 'en' ? 'Next tournament:' : 'Příští turnaj:');
 ---
 {ed && (
   <div class="card-navy countdown" data-start={`${ed.start_date}T09:00:00+01:00`}>

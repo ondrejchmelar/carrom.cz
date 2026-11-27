@@ -23,4 +23,4 @@ returning:
 
 next_tournament:
   # Nejbližší edice se stavem planned nebo registration_open. Když žádná není, box se skryje.
-  label: { cs: "Do startu:", en: "Starts in:" }
+  label: { cs: "Příští turnaj:", en: "Next tournament:" }

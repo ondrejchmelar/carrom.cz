@@ -57,7 +57,7 @@ const clubHref = (c: any) => (c.link?.competition ? L(`/vysledky/${c.link.compet
     {next && (
       <div class="card-navy nextbox">
         <div class="nb-text">
-          <span class="nb-label">{tr(lang, 'Nejbližší turnaj', 'Next tournament')}</span>
+          <span class="nb-label">{tr(lang, 'Příští turnaj', 'Next tournament')}</span>
           <span class="eyebrow">{`${weekday(next.start_date, lang)} ${dateShort(next.start_date, true, lang)} · ${next.venue?.city ?? ''}`}</span>
           <strong class="nb-name">{editionName(next, lang)}</strong>
         </div>
