@@ -72,6 +72,9 @@ collections:
           - { name: address, label: Adresa, widget: string, required: false }
       - { name: signup_url, label: Přihláška (odkaz na Google Form), widget: string, required: false }
       - { name: signup_deadline, label: Přihlášky do, widget: datetime, time_format: false, format: YYYY-MM-DD, required: false }
+      - { name: capacity, label: Kapacita (hráčů), widget: number, value_type: int, required: false }
+      - { name: entry_fee, label: Startovné / poplatky, widget: object, required: false, collapsed: true, hint: "Např. „200 Kč“. Při čisté částce dostane QR Platba v propozicích i částku.", fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string, required: false }] }
+      - { name: propozice, label: Propozice, widget: select, required: false, default: auto, options: [{ label: Vytvořit PDF z údajů ročníku, value: auto }, { label: Žádné (nebo nahrané v Dokumentech), value: none }], hint: "Nahraný dokument druhu propozice má vždy přednost." }
       - { name: schedule, label: Program, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
       - { name: report, label: Zpráva o turnaji, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
       - { name: sol_lit_url, label: Detailní výsledky v SoL lit, widget: string, required: false }

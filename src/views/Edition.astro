@@ -41,6 +41,7 @@ const videoId = (() => {
           <div class="btn-row">
             {signupOpen && <a class="btn btn-red" href={ed.signup_url} rel="noopener">{tr(lang, 'Přihlásit se', 'Sign up')}</a>}
             {docs.map((d: any) => <a class="btn btn-ghost-light" href={docHref(d)}>{t(d.title, lang)}</a>)}
+            {ed.propoziceAuto && <a class="btn btn-ghost-light" href={url(`/propozice/${ed.code}-${ed.year}${lang === 'en' ? '-en' : ''}.pdf`)}>{tr(lang, 'Propozice (PDF)', 'Tournament information (PDF)')}</a>}
           </div>
           {signupOpen && <PaymentNote lang={lang} />}
         </div>

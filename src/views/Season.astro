@@ -41,6 +41,7 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
         {s?.complete && <span class="pill on">{tr(lang, 'Dohráno', 'Finished')}</span>}
       </div>}
       {venue && <p class="small">{venue.name}{venue.address ? `, ${venue.address}` : ''}</p>}
+      {ed.propoziceAuto && <a class="small" style="color: var(--red); font-weight: 600" href={url(`/propozice/${ed.code}-${ed.year}${lang === 'en' ? '-en' : ''}.pdf`)}>{tr(lang, 'Propozice (PDF)', 'League information (PDF)')}</a>}
       {(!s || archive) && ed.report && <p class="lede">{t(ed.report, lang)}</p>}
     </div>
 

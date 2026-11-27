@@ -11,7 +11,7 @@ const cms = (coll: string, id?: string) => url('/admin/') + `#/collections/${col
 
 const rankingFor = (id: string) => Object.values(m.rankings as Record<string, any>).find((r: any) => (r.editions ?? []).includes(id));
 const hasDoc = (ed: any) =>
-  (ed.documents ?? []).length > 0 || m.documents.some((d: any) => d.edition === ed.id && d.kind === 'propozice');
+  ed.propoziceAuto || (ed.documents ?? []).length > 0 || m.documents.some((d: any) => d.edition === ed.id && d.kind === 'propozice');
 const hasResults = (ed: any) => Object.values(ed.results ?? {}).some((rows: any) => (rows ?? []).length > 0);
 const signup = (ed: any) => ed.signup_url ?? ed.links?.signup_url;
 
