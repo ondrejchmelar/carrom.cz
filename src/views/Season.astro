@@ -171,7 +171,7 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
           ))}
           {s.finalPlaces.length > 0 && (
             <div class="section">
-              <h3>{s.complete ? tr(lang, 'Konečné pořadí', 'Final places') : tr(lang, 'Zbývající místa', 'Other places')}</h3>
+              <h3>{s.complete ? tr(lang, 'Konečné pořadí', 'Final places') : tr(lang, 'Další místa', 'Other places')}</h3>
               <div class="table-box"><table class="data"><tbody>
                 {s.finalPlaces.map((r: any) => <tr><td class="rk l">{r.place}.</td><td class="name">{plainName(m.players[r.player], r.player)}</td></tr>)}
               </tbody></table></div>
