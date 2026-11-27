@@ -265,3 +265,20 @@ test('a coin that is too fast does not drop into the pocket', () => {
   const f = fast(s.pieces, 1 / 240);
   assert.equal(f.includes(c), false);
 });
+
+test('cpu with its last coin left and the queen on the board aims at the queen', () => {
+  for (const simple of [true, false]) {
+    const s = fresh({ easy: true });
+    s.turn = 'black';
+    pocket(s, (q) => q.color === 'black', 2); s.pocketed.black = 2; s.fell = [];
+    let lost = 0;
+    let seed = 1; const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    for (let i = 0; i < 20; i++) {
+      const shot = C.chooseShot(s, { simple, rand, budget: 30 });
+      const t = structuredClone(s); C.startShot(t, shot.x, shot.angle, shot.power);
+      for (let k = 0; k < 2400 && C.tick(t); k++);
+      if (t.fell.some((p) => p.color === 'black') && !t.fell.some((p) => p.kind === 'queen')) lost++;
+    }
+    assert.ok(lost <= 2, `simple=${simple}: last coin pocketed before the queen ${lost}/20 times`);
+  }
+});

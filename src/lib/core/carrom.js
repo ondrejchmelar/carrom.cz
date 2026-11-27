@@ -570,7 +570,7 @@ export function simulate(state, shot, maxSteps = 2400) {
   if (foul) score -= state.easy ? 8 : 18 + mine * 10;
   if (state.easy && state.queen.state !== 'covered' && !queen) {
     // Easy: a last coin before the queen just comes back, a wasted shot.
-    if (state.pocketed[me] + mine >= coinsOf(state)) score -= 12;
+    if (state.pocketed[me] + mine >= coinsOf(state)) score -= 25 + mine * 10;
     if (state.pocketed[other(me)] + theirs >= coinsOf(state)) score -= 12;
   }
   if (!state.easy && state.queen.state !== 'covered' && !(queen && mine)) {
@@ -619,7 +619,13 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   const me = state.turn;
   const y = BASE_Y[side(me)];
   const { striker: SR, pockets } = geom(state);
-  const targets = state.pieces.filter((p) => p.inPlay && (p.color === me || (p.kind === 'queen' && (state.easy || (state.pocketed[me] > 0 && !state.dues?.[me])))));
+  // With one own coin left and the queen still to cover, go for the queen: pocketing the last coin
+  // first only brings it back (Easy) or loses the board (ECC laws 96, 97).
+  const lastCoin = state.queen.state !== 'covered' && !(state.queen.state === 'pending' && state.queen.by === me)
+    && state.pocketed[me] >= coinsOf(state) - 1;
+  const queenOk = state.easy || (state.pocketed[me] > 0 && !state.dues?.[me]);
+  let targets = state.pieces.filter((p) => p.inPlay && (p.kind === 'queen' ? queenOk : p.color === me && !lastCoin));
+  if (!targets.length) targets = state.pieces.filter((p) => p.inPlay && p.color === me);
   const cands = [];
   for (let xi = 0; xi <= 16; xi++) {
     const x = BASE_X[0] + ((BASE_X[1] - BASE_X[0]) * xi) / 16;
@@ -663,9 +669,18 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   if (!cands.length) cands.push({ x: CENTER, angle: me === 'white' ? -Math.PI / 2 : Math.PI / 2, power: 0.8, h: 0 });
   cands.sort((a, b) => b.h - a.h);
   if (simple) {
-    const c = cands[Math.floor(rand() * Math.min(cands.length, 6))];
-    const noise = 0.12;
-    return { x: c.x, angle: c.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, c.power * (0.95 + rand() * 0.35)) };
+    // A casual player still knows not to sink the last coin before the queen: try a few loose
+    // shots and keep the first that does not do that.
+    let shot;
+    for (let i = 0; i < 8; i++) {
+      const c = cands[Math.floor(rand() * Math.min(cands.length, 6))];
+      const noise = 0.12;
+      shot = { x: c.x, angle: c.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, c.power * (0.95 + rand() * 0.35)) };
+      if (!lastCoin) break;
+      const r = simulate(state, shot);
+      if (!r.mine || r.queen) break;
+    }
+    return shot;
   }
   let best = null;
   const pool = cands.slice(0, budget);
