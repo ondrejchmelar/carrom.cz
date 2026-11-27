@@ -483,9 +483,9 @@ function endShotEasy(state) {
 // ---------------------------------------------------------------- match
 
 /** A game is played to 25 points or at most 8 boards; after the 8th board the leader wins, level
- * scores are a draw (law 39). Easy plays to 10, also at most 8 boards. Returns the winning key of
+ * scores are a draw (law 39). Easy plays to 10, with no board limit. Returns the winning key of
  * totals, 'draw', or null while the game goes on. */
-export const MATCH = { full: { target: 25, boards: 8 }, easy: { target: 10, boards: 8 } };
+export const MATCH = { full: { target: 25, boards: 8 }, easy: { target: 10, boards: Infinity } };
 export function matchWinner(totals, boards, easy = false) {
   const { target, boards: max } = easy ? MATCH.easy : MATCH.full;
   const [[a, pa], [b, pb]] = Object.entries(totals);

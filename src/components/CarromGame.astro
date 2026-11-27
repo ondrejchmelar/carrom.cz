@@ -19,21 +19,6 @@ const T = {
 }[lang];
 ---
 <div class="cg" data-lang={lang}>
-  <div class="cg-bar">
-    <div class="chips" role="group" aria-label={lang === 'en' ? 'Mode' : 'Režim'}>
-      <button type="button" class="chip" data-mode="computer" aria-pressed="true">{T.vs}</button>
-      <button type="button" class="chip" data-mode="two" aria-pressed="false">{T.two}</button>
-    </div>
-    <label class="cg-level">
-      <span>{T.level}</span>
-      <select data-level>
-        <option value="easy" selected>{T.easy}</option>
-        <option value="mid">{T.mid}</option>
-        <option value="hard">{T.hard}</option>
-      </select>
-    </label>
-  </div>
-
   <p class="cg-match" data-match aria-live="polite"></p>
   <div class="cg-score" aria-live="polite">
     <span class="cg-side" data-side="white"><i class="dot w"></i><span><b data-count="white">0</b>/<span data-total>3</span></span><span data-name="white"></span><i class="dot q" data-q="white" hidden></i></span>
@@ -57,12 +42,24 @@ const T = {
   </div>
 
   <p class="cg-status" data-status aria-live="polite"></p>
+  <div class="cg-bar">
+    <div class="chips" role="group" aria-label={lang === 'en' ? 'Mode' : 'Režim'}>
+      <button type="button" class="chip" data-mode="computer" aria-pressed="true">{T.vs}</button>
+      <button type="button" class="chip" data-mode="two" aria-pressed="false">{T.two}</button>
+    </div>
+    <label class="cg-level">
+      <span>{T.level}</span>
+      <select data-level>
+        <option value="easy" selected>{T.easy}</option>
+        <option value="mid">{T.mid}</option>
+        <option value="hard">{T.hard}</option>
+      </select>
+    </label>
+    <button type="button" class="btn btn-ghost" data-reset>{T.reset}</button>
+  </div>
   <details class="cg-rules small"><summary>{lang === 'en' ? 'Rules for this level' : 'Pravidla této obtížnosti'}</summary><p data-rules></p></details>
 
 
-  <div class="cg-foot">
-    <button type="button" class="btn btn-ghost" data-reset>{T.reset}</button>
-  </div>
   <p class="small cg-keys">{T.keys}</p>
 </div>
 
@@ -107,7 +104,7 @@ const T = {
       tryMid: 'Zkusit Střední', harderText: 'Lehká obtížnost je zvládnutá. Zkus Střední: plná pravidla, 9 kamenů a chytřejší soupeř.',
       matchYou: 'Vyhráváš zápas!', matchCpu: 'Zápas vyhrál počítač.', matchWon: (n: string) => `Zápas vyhrává ${n}!`,
       standing: (a: number, b: number) => `Stav zápasu ${a}:${b}.`, final: (a: number, b: number) => `Konečný stav ${a}:${b}.`,
-      match: (t: number, b: number) => `Zápas do ${t} bodů, nejvýš 8 boardů · ${b}. board`, draw: 'Zápas skončil remízou.', nextBoard: 'Další board', newMatch: 'Nová hra', pts: (p: number) => `Board za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
+      match: (t: number, b: number, max: number) => `Zápas do ${t} bodů${max < 99 ? `, nejvýš ${max} boardů` : ''} · ${b}. board`, draw: 'Zápas skončil remízou.', nextBoard: 'Další board', newMatch: 'Nová hra', pts: (p: number) => `Board za ${p} ${p === 1 ? 'bod' : p < 5 ? 'body' : 'bodů'}.`,
       youWon: 'Board vyhráváš!', aimHint: 'Táhni dozadu a pusť.',
     },
     en: {
@@ -147,7 +144,7 @@ const T = {
       tryMid: 'Try Medium', harderText: 'You have mastered Easy. Try Medium: full rules, 9 coins each and a smarter opponent.',
       matchYou: 'You win the game!', matchCpu: 'The computer wins the game.', matchWon: (n: string) => `${n} wins the game!`,
       standing: (a: number, b: number) => `Game score ${a}:${b}.`, final: (a: number, b: number) => `Final score ${a}:${b}.`,
-      match: (t: number, b: number) => `Game to ${t} points, at most 8 boards · board ${b}`, draw: 'The game is a draw.', nextBoard: 'Next board', newMatch: 'New game', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
+      match: (t: number, b: number, max: number) => `Game to ${t} points${max < 99 ? `, at most ${max} boards` : ''} · board ${b}`, draw: 'The game is a draw.', nextBoard: 'Next board', newMatch: 'New game', pts: (p: number) => `Board won by ${p} point${p === 1 ? '' : 's'}.`,
       youWon: 'You win the board!', aimHint: 'Pull back and let go.',
     },
   };
@@ -270,7 +267,8 @@ const T = {
       const over = $('[data-over]');
       over.hidden = !state.winner;
       const meName = mode === 'computer' ? L.you : L.p1, otherName = mode === 'computer' ? L.cpu : L.p2;
-      $('[data-match]').textContent = L.match(easy() ? C.MATCH.easy.target : C.MATCH.full.target, board);
+      const M = easy() ? C.MATCH.easy : C.MATCH.full;
+      $('[data-match]').textContent = L.match(M.target, board, M.boards);
       // Game score, big between the coin counts, each number on its player's side (colours swap each board).
       $('[data-tot="white"]').textContent = String(totals[personOf('white')]);
       $('[data-tot="black"]').textContent = String(totals[personOf('black')]);
@@ -603,6 +601,5 @@ const T = {
   .cg-rules { margin: 0; color: var(--muted); }
   .cg-rules summary { cursor: pointer; color: var(--navy); font-weight: 600; min-height: 32px; }
   .cg-rules p { margin: 6px 0 0; }
-  .cg-foot { display: flex; gap: 12px; }
   @media (hover: none) { .cg-keys { display: none; } }
 </style>

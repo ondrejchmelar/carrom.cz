@@ -206,6 +206,7 @@ test('game to 25 points or 8 boards, draw if level after 8 (law 39)', () => {
   assert.equal(C.matchWinner({ me: 12, other: 14 }, 8), 'other');
   assert.equal(C.matchWinner({ me: 12, other: 12 }, 8), 'draw');
   assert.equal(C.matchWinner({ me: 10, other: 3 }, 4, true), 'me');
+  assert.equal(C.matchWinner({ me: 6, other: 6 }, 12, true), null); // Easy has no board limit
 });
 
 test('from 22 points the queen adds nothing (law 37)', () => {
