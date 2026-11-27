@@ -266,19 +266,22 @@ test('a coin that is too fast does not drop into the pocket', () => {
   assert.equal(f.includes(c), false);
 });
 
-test('cpu with its last coin left and the queen on the board aims at the queen', () => {
+test('cpu with its last coin left and the queen on the board does not sink that coin first', () => {
+  // Deterministic: fixed open positions and a seeded random source.
+  const spots = [[370, 370], [300, 450], [460, 290], [250, 260], [480, 480], [420, 230], [270, 520]];
   for (const simple of [true, false]) {
-    const s = fresh({ easy: true });
-    s.turn = 'black';
-    pocket(s, (q) => q.color === 'black', 2); s.pocketed.black = 2; s.fell = [];
-    let lost = 0;
     let seed = 1; const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-    for (let i = 0; i < 20; i++) {
+    let lost = 0;
+    for (let i = 0; i < 12; i++) {
+      const s = fresh({ easy: true });
+      s.turn = 'black';
+      s.pieces.forEach((p, k) => { [p.x, p.y] = spots[(k + i) % spots.length]; });
+      pocket(s, (q) => q.color === 'black', 2); s.pocketed.black = 2; s.fell = [];
       const shot = C.chooseShot(s, { simple, rand, budget: 30 });
       const t = structuredClone(s); C.startShot(t, shot.x, shot.angle, shot.power);
       for (let k = 0; k < 2400 && C.tick(t); k++);
       if (t.fell.some((p) => p.color === 'black') && !t.fell.some((p) => p.kind === 'queen')) lost++;
     }
-    assert.ok(lost <= 2, `simple=${simple}: last coin pocketed before the queen ${lost}/20 times`);
+    assert.equal(lost, 0, `simple=${simple}: last coin pocketed before the queen ${lost}/12 times`);
   }
 });

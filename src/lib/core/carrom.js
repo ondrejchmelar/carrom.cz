@@ -693,5 +693,11 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
     }
   }
   const noise = (1 - skill) * 0.06;
-  return { x: best.x, angle: best.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, best.power * (1 + (rand() - 0.5) * noise * 2)) };
+  const shot = { x: best.x, angle: best.angle + (rand() - 0.5) * 2 * noise, power: Math.min(1, best.power * (1 + (rand() - 0.5) * noise * 2)) };
+  if (lastCoin) {
+    // The aiming slip must not sink the last coin before the queen; fall back to the clean shot.
+    const r = simulate(state, shot);
+    if (r.mine && !r.queen) return { x: best.x, angle: best.angle, power: best.power };
+  }
+  return shot;
 }
