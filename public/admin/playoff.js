@@ -68,7 +68,7 @@
     return h('div', { className: 'po' },
       h('div', { className: 'help' },
         h('b', null, 'Jak zapisovat: '),
-        'každá hra je jeden řádek ve tvaru horní:dolní (horní hráč = první v pavouku), např. 25:11. ',
+        'zápas = na 2 vítězné hry z 3 (nebo 1 hra), hra = do 25 bodů nebo 8 boardů. Každá hra je jeden řádek ve tvaru horní:dolní (horní hráč = první v pavouku), např. 25:11. ',
         'Na 2 vítězné z 3: zapište 2 hry, a třetí jen když je stav 1:1. Kdo hraje který zápas, doplní pavouk sám.',
         next.length ? h('div', { className: 'next' }, `Teď se hraje: ${next.join(', ')}`) : null,
         info.provisional ? h('div', { className: 'next' }, 'Nasazení je zatím podle průběžné tabulky.') : null,

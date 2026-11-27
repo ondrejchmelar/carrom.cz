@@ -69,7 +69,7 @@ collections:
       - name: games
         label: Hry
         widget: object
-        hint: "Každá hra je jeden řádek ve tvaru horní:dolní (horní = první hráč v popisku), např. 25:11. Na 2 vítězné z 3 (best of 3): zapište 2 hry a třetí jen při stavu 1:1. Kolik her se kde hraje, je ve Formátu sezóny (Na kolik her). Kdo hraje který zápas, spočítá web; živý pavouk je v náhledu vpravo."
+        hint: "Zápas = na 2 vítězné hry z 3 (nebo 1 hra), hra = do 25 bodů nebo 8 boardů. Každá hra je jeden řádek ve tvaru horní:dolní (horní = první hráč v popisku), např. 25:11. Na 2 vítězné z 3 (best of 3): zapište 2 hry a třetí jen při stavu 1:1. Kolik her se kde hraje, je ve Formátu sezóny (Na kolik her). Kdo hraje který zápas, spočítá web; živý pavouk je v náhledu vpravo."
         fields:
           - name: "1-8"
             label: Skupina o 1.–8. místo
