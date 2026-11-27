@@ -175,15 +175,3 @@ albums:
     edition: cocp/2009
     cover: /uploads/galerie/cocp-2009.jpg
     url: "http://fosgo.rajce.idnes.cz/4._Carrom_Open_Cup_Praha/"
-  - title: { cs: "3. Carrom Open Cup Praha 2008", en: "3rd Carrom Open Cup Prague 2008" }
-    year: "2008"
-    edition: cocp/2008
-    url: "http://pardubice.carrom.cz/gallery.php?akce=galerie_ukaz&galerie_id=22"
-  - title: { cs: "2. Carrom Open Cup Praha 2007", en: "2nd Carrom Open Cup Prague 2007" }
-    year: "2007"
-    edition: cocp/2007
-    url: "http://pardubice.carrom.cz/gallery.php?akce=galerie_ukaz&galerie_id=21"
-  - title: { cs: "1. Carrom Open Cup Praha 2006", en: "1st Carrom Open Cup Prague 2006" }
-    year: "2006"
-    edition: cocp/2006
-    url: "http://pardubice.carrom.cz/gallery.php?akce=galerie_ukaz&galerie_id=14"
