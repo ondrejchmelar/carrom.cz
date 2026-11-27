@@ -12,7 +12,7 @@ const { Content } = page ? await render(page) : { Content: null };
   <div class="wrap page">
     <div class="intro">
       <div class="page-head">
-        <span class="eyebrow">{tr(lang, 'Kulečník na prsty', 'Finger billiards')}</span>
+        <span class="eyebrow">{tr(lang, 'Prstový kulečník', 'Finger billiards')}</span>
         <h1>{page?.data.title ?? tr(lang, 'Hra carrom', 'The game')}</h1>
         <div class="prose">{Content && <Content />}</div>
         <div class="btn-row">

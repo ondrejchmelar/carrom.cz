@@ -2,7 +2,7 @@
 title: Hra carrom
 slug: hra-carrom
 layout: text-sidebar
-description: Kulečník na prsty. Pravidla carromu v kostce.
+description: Prstový kulečník. Pravidla carromu v kostce.
 ---
 
 Carrom je hra pro dva či čtyři hráče. Cílem je cvrnkáním strikeru dostat své kameny do děr v rozích desky.
