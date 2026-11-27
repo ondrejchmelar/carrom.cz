@@ -19,9 +19,12 @@
 
   function steps(entry, ctx, league) {
     const status = val(entry, ['status']);
-    const finished = status === 'finished';
+    const today = new Date().toISOString().slice(0, 10);
+    const end = String(val(entry, ['end_date']) || val(entry, ['start_date']) || '');
     const results = val(entry, ['results']) || {};
     const hasResults = Object.values(results).some((rows) => Array.isArray(rows) && rows.length > 0);
+    // Stav se posouvá sám při sestavení webu (src/lib/core/model.js autoStatus); tady stejné pravidlo.
+    const finished = status === 'finished' || !!ctx.playoffDone || (hasResults && !!end && end < today);
     const prop = (val(entry, ['propozice']) || 'auto') !== 'none';
     const propDone = !!ctx.uploadedPropozice || !!ctx.pdf || (prop && !finished);
     const S = (label, state, hint) => ({ label, state, hint });
@@ -34,7 +37,7 @@
         S('Přihlášky', prep(signup), 'Vyplňte odkaz na Google formulář s přihláškou do sezóny.'),
         S('Průběh', prep(ctx.evenings > 0 || hasResults), 'Zapisujte hrací večery (Ligy · PCL hrací večery).'),
         S('Konečné pořadí', hasResults || ctx.playoffDone ? 'done' : 'todo', 'U PCL ho spočítá web z playoff. U ostatních lig vyplňte Konečné pořadí.'),
-        S('Skončila', finished ? 'done' : 'todo', 'Po finále přepněte Stav na Odehraný.'),
+        S('Skončila', finished ? 'done' : 'todo', 'Stav se přepne sám po dohraném playoff, u lig bez playoff po vyplnění pořadí a konci sezóny.'),
       ];
     }
     return [
@@ -43,8 +46,31 @@
       S('Přihlášky', prep(filled(val(entry, ['signup_url']))), 'Vyplňte Přihláška (odkaz na Google Form) a Přihlášky do.'),
       S('Výsledky', hasResults ? 'done' : 'todo', 'Po turnaji spusťte Import ze SoL.'),
       S('Žebříček MČR', ctx.ranking ? (hasResults ? 'done' : 'todo') : 'skip', 'Přepočítá se sám po importu výsledků.'),
-      S('Odehráno', finished ? 'done' : 'todo', 'Po turnaji přepněte Stav na Odehraný.'),
+      S('Odehráno', finished ? 'done' : 'todo', 'Stav se přepne sám, až budou výsledky a turnaj skončí.'),
     ];
+  }
+
+  // Nový ročník: copies what usually stays, leaves out what belongs to one year (dates, sign-up, results, report…).
+  // Sveltia fills a new form from ?field=value (nested as venue.name; lists cannot be filled).
+  // Keep in step with nextEditionHref() in src/pages/admin/prehled.astro.
+  function nextEditionLink(entry, league, admin) {
+    const v = (...p) => val(entry, p);
+    const params = {
+      competition: v('competition'), year: Number(v('year')) + 1, status: 'planned', source: 'admin',
+      'venue.name': v('venue', 'name'), 'venue.city': v('venue', 'city'), 'venue.address': v('venue', 'address'),
+      capacity: v('capacity'), 'entry_fee.cs': v('entry_fee', 'cs'), 'entry_fee.en': v('entry_fee', 'en'),
+      propozice: v('propozice'), 'schedule.cs': v('schedule', 'cs'), 'schedule.en': v('schedule', 'en'),
+    };
+    if (league) Object.assign(params, {
+      phase: 'group',
+      'format.group_stage.legs': v('format', 'group_stage', 'legs'),
+      'format.group_stage.points.win': v('format', 'group_stage', 'points', 'win'),
+      'format.group_stage.points.draw': v('format', 'group_stage', 'points', 'draw'),
+      'format.playoff.bracket': v('format', 'playoff', 'bracket'),
+    });
+    const q = Object.entries(params).filter(([, x]) => x != null && x !== '' && !Number.isNaN(x))
+      .map(([k, x]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(x))}`).join('&');
+    return `${admin}#/collections/${league ? 'league_editions' : 'editions'}/new?${q}`;
   }
 
   function Panel({ entry, league }) {
@@ -64,6 +90,7 @@
     if (ctx.page) links.push(h('a', { key: 'p', href: ctx.page, target: '_blank' }, 'Stránka ročníku ↗'));
     if (ctx.pdf) links.push(h('a', { key: 'f', href: ctx.pdf, target: '_blank' }, 'Propozice PDF ↗'));
     if (!league && todo.some((s) => s.label === 'Výsledky')) links.push(h('a', { key: 's', href: SOL, target: '_blank' }, 'Import ze SoL ↗'));
+    if (id && ctx.page) links.push(h('a', { key: 'n', href: nextEditionLink(entry, league, base + 'admin/'), target: '_top' }, `Založit ročník ${Number(year) + 1}`));
     if (ctxAll && ctxAll.overview) links.push(h('a', { key: 'o', href: ctxAll.overview, target: '_top' }, 'Přehled všech ročníků'));
     return h('div', { className: 'postup' },
       h('div', { className: 'card' },

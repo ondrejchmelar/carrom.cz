@@ -1,5 +1,6 @@
 # Playoff PCL 2026. Jen skóre, podle slotů. Kdo hraje který slot, spočítá build z tabulky.
 # Každá položka v seznamu je jedna hra ve tvaru "horní:dolní".
+league: pcl-2026             # sezóna (určuje složku souboru)
 seeds: auto                 # auto = pořadí po základním kole; nebo seznam hráčů v pořadí
 games:
   "1-8":

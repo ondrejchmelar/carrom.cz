@@ -8,6 +8,29 @@ const m = model();
 const today = new Date().toISOString().slice(0, 10);
 const thisYear = Number(today.slice(0, 4));
 const cms = (coll: string, id?: string) => url('/admin/') + `#/collections/${coll}` + (id ? `/entries/${id}` : '');
+// New entry with fields filled in from the link (Sveltia reads ?field=value, nested as venue.name; lists cannot be filled).
+const cmsNew = (coll: string, params: Record<string, unknown>) =>
+  url('/admin/') + `#/collections/${coll}/new?` +
+  Object.entries(params).filter(([, v]) => v != null && v !== '').map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`).join('&');
+
+// Next year of a competition: copies what usually stays (venue, capacity, fee, program, format), leaves out
+// what belongs to one year only (dates, sign-up form, deadline, results, report, SoL, video, roster).
+// Keep in step with nextEditionLink() in public/admin/postup.js.
+function nextEditionHref(ed: any) {
+  const league = ed.competition.kind === 'league';
+  const g = ed.format?.group_stage ?? {};
+  return cmsNew(league ? 'league_editions' : 'editions', {
+    competition: ed.code, year: ed.year + 1, status: 'planned', source: 'admin',
+    'venue.name': ed.venue?.name, 'venue.city': ed.venue?.city, 'venue.address': ed.venue?.address,
+    capacity: ed.capacity, 'entry_fee.cs': ed.entry_fee?.cs, 'entry_fee.en': ed.entry_fee?.en,
+    propozice: ed.propozice, 'schedule.cs': ed.schedule?.cs, 'schedule.en': ed.schedule?.en,
+    ...(league ? {
+      phase: 'group',
+      'format.group_stage.legs': g.legs, 'format.group_stage.points.win': g.points?.win, 'format.group_stage.points.draw': g.points?.draw,
+      'format.playoff.bracket': ed.format?.playoff?.bracket,
+    } : {}),
+  });
+}
 
 const rankingFor = (id: string) => Object.values(m.rankings as Record<string, any>).find((r: any) => (r.editions ?? []).includes(id));
 const hasDoc = (ed: any) =>
@@ -64,6 +87,13 @@ const rows = editions.map((ed: any) => {
     missing,
     status: STATUS[ed.status] ?? [ed.status, '#F3F4F7', '#5A6680'],
     href: cms(ed.competition.kind === 'league' ? 'league_editions' : 'editions', ed.id),
+    status_note: ed.status_auto ? `Stav spočítaný z dat. V administraci je uloženo: ${STATUS[ed.status_set]?.[0] ?? ed.status_set}.` : null,
+    // Shortcuts (Ondrej, 2026-11-27): a new evening of a running PCL season, a news article about the event.
+    eveningHref: ed.code === 'pcl' && ed.status !== 'finished' && ed.phase !== 'playoff' && ed.phase !== 'finished'
+      ? cmsNew('league_evenings', { season: `pcl-${ed.year}` }) : null,
+    playoffHref: ed.code === 'pcl' && ed.status !== 'finished' && !(m.seasons as any)[ed.id]?.hasPlayoff
+      ? cmsNew('league_playoff', { league: `pcl-${ed.year}`, seeds: 'auto' }) : null,
+    articleHref: cmsNew('articles', { edition: ed.id, tags: ed.competition.kind === 'league' ? 'ligy' : ed.competition.category === 'abroad' ? 'zahranici' : 'turnaje' }),
   };
 });
 
@@ -77,8 +107,18 @@ for (const r of rows) {
   if (ended && !hasResults(ed) && ed.competition.kind !== 'league') todo.push({ text: `${name}: odehráno, chybí výsledky (import ze SoL)`, href: r.href });
   if (!ended && ed.status !== 'finished' && !hasDoc(ed)) todo.push({ text: `${name}: chybí propozice`, href: r.href });
   if (!ended && ed.competition.kind !== 'league' && ed.status !== 'finished' && !signup(ed)) todo.push({ text: `${name}: chybí odkaz na přihlášku`, href: r.href });
-  if (ed.competition.kind === 'league' && ed.status !== 'finished' && (m.seasons as any)[ed.id]?.complete) todo.push({ text: `${name}: playoff dohráno, přepněte stav na Skončila`, href: r.href });
+  if (r.playoffHref && ed.phase === 'playoff') todo.push({ text: `${name}: fáze Playoff, ale playoff není založené`, href: r.playoffHref });
 }
+
+// Next year to create: competitions played in the last two years whose next year does not exist yet.
+const latest = new Map<string, any>();
+for (const ed of Object.values(m.editions as Record<string, any>)) {
+  if (!latest.has(ed.code) || latest.get(ed.code).year < ed.year) latest.set(ed.code, ed);
+}
+const nextUp = [...latest.values()]
+  .filter((ed) => ed.year >= thisYear - 2 && ed.year <= thisYear)
+  .sort((a, b) => String(a.start_date ?? '').slice(5).localeCompare(String(b.start_date ?? '').slice(5)))
+  .map((ed) => ({ text: `${ed.competition.name.cs} ${ed.year + 1}`, href: nextEditionHref(ed) }));
 const warnings: string[] = m.warnings ?? [];
 ---
 <!doctype html>
@@ -108,7 +148,13 @@ const warnings: string[] = m.warnings ?? [];
     section.card { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
     .card h2 { margin: 0; padding: 16px 20px; font: 800 22px 'Bricolage Grotesque', sans-serif; border-bottom: 1px solid var(--line); }
     .row { display: grid; grid-template-columns: 80px minmax(0, 1fr) 150px 170px; gap: 14px; align-items: center; padding: 14px 20px; border-top: 1px solid #EEF0F4; }
+    .row { position: relative; }
     .row:hover { background: #F8F9FB; }
+    .row a.open::after { content: ''; position: absolute; inset: 0; }
+    .acts { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 2px; }
+    .acts a { position: relative; z-index: 1; font-size: 14px; font-weight: 600; color: var(--red); }
+    .acts a:hover { text-decoration: underline; }
+    .badge small { margin-left: 6px; font-size: 11px; font-weight: 600; opacity: .7; }
     @media (max-width: 700px) { .row { grid-template-columns: 1fr; gap: 6px; } }
     .date { font-weight: 700; font-variant-numeric: tabular-nums; }
     .name strong { display: block; }
@@ -139,17 +185,22 @@ const warnings: string[] = m.warnings ?? [];
         <section class="card">
           <h2>Sezóna {y}</h2>
           {rows.filter((r) => r.ed.year === y).map((r) => (
-            <a class="row" href={r.href}>
+            <div class="row">
               <span class="date">{r.ed.start_date ? `${Number(r.ed.start_date.slice(8, 10))}. ${Number(r.ed.start_date.slice(5, 7))}.` : '–'}</span>
               <span class="name">
-                <strong>{r.ed.competition.name.cs}{r.ed.edition_name?.cs ? ` · ${r.ed.edition_name.cs}` : ''}</strong>
+                <a class="open" href={r.href}><strong>{r.ed.competition.name.cs}{r.ed.edition_name?.cs ? ` · ${r.ed.edition_name.cs}` : ''}</strong></a>
                 <span>{r.ed.competition.kind === 'league' ? 'Liga' : 'Turnaj'}{r.ed.venue?.city ? ` · ${r.ed.venue.city}` : r.ed.venue?.name ? ` · ${r.ed.venue.name}` : ''}{r.missing.length ? ` · chybí: ${r.missing.join(', ')}` : ''}</span>
+                <span class="acts">
+                  {r.eveningHref && <a href={r.eveningHref}>Zapsat večer</a>}
+                  {r.playoffHref && <a href={r.playoffHref}>Založit playoff</a>}
+                  <a href={r.articleHref}>Napsat zprávu</a>
+                </span>
               </span>
               <span class="bar" aria-label={`Hotovo ${r.doneCount} z ${r.total} kroků`} title={r.st.map((s) => `${s.state === 'done' ? '✓' : s.state === 'skip' ? '–' : '○'} ${s.label}`).join('\n')}>
                 {r.st.map((s) => <i class={s.state}></i>)}
               </span>
-              <span class="badge" style={`background:${r.status[1]};color:${r.status[2]}`}>{r.status[0]}</span>
-            </a>
+              <span class="badge" style={`background:${r.status[1]};color:${r.status[2]}`} title={r.status_note ?? undefined}>{r.status[0]}{r.status_note && <small>auto</small>}</span>
+            </div>
           ))}
         </section>
       ))}
@@ -159,6 +210,12 @@ const warnings: string[] = m.warnings ?? [];
         <h2>Čeká na vás</h2>
         {todo.length ? <ul>{todo.map((t) => <li><a href={t.href}>{t.text}</a></li>)}</ul> : <p class="legend">Nic nečeká.</p>}
       </div>
+      {nextUp.length > 0 && (
+        <div class="box">
+          <h2>Nový ročník</h2>
+          <ul>{nextUp.map((t) => <li><a href={t.href}>{t.text}</a></li>)}</ul>
+        </div>
+      )}
       <div class="box">
         <h2>Kontrola dat</h2>
         <p class="legend">{warnings.length ? `${warnings.length} upozornění při posledním sestavení webu:` : 'Při posledním sestavení webu bez upozornění.'}</p>

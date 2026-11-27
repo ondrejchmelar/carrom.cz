@@ -210,8 +210,10 @@ export function season(edition, evenings, playoff) {
   let seeds = [];
   if (phase !== 'group' && playoff) {
     seeds = Array.isArray(playoff.seeds) ? playoff.seeds : table.map((r) => r.player);
+    // The admin stores best_of as key/value text ("3"), the YAML files as numbers.
+    const bestOf = Object.fromEntries(Object.entries(fmt.playoff?.best_of ?? {}).map(([k, v]) => [k, Number(v) || 1]));
     for (const key of fmt.playoff?.groups ?? ['1-8']) {
-      const grp = buildGroup(key, seeds, playoff.games?.[key], fmt.playoff?.best_of, playoff.winners?.[key]);
+      const grp = buildGroup(key, seeds, playoff.games?.[key], bestOf, playoff.winners?.[key]);
       if (grp) groups.push(grp);
     }
   }

@@ -37,14 +37,6 @@ export function buildModel(raw, { today = new Date() } = {}) {
     };
   }
 
-  // ---------- abroad (Eurocup): only editions with Czech players (Ondrej, 2026-11-26) ----------
-  const isCzech = (r) => r.country === 'CZ' || (r.player != null && (players[r.player]?.country ?? 'CZ') === 'CZ');
-  for (const [id, ed] of Object.entries(editions)) {
-    if (ed.competition.category !== 'abroad') continue;
-    ed.czech = Object.values(ed.results).some((rows) => (rows ?? []).some(isCzech));
-    if (!ed.czech && ed.status === 'finished') delete editions[id];
-  }
-
   // ---------- leagues (PCL-style seasons) ----------
   const seasons = {};
   for (const [id, lg] of Object.entries(raw.leagues ?? {})) {
@@ -55,12 +47,30 @@ export function buildModel(raw, { today = new Date() } = {}) {
     const s = season(ed, lg.evenings ?? [], lg.playoff);
     s.warnings.forEach((w) => warnings.push(`leagues/${id}: ${w}`));
     s.evenings = (lg.evenings ?? []).map((ev) => ({ ...ev, date: iso(ev.date) }));
+    s.hasPlayoff = !!lg.playoff;
     seasons[ed.id] = s;
     // Final places come from the build once the playoff is complete; never typed by hand.
     if (s.complete && !(ed.results.singles?.length)) {
       ed.results = { ...ed.results, singles: s.finalPlaces };
       ed.resultsComputed = true;
     }
+  }
+
+  // ---------- status moves forward on its own from the data (Ondrej, 2026-11-27) ----------
+  // The typed status stays in status_set; a hand-set later status (e.g. finished) always wins.
+  const todayIso0 = iso(today);
+  for (const ed of Object.values(editions)) {
+    ed.status_set = ed.status ?? 'planned';
+    ed.status = autoStatus(ed, seasons[ed.id], todayIso0);
+    ed.status_auto = ed.status !== ed.status_set;
+  }
+
+  // ---------- abroad (Eurocup): only editions with Czech players (Ondrej, 2026-11-26) ----------
+  const isCzech = (r) => r.country === 'CZ' || (r.player != null && (players[r.player]?.country ?? 'CZ') === 'CZ');
+  for (const [id, ed] of Object.entries(editions)) {
+    if (ed.competition.category !== 'abroad') continue;
+    ed.czech = Object.values(ed.results).some((rows) => (rows ?? []).some(isCzech));
+    if (!ed.czech && ed.status === 'finished') delete editions[id];
   }
 
   for (const ed of Object.values(editions)) {
@@ -149,4 +159,24 @@ export function buildModel(raw, { today = new Date() } = {}) {
     documents: Object.entries(documents).map(([id, d]) => ({ id, ...d, date: iso(d.date) })),
     warnings,
   };
+}
+
+const STATUS_ORDER = { planned: 0, registration_open: 1, running: 2, finished: 3 };
+const hasAnyResults = (ed) => Object.values(ed.results ?? {}).some((rows) => (rows ?? []).length > 0);
+
+/**
+ * Status implied by the data, never earlier than the typed one:
+ * sign-up link (deadline not passed) -> registration_open; league after its start -> running;
+ * league with the playoff complete, or results after the end date -> finished.
+ */
+export function autoStatus(ed, season, todayIso) {
+  const set = ed.status ?? 'planned';
+  const league = ed.competition?.kind === 'league';
+  const signup = ed.signup_url ?? ed.links?.signup_url;
+  const end = ed.end_date ?? ed.start_date;
+  let s = 'planned';
+  if (signup && (!ed.signup_deadline || ed.signup_deadline >= todayIso)) s = 'registration_open';
+  if (league && ed.start_date && ed.start_date <= todayIso) s = 'running';
+  if (season?.complete || (hasAnyResults(ed) && end && end < todayIso)) s = 'finished';
+  return (STATUS_ORDER[s] ?? 0) > (STATUS_ORDER[set] ?? 0) ? s : set;
 }

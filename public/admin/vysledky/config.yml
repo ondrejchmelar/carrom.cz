@@ -36,8 +36,8 @@ collections:
     summary: "{{season}} · {{date}}"
     filter: { field: season, pattern: "^pcl-" }
     fields:
-      - { name: season, label: Sezóna, widget: string, default: pcl-2027, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "pcl-<rok>" }
-      - { name: date, label: Datum, widget: datetime, time_format: false, format: YYYY-MM-DD }
+      - { name: season, label: Sezóna, widget: string, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "pcl-<rok>, např. pcl-2027" }
+      - { name: date, label: Datum, widget: datetime, time_format: false, format: YYYY-MM-DD, default: "{{now}}" }
       - { name: venue, label: Jiné místo než obvykle, widget: string, required: false, hint: "Prázdné = místo sezóny" }
       - name: matches
         label: Zápasy
@@ -53,34 +53,60 @@ collections:
 
   - name: league_playoff
     label: PCL – playoff
-    files:
-      - name: pcl-2026
-        label: Playoff PCL 2026
-        file: data/leagues/pcl-2026/playoff.yaml
+    label_singular: Playoff
+    folder: data/leagues
+    path: "{{league}}/playoff"
+    extension: yaml
+    format: yaml
+    create: true
+    identifier_field: league
+    summary: "Playoff {{league}}"
+    sortable_fields: { fields: [league], default: { field: league, direction: descending } }
+    filter: { field: league, pattern: "^pcl-\\d{4}$" }
+    fields:
+      - { name: league, label: Sezóna, widget: string, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "pcl-<rok>. Playoff nové sezóny se založí tlačítkem Nový." }
+      - { name: seeds, label: Nasazení, widget: string, default: auto, hint: "auto = podle tabulky po základním kole" }
+      - name: games
+        label: Hry
+        widget: object
+        hint: "Každá hra ve tvaru horní:dolní, např. 25:11. Kdo hraje který zápas, spočítá web."
         fields:
-          - { name: seeds, label: Nasazení, widget: string, default: auto, hint: "auto = podle tabulky po základním kole" }
-          - name: games
-            label: Hry
+          - name: "1-8"
+            label: Skupina o 1.–8. místo
             widget: object
-            hint: "Každá hra ve tvaru horní:dolní, např. 25:11. Kdo hraje který zápas, spočítá web."
+            required: false
             fields:
-              - name: "1-8"
-                label: Skupina o 1.–8. místo
-                widget: object
-                fields:
-                  - { name: qf1, label: "Čtvrtfinále 1 (1–8)", widget: list, required: false }
-                  - { name: qf2, label: "Čtvrtfinále 2 (5–4)", widget: list, required: false }
-                  - { name: qf3, label: "Čtvrtfinále 3 (3–6)", widget: list, required: false }
-                  - { name: qf4, label: "Čtvrtfinále 4 (7–2)", widget: list, required: false }
-                  - { name: sf1, label: Semifinále 1, widget: list, required: false }
-                  - { name: sf2, label: Semifinále 2, widget: list, required: false }
-                  - { name: l-sf1, label: "O 5.–8. místo (1)", widget: list, required: false }
-                  - { name: l-sf2, label: "O 5.–8. místo (2)", widget: list, required: false }
-                  - { name: f1, label: Finále, widget: list, required: false }
-                  - { name: f3, label: O 3. místo, widget: list, required: false }
-                  - { name: f5, label: O 5. místo, widget: list, required: false }
-                  - { name: f7, label: O 7. místo, widget: list, required: false }
-
+              - { name: qf1, label: "Čtvrtfinále 1 (1–8)", widget: list, required: false }
+              - { name: qf2, label: "Čtvrtfinále 2 (5–4)", widget: list, required: false }
+              - { name: qf3, label: "Čtvrtfinále 3 (3–6)", widget: list, required: false }
+              - { name: qf4, label: "Čtvrtfinále 4 (7–2)", widget: list, required: false }
+              - { name: sf1, label: Semifinále 1, widget: list, required: false }
+              - { name: sf2, label: Semifinále 2, widget: list, required: false }
+              - { name: l-sf1, label: "O 5.–8. místo (1)", widget: list, required: false }
+              - { name: l-sf2, label: "O 5.–8. místo (2)", widget: list, required: false }
+              - { name: f1, label: Finále, widget: list, required: false }
+              - { name: f3, label: O 3. místo, widget: list, required: false }
+              - { name: f5, label: O 5. místo, widget: list, required: false }
+              - { name: f7, label: O 7. místo, widget: list, required: false }
+          - name: "9-16"
+            label: Skupina o 9.–16. místo
+            widget: object
+            required: false
+            collapsed: true
+            hint: "Jen když se hraje (Formát sezóny → Skupiny). Při 9–10 hráčích se hraje jen Finále = zápas o 9. místo."
+            fields:
+              - { name: qf1, label: "Čtvrtfinále 1 (9–16)", widget: list, required: false }
+              - { name: qf2, label: "Čtvrtfinále 2 (13–12)", widget: list, required: false }
+              - { name: qf3, label: "Čtvrtfinále 3 (11–14)", widget: list, required: false }
+              - { name: qf4, label: "Čtvrtfinále 4 (15–10)", widget: list, required: false }
+              - { name: sf1, label: Semifinále 1, widget: list, required: false }
+              - { name: sf2, label: Semifinále 2, widget: list, required: false }
+              - { name: l-sf1, label: "O 13.–16. místo (1)", widget: list, required: false }
+              - { name: l-sf2, label: "O 13.–16. místo (2)", widget: list, required: false }
+              - { name: f1, label: "Finále (o 9. místo)", widget: list, required: false }
+              - { name: f3, label: O 11. místo, widget: list, required: false }
+              - { name: f5, label: O 13. místo, widget: list, required: false }
+              - { name: f7, label: O 15. místo, widget: list, required: false }
   - name: players
     label: Hráči
     label_singular: Hráč

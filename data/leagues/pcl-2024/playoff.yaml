@@ -1,5 +1,6 @@
 # Playoff PCL 2024 převzaté ze starého webu (tools/import/pcl_playoff_slots.py).
 # Tabulka základního kola na webu není, proto je nasazení vypsané. Skóre je "horní:dolní" podle slotu.
+league: pcl-2024             # sezóna (určuje složku souboru)
 seeds:
   - horst-simunsky
   - ajay-sekhesh
