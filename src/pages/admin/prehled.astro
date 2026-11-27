@@ -1,0 +1,169 @@
+---
+// Admin overview: where every current tournament and league season stands (read-only, built from data).
+// Sveltia CMS has no dashboard, so this page is generated at build and links into the CMS forms.
+import { model } from '../../lib/data';
+import { url } from '../../lib/site';
+
+const m = model();
+const today = new Date().toISOString().slice(0, 10);
+const thisYear = Number(today.slice(0, 4));
+const cms = (coll: string, id?: string) => url('/admin/') + `#/collections/${coll}` + (id ? `/entries/${id}` : '');
+
+const rankingFor = (id: string) => Object.values(m.rankings as Record<string, any>).find((r: any) => (r.editions ?? []).includes(id));
+const hasDoc = (ed: any) =>
+  (ed.documents ?? []).length > 0 || m.documents.some((d: any) => d.edition === ed.id && d.kind === 'propozice');
+const hasResults = (ed: any) => Object.values(ed.results ?? {}).some((rows: any) => (rows ?? []).length > 0);
+const signup = (ed: any) => ed.signup_url ?? ed.links?.signup_url;
+
+type Step = { label: string; state: 'done' | 'todo' | 'skip' };
+function steps(ed: any): Step[] {
+  const done = (b: boolean): Step['state'] => (b ? 'done' : 'todo');
+  // Once played, preparation steps that left no trace (old seasons) no longer apply.
+  const prep = (b: boolean): Step['state'] => (b ? 'done' : ed.status === 'finished' ? 'skip' : 'todo');
+  if (ed.competition.kind === 'league') {
+    const s = (m.seasons as any)[ed.id];
+    return [
+      { label: 'Založena', state: 'done' },
+      { label: 'Propozice', state: prep(hasDoc(ed)) },
+      { label: 'Přihlášky', state: prep(!!signup(ed) || (ed.roster ?? []).length > 0) },
+      { label: 'Průběh', state: prep((s?.evenings ?? []).length > 0 || hasResults(ed)) },
+      { label: 'Konečné pořadí', state: done(hasResults(ed)) },
+      { label: 'Skončila', state: done(ed.status === 'finished') },
+    ];
+  }
+  const r = rankingFor(ed.id);
+  return [
+    { label: 'Založen', state: 'done' },
+    { label: 'Propozice', state: prep(hasDoc(ed)) },
+    { label: 'Přihlášky', state: prep(!!signup(ed)) },
+    { label: 'Výsledky', state: done(hasResults(ed)) },
+    { label: 'Žebříček MČR', state: r ? done(hasResults(ed)) : 'skip' },
+    { label: 'Odehráno', state: done(ed.status === 'finished') },
+  ];
+}
+
+const STATUS: Record<string, [string, string, string]> = {
+  planned: ['Plánovaný', '#F3F4F7', '#5A6680'],
+  registration_open: ['Přihlášky otevřené', '#E3E8F5', '#0E1B3D'],
+  running: ['Probíhá', '#E3E8F5', '#0E1B3D'],
+  finished: ['Odehráno', '#E5F2EA', '#1D6B3A'],
+};
+
+const editions = Object.values(m.editions as Record<string, any>)
+  .filter((e: any) => e.year >= thisYear || e.status !== 'finished')
+  .sort((a: any, b: any) => (b.year - a.year) || String(a.start_date).localeCompare(String(b.start_date)));
+const years = [...new Set(editions.map((e: any) => e.year))];
+const rows = editions.map((ed: any) => {
+  const st = steps(ed);
+  const counted = st.filter((s) => s.state !== 'skip');
+  const missing = st.filter((s) => s.state === 'todo').map((s) => s.label);
+  return {
+    ed, st,
+    doneCount: counted.filter((s) => s.state === 'done').length,
+    total: counted.length,
+    missing,
+    status: STATUS[ed.status] ?? [ed.status, '#F3F4F7', '#5A6680'],
+    href: cms(ed.competition.kind === 'league' ? 'league_editions' : 'editions', ed.id),
+  };
+});
+
+// What needs attention now.
+const todo: { text: string; href: string }[] = [];
+for (const r of rows) {
+  const { ed } = r;
+  const name = `${ed.competition.name.cs} ${ed.year}`;
+  const ended = (ed.end_date ?? ed.start_date) && (ed.end_date ?? ed.start_date) < today;
+  if (ed.competition.kind === 'league' && ed.status === 'finished' && !hasResults(ed)) todo.push({ text: `${name}: skončila, chybí konečné pořadí`, href: r.href });
+  if (ended && !hasResults(ed) && ed.competition.kind !== 'league') todo.push({ text: `${name}: odehráno, chybí výsledky (import ze SoL)`, href: r.href });
+  if (!ended && ed.status !== 'finished' && !hasDoc(ed)) todo.push({ text: `${name}: chybí propozice`, href: r.href });
+  if (!ended && ed.competition.kind !== 'league' && ed.status !== 'finished' && !signup(ed)) todo.push({ text: `${name}: chybí odkaz na přihlášku`, href: r.href });
+  if (ed.competition.kind === 'league' && ed.status !== 'finished' && (m.seasons as any)[ed.id]?.complete) todo.push({ text: `${name}: playoff dohráno, přepněte stav na Skončila`, href: r.href });
+}
+const warnings: string[] = m.warnings ?? [];
+---
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Přehled · Administrace carrom.cz</title>
+  <link rel="icon" href={url('/favicon.ico')} />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Figtree:wght@400;600;700&display=swap" />
+  <style>
+    :root { --navy: #0E1B3D; --red: #D3242B; --bg: #F3F4F7; --muted: #5A6680; --line: #DDE1EA; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--navy); font: 16px/1.45 Figtree, system-ui, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    header { background: var(--navy); color: #fff; padding: 0 24px; min-height: 60px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    header strong { font-size: 17px; }
+    header a { margin-left: auto; height: 40px; padding: 0 16px; display: flex; align-items: center; border: 1px solid #3A4B78; border-radius: 20px; font-weight: 600; font-size: 14px; }
+    main { max-width: 1200px; margin: 0 auto; padding: 28px 16px 56px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    h1 { margin: 0 0 4px; font: 800 36px 'Bricolage Grotesque', sans-serif; letter-spacing: -0.02em; }
+    .lede { margin: 0 0 20px; color: var(--muted); }
+    section.card { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+    .card h2 { margin: 0; padding: 16px 20px; font: 800 22px 'Bricolage Grotesque', sans-serif; border-bottom: 1px solid var(--line); }
+    .row { display: grid; grid-template-columns: 80px minmax(0, 1fr) 150px 170px; gap: 14px; align-items: center; padding: 14px 20px; border-top: 1px solid #EEF0F4; }
+    .row:hover { background: #F8F9FB; }
+    @media (max-width: 700px) { .row { grid-template-columns: 1fr; gap: 6px; } }
+    .date { font-weight: 700; font-variant-numeric: tabular-nums; }
+    .name strong { display: block; }
+    .name span, .miss { font-size: 14px; color: var(--muted); }
+    .bar { display: flex; gap: 5px; }
+    .bar i { width: 18px; height: 6px; border-radius: 3px; background: var(--line); }
+    .bar i.done { background: var(--navy); }
+    .bar i.skip { background: transparent; box-shadow: inset 0 0 0 1px var(--line); }
+    .badge { justify-self: start; height: 28px; padding: 0 12px; border-radius: 14px; display: inline-flex; align-items: center; font-size: 13px; font-weight: 700; }
+    aside .box { background: #fff; border-radius: 16px; padding: 18px 20px; margin-bottom: 16px; }
+    aside h2 { margin: 0 0 10px; font-size: 17px; }
+    aside ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+    aside li a { display: flex; gap: 10px; }
+    aside li a::before { content: ''; flex: none; width: 8px; height: 8px; margin-top: 6px; border-radius: 4px; background: var(--red); }
+    aside li a:hover { color: var(--red); }
+    .legend { font-size: 13px; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Administrace · Přehled</strong>
+    <a href={url('/admin/')}>Otevřít administraci</a>
+  </header>
+  <main>
+    <div>
+      <h1>Přehled turnajů a lig</h1>
+      <p class="lede">Kde je který ročník. Stránka se přestaví s každou změnou dat. Kliknutím otevřete ročník v administraci.</p>
+      {years.map((y) => (
+        <section class="card">
+          <h2>Sezóna {y}</h2>
+          {rows.filter((r) => r.ed.year === y).map((r) => (
+            <a class="row" href={r.href}>
+              <span class="date">{r.ed.start_date ? `${Number(r.ed.start_date.slice(8, 10))}. ${Number(r.ed.start_date.slice(5, 7))}.` : '–'}</span>
+              <span class="name">
+                <strong>{r.ed.competition.name.cs}{r.ed.edition_name?.cs ? ` · ${r.ed.edition_name.cs}` : ''}</strong>
+                <span>{r.ed.competition.kind === 'league' ? 'Liga' : 'Turnaj'}{r.ed.venue?.city ? ` · ${r.ed.venue.city}` : r.ed.venue?.name ? ` · ${r.ed.venue.name}` : ''}{r.missing.length ? ` · chybí: ${r.missing.join(', ')}` : ''}</span>
+              </span>
+              <span class="bar" aria-label={`Hotovo ${r.doneCount} z ${r.total} kroků`} title={r.st.map((s) => `${s.state === 'done' ? '✓' : s.state === 'skip' ? '–' : '○'} ${s.label}`).join('\n')}>
+                {r.st.map((s) => <i class={s.state}></i>)}
+              </span>
+              <span class="badge" style={`background:${r.status[1]};color:${r.status[2]}`}>{r.status[0]}</span>
+            </a>
+          ))}
+        </section>
+      ))}
+      <p class="legend">Kroky turnaje: založen, propozice, přihlášky, výsledky, žebříček MČR, odehráno. Kroky ligy: založena, propozice, přihlášky, průběh, konečné pořadí, skončila. Prázdný rámeček = krok se ročníku netýká. Najetím myší na proužek se ukáže, který krok chybí.</p>
+    </div>
+    <aside>
+      <div class="box">
+        <h2>Čeká na vás</h2>
+        {todo.length ? <ul>{todo.map((t) => <li><a href={t.href}>{t.text}</a></li>)}</ul> : <p class="legend">Nic nečeká.</p>}
+      </div>
+      <div class="box">
+        <h2>Kontrola dat</h2>
+        <p class="legend">{warnings.length ? `${warnings.length} upozornění při posledním sestavení webu:` : 'Při posledním sestavení webu bez upozornění.'}</p>
+        {warnings.length > 0 && <ul style="margin-top:8px">{warnings.slice(0, 8).map((w) => <li style="color:#5A6680">{w}</li>)}</ul>}
+      </div>
+    </aside>
+  </main>
+</body>
+</html>
