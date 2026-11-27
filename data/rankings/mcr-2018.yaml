@@ -1,7 +1,7 @@
 year: 2018
 audience: open
 name: { cs: Mistrovství ČR 2018, en: Czech Championship 2018 }
-editions: [jarni/2018, letohrad/2018, cocp/2018]
+editions: [jarni/2018, druhy/2018, cocp/2018]
 best_of: 2
 points: published           # published = opsané ze starého webu | computed = spočítá build
 scale: 100

@@ -1,7 +1,7 @@
 year: 2025
 audience: open
 name: { cs: Mistrovství ČR 2025, en: Czech Championship 2025 }
-editions: [jarni/2025, letohrad/2025, cocp/2025]
+editions: [jarni/2025, druhy/2025, cocp/2025]
 best_of: 2
 points: published           # published = opsané ze starého webu | computed = spočítá build
 scale: 100

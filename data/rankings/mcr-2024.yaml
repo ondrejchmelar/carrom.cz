@@ -1,7 +1,7 @@
 year: 2024
 audience: open
 name: { cs: Mistrovství ČR 2024, en: Czech Championship 2024 }
-editions: [jarni/2024, letohrad/2024, cocp/2024]
+editions: [jarni/2024, druhy/2024, cocp/2024]
 best_of: 2
 points: published           # published = opsané ze starého webu | computed = spočítá build
 scale: 100

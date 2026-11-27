@@ -1,7 +1,7 @@
 year: 2023
 audience: open
 name: { cs: Mistrovství ČR 2023, en: Czech Championship 2023 }
-editions: [jarni/2023, letohrad/2023, cocp/2023]
+editions: [jarni/2023, druhy/2023, cocp/2023]
 best_of: 2
 points: published           # published = opsané ze starého webu | computed = spočítá build
 scale: 100

@@ -1,7 +1,7 @@
 year: 2022
 audience: open
 name: { cs: Mistrovství ČR 2022, en: Czech Championship 2022 }
-editions: [jarni/2022, letohrad/2022, cocp/2022]
+editions: [jarni/2022, druhy/2022, cocp/2022]
 best_of: 2
 points: published           # published = opsané ze starého webu | computed = spočítá build
 scale: 1000
