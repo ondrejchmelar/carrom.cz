@@ -16,3 +16,7 @@ It most likely comes from India. It has been played across the Indian subcontine
 3. **Pocket your pieces.** Pocket one and you play again. Whoever clears their colour first wins the board.
 4. **Cover the queen.** The red queen only counts if you pocket one of your own pieces straight after.
 5. **Mind the fouls.** Pocket the striker and one of your pieces goes back on the board.
+
+## Full rules
+
+- [Laws of Carrom (ECC)](https://www.carromitaly.com/wp-content/uploads/2023/02/Laws-of-Carrom-As-Adopted-by-ECC.pdf) – the official rules tournaments are played by (PDF)

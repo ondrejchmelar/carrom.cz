@@ -23,3 +23,8 @@ Pochází nejspíš z Indie. Posledních sto let se hraje na celém indickém su
 - **9 bílých, 9 černých** – každý hráč má svou barvu
 - **Královna** – červený kámen uprostřed
 - **Čtyři díry** – v rozích desky
+
+## Úplná pravidla
+
+- [Pravidla carromu ECC](https://www.carromitaly.com/wp-content/uploads/2023/02/Laws-of-Carrom-As-Adopted-by-ECC.pdf) – oficiální pravidla, podle kterých se hrají turnaje (anglicky, PDF)
+- [Pravidla carromu v češtině](/uploads/archiv/carrom/carrom_pravidla_edice_2004.doc) – český překlad, edice 2004 (DOC)
