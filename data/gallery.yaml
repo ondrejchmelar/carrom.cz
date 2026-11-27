@@ -77,6 +77,7 @@ albums:
     url: "https://www.lib.cas.cz/zt/carrom/album/2018_open/index.html"
   - title: { cs: "Odhalení sochy CARROM Praha 2017", en: "Unveiling of the CARROM statue, Prague 2017" }
     year: "2017"
+    cover: /uploads/galerie/socha-carrom-2017.jpg
     photographer: Michal Fučík
     url: "https://www.flickr.com/photos/184612779@N02/sets/72157716845229503/"
   - title: { cs: "12. Carrom Open Cup Praha 2017", en: "12th Carrom Open Cup Prague 2017" }
