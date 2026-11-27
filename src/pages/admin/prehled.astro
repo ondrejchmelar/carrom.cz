@@ -100,8 +100,7 @@ const warnings: string[] = m.warnings ?? [];
     header a { margin-left: auto; height: 40px; padding: 0 16px; display: flex; align-items: center; border: 1px solid #3A4B78; border-radius: 20px; font-weight: 600; font-size: 14px; }
     main { max-width: 1200px; margin: 0 auto; padding: 28px 16px 56px; display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 24px; align-items: start; }
     @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
-    h1 { margin: 0 0 4px; font: 800 36px 'Bricolage Grotesque', sans-serif; letter-spacing: -0.02em; }
-    .lede { margin: 0 0 20px; color: var(--muted); }
+    h1 { margin: 0 0 20px; font: 800 36px 'Bricolage Grotesque', sans-serif; letter-spacing: -0.02em; }
     section.card { background: #fff; border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
     .card h2 { margin: 0; padding: 16px 20px; font: 800 22px 'Bricolage Grotesque', sans-serif; border-bottom: 1px solid var(--line); }
     .row { display: grid; grid-template-columns: 80px minmax(0, 1fr) 150px 170px; gap: 14px; align-items: center; padding: 14px 20px; border-top: 1px solid #EEF0F4; }
@@ -132,7 +131,6 @@ const warnings: string[] = m.warnings ?? [];
   <main>
     <div>
       <h1>Přehled turnajů a lig</h1>
-      <p class="lede">Kde je který ročník. Stránka se přestaví s každou změnou dat. Kliknutím otevřete ročník v administraci.</p>
       {years.map((y) => (
         <section class="card">
           <h2>Sezóna {y}</h2>
@@ -151,7 +149,6 @@ const warnings: string[] = m.warnings ?? [];
           ))}
         </section>
       ))}
-      <p class="legend">Kroky turnaje: založen, propozice, přihlášky, výsledky, žebříček MČR, odehráno. Kroky ligy: založena, propozice, přihlášky, průběh, konečné pořadí, skončila. Prázdný rámeček = krok se ročníku netýká. Najetím myší na proužek se ukáže, který krok chybí.</p>
     </div>
     <aside>
       <div class="box">
