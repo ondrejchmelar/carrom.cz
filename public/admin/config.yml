@@ -273,6 +273,7 @@ collections:
       - { name: league, label: Liga (kód soutěže), widget: string, required: false }
       - { name: summary, label: Krátký popis, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string, required: false }] }
       - { name: description, label: Delší popis, widget: object, required: false, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
+      - { name: web, label: Web klubu (odkaz), widget: string, required: false, pattern: ["^https?://", "Musí začínat https://"] }
       - { name: email, label: E-mail (jen adresy asociace/klubu), widget: string, required: false }
       - { name: active, label: Aktivní, widget: boolean, default: true }
       - { name: home, label: Na úvodní stránce, widget: boolean, default: true, required: false }

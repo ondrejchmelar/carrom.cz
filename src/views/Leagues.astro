@@ -45,6 +45,7 @@ const mainSeason = main?.league ? seasonOf(main.league) : null;
               <span class="links">
                 {s && <a href={L(`/ligy/${s.code}/`, lang)}>{tr(lang, 'Výsledky', 'Results')}</a>}
                 {c.link?.competition && <a href={L(`/vysledky/${c.link.competition}/`, lang)}>{tr(lang, 'Výsledky', 'Results')}</a>}
+                {c.web && <a href={c.web} rel="noopener">{tr(lang, "Web klubu", "Club website")}</a>}
                 {c.email && <a href={`mailto:${c.email}`}>{c.email}</a>}
               </span>
             </div>
