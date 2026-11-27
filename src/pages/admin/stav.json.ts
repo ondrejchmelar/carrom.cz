@@ -37,5 +37,18 @@ export const GET: APIRoute = () => {
       }
     }
   }
-  return new Response(JSON.stringify({ overview: url('/admin/prehled/'), editions: out, used }), { headers: { 'Content-Type': 'application/json' } });
+  // PCL playoff preview (public/admin/playoff.js): seeds (provisional from the table during the group stage),
+  // format and names, so the admin can draw the bracket while scores are typed.
+  const playoff: Record<string, any> = {};
+  for (const ed of Object.values(m.editions as Record<string, any>)) {
+    const s = (m.seasons as any)[ed.id];
+    if (ed.code !== 'pcl' || !s) continue;
+    const seeds: string[] = s.seeds?.length ? s.seeds : s.table.map((r: any) => r.player);
+    const names = Object.fromEntries(seeds.map((p) => {
+      const pl: any = (m.players as any)[p] ?? {};
+      return [p, pl.short_name || [pl.first_name, pl.last_name].filter(Boolean).join(' ') || p];
+    }));
+    playoff[`pcl-${ed.year}`] = { seeds, provisional: !s.seeds?.length, names, groups: ed.format?.playoff?.groups ?? ['1-8'], best_of: ed.format?.playoff?.best_of ?? {} };
+  }
+  return new Response(JSON.stringify({ overview: url('/admin/prehled/'), editions: out, used, playoff }), { headers: { 'Content-Type': 'application/json' } });
 };

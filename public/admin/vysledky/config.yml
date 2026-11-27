@@ -36,7 +36,7 @@ collections:
     summary: "{{season}} · {{date}}"
     filter: { field: season, pattern: "^pcl-" }
     fields:
-      - { name: season, label: Sezóna, widget: string, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "pcl-<rok>, např. pcl-2027" }
+      - { name: season, label: Sezóna, widget: string, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "Ve tvaru pcl-2027" }
       - { name: date, label: Datum, widget: datetime, time_format: false, format: YYYY-MM-DD, default: "{{now}}" }
       - { name: venue, label: Jiné místo než obvykle, widget: string, required: false, hint: "Prázdné = místo sezóny" }
       - name: matches
@@ -64,30 +64,30 @@ collections:
     sortable_fields: { fields: [league], default: { field: league, direction: descending } }
     filter: { field: league, pattern: "^pcl-\\d{4}$" }
     fields:
-      - { name: league, label: Sezóna, widget: string, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "pcl-<rok>. Playoff nové sezóny se založí tlačítkem Nový." }
+      - { name: league, label: Sezóna, widget: string, pattern: ["^pcl-\\d{4}$", "Ve tvaru pcl-2027"], hint: "Ve tvaru pcl-2027." }
       - { name: seeds, label: Nasazení, widget: string, default: auto, hint: "auto = podle tabulky po základním kole" }
       - name: games
         label: Hry
         widget: object
-        hint: "Každá hra ve tvaru horní:dolní, např. 25:11. Kdo hraje který zápas, spočítá web."
+        hint: "Každá hra je jeden řádek ve tvaru horní:dolní (horní = první hráč v popisku), např. 25:11. Na 2 vítězné z 3 (best of 3): zapište 2 hry a třetí jen při stavu 1:1. Kolik her se kde hraje, je ve Formátu sezóny (Na kolik her). Kdo hraje který zápas, spočítá web; živý pavouk je v náhledu vpravo."
         fields:
           - name: "1-8"
             label: Skupina o 1.–8. místo
             widget: object
             required: false
             fields:
-              - { name: qf1, label: "Čtvrtfinále 1 (1–8)", widget: list, required: false }
-              - { name: qf2, label: "Čtvrtfinále 2 (5–4)", widget: list, required: false }
-              - { name: qf3, label: "Čtvrtfinále 3 (3–6)", widget: list, required: false }
-              - { name: qf4, label: "Čtvrtfinále 4 (7–2)", widget: list, required: false }
-              - { name: sf1, label: Semifinále 1, widget: list, required: false }
-              - { name: sf2, label: Semifinále 2, widget: list, required: false }
-              - { name: l-sf1, label: "O 5.–8. místo (1)", widget: list, required: false }
-              - { name: l-sf2, label: "O 5.–8. místo (2)", widget: list, required: false }
-              - { name: f1, label: Finále, widget: list, required: false }
-              - { name: f3, label: O 3. místo, widget: list, required: false }
-              - { name: f5, label: O 5. místo, widget: list, required: false }
-              - { name: f7, label: O 7. místo, widget: list, required: false }
+              - { name: qf1, label: "Čtvrtfinále 1 · nasazený 1 – 8", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: qf2, label: "Čtvrtfinále 2 · nasazený 5 – 4", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: qf3, label: "Čtvrtfinále 3 · nasazený 3 – 6", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: qf4, label: "Čtvrtfinále 4 · nasazený 7 – 2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: sf1, label: "Semifinále 1 · vítěz ČF1 – vítěz ČF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: sf2, label: "Semifinále 2 · vítěz ČF3 – vítěz ČF4", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: l-sf1, label: "O 5.–8. místo (1) · poražený ČF1 – poražený ČF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: l-sf2, label: "O 5.–8. místo (2) · poražený ČF3 – poražený ČF4", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f1, label: "Finále · vítěz SF1 – vítěz SF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f3, label: "O 3. místo · poražený SF1 – poražený SF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f5, label: "O 5. místo · vítězové zápasů o 5.–8.", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f7, label: "O 7. místo · poražení zápasů o 5.–8.", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
           - name: "9-16"
             label: Skupina o 9.–16. místo
             widget: object
@@ -95,18 +95,18 @@ collections:
             collapsed: true
             hint: "Jen když se hraje (Formát sezóny → Skupiny). Při 9–10 hráčích se hraje jen Finále = zápas o 9. místo."
             fields:
-              - { name: qf1, label: "Čtvrtfinále 1 (9–16)", widget: list, required: false }
-              - { name: qf2, label: "Čtvrtfinále 2 (13–12)", widget: list, required: false }
-              - { name: qf3, label: "Čtvrtfinále 3 (11–14)", widget: list, required: false }
-              - { name: qf4, label: "Čtvrtfinále 4 (15–10)", widget: list, required: false }
-              - { name: sf1, label: Semifinále 1, widget: list, required: false }
-              - { name: sf2, label: Semifinále 2, widget: list, required: false }
-              - { name: l-sf1, label: "O 13.–16. místo (1)", widget: list, required: false }
-              - { name: l-sf2, label: "O 13.–16. místo (2)", widget: list, required: false }
-              - { name: f1, label: "Finále (o 9. místo)", widget: list, required: false }
-              - { name: f3, label: O 11. místo, widget: list, required: false }
-              - { name: f5, label: O 13. místo, widget: list, required: false }
-              - { name: f7, label: O 15. místo, widget: list, required: false }
+              - { name: qf1, label: "Čtvrtfinále 1 · nasazený 9 – 16", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: qf2, label: "Čtvrtfinále 2 · nasazený 13 – 12", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: qf3, label: "Čtvrtfinále 3 · nasazený 11 – 14", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: qf4, label: "Čtvrtfinále 4 · nasazený 15 – 10", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: sf1, label: "Semifinále 1 · vítěz ČF1 – vítěz ČF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: sf2, label: "Semifinále 2 · vítěz ČF3 – vítěz ČF4", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: l-sf1, label: "O 13.–16. místo (1) · poražený ČF1 – poražený ČF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: l-sf2, label: "O 13.–16. místo (2) · poražený ČF3 – poražený ČF4", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f1, label: "Finále (o 9. místo) · vítěz SF1 – vítěz SF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f3, label: "O 11. místo · poražený SF1 – poražený SF2", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f5, label: "O 13. místo · vítězové zápasů o 13.–16.", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
+              - { name: f7, label: "O 15. místo · poražení zápasů o 13.–16.", label_singular: hra, widget: list, required: false, hint: "Každá hra jeden řádek, horní:dolní, např. 25:11." }
   - name: players
     label: Hráči
     label_singular: Hráč
