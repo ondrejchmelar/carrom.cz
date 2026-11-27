@@ -7,7 +7,7 @@ export type L10n = { cs?: string; en?: string } | string | null | undefined;
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-/** Base-aware link: url('/kalendar/') -> '/carrom.cz/kalendar/' on the GitHub Pages preview. */
+/** Base-aware link: url('/ligy/') -> '/carrom.cz/ligy/' on the GitHub Pages preview. */
 export function url(path = '/') {
   if (/^(https?:|mailto:|tel:|#)/.test(path)) return path;
   const p = path.startsWith('/') ? path : `/${path}`;
@@ -17,7 +17,7 @@ export function url(path = '/') {
 /** Czech path -> English path. Order matters: longer prefixes first. */
 const EN_PREFIX: [string, string][] = [
   ['/vysledky/rok/', '/en/results/year/'], ['/vysledky/mcr/', '/en/results/mcr/'], ['/vysledky/', '/en/results/'],
-  ['/kalendar/', '/en/calendar/'], ['/ligy/', '/en/leagues/'], ['/novinky/', '/en/news/'], ['/hraci/', '/en/players/'],
+  ['/ligy/', '/en/leagues/'], ['/novinky/', '/en/news/'], ['/hraci/', '/en/players/'],
   ['/galerie/', '/en/gallery/'], ['/asociace/', '/en/association/'], ['/hra-carrom/', '/en/the-game/'], ['/vice/', '/en/more/'],
 ];
 /** Path in the given language for a Czech path: lp('/ligy/pcl/2025/', 'en') -> '/en/leagues/pcl/2025/'. */
@@ -33,7 +33,7 @@ export function csPath(path: string) {
   for (const [cs, en] of EN_PREFIX) if (path.startsWith(en)) return cs + path.slice(en.length);
   return path.startsWith('/en/') ? '/' : path;
 }
-/** url() in a language: L('/kalendar/', 'en') -> '/carrom.cz/en/calendar/'. */
+/** url() in a language: L('/ligy/', 'en') -> '/carrom.cz/en/leagues/'. */
 export const L = (path: string, lang: Lang = 'cs') => url(lp(path, lang));
 /** Inline translation: tr(lang, 'Výsledky', 'Results'). */
 export const tr = (lang: Lang, cs: string, en: string) => (lang === 'en' ? en : cs);
@@ -51,7 +51,6 @@ const PAGE_PATHS: Record<string, { cs: string; en: string }> = {
   en: { cs: '/en/', en: '/' },
   novinky: { cs: '/novinky/', en: '/en/' },
   'hra-carrom': { cs: '/hra-carrom/', en: '/en/the-game/' },
-  kalendar: { cs: '/kalendar/', en: '/en/' },
   vysledky: { cs: '/vysledky/', en: '/en/' },
   ligy: { cs: '/ligy/', en: '/en/' },
   galerie: { cs: '/galerie/', en: '/en/' },

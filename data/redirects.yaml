@@ -163,8 +163,8 @@
 /english/wcs/wcs_2012.php: /en/
 /galerie/: /galerie/
 /index.php: /
-/kalendar.php: /kalendar/
-/kalendar/: /kalendar/
+/kalendar.php: "/novinky/#kalendar"
+/kalendar/: "/novinky/#kalendar"
 /kontakty/: "/asociace/#kontakty"
 /kontakty/asociace.php: "/asociace/#kontakty"
 /kontakty/cml.php: "/asociace/#kontakty"

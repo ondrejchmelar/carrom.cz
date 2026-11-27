@@ -491,12 +491,12 @@ def redirects(pages, editions):
     static = {
         '/': '/', '/index.php': '/', '/novinky/': '/novinky/', '/novinky/archiv.php': '/novinky/', '/novinky/archiv_1.php': '/novinky/',
         '/asociace/': '/asociace/', '/asociace/rada.php': '/asociace/#dokumenty', '/asociace/vh.php': '/asociace/#dokumenty',
-        '/carrom/': '/hra-carrom/', '/galerie/': '/galerie/', '/kalendar/': '/kalendar/', '/odkazy/': '/vice/',
+        '/carrom/': '/hra-carrom/', '/galerie/': '/galerie/', '/kalendar/': '/novinky/#kalendar', '/odkazy/': '/vice/',
         '/kontakty/': '/asociace/#kontakty', '/turnaje/': '/vysledky/', '/turnaje/index.php': '/vysledky/', '/mcr/': '/vysledky/mcr/',
         '/ecc/': '/vysledky/ecc/', '/pcl/': '/ligy/pcl/', '/cml/': '/ligy/cml/', '/ol/': '/ligy/ol/', '/ts/': '/vysledky/',
         '/ts/ts_2014.php': '/vysledky/', '/turnaje/cocp/': '/vysledky/cocp/', '/turnaje/druhy/': '/vysledky/druhy/',
         '/turnaje/jarni/': '/vysledky/jarni/', '/turnaje/tcc/': '/vysledky/tcc/', '/ecc/ecc_story_2011.php': '/vysledky/ecc/2011/',
-        '/english/': '/en/', '/kalendar.php': '/kalendar/', '/vysledky.php': '/vysledky/',
+        '/english/': '/en/', '/kalendar.php': '/novinky/#kalendar', '/vysledky.php': '/vysledky/',
     }
     out.update(static)
     for path in pages:

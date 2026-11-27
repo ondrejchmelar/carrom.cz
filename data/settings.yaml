@@ -35,7 +35,7 @@ payment:
     cs: Startovné i ligové poplatky prosíme přednostně převodem na účet asociace. QR kód pro platbu najdete na stránce Asociace.
     en: Please pay entry and league fees by bank transfer to the association's account. The payment QR code is on the Association page.
 
-# Sdílené Google kalendáře ČCA (stránka Kalendář, „Mějte akce v telefonu“). id = adresa kalendáře.
+# Sdílené Google kalendáře ČCA (Novinky, „Mějte akce v telefonu“). id = adresa kalendáře.
 calendars:
   - { id: 2tqu2p9knbel9ll7agphkltb44@group.calendar.google.com, cs: České turnaje, en: Czech tournaments }
   - { id: n9h35g2i22nr0uta9j2g42ik44@group.calendar.google.com, cs: Pražská liga (PCL), en: Prague league (PCL) }
