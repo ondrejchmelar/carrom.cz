@@ -13,6 +13,6 @@ source: old-site
 
 Všechny srdečně zveme na veřejné hraní, které se uskuteční 21. července od 19:30 hodin v
 
-dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/). Promítneme fotky z pražského Mistrovství Evropy a možná dojde i na historky.
+dejvické kavárně UŽ JSME DOMA. Promítneme fotky z pražského Mistrovství Evropy a možná dojde i na historky.
 
 Akce proběhne za podpory městské části Praha 6.

@@ -13,6 +13,6 @@ source: old-site
 
 Všechny srdečně zveme na veřejné hraní, které se uskuteční 5. května od 19:00 hodin v
 
-dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/). Přijďte sami nebo s kamarády. My vás to naučíme.
+dejvické kavárně UŽ JSME DOMA. Přijďte sami nebo s kamarády. My vás to naučíme.
 
 Akce proběhne za podpory městské části Praha 6.

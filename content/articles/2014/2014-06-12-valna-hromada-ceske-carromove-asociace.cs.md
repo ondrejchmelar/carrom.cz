@@ -15,4 +15,4 @@ se
 
 uskuteční 12. června 2014 od 19:00 hodin
 
-v kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/), Uralská 6, Praha 6.
+v kavárně UŽ JSME DOMA, Uralská 6, Praha 6.

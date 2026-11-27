@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-v neděli 17. dubna odpoledne si můžete přijít zahrát do kavárny [Knoflík](http://kavarna.centrumknoflik.cz/).
+v neděli 17. dubna odpoledne si můžete přijít zahrát do kavárny Knoflík.

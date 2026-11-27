@@ -13,4 +13,4 @@ source: old-site
 
 se uskutečnil od 7. do 11. listopadu v anglickém Birminghamu. Poprvé za účasti českého národního týmu, který přijel sbírat především zkušenosti, ale podařilo se i několik dílčích úspěchů.
 
-Informace najdete [zde](http://worldchampionship.ukcarromfed.com/).
+Informace najdete zde.

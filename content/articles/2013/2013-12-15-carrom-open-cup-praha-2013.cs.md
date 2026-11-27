@@ -13,4 +13,4 @@ source: old-site
 
 Vyhrál Dirk Polchow. Gratulujeme! Konečné pořadí najdete
 
-[zde](/vysledky/cocp/2013/).[Česká carromová asociace](mailto:cca@carrom.cz) - navrhl [Polmen](http://www.polmen.cz) - vytvořil [Šéfik](http://www.sefik.cz)
+[zde](/vysledky/cocp/2013/).[Česká carromová asociace](mailto:cca@carrom.cz) - navrhl Polmen - vytvořil Šéfik

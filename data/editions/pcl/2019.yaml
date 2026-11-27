@@ -8,8 +8,6 @@ format:                     # playoff převzaté ze starého webu, viz data/leag
     groups: ["1-8", "9-16"]
     best_of: { "1-8": 3, "1-8/5-8": 1, "9-16": 1 }
     dates: { qf: 2019-10-24, sf: 2019-11-07, f: 2019-11-21 }
-links:
-  table_url: "https://docs.google.com/spreadsheets/d/1q-D5TTP6PoV505gjAHHXtvbd-nyMp8rIZhQRdSAYTAM/"   # tabulka základního kola (Google tabulka)
 start_date: 2019-01-17
 report:
   cs: |

@@ -8,8 +8,6 @@ format:                     # playoff převzaté ze starého webu, viz data/leag
     groups: ["1-8", "9-16"]
     best_of: { "1-8": 3, "1-8/5-8": 1, "9-16": 1 }
     dates: { qf: 2017-10-26, sf: 2017-11-09, f: 2017-11-23 }
-links:
-  table_url: "https://docs.google.com/spreadsheets/d/1Wr6W9EC8AndX5NLa3HUZoa9GPb-q9XovhjvCr9SFfn8/"   # tabulka základního kola (Google tabulka)
 report:
   cs: |
     Pražská carromová liga byla odehrána v kavárně TRILOBIT, později Tercie, Zborovská 37, Praha 5.

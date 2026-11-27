@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-19. ledna startuje Pražská carromová liga. Ve východočeském kraji se bude hrát druhý ročník Medlešické ligy a sedmý ročník nejstarší české ligy - Pardubická Abdul liga.[starší zprávy](/novinky/)© [Česká carromová asociace](mailto:cca@carrom.cz) - navrhl [Polmen](http://www.polmen.cz) - vytvořil [Šéfik](http://www.sefik.cz)
+19. ledna startuje Pražská carromová liga. Ve východočeském kraji se bude hrát druhý ročník Medlešické ligy a sedmý ročník nejstarší české ligy - Pardubická Abdul liga.[starší zprávy](/novinky/)

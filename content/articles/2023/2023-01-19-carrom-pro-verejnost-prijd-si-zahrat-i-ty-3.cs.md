@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Možnost zkusit si carrom máte ve čtvrtek 20. září od 18:30 hodin v [Café Bar MANTA](http://www.dcmanta.cz/cafebarmanta.html), Kořenského 5, Praha 5, Smíchov. Přijďte sami nebo s kamarády. My vás to naučíme. Všichni jste srdečně zváni.
+Možnost zkusit si carrom máte ve čtvrtek 20. září od 18:30 hodin v Café Bar MANTA, Kořenského 5, Praha 5, Smíchov. Přijďte sami nebo s kamarády. My vás to naučíme. Všichni jste srdečně zváni.

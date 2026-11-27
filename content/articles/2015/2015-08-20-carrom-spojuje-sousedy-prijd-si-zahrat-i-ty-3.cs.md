@@ -13,6 +13,6 @@ source: old-site
 
 Všechny srdečně zveme na další veřejné hraní
 
-ve čtvrtek 20. srpna již od 18:00 hodin do dejvické kavárny [UŽ JSME DOMA](http://uzjstedoma.cz/). Přijďte sami nebo s kamarády. My vás to naučíme.
+ve čtvrtek 20. srpna již od 18:00 hodin do dejvické kavárny UŽ JSME DOMA. Přijďte sami nebo s kamarády. My vás to naučíme.
 
 Akce proběhne za podpory městské části Praha 6.

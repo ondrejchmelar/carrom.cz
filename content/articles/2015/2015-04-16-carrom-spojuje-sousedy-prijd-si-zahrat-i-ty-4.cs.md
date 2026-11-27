@@ -13,6 +13,6 @@ source: old-site
 
 Veřejné hraní
 
-proběhne ve čtvrtek 16. dubna mezi 20:00 a 23:00 hodinou v dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/). Přijďte sami nebo s kamarády. My vás to naučíme. Všichni jste srdečně zváni.
+proběhne ve čtvrtek 16. dubna mezi 20:00 a 23:00 hodinou v dejvické kavárně UŽ JSME DOMA. Přijďte sami nebo s kamarády. My vás to naučíme. Všichni jste srdečně zváni.
 
 Akce proběhne za podpory městské části Praha 6.

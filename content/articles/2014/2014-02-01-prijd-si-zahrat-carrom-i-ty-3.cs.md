@@ -15,4 +15,4 @@ veřejné hraní proběhne ve čtvrtek 6. února mezi 19:00 a 23:00 hodinou
 
 v
 
-dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/). Všichni jste srdečně zváni.
+dejvické kavárně UŽ JSME DOMA. Všichni jste srdečně zváni.

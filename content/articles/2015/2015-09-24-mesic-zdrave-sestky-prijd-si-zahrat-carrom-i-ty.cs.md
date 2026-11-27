@@ -11,8 +11,8 @@ date_approx: true
 source: old-site
 ---
 
-během září máte hned dvě možnosti přijít si zahrát carrom pod dohledem zkušenějších hráčů do dejvické kavárny [UŽ JSME DOMA](http://uzjstedoma.cz/).
+během září máte hned dvě možnosti přijít si zahrát carrom pod dohledem zkušenějších hráčů do dejvické kavárny UŽ JSME DOMA.
 
 Čtvrtky 10. a 24. 9. od 19 hodin se na vás budeme těšit.
 
-Další akce Měsíce zdravé šestky najdete [zde](http://www.zdravasestka.cz/).
+Další akce Měsíce zdravé šestky najdete zde.

@@ -19,4 +19,4 @@ Oba turnaje zajišťuje SPŠ a SOU Pelhřimov s podporou města Pelhřimov a 
 
 [zde](/uploads/archiv/adresar_dokumenty/itinerar_jaro_2020.pdf).
 
-Přihlašovací formulář vyplňte nejpozději 27. 3. [zde.](https://forms.gle/2XEwGU3hceDdv4rE9)
+Přihlašovací formulář vyplňte nejpozději 27. 3. zde.

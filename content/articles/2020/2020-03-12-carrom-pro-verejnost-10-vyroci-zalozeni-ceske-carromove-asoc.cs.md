@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Možnost zahrát si carrom a současně oslavit kulaté výročí České carromové asociace máte ve čtvrtek 12. března od 19:30 hodin v [Náletu](https://cafe.prostoru.cz/nalet/), Veletržní 73, Praha 7. Přijďte sami nebo s kamarády. Rádi vás uvidíme. Všichni jste srdečně zváni.
+Možnost zahrát si carrom a současně oslavit kulaté výročí České carromové asociace máte ve čtvrtek 12. března od 19:30 hodin v Náletu, Veletržní 73, Praha 7. Přijďte sami nebo s kamarády. Rádi vás uvidíme. Všichni jste srdečně zváni.

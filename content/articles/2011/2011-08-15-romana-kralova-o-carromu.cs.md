@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Na ODM turnaji v Bad Reichenhall vedl rozhovor pro internetové noviny Business Monitor s naší nejlepší hráčkou pakistánský novinář Nadir Hussain. Celý článek najdete [zde](http://www.businessmonitorpk.com/epaper/2011/february/page16.html).
+Na ODM turnaji v Bad Reichenhall vedl rozhovor pro internetové noviny Business Monitor s naší nejlepší hráčkou pakistánský novinář Nadir Hussain. Celý článek najdete zde.

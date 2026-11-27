@@ -13,4 +13,4 @@ source: old-site
 
 Ikea na své prezentaci na letošním Designbloku představila svou novinku, která bude od listopadu v prodeji ve všech jejích prodejnách.
 
-[Napište si Ježíškovi](http://www.ikea.com/cz/cs/catalog/products/20302233/?query=LATTJO+Hra+carrom).
+Napište si Ježíškovi.

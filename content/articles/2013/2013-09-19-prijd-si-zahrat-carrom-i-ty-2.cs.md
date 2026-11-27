@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Veřejné hraní proběhne ve čtvrtek 19. září mezi 19:00 a 23:00 hodinou v dejvické kavárně [UŽ JSME DOMA](http://uzjstedoma.cz/). Všichni jste srdečně zváni. Veřejné hraní se zapojilo do akce nazvané [Měsíc zdravé šestky](http://www.zdravasestka.cz) v rámci níž si můžete během celého měsíce září zkusit množství volnočasových aktivit po celé Praze 6 .
+Veřejné hraní proběhne ve čtvrtek 19. září mezi 19:00 a 23:00 hodinou v dejvické kavárně UŽ JSME DOMA. Všichni jste srdečně zváni. Veřejné hraní se zapojilo do akce nazvané Měsíc zdravé šestky v rámci níž si můžete během celého měsíce září zkusit množství volnočasových aktivit po celé Praze 6 .

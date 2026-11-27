@@ -11,4 +11,4 @@ date_approx: true
 source: old-site
 ---
 
-Hned na počátku roku 2011 se České carromové asociaci podařilo uspořádat velice  slušně obsazený carromový turnaj dvojic v indickém Gokarnu. Všichni se těší na další ročníky. Pořadí a fotografie najdete  [zde](/vysledky/). © [Česká carromová asociace](mailto:cca@carrom.cz) - navrhl [Polmen](http://www.polmen.cz) - vytvořil [Šéfik](http://www.sefik.cz)
+Hned na počátku roku 2011 se České carromové asociaci podařilo uspořádat velice  slušně obsazený carromový turnaj dvojic v indickém Gokarnu. Všichni se těší na další ročníky. Pořadí a fotografie najdete  [zde](/vysledky/).
