@@ -15,7 +15,7 @@ const T = {
     fee: 'Startovné', fees: 'Poplatky', feeTbd: 'upřesní pořadatel', orgName: 'Česká carromová asociace',
     program: 'Program', rules: 'Pravidla a hodnocení', signup: 'Přihlášky', pay: 'Platba', system: 'Hrací systém', dates: 'Termíny',
     icf: 'Hraje se podle pravidel ICF.', playedFrom: 'Hraje se od',
-    mcr: (i, n, name, best) => `Turnaj je ${i}. z ${n} turnajů soutěže ${name}. Vítěz získá 1 000 bodů, poslední 1 bod, ostatní rovnoměrně mezi tím, zaokrouhleno na celé body. Do celkového pořadí se počítají ${best} nejlepší výsledky.`,
+    mcr: (i, n, name) => `Turnaj je ${i}. z\u00a0${n} turnajů soutěže ${name}.`,
     deadline: (d) => `Přihlášky do ${d}`, capacity: (n) => `Kapacita ${n} hráčů, rozhoduje pořadí přihlášek.`,
     form: 'Přihláška je na stránce turnaje:', formLeague: 'Přihláška do ligy i zápis na hrací večery jsou na stránce ligy:',
     account: 'Účet ČCA', iban: 'IBAN', payNote: 'Nejlépe převodem předem. Do zprávy pro příjemce napište své jméno.',
@@ -30,7 +30,7 @@ const T = {
     fee: 'Entry fee', fees: 'Fees', feeTbd: 'to be announced', orgName: 'Czech Carrom Association',
     program: 'Programme', rules: 'Rules and scoring', signup: 'Registration', pay: 'Payment', system: 'Format', dates: 'Dates',
     icf: 'Played under ICF rules.', playedFrom: 'Starts',
-    mcr: (i, n, name, best) => `This is tournament ${i} of ${n} of the ${name}. The winner gets 1,000 points, the last player 1 point, the others evenly in between, rounded to whole points. The best ${best} results count.`,
+    mcr: (i, n, name) => `This is tournament ${i} of ${n} of the ${name}.`,
     deadline: (d) => `Register by ${d}`, capacity: (n) => `Limited to ${n} players, first come first served.`,
     form: 'The registration form is on the tournament page:', formLeague: 'League registration and evening sign-up are on the league page:',
     account: 'ČCA account', iban: 'IBAN', payNote: 'Bank transfer in advance preferred. Put your name in the payment message.',
@@ -169,7 +169,7 @@ export function propozicePdf(ed, ctx) {
     section(L.signup, [L.formLeague, ctx.pageUrl]);
   } else {
     section(L.program, [tx(ed.schedule, lang)]);
-    section(L.rules, [L.icf, r && idx ? L.mcr(idx, (r.editions ?? []).length, tx(r.name, lang), r.best_of ?? 2) : null]);
+    section(L.rules, [L.icf, r && idx ? L.mcr(idx, (r.editions ?? []).length, tx(r.name, lang)) : null]);
     section(L.signup, [
       ed.signup_deadline ? `${L.deadline(fmtDate(ed.signup_deadline, lang))}.` : null,
       ed.capacity ? L.capacity(ed.capacity) : null,
