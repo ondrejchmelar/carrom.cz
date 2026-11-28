@@ -1,5 +1,6 @@
 competition: ecc
 year: 2009
+venue: { name: "Lenk im Simmental, Švýcarsko", city: "Lenk im Simmental, Švýcarsko" }   # místo z původní zprávy
 status: finished
 start_date: 2009-07-10
 end_date: 2009-07-11

@@ -1,9 +1,9 @@
 competition: ecc
 year: 2026
 status: finished
-start_date: 2026-09-01      # UKÁZKA: přesné datum doplnit
+start_date: 2026-07-18      # den dvouhry podle SoL lit
 edition_name: { cs: 28. Carrom Eurocup, en: 28th Carrom Eurocup }
-venue: { name: Eurocup, city: "" }
+venue: { name: "Praha, Česká republika", city: "Praha, Česká republika" }
 external_url: "https://eurocup.carrom.cz"
 sol_lit_url: https://sol5.metapensiero.it/lit/tourney/a61d130076e211f1b82f901b0edac7fa
 results:

@@ -1,5 +1,6 @@
 competition: ecc
 year: 2017
+venue: { name: "San Michele all'Adige, Itálie", city: "San Michele all'Adige, Itálie" }   # místo z původní zprávy
 status: finished
 start_date: 2017-07-27
 end_date: 2017-07-31

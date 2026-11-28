@@ -1,5 +1,6 @@
 competition: ecc
 year: 2004
+venue: { name: "Flumserberg, Švýcarsko", city: "Flumserberg, Švýcarsko" }   # místo z původní zprávy
 status: finished
 start_date: 2004-06-26
 end_date: 2004-06-26

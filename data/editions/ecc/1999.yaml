@@ -1,5 +1,6 @@
 competition: ecc
 year: 1999
+venue: { name: "Curych, Švýcarsko", city: "Curych, Švýcarsko" }   # místo z původní zprávy
 status: finished
 start_date: 1999-07-03
 end_date: 1999-07-03

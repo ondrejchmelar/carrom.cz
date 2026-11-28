@@ -1,5 +1,6 @@
 competition: ecc
 year: 2013
+venue: { name: "Varšava, Polsko", city: "Varšava, Polsko" }   # místo z původní zprávy
 status: finished
 start_date: 2013-06-20
 end_date: 2013-06-24

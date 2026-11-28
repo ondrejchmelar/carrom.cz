@@ -1,5 +1,6 @@
 competition: ecc
 year: 2015
+venue: { name: "Lungern, Švýcarsko", city: "Lungern, Švýcarsko" }   # místo z původní zprávy
 status: finished
 start_date: 2015-08-27
 end_date: 2015-08-31

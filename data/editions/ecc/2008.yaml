@@ -1,5 +1,6 @@
 competition: ecc
 year: 2008
+venue: { name: "Sutton, Velká Británie", city: "Sutton, Velká Británie" }   # místo z původní zprávy
 status: finished
 start_date: 2008-08-01
 end_date: 2008-08-02

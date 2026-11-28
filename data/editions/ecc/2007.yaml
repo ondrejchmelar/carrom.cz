@@ -1,5 +1,6 @@
 competition: ecc
 year: 2007
+venue: { name: "Darmstadt, Německo", city: "Darmstadt, Německo" }   # místo z původní zprávy
 status: finished
 start_date: 2007-07-14
 end_date: 2007-07-15

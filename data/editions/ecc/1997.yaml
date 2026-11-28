@@ -1,5 +1,6 @@
 competition: ecc
 year: 1997
+venue: { name: "Luton, Velká Británie", city: "Luton, Velká Británie" }   # místo z původní zprávy
 status: finished
 start_date: 1997-07-19
 end_date: 1997-07-19

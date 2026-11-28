@@ -1,5 +1,6 @@
 competition: ecc
 year: 2014
+venue: { name: "Londýn, Velká Británie", city: "Londýn, Velká Británie" }   # město podle SoL lit
 status: finished
 start_date: 2014-08-07
 end_date: 2014-08-11

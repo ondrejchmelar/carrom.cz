@@ -1,6 +1,8 @@
 competition: ecc
 year: 2022
+venue: { name: "Stare Babice, Polsko", city: "Stare Babice, Polsko" }   # místo z původní zprávy
 status: finished
+start_date: 2022-07-09          # den dvouhry podle SoL lit
 report:
   cs: |
     2022, Stare Babice, POLSKO

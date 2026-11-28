@@ -1,5 +1,6 @@
 competition: ecc
 year: 2019
+venue: { name: "Bad Honnef, Německo", city: "Bad Honnef, Německo" }   # místo z původní zprávy
 status: finished
 start_date: 2019-08-01
 end_date: 2019-08-05

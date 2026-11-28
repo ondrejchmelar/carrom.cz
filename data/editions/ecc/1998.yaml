@@ -1,5 +1,6 @@
 competition: ecc
 year: 1998
+venue: { name: "Berlín, Německo", city: "Berlín, Německo" }   # místo z původní zprávy
 status: finished
 start_date: 1998-07-04
 end_date: 1998-07-04

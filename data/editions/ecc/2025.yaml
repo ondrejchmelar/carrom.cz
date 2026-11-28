@@ -1,6 +1,8 @@
 competition: ecc
 year: 2025
+venue: { name: "Chianciano Terme, Itálie", city: "Chianciano Terme, Itálie" }   # místo z původní zprávy
 status: finished
+start_date: 2025-08-11          # den dvouhry podle SoL lit
 report:
   cs: |
     2025, Chianciano Terme Toskánsko, Itálie

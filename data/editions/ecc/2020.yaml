@@ -1,5 +1,6 @@
 competition: ecc
 year: 2020
+venue: { name: "Stare Babice, Polsko", city: "Stare Babice, Polsko" }   # místo z původní zprávy
 status: finished
 report:
   cs: |

@@ -1,6 +1,8 @@
 competition: ecc
 year: 2023
+venue: { name: "Londýn, Velká Británie", city: "Londýn, Velká Británie" }   # místo z původní zprávy
 status: finished
+start_date: 2023-08-05          # den dvouhry podle SoL lit
 report:
   cs: |
     2023, Londýn, Velká Británie

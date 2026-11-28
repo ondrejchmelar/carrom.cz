@@ -1,5 +1,6 @@
 competition: ecc
 year: 2002
+venue: { name: "Bonn, Německo", city: "Bonn, Německo" }   # místo z původní zprávy
 status: finished
 start_date: 2002-07-05
 end_date: 2002-07-05

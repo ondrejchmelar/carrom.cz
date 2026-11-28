@@ -1,5 +1,6 @@
 competition: ecc
 year: 2010
+venue: { name: "Řím, Itálie", city: "Řím, Itálie" }   # místo z původní zprávy
 status: finished
 start_date: 2010-06-10
 end_date: 2010-06-14

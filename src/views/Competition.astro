@@ -37,7 +37,7 @@ const tail = (e: any) => {
           <span class="when">{e.year}</span>
           <span class="what">
             <strong>{league ? tr(lang, `Sezóna ${e.year}`, `Season ${e.year}`) : editionName(e, lang)}</strong>
-            {!league && <span class="small">{dateShort(e.start_date, true, lang)} · {e.venue?.city ?? e.venue?.name}</span>}
+            {!league && <span class="small">{[e.start_date && dateShort(e.start_date, true, lang), e.venue?.city || e.venue?.name].filter(Boolean).join(' · ')}</span>}
           </span>
           <span class="tail">{tail(e)}</span>
         </a>

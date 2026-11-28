@@ -1,5 +1,6 @@
 competition: ecc
 year: 2005
+venue: { name: "Mezzocorona, Itálie", city: "Mezzocorona, Itálie" }   # místo z původní zprávy
 status: finished
 start_date: 2005-07-30
 end_date: 2005-07-31

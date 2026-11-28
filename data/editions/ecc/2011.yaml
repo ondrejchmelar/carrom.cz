@@ -1,5 +1,6 @@
 competition: ecc
 year: 2011
+venue: { name: "Villepinte, Francie", city: "Villepinte, Francie" }   # místo z původní zprávy
 status: finished
 start_date: 2011-06-23
 end_date: 2011-06-27
