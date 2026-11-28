@@ -66,17 +66,9 @@ const homeHref = url(lang === 'en' ? '/en/' : '/');
     .cta { display: inline-flex; white-space: nowrap; }
     .lang { height: 32px; }
   }
-  /* Social icons from tablet width up; tighter spacing where the full menu just fits (Ondrej 2026-11-28). */
-  @media (min-width: 560px) {
+  /* Social icons from tablet width up; at 1100–1199 px the full menu needs the room, so they move to the footer (Ondrej 2026-11-28). */
+  @media (min-width: 560px) and (max-width: 1099px), (min-width: 1200px) {
     .social { display: inline-flex; }
-  }
-  @media (min-width: 1100px) and (max-width: 1239px) {
-    .bar { gap: 14px; }
-    .main-nav { gap: 14px; }
-    .main-nav a { font-size: 15px; }
-    .tools { gap: 4px; }
-    .social { width: 32px; }
-    .cta { padding: 0 16px; }
   }
   @media (min-width: 1280px) {
     .bar { gap: 28px; }
