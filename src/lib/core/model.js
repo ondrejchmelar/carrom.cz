@@ -95,7 +95,9 @@ export function buildModel(raw, { today = new Date() } = {}) {
     ed.propoziceAuto = (ed.propozice ?? 'auto') === 'auto' && !uploaded && ed.status !== 'finished';
   }
 
-  const editionList = Object.values(editions).sort((a, b) => (a.start_date ?? '').localeCompare(b.start_date ?? ''));
+  // Undated (old) editions sort by their year instead of all landing first.
+  const sortKey = (e) => e.start_date ?? String(e.year);
+  const editionList = Object.values(editions).sort((a, b) => sortKey(a).localeCompare(sortKey(b)));
   const todayIso = iso(today);
   const upcoming = editionList.filter((e) => (e.end_date ?? e.start_date) >= todayIso && e.status !== 'finished');
   const nextTournament =
