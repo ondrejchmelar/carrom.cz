@@ -120,8 +120,8 @@ collections:
       - { name: name, label: Název, widget: object, fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string }] }
       - { name: editions, label: Turnaje (soutěž/rok), widget: list, hint: "Např. jarni/2027, druhy/2027, cocp/2027" }
       - { name: best_of, label: Počet započítaných turnajů, widget: number, value_type: int, default: 2 }
-      - { name: points, label: Body, widget: select, options: [{ label: Spočítá web, value: computed }, { label: Převzaté ze starého webu, value: published }], default: computed }
-      - { name: top_points, label: Body za vítězství, widget: number, value_type: int, default: 1000, required: false }
+      - { name: points, label: Body, widget: select, options: [{ label: Spočítá web (od 2027), value: computed }, { label: Zapsané ručně (do 2026, staré pravidlo se 100 body), value: published }], default: computed }
+      - { name: top_points, label: Body za vítězství, widget: number, value_type: int, required: false, hint: "Jen když body počítá web. Prázdné = 1000 (nastavení webu). Ručně zapsané roky do 2026 mají stupnici 100." }
       - { name: rounding, label: Zaokrouhlení, widget: hidden, default: whole }
       - { name: eligible, label: Kdo se počítá, widget: hidden, default: mcr }
 
