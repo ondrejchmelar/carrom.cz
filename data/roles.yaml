@@ -6,7 +6,7 @@
 #
 # Kontrolu dělá .github/workflows/pr-check.yml (tools/check-scope.mjs).
 admin: [ondrejchmelar]
-editors: []
+editors: [michalfuciku]
 results:
   pcl: []
   cml: []
