@@ -518,7 +518,7 @@ const handleTranslate = async (request, env) => {
   const prompt = 'Translate this text about a carrom tournament from Czech to English. ' +
     'Keep names of people, clubs and places as they are, keep the word "striker", keep line breaks and Markdown. ' +
     'Reply with the translation only.\n\n' + text;
-  const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const model = env.GEMINI_MODEL || 'gemini-3.8-flash';
   const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
