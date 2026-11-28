@@ -18,6 +18,12 @@ const homeHref = url(lang === 'en' ? '/en/' : '/');
       ))}
     </nav>
     <div class="tools">
+      {(nav.social ?? []).map((sx: any) => (
+        <a class="social" href={sx.url} rel="noopener" aria-label={t(sx.label, lang)} title={t(sx.label, lang)}>
+          {sx.icon === 'facebook' && <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21z"/></svg>}
+          {sx.icon === 'youtube' && <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 002.4 7.2 26 26 0 002 12a26 26 0 00.4 4.8 2.5 2.5 0 001.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 001.8-1.8A26 26 0 0022 12a26 26 0 00-.4-4.8zM10 15V9l5.2 3z"/></svg>}
+        </a>
+      ))}
       <a class="lang" href={alt ?? url(lang === 'en' ? '/' : '/en/')} lang={lang === 'en' ? 'cs' : 'en'}>{lang === 'en' ? 'CZ' : 'EN'}</a>
       {nav.cta && <a class="btn btn-red cta" href={pageUrl(nav.cta, lang)}>{t(nav.cta.label, lang)}</a>}
     </div>
@@ -47,6 +53,8 @@ const homeHref = url(lang === 'en' ? '/en/' : '/');
   .tools { margin-left: auto; display: flex; align-items: center; gap: 8px; }
   .lang { height: 44px; min-width: 44px; padding: 0 10px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--navy-line); border-radius: 6px; color: #fff; font-size: 14px; font-weight: 600; }
   .lang:hover { color: #fff; border-color: #fff; }
+  .social { display: none; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 6px; color: var(--on-navy); }
+  .social:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
   .cta { display: none; min-height: 44px; padding: 0 20px; }
   @media (min-width: 1100px) {
     .bar { gap: 20px; }
@@ -55,8 +63,11 @@ const homeHref = url(lang === 'en' ? '/en/' : '/');
     .emblem { top: 8px; width: 88px; height: 88px; box-shadow: 0 0 0 4px var(--navy), 0 6px 16px rgba(14, 27, 61, 0.3); }
     .wordmark { width: 217px; height: 29px; }
     .main-nav { display: flex; }
-    .cta { display: inline-flex; }
+    .cta { display: inline-flex; white-space: nowrap; }
     .lang { height: 32px; }
+  }
+  @media (min-width: 1200px) {
+    .social { display: inline-flex; }
   }
   @media (min-width: 1280px) {
     .bar { gap: 28px; }

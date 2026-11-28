@@ -14,15 +14,14 @@ Přirozeným vývojem dochází počátkem roku 2010 k založení České carro
 
 V roce 2011 jsme se stali členy [Evropské carromové konfederace (ECC)](http://www.european-carrom-confederation.com). V roce 2017 jsme se stali plnohodnotnými členy [Mezinárodní carromové federace (ICF)](http://www.icfcarrom.com).
 
-## Odkazy
+## Další asociace
 
-- [ČCA na Facebooku](https://www.facebook.com/carromcz)
-- [Mezinárodní carromová federace (ICF)](https://www.carromicf.com/)
-- [Evropská carromová konfederace (ECC)](http://www.european-carrom-confederation.com/)
-- [Polská carromová asociace](http://www.carrom.pl/)
-- [Německá carromová federace](http://www.carrom.de/)
-- [Francouzská carromová federace](http://www.carrom.net/)
-- [Švýcarská carromová asociace](http://www.carrom.ch/)
-- [Italská carromová federace](http://www.carromitaly.com/)
-- [Carrom Švédsko](http://www.carrom.se/)
-- [Carrom UK](http://www.ukcarromfed.com/)
+- ![](/flags/world.svg) [Mezinárodní carromová federace (ICF)](https://www.carromicf.com/)
+- ![](/flags/eu.svg) [Evropská carromová konfederace (ECC)](http://www.european-carrom-confederation.com/)
+- ![](/flags/pl.svg) [Polská carromová asociace](http://www.carrom.pl/)
+- ![](/flags/de.svg) [Německá carromová federace](http://www.carrom.de/)
+- ![](/flags/fr.svg) [Francouzská carromová federace](http://www.carrom.net/)
+- ![](/flags/ch.svg) [Švýcarská carromová asociace](http://www.carrom.ch/)
+- ![](/flags/it.svg) [Italská carromová federace](http://www.carromitaly.com/)
+- ![](/flags/se.svg) [Carrom Švédsko](http://www.carrom.se/)
+- ![](/flags/gb.svg) [Carrom UK](http://www.ukcarromfed.com/)

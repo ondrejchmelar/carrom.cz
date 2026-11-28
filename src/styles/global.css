@@ -87,6 +87,9 @@ a.card:hover strong { color: var(--red); }
 .prose h2 { margin: 32px 0 12px; }
 .prose p, .prose ul, .prose ol { margin: 0 0 14px; }
 .prose a { color: var(--red); text-decoration: underline; }
+.prose img[src*="/flags/"] { display: inline-block; width: 24px; height: 16px; margin: 0 8px -2px 0; border-radius: 2px; box-shadow: 0 0 0 1px rgba(14, 27, 61, 0.15); }
+.prose li:has(> img[src*="/flags/"]) { list-style: none; }
+.prose ul:has(> li > img[src*="/flags/"]) { padding-left: 0; }
 
 /* tables */
 .table-box { background: var(--surface); border-radius: 16px; overflow-x: auto; }
