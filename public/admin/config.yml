@@ -76,7 +76,7 @@ collections:
       - &f_fee { name: entry_fee, label: Startovné / poplatky, widget: object, required: false, collapsed: true, hint: "Např. „200 Kč“. Při čisté částce dostane QR Platba v propozicích i částku.", fields: [{ name: cs, label: Česky, widget: string }, { name: en, label: Anglicky, widget: string, required: false }] }
       - &f_prop { name: propozice, label: Propozice, widget: select, required: false, default: auto, options: [{ label: Vytvořit PDF z údajů ročníku, value: auto }, { label: Žádné (nebo nahrané v Dokumentech), value: none }], hint: "Nahraný dokument druhu propozice má vždy přednost." }
       - &f_sched { name: schedule, label: Program, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
-      - &f_report { name: report, label: Zpráva o turnaji, widget: object, required: false, collapsed: true, fields: [{ name: cs, label: Česky, widget: text }, { name: en, label: Anglicky, widget: text, required: false }] }
+      - &f_report { name: report, label: Zpráva o turnaji, widget: cs_en, required: false, hint: "Anglický text může doplnit tlačítko Přeložit (Google Gemini, klíč zdarma z aistudio.google.com/apikey)." }
       - &f_sol { name: sol_lit_url, label: Detailní výsledky v SoL lit, widget: string, required: false }
       - &f_video { name: final_video, label: Video finále (odkaz na YouTube), widget: string, required: false, pattern: ["^(https://(www\\.)?(youtube\\.com|youtu\\.be)/.+)?$", "Odkaz na YouTube, např. https://youtu.be/…"] }
       - &f_source { name: source, label: Odkud výsledky, widget: select, options: [old-site, sol, admin], default: admin, required: false }
