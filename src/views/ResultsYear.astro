@@ -2,6 +2,7 @@
 // Shared body of /vysledky/ and /vysledky/rok/<year>/.
 import Base from '../layouts/Base.astro';
 import McrTable from '../components/McrTable.astro';
+import YearNav from '../components/YearNav.astro';
 import { model } from '../lib/data';
 import { L, t, tr, editionName, editionUrl, dateShort, fullName, type Lang } from '../lib/site';
 interface Props { year: number; years: number[]; lang?: Lang }
@@ -23,9 +24,7 @@ const league = (e: any) => e.competition.kind === 'league';
 <div class="wrap page">
   <div class="page-head">
     <h1>{tr(lang, 'Výsledky', 'Results')}</h1>
-    <nav class="chips" aria-label={tr(lang, 'Rok', 'Year')}>
-      {years.map((y, i) => <a class="chip" href={L(i === 0 ? '/vysledky/' : `/vysledky/rok/${y}/`, lang)} aria-current={y === year ? 'page' : undefined}>{y}</a>)}
-    </nav>
+    <YearNav lang={lang} current={String(year)} items={years.map((y, i) => ({ id: String(y), year: y, href: L(i === 0 ? '/vysledky/' : `/vysledky/rok/${y}/`, lang) }))} />
   </div>
   <div class:list={['cols', { two: !!ranking }]}>
     {ranking && (

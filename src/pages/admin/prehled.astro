@@ -152,9 +152,11 @@ const warnings: string[] = m.warnings ?? [];
     .row { position: relative; }
     .row:hover { background: #F8F9FB; }
     .row a.open::after { content: ''; position: absolute; inset: 0; }
-    .acts { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 2px; }
-    .acts a { position: relative; z-index: 1; font-size: 14px; font-weight: 600; color: var(--red); }
-    .acts a:hover { text-decoration: underline; }
+    .acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .acts a { position: relative; z-index: 1; display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border: 1px solid var(--line); border-radius: 16px; background: #fff; font-size: 13px; font-weight: 700; color: var(--navy); }
+    .acts a:hover { border-color: var(--navy); background: var(--bg); }
+    .acts a.primary { background: var(--red); border-color: var(--red); color: #fff; }
+    .acts a.primary:hover { background: #B81E24; }
     .badge small { margin-left: 6px; font-size: 11px; font-weight: 600; opacity: .7; }
     @media (max-width: 700px) { .row { grid-template-columns: 1fr; gap: 6px; } }
     .date { font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -192,9 +194,9 @@ const warnings: string[] = m.warnings ?? [];
                 <a class="open" href={r.href}><strong>{r.ed.competition.name.cs}{r.ed.edition_name?.cs ? ` · ${r.ed.edition_name.cs}` : ''}</strong></a>
                 <span>{r.ed.competition.kind === 'league' ? 'Liga' : 'Turnaj'}{r.ed.venue?.city ? ` · ${r.ed.venue.city}` : r.ed.venue?.name ? ` · ${r.ed.venue.name}` : ''}{r.missing.length ? ` · chybí: ${r.missing.join(', ')}` : ''}</span>
                 <span class="acts">
-                  {r.eveningHref && <a href={r.eveningHref}>Zapsat večer</a>}
+                  {r.eveningHref && <a class="primary" href={r.eveningHref}>Zapsat večer</a>}
                   {r.playoffHref && <a href={r.playoffHref}>Založit playoff</a>}
-                  {r.playoffEditHref && <a href={r.playoffEditHref}>Zapsat playoff</a>}
+                  {r.playoffEditHref && <a class="primary" href={r.playoffEditHref}>Zapsat playoff</a>}
                   <a href={r.articleHref}>Napsat zprávu</a>
                 </span>
               </span>
@@ -215,7 +217,7 @@ const warnings: string[] = m.warnings ?? [];
       {nextUp.length > 0 && (
         <div class="box">
           <h2>Nový ročník</h2>
-          <ul>{nextUp.map((t) => <li><a href={t.href}>{t.text}</a></li>)}</ul>
+          <div class="acts">{nextUp.map((t) => <a href={t.href}>+ {t.text}</a>)}</div>
         </div>
       )}
       <div class="box">
