@@ -8,4 +8,18 @@ report:
 source: old-site
 old_url: /cml/cml_2018.php
 
-results: {}
+results:
+  # Pořadí z tabulky starého webu (CML_tabulka_2018.xlsx), nejdřív skupina A, pak B a C.
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: darius-brozek }
+    - { place: 4, player: pavel-schierl }
+    - { place: 5, player: miroslav-cernohous }
+    - { place: 6, player: zdenek-taborsky }
+    - { place: 7, player: radek-jaromersky }
+    - { place: 8, player: jiri-mareda }
+    - { place: 9, player: eliska-krizkova }
+    - { place: 10, player: david-derka }
+    - { place: 11, player: radka-cernohousova }
+    - { place: 12, player: lenka-prazakova }

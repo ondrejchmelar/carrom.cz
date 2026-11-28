@@ -41,7 +41,7 @@ const league = (e: any) => e.competition.kind === 'league';
           <a href={editionUrl(e, lang)}>
             <span class="when">{e.start_date ? dateShort(e.start_date, false, lang) : ''}</span>
             <span class="what"><strong>{editionName(e, lang)}</strong><span class="small">{e.venue?.city ?? e.venue?.name ?? ''}</span></span>
-            <span class="tail">{league(e) ? (e.status === 'running' ? tr(lang, 'Probíhá · tabulka a playoff', 'Running · table and playoff') : tr(lang, 'Tabulka', 'Table')) : winner(e) ? `${tr(lang, 'Vítěz', 'Winner')} ${winner(e)}` : e.status === 'finished' ? tr(lang, 'Výsledky doplníme', 'Results to follow') : tr(lang, 'Výsledky budou po turnaji', 'Results after the tournament')}</span>
+            <span class="tail">{league(e) && e.status === 'running' ? (m.seasons[e.id] ? tr(lang, 'Probíhá · tabulka a playoff', 'Running · table and playoff') : tr(lang, 'Probíhá', 'Running')) : winner(e) ? `${tr(lang, 'Vítěz', 'Winner')} ${winner(e)}` : e.status === 'finished' ? tr(lang, 'Výsledky nejsou k dispozici', 'No results available') : tr(lang, 'Výsledky budou po turnaji', 'Results after the tournament')}</span>
           </a>
         ))}
       </div>

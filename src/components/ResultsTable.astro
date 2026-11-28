@@ -11,9 +11,11 @@ const multi = divisions.length > 1;
 ---
 {divisions.length === 0 && (
   <p class="notice">
-    {ed.status === 'finished' || ed.status === 'running'
-      ? (lang === 'en' ? 'Final places are not on the site yet.' : 'Konečné pořadí zatím není na webu.')
-      : (lang === 'en' ? 'Results after the tournament.' : 'Výsledky budou po turnaji.')}
+    {ed.status === 'finished'
+      ? (lang === 'en' ? 'Final places are not available.' : 'Konečné pořadí není k dispozici.')
+      : ed.status === 'running'
+        ? (lang === 'en' ? 'The season is running; final places come at its end.' : 'Sezóna probíhá, konečné pořadí bude po jejím skončení.')
+        : (lang === 'en' ? 'Results after the tournament.' : 'Výsledky budou po turnaji.')}
     {ed.sol_lit_url && <> {lang === 'en' ? 'Detailed results are in' : 'Podrobné výsledky jsou v'} <a href={ed.sol_lit_url} style="color: var(--red); font-weight: 600">SoL lit</a>.</>}
   </p>
 )}

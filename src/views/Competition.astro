@@ -19,7 +19,7 @@ const tail = (e: any) => {
   const w = winner(e);
   if (w) return `${tr(lang, 'Vítěz', 'Winner')} ${w}`;
   if (!league && e.status !== 'finished') return tr(lang, 'Připravujeme', 'Coming up');
-  return tr(lang, 'Výsledky doplníme', 'Results to follow');
+  return tr(lang, 'Výsledky nejsou k dispozici', 'No results available');
 };
 ---
 <Base title={t(c.name, lang)} lang={lang} current={league ? 'ligy' : 'vysledky'}>

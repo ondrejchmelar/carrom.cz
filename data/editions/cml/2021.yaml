@@ -4,4 +4,18 @@ status: finished
 source: old-site
 old_url: /cml/cml_2021.php
 
-results: {}
+results:
+  # Pořadí z tabulky starého webu (CML_tabulka_2021.xlsx), nejdřív skupina A, pak B.
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: zdenek-svitak }
+    - { place: 3, player: horst-simunsky }
+    - { place: 4, player: darius-brozek }
+    - { place: 5, player: frantisek-cervenka }
+    - { place: 6, player: miroslav-cernohous }
+    - { place: 7, player: pavel-schierl }
+    - { place: 8, player: radka-cernohousova }
+    - { place: 9, player: jiri-mareda }
+    - { place: 10, player: manish-sahijwani }
+    - { place: 11, player: zdenek-taborsky }
+    - { place: 12, player: eliska-krizkova }

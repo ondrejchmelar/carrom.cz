@@ -63,12 +63,12 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
 
     {(!s || archive) && (
       <section class="section">
-        <h2>{tr(lang, 'Konečné pořadí', 'Final places')}</h2>
+        <h2>{ed.status === 'running' ? tr(lang, 'Průběh sezóny', 'Season so far') : tr(lang, 'Konečné pořadí', 'Final places')}</h2>
         <ResultsTable ed={ed} lang={lang} />
         {(ed.links?.table_url || docs.length > 0) && (
           <div class="btn-row">
-            {ed.links?.table_url && <a class="btn btn-ghost" href={ed.links.table_url} rel="noopener">{tr(lang, 'Tabulka základního kola', 'Group-stage table')}</a>}
-            {docs.map((d: any) => <a class="btn btn-ghost" href={url(t(d.file))}>{d.kind === 'results' ? tr(lang, 'Tabulka základního kola', 'Group-stage table') : t(d.title, lang).replace(/\s*–.*$/, '')}</a>)}
+            {ed.links?.table_url && <a class="btn btn-ghost" href={/^https?:/.test(ed.links.table_url) ? ed.links.table_url : url(ed.links.table_url)} rel="noopener">{ed.status === 'running' ? tr(lang, 'Průběžná tabulka (Excel)', 'Current table (Excel)') : tr(lang, 'Tabulka základního kola', 'Group-stage table')}</a>}
+            {docs.map((d: any) => <a class="btn btn-ghost" href={url(t(d.file))}>{d.kind === 'results' ? (ed.id.startsWith('pcl/') ? tr(lang, 'Tabulka základního kola', 'Group-stage table') : tr(lang, 'Tabulka sezóny', 'Season table')) : t(d.title, lang).replace(/\s*–.*$/, '')}</a>)}
           </div>
         )}
       </section>

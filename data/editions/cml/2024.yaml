@@ -4,4 +4,16 @@ status: finished
 source: old-site
 old_url: /cml/cml_2024.php
 
-results: {}
+results:
+  # Pořadí z tabulky starého webu (CML_tabulka_2024.xlsx), nejdřív skupina A, pak B.
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: matej-bednar }
+    - { place: 4, player: darius-brozek }
+    - { place: 5, player: miroslav-cernohous }
+    - { place: 6, player: pavel-schierl }
+    - { place: 7, player: petr-stary }
+    - { place: 8, player: zdenek-taborsky }
+    - { place: 9, player: jiri-pavela }
+    - { place: 10, player: radka-cernohousova }

@@ -1,0 +1,11 @@
+title:
+  cs: "Výsledky – Medlešická liga 2020"
+  en: "Results – Medlešice League 2020"
+kind: results
+date: 2020-12-31
+edition: cml/2020
+file:
+  cs: /uploads/archiv/cml/CML_tabulka_2020.xlsx
+old_urls:
+  - "/cml/CML_tabulka_2020.xlsx"
+source: old-site

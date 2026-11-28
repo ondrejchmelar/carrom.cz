@@ -1,6 +1,9 @@
 competition: ol
 year: 2026
-status: finished
+status: running             # sezóna běží do 15. 11. 2026 (Ondrej, 28. 11. 2026)
+end_date: 2026-11-15
+links:
+  table_url: /uploads/archiv/ol/OL_tabulka_2026.xlsx   # průběžná tabulka (kopie ze starého webu)
 report:
   cs: |
     Bernard Opoliga byla založena v letošním roce 2026. Další informace můžete očekávat v brzké době.

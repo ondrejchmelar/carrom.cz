@@ -7,4 +7,15 @@ report:
 source: old-site
 old_url: /cml/cml_2015.php
 
-results: {}
+results:
+  # Pořadí z tabulky starého webu (CML_tabulka_2015.xlsx).
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: darius-brozek }
+    - { place: 3, player: zdenek-taborsky }
+    - { place: 4, player: horst-simunsky }
+    - { place: 5, player: pavel-schierl }
+    - { place: 6, player: radek-jaromersky }
+    - { place: 7, player: david-derka }
+    - { place: 8, player: jiri-mareda }
+    - { place: 9, player: michaela-volejnikova }

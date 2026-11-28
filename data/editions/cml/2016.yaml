@@ -4,4 +4,15 @@ status: finished
 source: old-site
 old_url: /cml/cml_2016.php
 
-results: {}
+results:
+  # Pořadí z tabulky starého webu (CML_tabulka_2016.xlsx).
+  singles:
+    - { place: 1, player: horst-simunsky }
+    - { place: 2, player: karlos-novak }
+    - { place: 3, player: darius-brozek }
+    - { place: 4, player: zdenek-taborsky }
+    - { place: 5, player: pavel-schierl }
+    - { place: 6, player: radek-jaromersky }
+    - { place: 7, player: jiri-mareda }
+    - { place: 8, player: david-derka }
+    - { place: 9, player: lenka-prazakova }

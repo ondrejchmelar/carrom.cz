@@ -1,0 +1,11 @@
+title:
+  cs: "Výsledky – Medlešická liga 2021"
+  en: "Results – Medlešice League 2021"
+kind: results
+date: 2021-12-31
+edition: cml/2021
+file:
+  cs: /uploads/archiv/cml/CML_tabulka_2021.xlsx
+old_urls:
+  - "/cml/CML_tabulka_2021.xlsx"
+source: old-site

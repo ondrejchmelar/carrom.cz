@@ -1,0 +1,11 @@
+title:
+  cs: "Výsledky – Medlešická liga 2023"
+  en: "Results – Medlešice League 2023"
+kind: results
+date: 2023-12-31
+edition: cml/2023
+file:
+  cs: /uploads/archiv/cml/CML_tabulka_2023.xlsx
+old_urls:
+  - "/cml/CML_tabulka_2023.xlsx"
+source: old-site

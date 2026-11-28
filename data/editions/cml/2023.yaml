@@ -4,4 +4,17 @@ status: finished
 source: old-site
 old_url: /cml/cml_2023.php
 
-results: {}
+results:
+  # Pořadí z tabulky starého webu (CML_tabulka_2023.xlsx), nejdřív skupina A, pak B.
+  singles:
+    - { place: 1, player: karlos-novak }
+    - { place: 2, player: horst-simunsky }
+    - { place: 3, player: darius-brozek }
+    - { place: 4, player: matej-bednar }
+    - { place: 5, player: miroslav-cernohous }
+    - { place: 6, player: pavel-schierl }
+    - { place: 7, name: "Kuba" }
+    - { place: 8, player: zdenek-taborsky }
+    - { place: 9, player: radka-cernohousova }
+    - { place: 10, player: jiri-pavela }
+    - { place: 11, player: petr-stary }

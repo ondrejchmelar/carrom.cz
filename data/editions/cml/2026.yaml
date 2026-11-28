@@ -1,6 +1,9 @@
 competition: cml
 year: 2026
-status: finished
+status: running             # sezóna běží do 31. 12. 2026 (Ondrej, 28. 11. 2026)
+end_date: 2026-12-31
+links:
+  table_url: /uploads/archiv/cml/CML_tabulka_2026.xlsx   # průběžná tabulka (kopie ze starého webu)
 source: old-site
 old_url: /cml/cml_2026.php
 
