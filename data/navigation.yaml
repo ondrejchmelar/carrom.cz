@@ -25,15 +25,13 @@ more:
   - { page: asociace,   label: { cs: Asociace,        en: Association }, note: { cs: "Historie, dokumenty, kontakty", en: "History, documents, contacts" } }
   - { url: "https://eurocup.carrom.cz", label: { cs: Euro Cup, en: Euro Cup } }
 
+# Patička; za odkazy se přidají ikony ze „social“
 footer:
   - { page: asociace, anchor: kontakty, label: { cs: Kontakty, en: Contacts } }
   - { page: asociace, anchor: dokumenty, label: { cs: Stanovy a zápisy, en: Statutes and minutes } }
   - { url: "https://eurocup.carrom.cz", label: { cs: Euro Cup, en: Euro Cup } }
-  - { url: "https://www.facebook.com/carromcz", label: { cs: Facebook, en: Facebook } }
-  - { url: "https://www.youtube.com/playlist?list=PLYDBw2L9ckWUS_mlIsXefBHXQY6PwHX6r", label: { cs: YouTube, en: YouTube } }
-  - { page: en, label: { cs: English, en: Česky } }
 
-# Ikony vpravo v horní liště (podporované ikony: facebook, youtube)
+# Ikony vpravo v horní liště a v patičce (podporované ikony: facebook, youtube)
 social:
   - { icon: facebook, url: "https://www.facebook.com/carromcz", label: { cs: ČCA na Facebooku, en: Czech Carrom Association on Facebook } }
   - { icon: youtube, url: "https://www.youtube.com/playlist?list=PLYDBw2L9ckWUS_mlIsXefBHXQY6PwHX6r", label: { cs: Carrom na YouTube, en: Carrom on YouTube } }
