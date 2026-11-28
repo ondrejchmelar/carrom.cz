@@ -28,7 +28,9 @@ more:
 footer:
   - { page: asociace, anchor: kontakty, label: { cs: Kontakty, en: Contacts } }
   - { page: asociace, anchor: dokumenty, label: { cs: Stanovy a zápisy, en: Statutes and minutes } }
+  - { url: "https://eurocup.carrom.cz", label: { cs: Euro Cup, en: Euro Cup } }
   - { url: "https://www.facebook.com/carromcz", label: { cs: Facebook, en: Facebook } }
+  - { url: "https://www.youtube.com/playlist?list=PLYDBw2L9ckWUS_mlIsXefBHXQY6PwHX6r", label: { cs: YouTube, en: YouTube } }
   - { page: en, label: { cs: English, en: Česky } }
 
 # Ikony vpravo v horní liště (podporované ikony: facebook, youtube)
