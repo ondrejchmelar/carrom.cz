@@ -299,38 +299,9 @@ const T = {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.setTransform(s, 0, 0, s, FRAME * s, FRAME * s);
       if (flipped()) { ctx.translate(C.BOARD, C.BOARD); ctx.rotate(Math.PI); }
-      // frame
-      rr(-FRAME, -FRAME, C.BOARD + FRAME * 2, C.BOARD + FRAME * 2, 26, COL.frame);
-      rr(-FRAME + 8, -FRAME + 8, C.BOARD + FRAME * 2 - 16, C.BOARD + FRAME * 2 - 16, 20, COL.frame2);
-      // surface
-      const g = ctx.createRadialGradient(C.CENTER, C.CENTER, 60, C.CENTER, C.CENTER, C.BOARD * 0.75);
-      g.addColorStop(0, COL.birch); g.addColorStop(1, COL.birch2);
-      ctx.fillStyle = g; ctx.fillRect(0, 0, C.BOARD, C.BOARD);
-      // pockets
+      // frame, playing surface, pockets and markings: drawn once per size into a cached layer
+      ctx.drawImage(boardLayer(), -FRAME, -FRAME, C.BOARD + FRAME * 2, C.BOARD + FRAME * 2);
       const G = C.geom(state);
-      for (const [x, y] of G.pockets) circle(x, y, G.pocket, COL.navy);
-      // base lines
-      ctx.strokeStyle = COL.navy; ctx.lineWidth = 2.4;
-      const L1 = 135, L2 = C.BOARD - 135;
-      for (const [side, y0] of [['b', C.BOARD - 102], ['t', 102]] as const) {
-        const y1 = side === 'b' ? y0 - 31.8 : y0 + 31.8;
-        line(L1 + 15.9, y0, L2 - 15.9, y0); line(L1 + 15.9, y1, L2 - 15.9, y1);
-        for (const x of [L1 + 15.9, L2 - 15.9]) { ring(x, (y0 + y1) / 2, 15.9, COL.navy, 2.4); circle(x, (y0 + y1) / 2, 11, COL.red); }
-      }
-      for (const [x0, side] of [[102, 'l'], [C.BOARD - 102, 'r']] as const) {
-        const x1 = side === 'l' ? x0 + 31.8 : x0 - 31.8;
-        line(x0, L1 + 15.9, x0, L2 - 15.9); line(x1, L1 + 15.9, x1, L2 - 15.9);
-        for (const y of [L1 + 15.9, L2 - 15.9]) { ring((x0 + x1) / 2, y, 15.9, COL.navy, 2.4); circle((x0 + x1) / 2, y, 11, COL.red); }
-      }
-      // diagonal arrows towards the pockets
-      ctx.strokeStyle = COL.navy; ctx.lineWidth = 1.6;
-      for (const [sx, sy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
-        const ax = C.CENTER - sx * 105, ay = C.CENTER - sy * 105, bx = C.CENTER - sx * 265, by = C.CENTER - sy * 265;
-        line(ax, ay, bx, by);
-      }
-      // centre
-      ring(C.CENTER, C.CENTER, 85, COL.red, 2.4);
-      ring(C.CENTER, C.CENTER, 15.9, COL.red, 1.6);
       // coins
       for (const p of state.pieces) if (p.inPlay) coin(p.x, p.y, p.r, p.color);
       // striker
@@ -387,8 +358,143 @@ const T = {
         striker(showStriker.x, showStriker.y, blocked);
       }
     }
+    // ---------- the board itself (static, cached) ----------
+    let layer: HTMLCanvasElement | null = null, layerKey = '';
+    function boardLayer() {
+      const key = `${scale}|${state.easy}`;
+      if (layer && layerKey === key) return layer;
+      const W = C.BOARD + FRAME * 2;
+      layer ??= document.createElement('canvas');
+      layer.width = layer.height = Math.round(W * scale);
+      layerKey = key;
+      const c = layer.getContext('2d')!;
+      c.setTransform(scale, 0, 0, scale, FRAME * scale, FRAME * scale);
+      paintBoard(c);
+      return layer;
+    }
+    function paintBoard(c: CanvasRenderingContext2D) {
+      let seed = 11;
+      const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      const B = C.BOARD, F = FRAME, W = B + F * 2;
+      const G = C.geom(state);
+      const ink = '#1B1512', red = '#C8202A';
+      // Frame: dark polished wood, grain running along each side, mitred corners.
+      c.save();
+      c.beginPath(); c.roundRect(-F, -F, W, W, 22); c.clip();
+      const sides: [number, number][][] = [
+        [[-F, -F], [B + F, -F], [B, 0], [0, 0]], [[-F, B + F], [B + F, B + F], [B, B], [0, B]],
+        [[-F, -F], [0, 0], [0, B], [-F, B + F]], [[B + F, -F], [B, 0], [B, B], [B + F, B + F]],
+      ];
+      sides.forEach((pts, i) => {
+        c.save();
+        c.beginPath(); pts.forEach(([x, y], k) => (k ? c.lineTo(x, y) : c.moveTo(x, y))); c.closePath(); c.clip();
+        const horiz = i < 2;
+        const lg = horiz ? c.createLinearGradient(0, i ? B : -F, 0, i ? B + F : 0) : c.createLinearGradient(i === 2 ? -F : B + F, 0, i === 2 ? 0 : B, 0);
+        lg.addColorStop(0, '#5A3620'); lg.addColorStop(0.45, '#6E4428'); lg.addColorStop(1, '#3E2414');
+        c.fillStyle = lg; c.fillRect(-F, -F, W, W);
+        for (let k = 0; k < 70; k++) {
+          const o = -F + rnd() * W, a = 0.04 + rnd() * 0.08;
+          c.strokeStyle = rnd() < 0.5 ? `rgba(30,14,6,${a})` : `rgba(160,100,60,${a * 0.7})`;
+          c.lineWidth = 0.4 + rnd() * 1.4;
+          c.beginPath();
+          for (let t = -F; t <= B + F; t += 20) {
+            const w = Math.sin(t / (60 + k) + k) * 1.6;
+            horiz ? c.lineTo(t, (i ? B : -F) + ((o + F) % F) + w) : c.lineTo((i === 2 ? -F : B) + ((o + F) % F) + w, t);
+          }
+          c.stroke();
+        }
+        c.restore();
+      });
+      // Varnish highlight on the outer edge, and the seam to the playing surface.
+      c.strokeStyle = 'rgba(255,225,190,.18)'; c.lineWidth = 2;
+      c.beginPath(); c.roundRect(-F + 2, -F + 2, W - 4, W - 4, 20); c.stroke();
+      c.restore();
+      // Playing surface: pale birch plywood with soft grain.
+      c.save();
+      c.beginPath(); c.rect(0, 0, B, B); c.clip();
+      const sg = c.createLinearGradient(0, 0, B, B);
+      sg.addColorStop(0, '#F0DDB4'); sg.addColorStop(0.5, '#EAD3A3'); sg.addColorStop(1, '#E2C893');
+      c.fillStyle = sg; c.fillRect(0, 0, B, B);
+      for (let k = 0; k < 150; k++) {
+        const y0 = rnd() * B, a = 0.025 + rnd() * 0.05, amp = 2 + rnd() * 6, len = 90 + rnd() * 160;
+        c.strokeStyle = rnd() < 0.7 ? `rgba(150,105,50,${a})` : `rgba(255,248,230,${a * 1.6})`;
+        c.lineWidth = 0.4 + rnd() * 1.2;
+        c.beginPath();
+        for (let x = -10; x <= B + 10; x += 12) c.lineTo(x, y0 + Math.sin(x / len + k * 1.7) * amp);
+        c.stroke();
+      }
+      // a soft lamp light in the middle, darker towards the frame
+      const vg = c.createRadialGradient(B / 2, B / 2, B * 0.15, B / 2, B / 2, B * 0.75);
+      vg.addColorStop(0, 'rgba(255,250,235,.18)'); vg.addColorStop(1, 'rgba(90,55,20,.16)');
+      c.fillStyle = vg; c.fillRect(0, 0, B, B);
+      // the frame's shadow on the surface
+      const sh = 10;
+      for (const [x, y, w, h, gx0, gy0, gx1, gy1] of [[0, 0, B, sh, 0, 0, 0, sh], [0, 0, sh, B, 0, 0, sh, 0], [0, B - 4, B, 4, 0, B, 0, B - 4], [B - 4, 0, 4, B, B, 0, B - 4, 0]]) {
+        const g2 = c.createLinearGradient(gx0, gy0, gx1, gy1);
+        g2.addColorStop(0, 'rgba(40,20,5,.35)'); g2.addColorStop(1, 'rgba(40,20,5,0)');
+        c.fillStyle = g2; c.fillRect(x, y, w, h);
+      }
+      c.restore();
+      // Pockets: a dark net with a rim.
+      for (const [x, y] of G.pockets) {
+        const r = G.pocket;
+        const pg = c.createRadialGradient(x - r * 0.25, y - r * 0.25, r * 0.1, x, y, r);
+        pg.addColorStop(0, '#000'); pg.addColorStop(0.75, '#0B0907'); pg.addColorStop(1, '#2A1D14');
+        c.fillStyle = pg; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill();
+        c.strokeStyle = 'rgba(255,240,210,.35)'; c.lineWidth = 1.2;
+        c.beginPath(); c.arc(x, y, r + 0.8, 0, Math.PI * 2); c.stroke();
+      }
+      // Markings in black ink and red, as on a tournament board.
+      const ln = (a: number, b: number, d: number, e: number) => { c.beginPath(); c.moveTo(a, b); c.lineTo(d, e); c.stroke(); };
+      const dot = (x: number, y: number, r: number, col: string) => { c.fillStyle = col; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill(); };
+      const rg = (x: number, y: number, r: number, col: string, w: number) => { c.strokeStyle = col; c.lineWidth = w; c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.stroke(); };
+      c.lineCap = 'round';
+      c.strokeStyle = ink; c.lineWidth = 2;
+      const L1 = 135, L2 = B - 135;
+      const base = (x: number, y: number) => { dot(x, y, 15.9, '#F3E4C2'); rg(x, y, 15.9, ink, 2); dot(x, y, 12.2, red); rg(x, y, 12.2, 'rgba(0,0,0,.25)', 0.8); };
+      for (const [sd, y0] of [['b', B - 102], ['t', 102]] as const) {
+        const y1 = sd === 'b' ? y0 - 31.8 : y0 + 31.8;
+        c.strokeStyle = ink; c.lineWidth = 2;
+        ln(L1 + 15.9, y0, L2 - 15.9, y0); c.lineWidth = 1.2; ln(L1 + 15.9, y1, L2 - 15.9, y1);
+        for (const x of [L1 + 15.9, L2 - 15.9]) base(x, (y0 + y1) / 2);
+      }
+      for (const [x0, sd] of [[102, 'l'], [B - 102, 'r']] as const) {
+        const x1 = sd === 'l' ? x0 + 31.8 : x0 - 31.8;
+        c.strokeStyle = ink; c.lineWidth = 2;
+        ln(x0, L1 + 15.9, x0, L2 - 15.9); c.lineWidth = 1.2; ln(x1, L1 + 15.9, x1, L2 - 15.9);
+        for (const y of [L1 + 15.9, L2 - 15.9]) base((x0 + x1) / 2, y);
+      }
+      // Diagonal arrows towards the pockets, with the arrowhead near the centre and an arc at the end.
+      c.strokeStyle = ink; c.lineWidth = 1.4;
+      for (const [sx, sy] of [[1, 1], [-1, 1], [1, -1], [-1, -1]]) {
+        const ux = -sx * Math.SQRT1_2, uy = -sy * Math.SQRT1_2;
+        const a = 150, b = 330;
+        ln(B / 2 + ux * a, B / 2 + uy * a, B / 2 + ux * b, B / 2 + uy * b);
+        const hx = B / 2 + ux * a, hy = B / 2 + uy * a, ang = Math.atan2(-uy, -ux);
+        c.beginPath();
+        c.moveTo(hx + Math.cos(ang + Math.PI - 0.4) * 10, hy + Math.sin(ang + Math.PI - 0.4) * 10);
+        c.lineTo(hx, hy);
+        c.lineTo(hx + Math.cos(ang + Math.PI + 0.4) * 10, hy + Math.sin(ang + Math.PI + 0.4) * 10);
+        c.stroke();
+        const ex = B / 2 + ux * (b - 12), ey = B / 2 + uy * (b - 12), ea = Math.atan2(uy, ux);
+        c.beginPath(); c.arc(ex, ey, 12, ea + Math.PI / 2 + 0.3, ea + Math.PI * 1.5 - 0.3, true); c.stroke();
+      }
+      // Centre: outer red ring, a light rose and the small centre circle.
+      rg(B / 2, B / 2, 85, red, 2.4);
+      rg(B / 2, B / 2, 80, red, 0.8);
+      c.save(); c.translate(B / 2, B / 2);
+      c.strokeStyle = 'rgba(200,32,42,.35)'; c.lineWidth = 0.9;
+      for (let k = 0; k < 8; k++) {
+        c.rotate(Math.PI / 4);
+        c.beginPath(); c.moveTo(0, -18); c.quadraticCurveTo(14, -48, 0, -76); c.quadraticCurveTo(-14, -48, 0, -18); c.stroke();
+      }
+      c.restore();
+      dot(B / 2, B / 2, 15.9, '#F3E4C2');
+      rg(B / 2, B / 2, 15.9, red, 1.8);
+      dot(B / 2, B / 2, 3, red);
+    }
     function rr(x: number, y: number, w: number, h: number, r: number, c: string) { ctx.fillStyle = c; ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
-    function circle(x: number, y: number, r: number, c: string) { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); }
+    function circle(x: number, y: number, r: number, c: string | CanvasGradient) { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); }
     function ring(x: number, y: number, r: number, c: string, w: number) { if (!w) return; ctx.strokeStyle = c; ctx.lineWidth = w; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.stroke(); }
     function arrow(from: number[], to: number[], size: number) {
       const a = Math.atan2(to[1] - from[1], to[0] - from[0]);
@@ -402,16 +508,21 @@ const T = {
     }
     function line(a: number, b: number, c: number, d: number) { ctx.beginPath(); ctx.moveTo(a, b); ctx.lineTo(c, d); ctx.stroke(); }
     function coin(x: number, y: number, r: number, color: string) {
-      circle(x + 1.6, y + 2.2, r, 'rgba(59,36,22,.28)');
-      const base = color === 'white' ? COL.white : color === 'black' ? COL.black : COL.red;
-      circle(x, y, r, base);
-      ring(x, y, r * 0.62, color === 'white' ? 'rgba(14,27,61,.18)' : 'rgba(255,255,255,.22)', 1.6);
-      ring(x, y, r - 0.8, color === 'white' ? 'rgba(14,27,61,.35)' : 'rgba(0,0,0,.35)', 1.2);
+      circle(x + 1.6, y + 2.2, r, 'rgba(59,36,22,.3)');
+      const [hi, lo] = color === 'white' ? ['#FFFDF6', '#E6DCC6'] : color === 'black' ? ['#3A3F52', '#11141F'] : ['#F0525A', '#A3141C'];
+      const g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.4, r * 0.1, x, y, r);
+      g.addColorStop(0, hi); g.addColorStop(1, lo);
+      circle(x, y, r, g);
+      ring(x, y, r * 0.62, color === 'white' ? 'rgba(120,90,50,.28)' : 'rgba(255,255,255,.2)', 1.4);
+      ring(x, y, r * 0.38, color === 'white' ? 'rgba(120,90,50,.18)' : 'rgba(255,255,255,.12)', 1);
+      ring(x, y, r - 0.6, color === 'white' ? 'rgba(80,60,30,.35)' : 'rgba(0,0,0,.45)', 1.2);
     }
     function striker(x: number, y: number, blocked: boolean) {
       const SR = C.geom(state).striker;
       circle(x + 2, y + 2.6, SR, 'rgba(59,36,22,.3)');
-      circle(x, y, SR, '#F4F1EA');
+      const g = ctx.createRadialGradient(x - SR * 0.35, y - SR * 0.4, SR * 0.1, x, y, SR);
+      g.addColorStop(0, '#FFFFFF'); g.addColorStop(1, '#DCD6CA');
+      circle(x, y, SR, g);
       ring(x, y, SR - 1, blocked ? COL.red : COL.frame, 2.6);
       ring(x, y, SR * 0.55, blocked ? COL.red : COL.navy, 2);
       circle(x, y, 3.5, blocked ? COL.red : COL.navy);
