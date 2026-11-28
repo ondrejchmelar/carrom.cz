@@ -478,6 +478,59 @@ const handleRefresh = async (request, env) => {
 const handlePreflight = (request, env) =>
   new Response(null, { status: 204, headers: getCorsHeaders(request, env) ?? {} });
 
+/**
+ * carrom.cz addition (2026-11-28): translate a Czech text to English for the admin's „Přeložit“ button.
+ * The Google Gemini key is the Cloudflare secret GEMINI_API_KEY, so it never reaches the browser or the
+ * public repository. Only people signed in to the admin whose GitHub token can push to the repository
+ * may use it.
+ * @param {Request} request - HTTP request.
+ * @param {{ [key: string]: string }} env - Environment variables.
+ * @returns {Promise<Response>} HTTP response.
+ */
+const handleTranslate = async (request, env) => {
+  const cors = getCorsHeaders(request, env);
+  const headers = { ...(cors ?? {}), 'Access-Control-Allow-Headers': 'Accept, Content-Type, Authorization', 'Content-Type': 'application/json' };
+  const reply = (status, body) => new Response(JSON.stringify(body), { status, headers });
+
+  if (!cors) return reply(403, { error: 'origin not allowed' });
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers });
+  if (!env.GEMINI_API_KEY) return reply(503, { error: 'GEMINI_API_KEY is not set in Cloudflare' });
+
+  const token = (request.headers.get('Authorization') ?? '').replace(/^Bearer\s+/i, '');
+  if (!token) return reply(401, { error: 'not signed in' });
+
+  const repo = env.TRANSLATE_REPO || 'ondrejchmelar/carrom.cz';
+  const gh = await fetch(`https://api.github.com/repos/${repo}`, {
+    headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'User-Agent': 'carrom-cz-translate' },
+  });
+  const repoInfo = gh.ok ? await gh.json() : null;
+  if (!repoInfo?.permissions?.push) return reply(403, { error: 'no write access to the repository' });
+
+  let text = '';
+  try {
+    ({ text = '' } = await request.json());
+  } catch {
+    //
+  }
+  if (!text.trim()) return reply(400, { error: 'empty text' });
+  if (text.length > 20000) return reply(413, { error: 'text too long' });
+
+  const prompt = 'Translate this text about a carrom tournament from Czech to English. ' +
+    'Keep names of people, clubs and places as they are, keep the word "striker", keep line breaks and Markdown. ' +
+    'Reply with the translation only.\n\n' + text;
+  const model = env.GEMINI_MODEL || 'gemini-2.5-flash';
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
+    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.2 } }),
+  });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) return reply(502, { error: j?.error?.message || `Gemini HTTP ${r.status}` });
+  const out = (j.candidates?.[0]?.content?.parts ?? []).map((part) => part.text || '').join('').trim();
+  if (!out) return reply(502, { error: 'empty translation' });
+  return reply(200, { text: out });
+};
+
 export default {
   /**
    * The main request handler.
@@ -508,6 +561,10 @@ export default {
       if (method === 'POST') {
         return handleRefresh(request, env);
       }
+    }
+
+    if (pathname === '/translate' && ['POST', 'OPTIONS'].includes(method)) {
+      return handleTranslate(request, env);
     }
 
     return new Response('', { status: 404 });
