@@ -343,7 +343,14 @@ const T = {
               const L = Math.max(d, c.piece.r + 55);
               const to = [c.from[0] + (dx / d) * L, c.from[1] + (dy / d) * L];
               line(c.from[0], c.from[1], to[0], to[1]);
-              arrow(c.from, to, i ? 9 : 12);
+              if (c.bounce && L <= d + 0.5) {
+                // Off the frame: a shorter arrow for where the coin goes next.
+                const b = c.bounce, bd = Math.hypot(b.to[0] - b.from[0], b.to[1] - b.from[1]) || 1, bl = Math.min(bd, 110);
+                const bt = [b.from[0] + ((b.to[0] - b.from[0]) / bd) * bl, b.from[1] + ((b.to[1] - b.from[1]) / bd) * bl];
+                ctx.setLineDash(i ? [6, 7] : [7, 6]);
+                line(b.from[0], b.from[1], bt[0], bt[1]);
+                arrow(b.from, bt, i ? 9 : 11);
+              } else arrow(c.from, to, i ? 9 : 12);
               ring(c.piece.x, c.piece.y, c.piece.r + 3, ctx.strokeStyle as string, 2.4);
             });
             ctx.globalAlpha = 1;

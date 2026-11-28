@@ -285,3 +285,16 @@ test('cpu with its last coin left and the queen on the board does not sink that 
     assert.equal(lost, 0, `simple=${simple}: last coin pocketed before the queen ${lost}/12 times`);
   }
 });
+
+test('aim guide: a coin sent into the frame shows its bounce', () => {
+  const s = fresh({ easy: true });
+  for (const p of s.pieces) p.inPlay = false;
+  const c = s.pieces[1]; Object.assign(c, { inPlay: true, x: 300, y: 450 });
+  // Hit it head-on: it runs up and a little left into the top frame, away from the pockets.
+  const pr = C.predictShot(s, 370, Math.atan2(c.y - C.BASE_Y.bottom, c.x - 370));
+  assert.equal(pr.coins.length, 1);
+  const b = pr.coins[0].bounce;
+  assert.ok(b, 'bounce shown');
+  assert.ok(Math.abs(b.from[1] - c.r) < 1, 'bounces off the top frame');
+  assert.ok(b.to[1] > b.from[1] && b.to[0] < b.from[0], 'and comes back down, still heading left');
+});

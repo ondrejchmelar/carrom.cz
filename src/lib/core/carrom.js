@@ -554,7 +554,17 @@ export function predictShot(state, x, angle) {
     const next = cast(state, cur.x, cur.y, cx, cy, cur.r, cur, w);
     const len = next ? next.t : w;
     const to = [cur.x + cx * len, cur.y + cy * len];
-    out.coins.push({ from: [cur.x, cur.y], to, piece: cur });
+    const coin = { from: [cur.x, cur.y], to, piece: cur, bounce: null };
+    if (!next && !g.pockets.some(([px, py]) => Math.hypot(to[0] - px, to[1] - py) < g.pocket + cur.r)) {
+      // The coin comes off the frame: show where it goes next, up to the next coin or frame.
+      const bx = Math.abs(to[0] - cur.r) < 0.5 || Math.abs(to[0] - (BOARD - cur.r)) < 0.5 ? -cx : cx;
+      const by = Math.abs(to[1] - cur.r) < 0.5 || Math.abs(to[1] - (BOARD - cur.r)) < 0.5 ? -cy : cy;
+      const w2 = toWall(to[0], to[1], bx, by, cur.r);
+      const hit2 = cast(state, to[0], to[1], bx, by, cur.r, cur, w2);
+      const t2 = hit2 ? hit2.t : w2;
+      coin.bounce = { from: to, to: [to[0] + bx * t2, to[1] + by * t2] };
+    }
+    out.coins.push(coin);
     from = to; cur = next?.piece;
   }
   return out;
