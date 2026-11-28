@@ -27,4 +27,3 @@ It most likely comes from India. It has been played across the Indian subcontine
 - [World Cup Carrom 2010](https://vimeo.com/15778609)
 - [Carrom white slam](https://www.youtube.com/watch?v=216BEuZAots)
 - [World Championship 2008 final, Cannes](https://www.youtube.com/watch?v=Ttb5NXR22PE)
-- [Arun Deshpande, a few tricks of the master](https://www.youtube.com/watch?v=Eh6lCAyRJP0)
