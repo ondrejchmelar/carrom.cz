@@ -56,22 +56,21 @@ const homeHref = url(lang === 'en' ? '/en/' : '/');
   .social { display: none; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 6px; color: var(--on-navy); }
   .social:hover { background: rgba(255, 255, 255, 0.08); }
   .cta { display: none; min-height: 44px; padding: 0 20px; }
+  /* Social icons in the top bar from tablet width up; on phones they are on the Více page. */
+  @media (min-width: 560px) {
+    .social { display: inline-flex; }
+  }
+  /* One desktop layout from 1100 px: full menu, icons, EN and the button. The menu gaps grow
+     smoothly from 14 to 24 px instead of jumping at fixed widths (Ondrej 2026-11-28). */
   @media (min-width: 1100px) {
-    .bar { gap: 20px; }
-    .main-nav { gap: 18px; }
+    .bar { gap: 16px; }
     .logo { padding-left: 102px; }
     .emblem { top: 8px; width: 88px; height: 88px; box-shadow: 0 0 0 4px var(--navy), 0 6px 16px rgba(14, 27, 61, 0.3); }
     .wordmark { width: 217px; height: 29px; }
-    .main-nav { display: flex; }
-    .cta { display: inline-flex; white-space: nowrap; }
-    .lang { height: 32px; }
-  }
-  /* Social icons from tablet width up; at 1100–1199 px the full menu needs the room, so they move to the footer (Ondrej 2026-11-28). */
-  @media (min-width: 560px) and (max-width: 1099px), (min-width: 1200px) {
-    .social { display: inline-flex; }
-  }
-  @media (min-width: 1280px) {
-    .bar { gap: 28px; }
-    .main-nav { gap: 24px; }
+    .main-nav { display: flex; gap: clamp(14px, calc(14px + (100vw - 1100px) / 8), 24px); }
+    .tools { gap: 4px; }
+    .social { width: 32px; }
+    .lang { height: 32px; padding: 0 6px; }
+    .cta { display: inline-flex; white-space: nowrap; padding: 0 18px; }
   }
 </style>
