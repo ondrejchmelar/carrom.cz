@@ -236,7 +236,7 @@ const T = {
     }
     function statusCore() {
       if (state.winner) return '';
-      if (phase === 'cpu') return L.cpuThinks;
+      if (phase === 'cpu') return message ? `${message} ${L.cpuThinks}` : L.cpuThinks; // keep the note from the last shot readable
       if (human() && !C.strikerFree(state, strikerX)) return `${message ? message + ' ' : ''}${L.blocked}`;
       if (message) return message;
       const breaking = !state.shots;
@@ -488,7 +488,7 @@ const T = {
           else { cpuGhost = null; strikerX = shot.x; phase = 'aim'; message = ''; shoot(shot.angle, shot.power); }
         };
         requestAnimationFrame(anim);
-      }, 350);
+      }, message ? Math.min(4000, 1200 + message.length * 35) : 350); // time to read the note from the last shot
     }
     function reset() {
       const score = { white: 0, black: 0 };
