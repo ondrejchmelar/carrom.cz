@@ -1,11 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
+import SocialIcon from '../components/SocialIcon.astro';
 import { model } from '../lib/data';
 import { t, tr, pageUrl, type Lang } from '../lib/site';
 interface Props { lang?: Lang }
 const { lang = 'cs' } = Astro.props;
 const items = model().navigation.more ?? [];
+const social = model().navigation.social ?? [];
 ---
 <Base title={tr(lang, 'Více', 'More')} lang={lang} current="vice">
   <div class="wrap page">
@@ -17,6 +19,12 @@ const items = model().navigation.more ?? [];
           <Icon name={i.url ? 'external' : 'chevron'} size={18} />
         </a>
       ))}
+      {social.map((sx: any) => (
+        <a class="card item" href={sx.url} rel="noopener">
+          <span class="tx soc"><SocialIcon name={sx.icon} /><strong>{t(sx.label, lang)}</strong></span>
+          <Icon name="external" size={18} />
+        </a>
+      ))}
     </nav>
   </div>
 </Base>
@@ -25,4 +33,5 @@ const items = model().navigation.more ?? [];
   .item { flex-direction: row; align-items: center; justify-content: space-between; min-height: 64px; }
   .tx { display: flex; flex-direction: column; gap: 2px; }
   .tx strong { font-size: 17px; }
+  .tx.soc { flex-direction: row; align-items: center; gap: 12px; }
 </style>
