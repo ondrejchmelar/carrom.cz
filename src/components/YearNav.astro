@@ -15,19 +15,37 @@ const prev: any = list[i - 1], next: any = list[i + 1];
 ---
 {list.length > 1 && (
   <nav class="yn" aria-label={tr(lang, 'Další ročníky', 'Other years')}>
-    {prev ? <a class="yn-step" href={prev.href} rel="prev">‹ {prev.year}</a> : <span class="yn-step off" aria-hidden="true">‹</span>}
-    <select class="yn-sel" aria-label={tr(lang, 'Ročník', 'Year')} data-year-nav>
-      {[...list].reverse().map((e: any) => <option value={e.href} selected={e.id === cur}>{e.year}</option>)}
-    </select>
-    {next ? <a class="yn-step" href={next.href} rel="next">{next.year} ›</a> : <span class="yn-step off" aria-hidden="true">›</span>}
+    {prev
+      ? <a class="yn-step" href={prev.href} rel="prev" aria-label={tr(lang, `Předchozí ročník ${prev.year}`, `Previous year ${prev.year}`)}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg><span>{prev.year}</span></a>
+      : <span class="yn-step off" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg></span>}
+    <label class="yn-pick">
+      <span class="sr">{tr(lang, 'Ročník', 'Year')}</span>
+      <select class="yn-sel" data-year-nav>
+        {[...list].reverse().map((e: any) => <option value={e.href} selected={e.id === cur}>{e.year}</option>)}
+      </select>
+      <svg class="yn-caret" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5" /></svg>
+    </label>
+    {next
+      ? <a class="yn-step" href={next.href} rel="next" aria-label={tr(lang, `Další ročník ${next.year}`, `Next year ${next.year}`)}><span>{next.year}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></a>
+      : <span class="yn-step off" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg></span>}
   </nav>
 )}
 <style>
-  .yn { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .yn-step { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-size: 14px; font-weight: 700; color: var(--navy); }
-  .yn-step:hover { border-color: var(--navy); }
-  .yn-step.off { color: #C3CAD9; }
-  .yn-sel { min-height: 36px; padding: 0 30px 0 12px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font: 700 14px var(--f-body); color: var(--navy); }
+  /* One joined control: previous year · year picker · next year. */
+  .yn { align-self: flex-start; width: max-content; max-width: 100%; display: inline-flex; align-items: stretch; height: 44px; border: 1px solid var(--line); border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(14, 27, 61, .06); overflow: hidden; }
+  .yn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  .yn-step { display: inline-flex; align-items: center; gap: 4px; padding: 0 14px; font-size: 14px; font-weight: 700; color: var(--navy); font-variant-numeric: tabular-nums; transition: background .15s, color .15s; }
+  .yn-step:first-child { padding-left: 12px; }
+  .yn-step:last-child { padding-right: 12px; }
+  a.yn-step:hover { background: var(--navy); color: #fff; }
+  a.yn-step:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+  .yn-step.off { color: #C3CAD9; padding: 0 14px; }
+  .yn-pick { position: relative; display: flex; align-items: center; border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .yn-sel { appearance: none; -webkit-appearance: none; height: 100%; border: 0; margin: 0; padding: 0 36px 0 18px; background: transparent; font: 800 17px var(--f-body); color: var(--navy); cursor: pointer; font-variant-numeric: tabular-nums; }
+  .yn-sel:hover { background: #F3F4F7; }
+  .yn-sel:focus-visible { outline: 2px solid var(--red); outline-offset: -2px; }
+  .yn-caret { position: absolute; right: 12px; pointer-events: none; color: var(--red); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 <script>
   for (const s of document.querySelectorAll<HTMLSelectElement>('[data-year-nav]')) s.addEventListener('change', () => { location.href = s.value; });
