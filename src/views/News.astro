@@ -12,10 +12,21 @@ const { lang = 'cs' } = Astro.props;
 const m = model();
 const today = new Date().toISOString().slice(0, 10);
 const upcoming = m.editionList.filter((e: any) => e.start_date && (e.end_date ?? e.start_date) >= today);
-const byMonth = new Map<string, any[]>();
-for (const e of upcoming) {
-  const k = e.start_date.slice(0, 7);
-  byMonth.set(k, [...(byMonth.get(k) ?? []), e]);
+// Editions held back to back at the same place (e.g. juniors Friday, singles Saturday, doubles Sunday) share one row.
+const nextDay = (iso: string) => new Date(Date.parse(`${iso}T12:00:00Z`) + 864e5).toISOString().slice(0, 10);
+const groups: any[][] = [];
+for (const e of [...upcoming].sort((a: any, b: any) => a.start_date.localeCompare(b.start_date))) {
+  const g = groups.find((g) => {
+    const end = g.map((x: any) => x.end_date ?? x.start_date).sort().at(-1);
+    const city = (x: any) => x.venue?.city ?? x.venue?.name;
+    return g[0].competition.kind === 'tournament' && e.competition.kind === 'tournament' && city(g[0]) && city(g[0]) === city(e) && e.start_date <= nextDay(end);
+  });
+  if (g) g.push(e); else groups.push([e]);
+}
+const byMonth = new Map<string, any[][]>();
+for (const g of groups) {
+  const k = g[0].start_date.slice(0, 7);
+  byMonth.set(k, [...(byMonth.get(k) ?? []), g]);
 }
 const cats = [
   ['all', 'Vše', 'All'], ['mcr', 'Turnaje MČR', 'Championship'], ['league', 'Ligy', 'Leagues'], ['junior', 'Junioři', 'Juniors'], ['abroad', 'Zahraničí', 'Abroad'],
@@ -57,7 +68,7 @@ const years = [...new Set(news.map((a) => a.year))].sort((a, b) => b - a);
         {[...byMonth.entries()].map(([k, list]) => (
           <section class="month" data-month>
             <h3 class="month-title">{monthTitle(`${k}-01`, lang)}</h3>
-            {list.map((e: any) => <div data-cat={e.competition.category}><EventRow ed={e} hot={e.id === nextId} lang={lang} /></div>)}
+            {list.map((g: any[]) => <div data-cat={[...new Set(g.map((e: any) => e.competition.category))].join(' ')}><EventRow eds={g} hot={g.some((e: any) => e.id === nextId)} lang={lang} /></div>)}
           </section>
         ))}
         <p class="small">{tr(lang, 'Pořádáte turnaj, veřejné hraní nebo ukázku carromu? Zapíšeme je do kalendáře, napište na', 'Organising a tournament, open play or a carrom demo? We add it to the calendar, write to')} <a class="more" href={`mailto:${m.settings.site?.email}`}>{m.settings.site?.email}</a>.</p>
@@ -119,7 +130,7 @@ const years = [...new Set(news.map((a) => a.year))].sort((a, b) => b - a);
   buttons.forEach((b) => b.addEventListener('click', () => {
     const f = b.dataset.filter;
     buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    document.querySelectorAll<HTMLElement>('[data-cat]').forEach((el) => { el.hidden = f !== 'all' && el.dataset.cat !== f; });
+    document.querySelectorAll<HTMLElement>('[data-cat]').forEach((el) => { el.hidden = f !== 'all' && !(el.dataset.cat ?? '').split(' ').includes(f); });
     document.querySelectorAll<HTMLElement>('[data-month]').forEach((sec) => {
       sec.hidden = ![...sec.querySelectorAll<HTMLElement>('[data-cat]')].some((x) => !x.hidden);
     });

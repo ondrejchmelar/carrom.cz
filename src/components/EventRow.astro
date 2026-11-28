@@ -1,18 +1,55 @@
 ---
+// One calendar row. `eds` holds one edition, or several held back to back at the same place
+// (e.g. juniors on Friday, singles on Saturday, doubles on Sunday): they share one row (Ondrej 2026-11-28).
 import { t, editionName, editionUrl, dayOfMonth, monthShort, dateShort, weekday, type Lang } from '../lib/site';
-interface Props { ed: any; hot?: boolean; lang?: Lang }
+interface Props { ed?: any; eds?: any[]; hot?: boolean; lang?: Lang }
 const { ed, hot = false, lang = 'cs' } = Astro.props;
+const eds: any[] = Astro.props.eds ?? [ed];
 const CAT: Record<string, string> = lang === 'en'
   ? { mcr: 'Championship', league: 'League', junior: 'Juniors', abroad: 'Abroad', other: 'Tournament' }
   : { mcr: 'Turnaj MČR', league: 'Liga', junior: 'Junioři', abroad: 'Zahraničí', other: 'Turnaj' };
-const open = ed.status === 'registration_open' && ed.signup_url;
+const start = eds.map((e) => e.start_date).sort()[0];
+const end = eds.map((e) => e.end_date ?? e.start_date).sort().at(-1);
+const multi = end && end !== start;
+const sameMonth = multi && start.slice(0, 7) === end.slice(0, 7);
+const badgeDay = multi && sameMonth ? `${dayOfMonth(start)}–${dayOfMonth(end)}` : `${dayOfMonth(start)}`;
+const when = !multi
+  ? `${weekday(start, lang)} ${dateShort(start, true, lang)}`
+  : lang === 'en'
+    ? `${weekday(start, lang)} ${dateShort(start, !sameMonth && start.slice(0, 4) !== end.slice(0, 4), lang)} – ${weekday(end, lang)} ${dateShort(end, true, lang)}`
+    : `${weekday(start, lang).toLowerCase()} ${sameMonth ? `${dayOfMonth(start)}.` : dateShort(start, start.slice(0, 4) !== end.slice(0, 4), lang)} – ${weekday(end, lang).toLowerCase()} ${dateShort(end, true, lang)}`;
+const whenCap = when.charAt(0).toUpperCase() + when.slice(1);
+const place = eds[0].venue?.city ?? eds[0].venue?.name;
+const cats = [...new Set(eds.map((e) => CAT[e.competition.category] ?? (lang === 'en' ? 'Event' : 'Akce')))].join(' · ');
+const dayAbbr = (iso: string) => (lang === 'en' ? weekday(iso, lang).slice(0, 3) : ({ Neděle: 'Ne', Pondělí: 'Po', Úterý: 'Út', Středa: 'St', Čtvrtek: 'Čt', Pátek: 'Pá', Sobota: 'So' } as any)[weekday(iso, lang)]);
+const open = eds.find((e) => e.status === 'registration_open' && e.signup_url);
 ---
-<a class:list={['event', { hot }]} href={editionUrl(ed, lang)}>
-  <span class:list={['date-badge', { hot }]}><b>{dayOfMonth(ed.start_date)}</b><span>{monthShort(ed.start_date, lang)}</span></span>
-  <span class="what">
-    <span class="eyebrow">{CAT[ed.competition.category] ?? (lang === 'en' ? 'Event' : 'Akce')}</span>
-    <strong>{editionName(ed, lang)}</strong>
-    <span class="small">{`${weekday(ed.start_date, lang)} ${dateShort(ed.start_date, true, lang)}`}{ed.venue?.city ? ` · ${ed.venue.city}` : ed.venue?.name ? ` · ${ed.venue.name}` : ''}</span>
-  </span>
-  {open && <span class="btn btn-red cta">{lang === 'en' ? 'Sign up' : 'Přihlásit se'}</span>}
-</a>
+{eds.length === 1 ? (
+  <a class:list={['event', { hot }]} href={editionUrl(eds[0], lang)}>
+    <span class:list={['date-badge', { hot, range: multi && sameMonth }]}><b>{badgeDay}</b><span>{monthShort(start, lang)}</span></span>
+    <span class="what">
+      <span class="eyebrow">{cats}</span>
+      <strong>{editionName(eds[0], lang)}</strong>
+      <span class="small">{whenCap}{place ? ` · ${place}` : ''}</span>
+    </span>
+    {open && <span class="btn btn-red cta">{lang === 'en' ? 'Sign up' : 'Přihlásit se'}</span>}
+  </a>
+) : (
+  <div class:list={['event', 'group', { hot }]}>
+    <span class:list={['date-badge', { hot, range: sameMonth }]}><b>{badgeDay}</b><span>{monthShort(start, lang)}</span></span>
+    <span class="what">
+      <span class="eyebrow">{cats}</span>
+      {eds.map((e) => (
+        <a class="name" href={editionUrl(e, lang)}><span class="day">{dayAbbr(e.start_date)}{(e.end_date ?? e.start_date) !== e.start_date ? `–${dayAbbr(e.end_date)}` : ''}</span><strong>{editionName(e, lang)}</strong></a>
+      ))}
+      <span class="small">{whenCap}{place ? ` · ${place}` : ''}</span>
+    </span>
+    {open && <a class="btn btn-red cta" href={editionUrl(open, lang)}>{lang === 'en' ? 'Sign up' : 'Přihlásit se'}</a>}
+  </div>
+)}
+<style>
+  .date-badge.range b { font-size: 22px; letter-spacing: -0.02em; }
+  .group .name { color: inherit; display: grid; grid-template-columns: 4.2em minmax(0, 1fr); align-items: baseline; }
+  .group .name:hover strong { text-decoration: underline; }
+  .group .day { font-size: 14px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+</style>
