@@ -7,7 +7,7 @@ venue: { name: Čítárna Unijazz, address: "Husitská 22, Praha 3" }
 
 links:                      # web jen odkazuje, nic nečte
   signup_url: ~             # přihláška na sezónu (Google Form)
-  evening_signup_url: ~     # zápis na večery (Google Sheet)
+  evening_signup_url: "https://docs.google.com/spreadsheets/d/13hc60jhi7W9WXbua-bn56QSMaA4I_yGAYoX-wL7AULU/edit#gid=0"   # zápis na večery (Google Sheet), ze starého webu
 
 format:                     # z propozic PCL 2026, jednou za sezónu
   group_stage:
