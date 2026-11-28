@@ -1,7 +1,7 @@
 # Checks every pull request (editors, the admin assistant, Ondrej): data, tests, build, permissions.
 # The built site is attached to the run as "nahled" (download and open index.html), since
 # GitHub Pages has no per-PR previews.
-name: Kontrola PR
+name: PR check
 
 on:
   pull_request:
@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v5
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: Oprávnění (data/roles.yaml)
+      - name: Permissions (data/roles.yaml)
         env:
           AUTHOR: ${{ github.event.pull_request.user.login }}
           BASE: ${{ github.event.pull_request.base.sha }}
@@ -31,9 +31,9 @@ jobs:
           git diff --name-only "$BASE"..."$HEAD" > changed.txt
           cat changed.txt
           xargs -a changed.txt -d '\n' node tools/check-scope.mjs --user "$AUTHOR" $label_args
-      - name: Kontrola dat
+      - name: Check data
         run: npm run check:data
-      - name: Testy
+      - name: Tests
         run: npm test
       - name: Astro build
         run: npm run build

@@ -1,7 +1,7 @@
 # Actions → "Import ze SoL" → Run workflow, vlož odkaz na turnaj nebo šampionát v SoL lit.
 # Skript zapíše konečné pořadí do ročníku se stejným datem a otevře pull request ke kontrole.
 # Potřebuje v Settings → Actions → General zapnuté „Allow GitHub Actions to create and approve pull requests“.
-name: Import ze SoL
+name: Import from SoL
 
 on:
   workflow_dispatch:

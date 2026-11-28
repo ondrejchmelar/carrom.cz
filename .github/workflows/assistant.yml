@@ -1,7 +1,7 @@
 # Admin assistant: an editor writes a request in a GitHub issue (label "asistent") or mentions
 # @claude in a comment; Claude Code opens a pull request; "Kontrola PR" checks it; a person merges.
 # Needs the repo secret ANTHROPIC_API_KEY (see README). Without it this workflow does nothing.
-name: Asistent
+name: Assistant
 
 on:
   issues:

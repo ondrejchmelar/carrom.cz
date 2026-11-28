@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   scope:
-    name: Oprávnění
+    name: Permissions
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
@@ -28,11 +28,11 @@ jobs:
       - uses: actions/setup-node@v5
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: Kdo co změnil (data/roles.yaml)
+      - name: Check who may change what (data/roles.yaml)
         run: node tools/check-scope.mjs --push "$GITHUB_EVENT_PATH"
 
   build:
-    name: Sestavení
+    name: Build
     needs: scope
     if: always() && (needs.scope.result == 'success' || needs.scope.result == 'skipped')
     runs-on: ubuntu-latest
@@ -41,9 +41,9 @@ jobs:
       - uses: actions/setup-node@v5
         with: { node-version: 22, cache: npm }
       - run: npm ci
-      - name: Kontrola dat
+      - name: Check data
         run: npm run check:data
-      - name: Testy
+      - name: Tests
         run: npm test
       - id: pages
         uses: actions/configure-pages@v5
@@ -58,7 +58,7 @@ jobs:
         with: { path: dist }
 
   deploy:
-    name: Zveřejnění
+    name: Deploy to GitHub Pages
     needs: build
     if: always() && needs.build.result == 'success'
     runs-on: ubuntu-latest
