@@ -46,6 +46,12 @@ const desc = description ?? (lang === 'en' ? 'Carrom in the Czech Republic: tour
       <slot />
     </main>
     <Footer lang={lang} />
+    <script is:inline>
+      // External links (Facebook, YouTube, galleries, SoL, federations…) open in a new tab.
+      document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+        if (a.host !== location.host && !a.target) { a.target = '_blank'; a.rel = ((a.rel || '') + ' noopener').trim(); }
+      });
+    </script>
     <TabBar lang={lang} current={current} />
   </body>
 </html>
