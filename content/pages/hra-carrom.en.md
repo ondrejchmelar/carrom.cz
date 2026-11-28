@@ -20,3 +20,11 @@ It most likely comes from India. It has been played across the Indian subcontine
 ## Full rules
 
 - [Laws of Carrom (ECC)](https://www.carromitaly.com/wp-content/uploads/2023/02/Laws-of-Carrom-As-Adopted-by-ECC.pdf) – the official rules tournaments are played by (PDF)
+
+## Videos
+
+- [Carrom on YouTube](https://www.youtube.com/playlist?list=PLYDBw2L9ckWUS_mlIsXefBHXQY6PwHX6r) (playlist)
+- [World Cup Carrom 2010](https://vimeo.com/15778609)
+- [Carrom white slam](https://www.youtube.com/watch?v=216BEuZAots)
+- [World Championship 2008 final, Cannes](https://www.youtube.com/watch?v=Ttb5NXR22PE)
+- [Arun Deshpande, a few tricks of the master](https://www.youtube.com/watch?v=Eh6lCAyRJP0)

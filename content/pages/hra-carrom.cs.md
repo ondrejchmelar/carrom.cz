@@ -27,3 +27,11 @@ Pochází nejspíš z Indie. Posledních sto let se hraje na celém indickém su
 ## Úplná pravidla
 
 [Pravidla carromu v češtině](/uploads/archiv/carrom/carrom_pravidla_edice_2004.doc) (DOC)
+
+## Videa
+
+- [Carrom na YouTube](https://www.youtube.com/playlist?list=PLYDBw2L9ckWUS_mlIsXefBHXQY6PwHX6r) (playlist)
+- [World Cup Carrom 2010](https://vimeo.com/15778609)
+- [Carrom white slam](https://www.youtube.com/watch?v=216BEuZAots)
+- [Finále World Championship 2008, Cannes](https://www.youtube.com/watch?v=Ttb5NXR22PE)
+- [Arun Deshpande, několik triků mistra](https://www.youtube.com/watch?v=Eh6lCAyRJP0)

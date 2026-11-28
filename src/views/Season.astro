@@ -22,6 +22,11 @@ const defaultTab = s && s.phase !== 'group' && s.groups.length ? 'playoff' : 'ta
 // cross table lookup: key "a|b" -> [scoreA, scoreB] from a's side
 const res = new Map<string, number[]>();
 for (const x of s?.matches ?? []) { res.set(`${x.a}|${x.b}`, [x.sa, x.sb]); res.set(`${x.b}|${x.a}`, [x.sb, x.sa]); }
+// Newest results: matches of the last dated evening are marked red (like the old sheets' legend), during the group stage.
+const isoDay = (d: any) => (d ? (d instanceof Date ? d.toISOString() : String(d)).slice(0, 10) : null);
+const lastDate = s && s.phase === 'group' ? (s.matches.map((x: any) => isoDay(x.date)).filter(Boolean).sort().at(-1) ?? null) : null;
+const fresh = new Set((s?.matches ?? []).filter((x: any) => lastDate && isoDay(x.date) === lastDate).flatMap((x: any) => [`${x.a}|${x.b}`, `${x.b}|${x.a}`]));
+const freshPlayers = new Set((s?.matches ?? []).filter((x: any) => lastDate && isoDay(x.date) === lastDate).flatMap((x: any) => [x.a, x.b]));
 const order = s?.table.map((r: any) => r.player) ?? [];
 const venue = ed.venue;
 // Old seasons have only the playoff (no group-stage matches here): show the bracket and final places, and link the old table.
@@ -96,7 +101,7 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
                   return (
                     <tr class:list={{ top: r.place <= 8 && cutAt, cut: cutAt && r.place === cutAt && s.table.length > cutAt }}>
                       <td class="rk l">{r.place}</td>
-                      <td class="name">{href ? <a href={href}>{nm}</a> : nm}</td>
+                      <td class="name">{href ? <a href={href}>{nm}</a> : nm}{freshPlayers.has(r.player) && <span class="new-dot" title={tr(lang, 'Hrál/a v posledním hracím večeru', 'Played on the last match night')}></span>}</td>
                       <td>{r.played}</td><td>{r.won}</td><td>{r.drawn}</td><td>{r.lost}</td>
                       <td>{r.scored}:{r.conceded}</td><td>{r.diff > 0 ? `+${r.diff}` : r.diff}</td>
                       <td class="strong">{r.points}</td><td class="dim">{r.remaining}</td>
@@ -107,6 +112,7 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
             </table>
           </div>
           <p class="small">{tr(lang, 'Výhra 2 body, remíza 1. Při rovnosti rozhoduje rozdíl skóre, pak vzájemné zápasy a nakonec vstřelené body.', 'A win is 2 points, a draw 1. Ties are broken by score difference, then head-to-head, then points scored.')}{cutAt ? tr(lang, ' Prvních 8 hraje playoff o 1.–8. místo.', ' The top 8 play the playoff for places 1–8.') : ''}</p>
+          {lastDate && <p class="small fresh-note"><span class="new-dot"></span> {tr(lang, `Červeně jsou výsledky z posledního hracího večera (${dateShort(lastDate, true, lang)}).`, `Red marks results from the last match night (${dateShort(lastDate, true, lang)}).`)}</p>}
           {s.idle.length > 0 && <p class="small">{tr(lang, 'Na soupisce bez odehraného zápasu', 'Signed up, no match played yet')}: {s.idle.map((p: string) => plainName(m.players[p], p)).join(', ')}.</p>}
         </section>
 
@@ -123,7 +129,7 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
                       if (a === b) return <td class="x-self" aria-label="—"></td>;
                       const r = res.get(`${a}|${b}`);
                       if (!r) return <td class="x-none">·</td>;
-                      return <td class:list={[r[0] > r[1] ? 'x-w' : r[0] < r[1] ? 'x-l' : 'x-d']}>{r[0]}:{r[1]}</td>;
+                      return <td class:list={[r[0] > r[1] ? 'x-w' : r[0] < r[1] ? 'x-l' : 'x-d', { 'x-new': fresh.has(`${a}|${b}`) }]}>{r[0]}:{r[1]}</td>;
                     })}
                     <td class="x-pts">{s.table[i].points}</td>
                   </tr>
@@ -131,6 +137,7 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
               </tbody>
             </table>
           </div>
+          {lastDate && <p class="small fresh-note"><span class="new-dot"></span> {tr(lang, `Červeně jsou výsledky z posledního hracího večera (${dateShort(lastDate, true, lang)}).`, `Red marks results from the last match night (${dateShort(lastDate, true, lang)}).`)}</p>}
           <div class="pick">
             <label for="who">{tr(lang, 'Zápasy hráče', 'Matches of')}</label>
             <select id="who" class="sel">
@@ -143,7 +150,7 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
                 {order.filter((b: string) => b !== a).map((b: string) => {
                   const r = res.get(`${a}|${b}`);
                   return (
-                    <div class="op">
+                    <div class:list={['op', { new: fresh.has(`${a}|${b}`) }]}>
                       <span class="nm">{plainName(m.players[b], b)}</span>
                       <span class="osc">{r ? `${r[0]}:${r[1]}` : tr(lang, 'nehráno', 'not played')}</span>
                       <span class:list={['res', r ? (r[0] > r[1] ? 'v' : r[0] < r[1] ? 'p' : 'r') : 'n']}>{r ? (r[0] > r[1] ? tr(lang, 'V', 'W') : r[0] < r[1] ? tr(lang, 'P', 'L') : tr(lang, 'R', 'D')) : ''}</span>
@@ -215,6 +222,10 @@ const signupOpen = !!ed.links?.signup_url && ['planned', 'registration_open'].in
   .cross td { height: 36px; min-width: 52px; text-align: center; border-radius: 6px; white-space: nowrap; background: #F5F6F9; }
   .cross .x-w { font-weight: 800; color: var(--navy); }
   .cross .x-l { color: #8A93A8; }
+  .cross .x-new { background: #FCE9EA; color: var(--red); box-shadow: inset 0 0 0 1.5px var(--red); }
+  .op.new .osc { color: var(--red); }
+  .new-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--red); margin-left: 8px; vertical-align: middle; }
+  .fresh-note .new-dot { margin: 0 4px 0 0; }
   .cross .x-self { background: repeating-linear-gradient(135deg, #E3E6EE 0 4px, #F3F4F7 4px 8px); }
   .cross .x-none { color: #8A93A8; background: #F3F4F7; }
   .cross .x-pts { background: transparent; font-weight: 800; font-size: 15px; }
