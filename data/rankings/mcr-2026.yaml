@@ -3,7 +3,7 @@ audience: open
 name: { cs: Mistrovství ČR 2026, en: Czech Championship 2026 }
 editions: [jarni/2026, druhy/2026, cocp/2026]
 best_of: 2
-points: published           # published = zapsané ručně (staré pravidlo, stupnice 100) | computed = spočítá build
+points: published           # published = zapsané ručně (staré pravidlo) | computed = spočítá build
 scale: 100
 check: false                # staré roky: body podle tehdejšího pravidla, jen opsané
 source: old-site            # /mcr/mcr_2026.php

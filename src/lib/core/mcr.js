@@ -58,7 +58,7 @@ export function rankingTable(ranking, editions, players, defaults = {}) {
     });
     return { columns: cols, scale: ranking.scale ?? 100, mode: 'published', rows: placeRows(rows) };
   }
-  const top = ranking.top_points ?? defaults.top_points ?? 1000;
+  const top = ranking.top_points ?? defaults.top_points ?? 100;
   const mode = ranking.rounding ?? defaults.rounding ?? 'whole';
   const per = cols.map((id) => {
     const res = editions[id]?.results?.singles ?? [];

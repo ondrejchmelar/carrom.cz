@@ -19,7 +19,7 @@ player_page:
 
 # Výchozí pravidla MČR pro nové roky (ročník je může přepsat)
 mcr:
-  top_points: 1000   # vítěz 1000, poslední 1, mezi nimi rovnoměrně
+  top_points: 100    # vítěz 100, poslední 1, mezi nimi rovnoměrně (Ondrej 2026-11-28: zůstává stupnice 100)
   best_of: 2         # počítají se 2 nejlepší turnaje ze 3
   rounding: whole    # body za turnaj zaokrouhlené na celá čísla
 
