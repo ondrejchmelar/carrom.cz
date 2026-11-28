@@ -350,8 +350,19 @@ const T = {
             // and the next coin it would push.
             const pr = C.predictShot(state, showStriker.x, sh.angle);
             line(pr.striker.from[0], pr.striker.from[1], pr.striker.to[0], pr.striker.to[1]);
+            if (pr.bounce) {
+              // Off the frame: where the striker goes next, with an arrow.
+              const b = pr.bounce, bd = Math.hypot(b.to[0] - b.from[0], b.to[1] - b.from[1]) || 1;
+              const L = Math.min(bd, Math.max(90, len * 0.5));
+              const to = [b.from[0] + ((b.to[0] - b.from[0]) / bd) * (pr.coins.length ? bd : L), b.from[1] + ((b.to[1] - b.from[1]) / bd) * (pr.coins.length ? bd : L)];
+              ctx.globalAlpha = live ? 0.8 : 0.5;
+              line(b.from[0], b.from[1], to[0], to[1]);
+              ctx.lineWidth = 3; arrow(b.from, to, 12);
+              ctx.globalAlpha = 1;
+            }
             ctx.setLineDash([]);
-            if (pr.coins.length) ring(pr.striker.to[0], pr.striker.to[1], G.striker, 'rgba(14,27,61,.45)', 2);
+            const hitAt = pr.bounce ? pr.bounce.to : pr.striker.to;
+            if (pr.coins.length) ring(hitAt[0], hitAt[1], G.striker, 'rgba(14,27,61,.45)', 2);
             pr.coins.forEach((c, i) => {
               ctx.globalAlpha = live ? (i ? 0.55 : 0.95) : 0.5;
               ctx.strokeStyle = live ? COL.red : '#9AA3B8'; ctx.lineWidth = i ? 2.4 : 3.2;

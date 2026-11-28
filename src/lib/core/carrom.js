@@ -47,9 +47,9 @@ export function rack({ easy = false, rand = Math.random, jitter = 0.06 } = {}) {
   const R = geom({ easy }).coin;
   const pieces = [{ id: 0, kind: 'queen', color: 'queen', x: CENTER, y: CENTER }];
   const d = R * 2 + 0.2;
-  // Colours alternate in both rings. One ray points at the far-left pocket (top left, seen by white),
-  // and both coins on it are white: inner ring W B W B W B, outer ring corners white, edges black.
-  const ray = Math.atan2(-1, -1);
+  // Colours alternate in both rings. One ray points at the near-left pocket (bottom left, seen by
+  // white), and both coins on it are white: inner ring W B W B W B, outer ring corners white, edges black.
+  const ray = Math.atan2(1, -1);
   let id = 1;
   const put = (a, dist, color) => pieces.push({ id: id++, kind: 'coin', color, x: CENTER + Math.cos(a) * dist, y: CENTER + Math.sin(a) * dist });
   for (let k = 0; k < 6; k++) put(ray + (k * Math.PI) / 3, d, k % 2 ? 'black' : 'white');
@@ -533,8 +533,20 @@ export function predictShot(state, x, angle) {
   const hit = cast(state, x, y, dx, dy, g.striker, null, wall);
   const t = hit ? hit.t : wall;
   const striker = { from: [x, y], to: [x + dx * t, y + dy * t] };
-  const out = { striker, coins: [] };
+  const out = { striker, bounce: null, coins: [] };
   let cur = hit?.piece, from = striker.to;
+  const [ex, ey] = striker.to;
+  if (!hit && !g.pockets.some(([px, py]) => Math.hypot(ex - px, ey - py) < g.pocket + g.striker)) {
+    // No coin on the way: the striker comes off the frame (angle in = angle out). Show that path up to
+    // the next coin or frame, and carry on from a coin it would hit.
+    const bx = Math.abs(ex - g.striker) < 0.5 || Math.abs(ex - (BOARD - g.striker)) < 0.5 ? -dx : dx;
+    const by = Math.abs(ey - g.striker) < 0.5 || Math.abs(ey - (BOARD - g.striker)) < 0.5 ? -dy : dy;
+    const w2 = toWall(ex, ey, bx, by, g.striker);
+    const hit2 = cast(state, ex, ey, bx, by, g.striker, null, w2);
+    const t2 = hit2 ? hit2.t : w2;
+    out.bounce = { from: [ex, ey], to: [ex + bx * t2, ey + by * t2] };
+    cur = hit2?.piece; from = out.bounce.to;
+  }
   for (let k = 0; k < 2 && cur; k++) {
     const ux = cur.x - from[0], uy = cur.y - from[1], ul = Math.hypot(ux, uy) || 1;
     const cx = ux / ul, cy = uy / ul;
@@ -649,14 +661,19 @@ export function chooseShot(state, { skill = 0.75, rand = Math.random, budget = 9
   // Fallback: a firm break, or a medium shot at the middle to open things up.
   const opening = state.pieces.every((p) => p.inPlay && Math.hypot(p.x - CENTER, p.y - CENTER) < 120);
   if (opening && !simple) {
-    // Break along the rack's diagonal: hit the nearest coin on it so that the push runs through the
-    // pack and drives the coin at the far end into the far pocket.
-    const near = state.pieces.reduce((a, p) => ((me === 'white' ? p.x + p.y > a.x + a.y : p.x + p.y < a.x + a.y) ? p : a));
-    const k = (me === 'white' ? 1 : -1) * Math.SQRT1_2 * (near.r + SR);
+    // Break along one of the rack's diagonals: hit the coin nearest to you on it so that the push runs
+    // through the pack and drives the coin at the far end into the far pocket. Both diagonals are
+    // tried; the search below keeps whichever sends more of your own coins in.
     cands.length = 0;
-    for (const x of [BASE_X[1] - 10, BASE_X[1] - 60, BASE_X[0] + 10, BASE_X[0] + 60]) {
-      if (!strikerFree(state, x, me)) continue;
-      cands.push({ x, angle: Math.atan2(near.y + k - y, near.x + k - x), power: 0.8, h: 5 });
+    const toMe = me === 'white' ? 1 : -1;
+    for (const ux of [1, -1]) {
+      const u = [ux * Math.SQRT1_2, toMe * Math.SQRT1_2];
+      const near = state.pieces.reduce((a, p) => (p.x * u[0] + p.y * u[1] > a.x * u[0] + a.y * u[1] ? p : a));
+      const cx = near.x + u[0] * (near.r + SR), cy = near.y + u[1] * (near.r + SR);
+      for (const x of [BASE_X[1] - 10, BASE_X[1] - 60, BASE_X[0] + 10, BASE_X[0] + 60]) {
+        if (!strikerFree(state, x, me)) continue;
+        cands.push({ x, angle: Math.atan2(cy - y, cx - x), power: 0.8, h: 5 });
+      }
     }
   }
   if (!cands.length) {
